@@ -26,7 +26,7 @@
 				<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
 			</span>
 			<span class="mh-text">
-				<a href="newsfeed" title=""><img src="images/logo2.png" alt=""></a>
+			<a href="{{ url ('newsfeed') }}" title=""><img src="images/logo2.png" alt=""></a>
 			</span>
 			<span class="mh-btns-right">
 				<a class="fa fa-sliders" href="#shoppingbag"></a>
@@ -39,106 +39,108 @@
 			</form>
 		</div>
 		<nav id="menu" class="res-menu">
-			<ul>
-				<li><span>Home</span>
-					<ul>
-						<li><a href="index-2" title="">Home Social</a></li>
-						<li><a href="index2" title="">Home Social 2</a></li>
-						<li><a href="index-company" title="">Home Company</a></li>
-						<li><a href="landing" title="">Login page</a></li>
-						<li><a href="logout" title="">Logout Page</a></li>
-						<li><a href="newsfeed" title="">news feed</a></li>
-					</ul>
-				</li>
-				<li><span>Time Line</span>
-					<ul>
-						<li><a href="time-line" title="">timeline</a></li>
-						<li><a href="timeline-friends" title="">timeline friends</a></li>
-						<li><a href="timeline-groups" title="">timeline groups</a></li>
-						<li><a href="timeline-pages" title="">timeline pages</a></li>
-						<li><a href="timeline-photos" title="">timeline photos</a></li>
-						<li><a href="timeline-videos" title="">timeline videos</a></li>
-						<li><a href="fav-page" title="">favourit page</a></li>
-						<li><a href="groups" title="">groups page</a></li>
-						<li><a href="page-likers" title="">Likes page</a></li>
-						<li><a href="people-nearby" title="">people nearby</a></li>
+		<ul>
+			<li><span>Home</span>
+				<ul>
+					<li><a href="{{ url('index-2') }}" title="">Home Social</a></li>
+					<li><a href="{{ url('index2') }}" title="">Home Social 2</a></li>
+					<li><a href="{{ url('index-company') }}" title="">Home Company</a></li>
+					<li><a href="{{ url('landing') }}" title="">Login page</a></li>
+					<li><a href="{{ url('logout') }}" title="">Logout Page</a></li>
+					<li><a href="{{ url('newsfeed') }}" title="">news feed</a></li>
+				</ul>
+			</li>
+			<li><span>Time Line</span>
+				<ul>
+					<li><a href="{{ url('time-line') }}" title="">timeline</a></li>
+					<li><a href="{{ url('timeline-friends') }}" title="">timeline friends</a></li>
+					<li><a href="{{ url('timeline-groups') }}" title="">timeline groups</a></li>
+					<li><a href="{{ url('timeline-pages') }}" title="">timeline pages</a></li>
+					<li><a href="{{ url('timeline-photos') }}" title="">timeline photos</a></li>
+					<li><a href="{{ url('timeline-videos') }}" title="">timeline videos</a></li>
+					<li><a href="{{ url('fav-page') }}" title="">favourit page</a></li>
+					<li><a href="{{ url('groups') }}" title="">groups page</a></li>
+					<li><a href="{{ url('page-likers') }}" title="">Likes page</a></li>
+					<li><a href="{{ url('people-nearby') }}" title="">people nearby</a></li>
 
 
-					</ul>
-				</li>
-				<li><span>Account Setting</span>
-					<ul>
-						<li><a href="create-fav-page" title="">create fav page</a></li>
-						<li><a href="edit-account-setting" title="">edit account setting</a></li>
-						<li><a href="edit-interest" title="">edit-interest</a></li>
-						<li><a href="edit-password" title="">edit-password</a></li>
-						<li><a href="edit-profile-basic" title="">edit profile basics</a></li>
-						<li><a href="edit-work-eductation" title="">edit work educations</a></li>
-						<li><a href="messages" title="">message box</a></li>
-						<li><a href="inbox" title="">Inbox</a></li>
-						<li><a href="notifications" title="">notifications page</a></li>
-					</ul>
-				</li>
-				<li><span>forum</span>
-					<ul>
-						<li><a href="forum" title="">Forum Page</a></li>
-						<li><a href="forums-category" title="">Fourm Category</a></li>
-						<li><a href="forum-open-topic" title="">Forum Open Topic</a></li>
-						<li><a href="forum-create-topic" title="">Forum Create Topic</a></li>
-					</ul>
-				</li>
-				<li><span>Our Shop</span>
-					<ul>
-						<li><a href="shop" title="">Shop Products</a></li>
-						<li><a href="shop-masonry" title="">Shop Masonry Products</a></li>
-						<li><a href="shop-single" title="">Shop Detail Page</a></li>
-						<li><a href="shop-cart" title="">Shop Product Cart</a></li>
-						<li><a href="shop-checkout" title="">Product Checkout</a></li>
-					</ul>
-				</li>
-				<li><span>Our Blog</span>
-					<ul>
-						<li><a href="blog-grid-wo-sidebar" title="">Our Blog</a></li>
-						<li><a href="blog-grid-right-sidebar" title="">Blog with R-Sidebar</a></li>
-						<li><a href="blog-grid-left-sidebar" title="">Blog with L-Sidebar</a></li>
-						<li><a href="blog-masonry" title="">Blog Masonry Style</a></li>
-						<li><a href="blog-list-wo-sidebar" title="">Blog List Style</a></li>
-						<li><a href="blog-list-right-sidebar" title="">Blog List with R-Sidebar</a></li>
-						<li><a href="blog-list-left-sidebar" title="">Blog List with L-Sidebar</a></li>
-						<li><a href="blog-detail" title="">Blog Post Detail</a></li>
-					</ul>
-				</li>
-				<li><span>Portfolio</span>
-					<ul>
-						<li><a href="portfolio-2colm" title="">Portfolio 2col</a></li>
-						<li><a href="portfolio-3colm" title="">Portfolio 3col</a></li>
-						<li><a href="portfolio-4colm" title="">Portfolio 4col</a></li>
-					</ul>
-				</li>
-				<li><span>Support & Help</span>
-					<ul>
-						<li><a href="support-and-help" title="">Support & Help</a></li>
-						<li><a href="support-and-help-detail" title="">Support & Help Detail</a></li>
-						<li><a href="support-and-help-search-result" title="">Support & Help Search Result</a></li>
-					</ul>
-				</li>
-				<li><span>More pages</span>
-					<ul>
-						<li><a href="careers" title="">Careers</a></li>
-						<li><a href="career-detail" title="">Career Detail</a></li>
-						<li><a href="404" title="">404 error page</a></li>
-						<li><a href="404-2" title="">404 Style2</a></li>
-						<li><a href="faq" title="">faq's page</a></li>
-						<li><a href="insights" title="">insights</a></li>
-						<li><a href="knowledge-base" title="">knowledge base</a></li>
-					</ul>
-				</li>
-				<li><a href="about" title="">about</a></li>
-				<li><a href="about-company" title="">About Us2</a></li>
-				<li><a href="contact" title="">contact</a></li>
-				<li><a href="contact-branches" title="">Contact Us2</a></li>
-				<li><a href="widgets" title="">Widgts</a></li>
-			</ul>
+				</ul>
+			</li>
+			<li><span>Account Setting</span>
+				<ul>
+					<li><a href="{{ url('create-fav-page') }}" title="">create fav page</a></li>
+					<li><a href="{{ url('edit-account-setting') }}" title="">edit account setting</a></li>
+					<li><a href="{{ url('edit-interest') }}" title="">edit-interest</a></li>
+					<li><a href="{{ url('edit-password') }}" title="">edit-password</a></li>
+					<li><a href="{{ url('edit-profile-basic') }}" title="">edit profile basics</a></li>
+					<li><a href="{{ url('edit-work-eductation') }}" title="">edit work educations</a></li>
+					<li><a href="{{ url('messages') }}" title="">message box</a></li>
+					<li><a href="{{ url('inbox') }}" title="">Inbox</a></li>
+					<li><a href="{{ url('notifications') }}" title="">notifications page</a></li>
+				</ul>
+			</li>
+			<li><span>forum</span>
+				<ul>
+					<li><a href="{{ url('forum') }}" title="">Forum Page</a></li>
+					<li><a href="{{ url('forums-category') }}" title="">Fourm Category</a></li>
+					<li><a href="{{ url('forum-open-topic') }}" title="">Forum Open Topic</a></li>
+					<li><a href="{{ url('forum-create-topic') }}" title="">Forum Create Topic</a></li>
+				</ul>
+			</li>
+			<li><span>Our Shop</span>
+				<ul>
+					<li><a href="{{ url('shop') }}" title="">Shop Products</a></li>
+					<li><a href="{{ url('shop-masonry') }}" title="">Shop Masonry Products</a></li>
+					<li><a href="{{ url('shop-single') }}" title="">Shop Detail Page</a></li>
+					<li><a href="{{ url('shop-cart') }}" title="">Shop Product Cart</a></li>
+					<li><a href="{{ url('shop-checkout') }}" title="">Product Checkout</a></li>
+				</ul>
+			</li>
+			<li><span>Our Blog</span>
+				<ul>
+					<li><a href="{{ url('blog-grid-wo-sidebar') }}" title="">Our Blog</a></li>
+					<li><a href="{{ url('blog-grid-right-sidebar') }}" title="">Blog with R-Sidebar</a></li>
+					<li><a href="{{ url('blog-grid-left-sidebar') }}" title="">Blog with L-Sidebar</a></li>
+					<li><a href="{{ url('blog-masonry') }}" title="">Blog Masonry Style</a></li>
+					<li><a href="{{ url('blog-list-wo-sidebar') }}" title="">Blog List Style</a></li>
+					<li><a href="{{ url('blog-list-right-sidebar') }}" title="">Blog List with R-Sidebar</a>
+					</li>
+					<li><a href="{{ url('blog-list-left-sidebar') }}" title="">Blog List with L-Sidebar</a></li>
+					<li><a href="{{ url('blog-detail') }}" title="">Blog Post Detail</a></li>
+				</ul>
+			</li>
+			<li><span>Portfolio</span>
+				<ul>
+					<li><a href="{{ url('portfolio-2colm') }}" title="">Portfolio 2col</a></li>
+					<li><a href="{{ url('portfolio-3colm') }}" title="">Portfolio 3col</a></li>
+					<li><a href="{{ url('portfolio-4colm') }}" title="">Portfolio 4col</a></li>
+				</ul>
+			</li>
+			<li><span>Support & Help</span>
+				<ul>
+					<li><a href="{{ url('support-and-help') }}" title="">Support & Help</a></li>
+					<li><a href="{{ url('support-and-help-detail') }}" title="">Support & Help Detail</a></li>
+					<li><a href="{{ url('support-and-help-search-result') }}" title="">Support & Help Search
+							Result</a></li>
+				</ul>
+			</li>
+			<li><span>More pages</span>
+				<ul>
+					<li><a href="{{ url('careers') }}" title="">Careers</a></li>
+					<li><a href="{{ url('career-detail') }}" title="">Career Detail</a></li>
+					<li><a href="{{ url('404') }}" title="">404 error page</a></li>
+					<li><a href="{{ url('404-2') }}" title="">404 Style2</a></li>
+					<li><a href="{{ url('faq') }}" title="">faq's page</a></li>
+					<li><a href="{{ url('insights') }}" title="">insights</a></li>
+					<li><a href="{{ url('knowledge-base') }}" title="">knowledge base</a></li>
+				</ul>
+			</li>
+			<li><a href="{{ url('about') }}" title="">about</a></li>
+			<li><a href="{{ url('about-company') }}" title="">About Us2</a></li>
+			<li><a href="{{ url('contact') }}" title="">contact</a></li>
+			<li><a href="{{ url('contact-branches') }}" title="">Contact Us2</a></li>
+			<li><a href="{{ url('widgets') }}" title="">Widgets</a></li>
+		</ul>
 		</nav>
 		<nav id="shoppingbag">
 			<div>
@@ -206,11 +208,12 @@
 				</div>
 			</div>
 		</nav>
-	</div><!-- responsive header -->
+	</div>
+	<!-- responsive header -->
 
 	<div class="topbar transparent">
 		<div class="logo">
-			<a title="" href="newsfeed"><img src="images/logo2.png" alt=""></a>
+		<a title="" href="{{ url('newsfeed') }}"><img src="images/logo2.png" alt=""></a>
 		</div>
 		<div class="menu-container" id="toggle">
 		  <a href="#" class="canvas-menu" >
@@ -218,72 +221,76 @@
 		</div>
 		<div class="overlay" id="overlay">
 		  <nav class="overlay-menu">
-			<ul class="offcanvas-menu">
+		  <ul class="offcanvas-menu">
 				<li class="menu-item-has-children">
 					<a href="#" title="">Home</a>
 					<ul>
-						<li><a href="index-2" title="">Home Social</a></li>
-						<li><a href="index2" title="">Home Social 2</a></li>
-						<li><a href="index-company" title="">Home Company</a></li>
+					<li><a href="{{ url ('index-2') }}" title="">Home Social</a></li>
+								<li><a href="{{ url ('index2') }}" title="">Home Social 2</a></li>
+								<li><a href="{{ url ('index-company') }}i" title="">Home Company</a></li>
 					</ul>
 				</li>
 				<li class="menu-item-has-children">
 					<a href="#" title="">Our Blog</a>
 					<ul>
-						<li><a href="blog-grid-wo-sidebar" title="">Our Blog</a></li>
-						<li><a href="blog-grid-right-sidebar" title="">Blog with R-Sidebar</a></li>
-						<li><a href="blog-grid-left-sidebar" title="">Blog with L-Sidebar</a></li>
-						<li><a href="blog-masonry" title="">Blog Masonry Style</a></li>
-						<li><a href="blog-list-wo-sidebar" title="">Blog List Style</a></li>
-						<li><a href="blog-list-right-sidebar" title="">Blog List with R-Sidebar</a></li>
-						<li><a href="blog-list-left-sidebar" title="">Blog List with L-Sidebar</a></li>
-						<li><a href="blog-detail" title="">Blog Post Detail</a></li>
+					<li><a href="{{ url('blog-grid-wo-sidebar') }}" title="">Our Blog</a></li>
+								<li><a href="{{ url('blog-grid-right-sidebar') }}" title="">Blog with R-Sidebar</a></li>
+								<li><a href="{{ url('blog-grid-left-sidebar') }}" title="">Blog with L-Sidebar</a></li>
+								<li><a href="{{ url('blog-masonry') }}" title="">Blog Masonry Style</a></li>
+								<li><a href="{{ url('blog-list-wo-sidebar') }}" title="">Blog List Style</a></li>
+								<li><a href="{{ url('blog-list-right-sidebar') }}" title="">Blog List with R-Sidebar</a>
+								</li>
+								<li><a href="{{ url('blog-list-left-sidebar') }}" title="">Blog List with L-Sidebar</a>
+								</li>
+								<li><a href="{{ url('blog-detail') }}" title="">Blog Post Detail</a></li>
 					</ul>
 				</li>
 				<li class="menu-item-has-children">
 					<a href="#" title="">Shop Pages</a>
 					<ul>
-						<li><a href="shop" title="">Shop Products</a></li>
-						<li><a href="shop-masonry" title="">Shop Masonry Products</a></li>
-						<li><a href="shop-single" title="">Shop Detail Page</a></li>
-						<li><a href="shop-cart" title="">Shop Product Cart</a></li>
-						<li><a href="shop-checkout" title="">Product Checkout</a></li>
+					<li><a href="{{ url('shop') }}" title="">Shop Products</a></li>
+								<li><a href="{{ url('shop-masonry') }}" title="">Shop Masonry Products</a></li>
+								<li><a href="{{ url('shop-single') }}" title="">Shop Detail Page</a></li>
+								<li><a href="{{ url('shop-cart') }}" title="">Shop Product Cart</a></li>
+								<li><a href="{{ url('shop-checkout') }}" title="">Product Checkout</a></li>
 					</ul>
 				</li>
 				<li class="menu-item-has-children">
 					<a href="#" title="">Our Portfolio</a>
 					<ul>
-						<li><a href="portfolio-2colm" title="">Portfolio 2col</a></li>
-						<li><a href="portfolio-3colm" title="">Portfolio 3col</a></li>
-						<li><a href="portfolio-4colm" title="">Portfolio 4col</a></li>
+					<li><a href="{{ url('portfolio-2colm') }}" title="">Portfolio 2col</a></li>
+								<li><a href="{{ url('portfolio-3colm') }}" title="">Portfolio 3col</a></li>
+								<li><a href="{{ url('portfolio-4colm') }}" title="">Portfolio 4col</a></li>
 					</ul>
 				</li>
 				<li class="menu-item-has-children">
 					<a href="#" title="">Support & Help</a>
 					<ul>
-						<li><a href="support-and-help" title="">Support & Help</a></li>
-						<li><a href="support-and-help-detail" title="">Support & Help Detail</a></li>
-						<li><a href="support-and-help-search-result" title="">Support & Help Search Result</a></li>
+						<li><a href="{{ url('support-and-help') }}" title="">Support & Help</a></li>
+								<li><a href="{{ url('support-and-help-detail') }}" title="">Support & Help Detail</a>
+								</li>
+								<li><a href="{{ url('support-and-help-search-result') }}" title="">Support & Help Search
+										Result</a></li>
 					</ul>
 				</li>
 				<li class="menu-item-has-children">
 					<a href="#" title="">Company Forum</a>
 					<ul>
-						<li><a href="forum" title="">Forum Page</a></li>
-						<li><a href="forums-category" title="">Fourm Category</a></li>
-						<li><a href="forum-open-topic" title="">Forum Open Topic</a></li>
-						<li><a href="forum-create-topic" title="">Forum Create Topic</a></li>
+					<li><a href="{{ url('forum') }}" title="">Forum Page</a></li>
+								<li><a href="{{ url('forums-category') }}" title="">Forum Category</a></li>
+								<li><a href="{{ url('forum-open-topic') }}" title="">Forum Open Topic</a></li>
+								<li><a href="{{ url('forum-create-topic') }}" title="">Forum Create Topic</a></li>
 					</ul>
 				</li>
 				<li class="menu-item-has-children">
 					<a href="#" title="">Featured Pages</a>
 					<ul>
-						<li><a href="careers" title="">Careers</a></li>
-						<li><a href="career-detail" title="">Career Detail</a></li>
-						<li><a href="logout" title="">Logout Page</a></li>
-						<li><a href="404-2" title="">404 Errro Page</a></li>
-						<li><a href="about-company" title="">About Us</a></li>
-						<li><a href="contact-branches" title="">Contact Us</a></li>
+					<li><a href="{{ url('careers') }}" title="">Careers</a></li>
+								<li><a href="{{ url('career-detail') }}" title="">Career Detail</a></li>
+								<li><a href="{{ url('logout') }}" title="">Logout Page</a></li>
+								<li><a href="{{ url('404-2') }}" title="">404 Error Page</a></li>
+								<li><a href="{{ url('about-company') }}" title="">About Us</a></li>
+								<li><a href="{{ url('contact-branches') }}" title="">Contact Us</a></li>
 					</ul>
 				</li>
 
@@ -301,7 +308,7 @@
 						<div class="top-banner">
 							<h1>Career Detail</h1>
 							<nav class="breadcrumb">
-							  <a class="breadcrumb-item" href="index-2">Home</a>
+							<a class="breadcrumb-item" href="{{ url('index-2')}}">Home</a>
 							  <span class="breadcrumb-item active">Career Detail</span>
 							</nav>
 						</div>
@@ -425,7 +432,7 @@
 					<div class="widget">
 						<div class="foot-logo">
 							<div class="logo">
-								<a href="index-2" title=""><img src="images/logo.png" alt=""></a>
+							<a href="{{ url('index-2') }}" title=""><img src="images/logo.png" alt=""></a>
 							</div>
 							<p>
 								The trio took this simple idea and built it into the world’s leading carpooling platform.
@@ -459,11 +466,11 @@
 					<div class="widget">
 						<div class="widget-title"><h4>Navigate</h4></div>
 						<ul class="list-style">
-							<li><a href="about" title="">about us</a></li>
-							<li><a href="contact" title="">contact us</a></li>
-							<li><a href="terms" title="">terms & Conditions</a></li>
-							<li><a href="#" title="">RSS syndication</a></li>
-							<li><a href="sitemap" title="">Sitemap</a></li>
+						<li><a href="{{ url('about') }}" title="">about us</a></li>
+						<li><a href="{{ url('contact') }}" title="">contact us</a></li>
+						<li><a href="{{ url('terms') }}" title="">terms & Conditions</a></li>
+						<li><a href="#" title="">RSS syndication</a></li>
+						<li><a href="{{ url('sitemap') }}" title="">Sitemap</a></li>
 						</ul>
 					</div>
 				</div>
@@ -471,11 +478,11 @@
 					<div class="widget">
 						<div class="widget-title"><h4>useful links</h4></div>
 						<ul class="list-style">
-							<li><a href="#" title="">leasing</a></li>
-							<li><a href="#" title="">submit route</a></li>
-							<li><a href="#" title="">how does it work?</a></li>
-							<li><a href="#" title="">agent listings</a></li>
-							<li><a href="#" title="">view All</a></li>
+						<li><a href="#" title="">leasing</a></li>
+								<li><a href="#" title="">submit route</a></li>
+								<li><a href="#" title="">how does it work?</a></li>
+								<li><a href="#" title="">agent listings</a></li>
+								<li><a href="#" title="">view All</a></li>
 						</ul>
 					</div>
 				</div>

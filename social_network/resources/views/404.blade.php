@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 	<title>Winku Social Network Toolkit</title>
-    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="{{ url('images/fav.png') }}" type="image/png" sizes="16x16">
 
     <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -26,7 +26,7 @@
 					<div class="error-meta">
 						<h1>whoops!</h1>
 						<span>we couldn't find that page </span>
-						<a href="index-2" title="" data-ripple="">Go Back</a>
+						<a href="{{ url ('index-2') }}" title="" data-ripple="">Go Back</a>
 					</div>
 				</div>
 			</div>

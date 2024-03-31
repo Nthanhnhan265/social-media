@@ -254,7 +254,7 @@
 						<li><a href="notifications" title="">notifications page</a></li>
 					</ul>
 				</li>
-				<li>
+				<!-- <li>
 					<a href="#" title="">more pages</a>
 					<ul>
 						<li><a href="404" title="">404 error page</a></li>
@@ -265,7 +265,7 @@
 						<li><a href="knowledge-base" title="">knowledge base</a></li>
 						<li><a href="widgets" title="">Widgts</a></li>
 					</ul>
-				</li>
+				</li> -->
 			</ul>
 			<ul class="setting-area">
 				<li>
@@ -407,15 +407,7 @@
 						</ul>
 						<a href="messages" title="" class="more-mesg">view more</a>
 					</div>
-				</li>
-				<li><a href="#" title="Languages" data-ripple=""><i class="fa fa-globe"></i></a>
-					<div class="dropdowns languages">
-						<a href="#" title=""><i class="ti-check"></i>English</a>
-						<a href="#" title="">Arabic</a>
-						<a href="#" title="">Dutch</a>
-						<a href="#" title="">French</a>
-					</div>
-				</li>
+				</li>				
 			</ul>
 			<div class="user-img">
 				<img src="images/resources/admin.jpg" alt="">
@@ -430,8 +422,7 @@
 					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
 					<a href="#" title=""><i class="ti-power-off"></i>log out</a>
 				</div>
-			</div>
-			<span class="ti-menu main-menu" data-ripple=""></span>
+			</div>			
 		</div>
 	</div><!-- topbar -->
 	
@@ -478,8 +469,7 @@
 									<a class="" href="timeline-videos" title="" data-ripple="">Videos</a>
 									<a class="" href="timeline-friends" title="" data-ripple="">Friends</a>
 									<a class="" href="groups" title="" data-ripple="">Groups</a>
-									<a class="" href="about" title="" data-ripple="">about</a>
-									<a class="active" href="#" title="" data-ripple="">more</a>
+									<a class="" href="about" title="" data-ripple="">about</a>									
 								</li>
 							</ul>
 						</div>
@@ -528,11 +518,7 @@
 											<li>
 												<i class="ti-info-alt"></i>
 												<a href="edit-profile-basic" title="">Basic info</a>
-											</li>
-											<li>
-												<i class="ti-mouse-alt"></i>
-												<a href="edit-work-eductation" title="">Education & Work</a>
-											</li>
+											</li>											
 											<li>
 												<i class="ti-heart"></i>
 												<a href="edit-interest" title="">My interests</a>
@@ -599,67 +585,6 @@
 									</div>
 								</div>	
 							</div><!-- centerl meta -->
-							<div class="col-lg-3">
-								<aside class="sidebar static">
-									<div class="widget">
-											<h4 class="widget-title">Profile intro</h4>
-											<ul class="short-profile">
-												<li>
-													<span>about</span>
-													<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft </p>
-												</li>
-												<li>
-													<span>fav tv show</span>
-													<p>Sacred Games, Spartcus Blood, Games of Theron </p>
-												</li>
-												<li>
-													<span>favourit music</span>
-													<p>Justin Biber, Shakira, Nati Natasah</p>
-												</li>
-											</ul>
-										</div>
-									<div class="widget stick-widget">
-										<h4 class="widget-title">Who's follownig</h4>
-										<ul class="followers">
-											<li>
-												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line" title="">Kelly Bill</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line" title="">Issabel</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line" title="">Andrew</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line" title="">Sophia</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line" title="">Allen</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-										</ul>
-									</div><!-- who's following -->
-								</aside>
-							</div><!-- sidebar -->
 						</div>	
 					</div>
 				</div>

@@ -254,18 +254,6 @@
 						<li><a href="notifications" title="">notifications page</a></li>
 					</ul>
 				</li>
-				<li>
-					<a href="#" title="">more pages</a>
-					<ul>
-						<li><a href="404" title="">404 error page</a></li>
-						<li><a href="about" title="">about</a></li>
-						<li><a href="contact" title="">contact</a></li>
-						<li><a href="faq" title="">faq's page</a></li>
-						<li><a href="insights" title="">insights</a></li>
-						<li><a href="knowledge-base" title="">knowledge base</a></li>
-						<li><a href="widgets" title="">Widgts</a></li>
-					</ul>
-				</li>
 			</ul>
 			<ul class="setting-area">
 				<li>
@@ -408,14 +396,6 @@
 						<a href="messages" title="" class="more-mesg">view more</a>
 					</div>
 				</li>
-				<li><a href="#" title="Languages" data-ripple=""><i class="fa fa-globe"></i></a>
-					<div class="dropdowns languages">
-						<a href="#" title=""><i class="ti-check"></i>English</a>
-						<a href="#" title="">Arabic</a>
-						<a href="#" title="">Dutch</a>
-						<a href="#" title="">French</a>
-					</div>
-				</li>
 			</ul>
 			<div class="user-img">
 				<img src="images/resources/admin.jpg" alt="">
@@ -430,8 +410,7 @@
 					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
 					<a href="#" title=""><i class="ti-power-off"></i>log out</a>
 				</div>
-			</div>
-			<span class="ti-menu main-menu" data-ripple=""></span>
+			</div>			
 		</div>
 	</div><!-- topbar -->
 	
@@ -528,11 +507,7 @@
 												<li>
 													<i class="ti-info-alt"></i>
 													<a href="edit-profile-basic" title="">Basic info</a>
-												</li>
-												<li>
-													<i class="ti-mouse-alt"></i>
-													<a href="edit-work-eductation" title="">Education & Work</a>
-												</li>
+												</li>											
 												<li>
 													<i class="ti-heart"></i>
 													<a href="edit-interest" title="">My interests</a>
@@ -580,18 +555,7 @@
 									<aside class="sidebar static">
 										<div class="widget">
 											<div class="banner medium-opacity bluesh">
-											<div style="background-image: url(images/resources/baner-widgetbg.jpg)" class="bg-image"></div>
-											<div class="baner-top">
-												<span><img src="images/book-icon.png" alt=""></span>
-												<i class="fa fa-ellipsis-h"></i>
-											</div>
-											<div class="banermeta">
-												<p>
-													create your own favourit page.
-												</p>
-												<span>like them all</span>
-												<a href="#" title="" data-ripple="">start now!</a>
-											</div>
+											<div style="background-image: url(images/resources/baner-widgetbg.jpg)" class="bg-image"></div>																					
 										</div>											
 										</div>
 										<div class="widget stick-widget">

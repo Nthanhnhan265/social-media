@@ -72,7 +72,6 @@
 						<li><a href="edit-interest" title="">edit-interest</a></li>
 						<li><a href="edit-password" title="">edit-password</a></li>
 						<li><a href="edit-profile-basic" title="">edit profile basics</a></li>
-						<li><a href="edit-work-eductation" title="">edit work educations</a></li>
 						<li><a href="messages" title="">message box</a></li>
 						<li><a href="inbox" title="">Inbox</a></li>
 						<li><a href="notifications" title="">notifications page</a></li>
@@ -247,14 +246,13 @@
 						<li><a href="edit-account-setting" title="">edit account setting</a></li>
 						<li><a href="edit-interest" title="">edit-interest</a></li>
 						<li><a href="edit-password" title="">edit-password</a></li>
-						<li><a href="edit-profile-basic" title="">edit profile basics</a></li>
-						<li><a href="edit-work-eductation" title="">edit work educations</a></li>
+						<li><a href="edit-profile-basic" title="">edit profile basics</a></li>						
 						<li><a href="messages" title="">message box</a></li>
 						<li><a href="inbox" title="">Inbox</a></li>
 						<li><a href="notifications" title="">notifications page</a></li>
 					</ul>
 				</li>
-				<li>
+				<!-- <li>
 					<a href="#" title="">more pages</a>
 					<ul>
 						<li><a href="404" title="">404 error page</a></li>
@@ -265,7 +263,7 @@
 						<li><a href="knowledge-base" title="">knowledge base</a></li>
 						<li><a href="widgets" title="">Widgts</a></li>
 					</ul>
-				</li>
+				</li> -->
 			</ul>
 			<ul class="setting-area">
 				<li>
@@ -407,15 +405,7 @@
 						</ul>
 						<a href="messages" title="" class="more-mesg">view more</a>
 					</div>
-				</li>
-				<li><a href="#" title="Languages" data-ripple=""><i class="fa fa-globe"></i></a>
-					<div class="dropdowns languages">
-						<a href="#" title=""><i class="ti-check"></i>English</a>
-						<a href="#" title="">Arabic</a>
-						<a href="#" title="">Dutch</a>
-						<a href="#" title="">French</a>
-					</div>
-				</li>
+				</li>			
 			</ul>
 			<div class="user-img">
 				<img src="images/resources/admin.jpg" alt="">
@@ -431,7 +421,6 @@
 					<a href="#" title=""><i class="ti-power-off"></i>log out</a>
 				</div>
 			</div>
-			<span class="ti-menu main-menu" data-ripple=""></span>
 		</div>
 	</div><!-- topbar -->
 
@@ -478,8 +467,7 @@
 									<a class="" href="timeline-videos" title="" data-ripple="">Videos</a>
 									<a class="" href="timeline-friends" title="" data-ripple="">Friends</a>
 									<a class="" href="timeline-groups" title="" data-ripple="">Groups</a>
-									<a class="active" href="about" title="" data-ripple="">about</a>
-									<a class="" href="#" title="" data-ripple="">more</a>
+									<a class="active" href="about" title="" data-ripple="">about</a>									
 								</li>
 							</ul>
 						</div>
@@ -504,11 +492,7 @@
 										<li>
 											<i class="ti-info-alt"></i>
 											<a title="" href="edit-profile-basic">Basic info</a>
-										</li>
-										<li>
-											<i class="ti-mouse-alt"></i>
-											<a title="" href="edit-work-eductation">Education &amp; Work</a>
-										</li>
+										</li>									
 										<li>
 											<i class="ti-heart"></i>
 											<a title="" href="edit-interest">My interests</a>
@@ -555,10 +539,7 @@
 												</li>
 												<li class="nav-item">
 													<a href="#location" class="nav-link" data-toggle="tab" >location</a>
-												</li>
-												<li class="nav-item">
-													<a href="#work" class="nav-link" data-toggle="tab" >work and education</a>
-												</li>
+												</li>												
 												<li class="nav-item">
 													<a href="#interest" class="nav-link" data-toggle="tab"  >interests</a>
 												</li>

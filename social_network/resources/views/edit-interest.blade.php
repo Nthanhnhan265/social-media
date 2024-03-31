@@ -253,19 +253,7 @@
 						<li><a href="inbox" title="">Inbox</a></li>
 						<li><a href="notifications" title="">notifications page</a></li>
 					</ul>
-				</li>
-				<li>
-					<a href="#" title="">more pages</a>
-					<ul>
-						<li><a href="404" title="">404 error page</a></li>
-						<li><a href="about" title="">about</a></li>
-						<li><a href="contact" title="">contact</a></li>
-						<li><a href="faq" title="">faq's page</a></li>
-						<li><a href="insights" title="">insights</a></li>
-						<li><a href="knowledge-base" title="">knowledge base</a></li>
-						<li><a href="widgets" title="">Widgts</a></li>
-					</ul>
-				</li>
+				</li>				
 			</ul>
 			<ul class="setting-area">
 				<li>
@@ -407,15 +395,7 @@
 						</ul>
 						<a href="messages" title="" class="more-mesg">view more</a>
 					</div>
-				</li>
-				<li><a href="#" title="Languages" data-ripple=""><i class="fa fa-globe"></i></a>
-					<div class="dropdowns languages">
-						<a href="#" title=""><i class="ti-check"></i>English</a>
-						<a href="#" title="">Arabic</a>
-						<a href="#" title="">Dutch</a>
-						<a href="#" title="">French</a>
-					</div>
-				</li>
+				</li>				
 			</ul>
 			<div class="user-img">
 				<img src="images/resources/admin.jpg" alt="">
@@ -430,8 +410,7 @@
 					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
 					<a href="#" title=""><i class="ti-power-off"></i>log out</a>
 				</div>
-			</div>
-			<span class="ti-menu main-menu" data-ripple=""></span>
+			</div>			
 		</div>
 	</div><!-- topbar -->
 	
@@ -478,8 +457,7 @@
 										<a class="" href="timeline-videos" title="" data-ripple="">Videos</a>
 										<a class="" href="timeline-friends" title="" data-ripple="">Friends</a>
 										<a class="" href="groups" title="" data-ripple="">Groups</a>
-										<a class="" href="about" title="" data-ripple="">about</a>
-										<a class="active" href="#" title="" data-ripple="">more</a>
+										<a class="" href="about" title="" data-ripple="">about</a>										
 									</li>
 								</ul>
 							</div>
@@ -496,35 +474,14 @@
 						<div class="col-lg-12">
 							<div class="row" id="page-contents">
 								<div class="col-lg-3">
-									<aside class="sidebar static">
-										<div class="widget">
-											<h4 class="widget-title">Profile intro</h4>
-											<ul class="short-profile">
-												<li>
-													<span>about</span>
-													<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft </p>
-												</li>
-												<li>
-													<span>fav tv show</span>
-													<p>Sacred Games, Spartcus Blood, Games of Theron </p>
-												</li>
-												<li>
-													<span>favourit music</span>
-													<p>Justin Biber, Shakira, Nati Natasah</p>
-												</li>
-											</ul>
-										</div>
+									<aside class="sidebar static">										
 										<div class="widget stick-widget">
 										<h4 class="widget-title">Edit info</h4>
 										<ul class="naves">
 											<li>
 												<i class="ti-info-alt"></i>
 												<a href="edit-profile-basic" title="">Basic info</a>
-											</li>
-											<li>
-												<i class="ti-mouse-alt"></i>
-												<a href="edit-work-eductation" title="">Education & Work</a>
-											</li>
+											</li>											
 											<li>
 												<i class="ti-heart"></i>
 												<a href="edit-interest" title="">My interests</a>

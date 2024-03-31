@@ -8,8 +8,8 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 	<title>Winku Social Network Toolkit</title>
-    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16"> 
-    
+    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+
     <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/color.css') }}">
@@ -19,7 +19,7 @@
 <body>
 <!--<div class="se-pre-con"></div>-->
 <div class="theme-layout">
-	
+
 	<div class="responsive-header">
 		<div class="mh-head first Sticky">
 			<span class="mh-btns-left">
@@ -62,8 +62,8 @@
 						<li><a href="groups" title="">groups page</a></li>
 						<li><a href="page-likers" title="">Likes page</a></li>
 						<li><a href="people-nearby" title="">people nearby</a></li>
-						
-						
+
+
 					</ul>
 				</li>
 				<li><span>Account Setting</span>
@@ -146,27 +146,27 @@
 					<form method="post">
 						<div class="setting-row">
 							<span>use night mode</span>
-							<input type="checkbox" id="nightmode"/> 
+							<input type="checkbox" id="nightmode"/>
 							<label for="nightmode" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Notifications</span>
-							<input type="checkbox" id="switch2"/> 
+							<input type="checkbox" id="switch2"/>
 							<label for="switch2" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Notification sound</span>
-							<input type="checkbox" id="switch3"/> 
+							<input type="checkbox" id="switch3"/>
 							<label for="switch3" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>My profile</span>
-							<input type="checkbox" id="switch4"/> 
+							<input type="checkbox" id="switch4"/>
 							<label for="switch4" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Show profile</span>
-							<input type="checkbox" id="switch5"/> 
+							<input type="checkbox" id="switch5"/>
 							<label for="switch5" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 					</form>
@@ -174,32 +174,32 @@
 					<form method="post">
 						<div class="setting-row">
 							<span>Sub users</span>
-							<input type="checkbox" id="switch6" /> 
+							<input type="checkbox" id="switch6" />
 							<label for="switch6" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>personal account</span>
-							<input type="checkbox" id="switch7" /> 
+							<input type="checkbox" id="switch7" />
 							<label for="switch7" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Business account</span>
-							<input type="checkbox" id="switch8" /> 
+							<input type="checkbox" id="switch8" />
 							<label for="switch8" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Show me online</span>
-							<input type="checkbox" id="switch9" /> 
+							<input type="checkbox" id="switch9" />
 							<label for="switch9" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Delete history</span>
-							<input type="checkbox" id="switch10" /> 
+							<input type="checkbox" id="switch10" />
 							<label for="switch10" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Expose author name</span>
-							<input type="checkbox" id="switch11" /> 
+							<input type="checkbox" id="switch11" />
 							<label for="switch11" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 					</form>
@@ -207,12 +207,12 @@
 			</div>
 		</nav>
 	</div><!-- responsive header -->
-	
+
 	<div class="topbar stick">
 		<div class="logo">
 			<a title="" href="newsfeed"><img src="images/logo.png" alt=""></a>
 		</div>
-		
+
 		<div class="top-area">
 			<ul class="main-menu">
 				<li>
@@ -435,7 +435,7 @@
 			<span class="ti-menu main-menu" data-ripple=""></span>
 		</div>
 	</div><!-- topbar -->
-	
+
 	<section>
 		<div class="feature-photo">
 			<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
@@ -480,7 +480,7 @@
 									<a class="" href="timeline-friends" title="" data-ripple="">Friends</a>
 									<a class="" href="timeline-groups" title="" data-ripple="">Groups</a>
 									<a class="" href="about" title="" data-ripple="">about</a>
-									<a class="" href="#" title="" data-ripple="">more</a>
+									
 								</li>
 							</ul>
 						</div>
@@ -489,84 +489,14 @@
 			</div>
 		</div>
 	</section><!-- top area -->
-		
+
 	<section>
 		<div class="gap gray-bg">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="row" id="page-contents">
-							<div class="col-lg-3">
-								<aside class="sidebar static">
-									<div class="widget">
-										<h4 class="widget-title">Shortcuts</h4>
-										<ul class="naves">
-											<li>
-												<i class="ti-clipboard"></i>
-												<a href="newsfeed" title="">News feed</a>
-											</li>
-											<li>
-												<i class="ti-mouse-alt"></i>
-												<a href="inbox" title="">Inbox</a>
-											</li>
-											<li>
-												<i class="ti-files"></i>
-												<a href="fav-page" title="">My pages</a>
-											</li>
-											<li>
-												<i class="ti-user"></i>
-												<a href="timeline-friends" title="">friends</a>
-											</li>
-											<li>
-												<i class="ti-image"></i>
-												<a href="timeline-photos" title="">images</a>
-											</li>
-											<li>
-												<i class="ti-video-camera"></i>
-												<a href="timeline-videos" title="">videos</a>
-											</li>
-											<li>
-												<i class="ti-comments-smiley"></i>
-												<a href="messages" title="">Messages</a>
-											</li>
-											<li>
-												<i class="ti-bell"></i>
-												<a href="notifications" title="">Notifications</a>
-											</li>
-											<li>
-												<i class="ti-share"></i>
-												<a href="people-nearby" title="">People Nearby</a>
-											</li>
-											<li>
-												<i class="fa fa-bar-chart-o"></i>
-												<a href="insights" title="">insights</a>
-											</li>
-											<li>
-												<i class="ti-power-off"></i>
-												<a href="landing" title="">Logout</a>
-											</li>
-										</ul>
-									</div><!-- Shortcuts -->
-									<div class="widget">
-										<h4 class="widget-title">Profile intro</h4>
-										<ul class="short-profile">
-											<li>
-												<span>about</span>
-												<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
-											</li>
-											<li>
-												<span>fav tv show</span>
-												<p>Sacred Games, Spartcus Blood, Games of theron</p>
-											</li>
-											<li>
-												<span>favourit music</span>
-												<p>Justin Biber, Nati Natsha, Shakira</p>
-											</li>
-										</ul>
-									</div><!-- profile intro widget -->
-
-								</aside>
-							</div><!-- sidebar -->
+							<!-- sidebar -->
 							<div class="col-lg-6">
 								<div class="central-meta">
 									<ul class="photos">
@@ -637,211 +567,12 @@
 									<div class="lodmore"><button class="btn-view btn-load-more"></button></div>
 								</div><!-- photos -->
 							</div><!-- centerl meta -->
-							<div class="col-lg-3">
-								<aside class="sidebar static">
-									<div class="widget">
-										<h4 class="widget-title">Twitter feed</h4>
-										<ul class="twiter-feed">
-											<li>
-												<i class="fa fa-twitter"></i>
-												<span>
-													<i>jhon william</i>
-													@jhonwilliam
-												</span>
-												<p>tomorrow with the company we were working and 5 child run away from the working place. <a href="#" title="">#daydream5k</a> </p>
-												<em>2 hours ago</em>
-											</li>
-											<li>
-												<i class="fa fa-twitter"></i>
-												<span>
-													<i>Kelly watson</i>
-													@kelly
-												</span>
-												<p>tomorrow with the company we were working and 5 child run away from the working place. <a href="#" title="">#daydream5k</a> </p>
-												<em>2 hours ago</em>
-											</li>
-											<li>
-												<i class="fa fa-twitter"></i>
-												<span>
-													<i>Jony bravo</i>
-													@jonibravo
-												</span>
-												<p>tomorrow with the company we were working and 5 child run away from the working place. <a href="#" title="">#daydream5k</a> </p>
-												<em>2 hours ago</em>
-											</li>
-										</ul>
-									</div><!-- twitter feed-->
-									<div class="widget friend-list stick-widget">
-										<h4 class="widget-title">Friends</h4>
-										<div id="searchDir"></div>
-										<ul id="people-list" class="friendz-list">
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line">bucky barnes</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="36415f5842534445595a52534476515b575f5a1855595b">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="741615061a1107341319151d185a171b19">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar3.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line">jason borne</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3852594b57565a785f55595154165b5755">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar4.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line">Cameron diaz</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="761c170519181436111b171f1a5815191b">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6a000b190504082a0d070b030644090507">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar6.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line">andrew</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5c363d2f33323e1c3b313d3530723f3331">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar7.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line">amy watson</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3a9a2b0acada183a4aea2aaafeda0acae">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e08a81938f8e82a0878d81898cce838f8d">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="781a190a161d0b381f15191114561b1715">[email&#160;protected]</a></i>
-												</div>
-											</li>
-										</ul>
-										<div class="chat-box">
-											<div class="chat-head">
-												<span class="status f-online"></span>
-												<h6>Bucky Barnes</h6>
-												<div class="more">
-													<span><i class="ti-more-alt"></i></span>
-													<span class="close-mesage"><i class="ti-close"></i></span>
-												</div>
-											</div>
-											<div class="chat-list">
-												<ul>
-													<li class="me">
-														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="you">
-														<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="me">
-														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-												</ul>
-												<form class="text-box">
-													<textarea placeholder="Post enter to post..."></textarea>
-													<div class="add-smiles">
-														<span title="add icon" class="em em-expressionless"></span>
-													</div>
-													<div class="smiles-bunch">
-														<i class="em em---1"></i>
-														<i class="em em-smiley"></i>
-														<i class="em em-anguished"></i>
-														<i class="em em-laughing"></i>
-														<i class="em em-angry"></i>
-														<i class="em em-astonished"></i>
-														<i class="em em-blush"></i>
-														<i class="em em-disappointed"></i>
-														<i class="em em-worried"></i>
-														<i class="em em-kissing_heart"></i>
-														<i class="em em-rage"></i>
-														<i class="em em-stuck_out_tongue"></i>
-													</div>
-													<button type="submit"></button>
-												</form>
-											</div>
-										</div>
-									</div><!-- friends list sidebar -->
-									
-								</aside>
-							</div><!-- sidebar -->
-						</div>	
+							<!-- sidebar -->
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</section>
 
 	<footer>
@@ -852,7 +583,7 @@
 						<div class="foot-logo">
 							<div class="logo">
 								<a href="index-2" title=""><img src="images/logo.png" alt=""></a>
-							</div>	
+							</div>
 							<p>
 								The trio took this simple idea and built it into the world’s leading carpooling platform.
 							</p>
@@ -934,27 +665,27 @@
 			<form method="post">
 				<div class="setting-row">
 					<span>use night mode</span>
-					<input type="checkbox" id="nightmode1"/> 
+					<input type="checkbox" id="nightmode1"/>
 					<label for="nightmode1" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Notifications</span>
-					<input type="checkbox" id="switch22" /> 
+					<input type="checkbox" id="switch22" />
 					<label for="switch22" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Notification sound</span>
-					<input type="checkbox" id="switch33" /> 
+					<input type="checkbox" id="switch33" />
 					<label for="switch33" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>My profile</span>
-					<input type="checkbox" id="switch44" /> 
+					<input type="checkbox" id="switch44" />
 					<label for="switch44" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Show profile</span>
-					<input type="checkbox" id="switch55" /> 
+					<input type="checkbox" id="switch55" />
 					<label for="switch55" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 			</form>
@@ -962,41 +693,41 @@
 			<form method="post">
 				<div class="setting-row">
 					<span>Sub users</span>
-					<input type="checkbox" id="switch66" /> 
+					<input type="checkbox" id="switch66" />
 					<label for="switch66" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>personal account</span>
-					<input type="checkbox" id="switch77" /> 
+					<input type="checkbox" id="switch77" />
 					<label for="switch77" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Business account</span>
-					<input type="checkbox" id="switch88" /> 
+					<input type="checkbox" id="switch88" />
 					<label for="switch88" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Show me online</span>
-					<input type="checkbox" id="switch99" /> 
+					<input type="checkbox" id="switch99" />
 					<label for="switch99" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Delete history</span>
-					<input type="checkbox" id="switch101" /> 
+					<input type="checkbox" id="switch101" />
 					<label for="switch101" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Expose author name</span>
-					<input type="checkbox" id="switch111" /> 
+					<input type="checkbox" id="switch111" />
 					<label for="switch111" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 			</form>
-		</div><!-- side panel -->	
-	
+		</div><!-- side panel -->
+
 	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js"></script>
 	<script src="{{ asset('js/script.js') }}"></script>
 
-</body>	
+</body>
 
 
 </html>

@@ -255,6 +255,8 @@
 						<li><a href="{{ url('notifications') }}" title="">notifications page</a></li>
 					</ul>
 				</li>
+<<<<<<< HEAD
+=======
 				<li>
 					<a href="#" title="">more pages</a>
 					<ul>
@@ -267,6 +269,7 @@
 						<li><a href="{{ url('widgets') }}" title="">Widgts</a></li>
 					</ul>
 				</li>
+>>>>>>> dev
 			</ul>
 			<ul class="setting-area">
 				<li>
@@ -418,14 +421,6 @@
 						<a href="{{ url('messages') }}" title="" class="more-mesg">view more</a>
 					</div>
 				</li>
-				<li><a href="#" title="Languages" data-ripple=""><i class="fa fa-globe"></i></a>
-					<div class="dropdowns languages">
-						<a href="#" title=""><i class="ti-check"></i>English</a>
-						<a href="#" title="">Arabic</a>
-						<a href="#" title="">Dutch</a>
-						<a href="#" title="">French</a>
-					</div>
-				</li>
 			</ul>
 			<div class="user-img">
 				<img src="images/resources/admin.jpg" alt="">
@@ -440,8 +435,7 @@
 					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
 					<a href="#" title=""><i class="ti-power-off"></i>log out</a>
 				</div>
-			</div>
-			<span class="ti-menu main-menu" data-ripple=""></span>
+			</div>			
 		</div>
 	</div>	
 <!-- topbar -->
@@ -536,6 +530,24 @@
 										<div class="widget stick-widget">
 											<h4 class="widget-title">Edit info</h4>
 											<ul class="naves">
+<<<<<<< HEAD
+												<li>
+													<i class="ti-info-alt"></i>
+													<a href="edit-profile-basic" title="">Basic info</a>
+												</li>											
+												<li>
+													<i class="ti-heart"></i>
+													<a href="edit-interest" title="">My interests</a>
+												</li>
+												<li>
+													<i class="ti-settings"></i>
+													<a href="edit-account-setting" title="">account setting</a>
+												</li>
+												<li>
+													<i class="ti-lock"></i>
+													<a href="edit-password" title="">change password</a>
+												</li>
+=======
 											<li>
 												<i class="ti-info-alt"></i>
 												<a href="{{ url('edit-profile-basic') }}" title="">Basic info</a>
@@ -556,6 +568,7 @@
 												<i class="ti-lock"></i>
 												<a href="{{ url('edit-password') }}" title="">change password</a>
 											</li>
+>>>>>>> dev
 											</ul>
 										</div><!-- settings widget -->										
 									</aside>
@@ -591,18 +604,7 @@
 									<aside class="sidebar static">
 										<div class="widget">
 											<div class="banner medium-opacity bluesh">
-											<div style="background-image: url(images/resources/baner-widgetbg.jpg)" class="bg-image"></div>
-											<div class="baner-top">
-												<span><img src="images/book-icon.png" alt=""></span>
-												<i class="fa fa-ellipsis-h"></i>
-											</div>
-											<div class="banermeta">
-												<p>
-													create your own favourit page.
-												</p>
-												<span>like them all</span>
-												<a href="#" title="" data-ripple="">start now!</a>
-											</div>
+											<div style="background-image: url(images/resources/baner-widgetbg.jpg)" class="bg-image"></div>																					
 										</div>											
 										</div>
 										<div class="widget stick-widget">

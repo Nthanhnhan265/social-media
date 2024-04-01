@@ -419,15 +419,7 @@
 						</ul>
 						<a href="{{ url('messages') }}" title="" class="more-mesg">view more</a>
 					</div>
-				</li>
-				<li><a href="#" title="Languages" data-ripple=""><i class="fa fa-globe"></i></a>
-					<div class="dropdowns languages">
-						<a href="#" title=""><i class="ti-check"></i>English</a>
-						<a href="#" title="">Arabic</a>
-						<a href="#" title="">Dutch</a>
-						<a href="#" title="">French</a>
-					</div>
-				</li>
+				</li>				
 			</ul>
 			<div class="user-img">
 				<img src="images/resources/admin.jpg" alt="">
@@ -442,8 +434,7 @@
 					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
 					<a href="#" title=""><i class="ti-power-off"></i>log out</a>
 				</div>
-			</div>
-			<span class="ti-menu main-menu" data-ripple=""></span>
+			</div>			
 		</div>
 	</div><!-- topbar -->
 	
@@ -508,24 +499,7 @@
 						<div class="col-lg-12">
 							<div class="row" id="page-contents">
 								<div class="col-lg-3">
-									<aside class="sidebar static">
-										<div class="widget">
-											<h4 class="widget-title">Profile intro</h4>
-											<ul class="short-profile">
-												<li>
-													<span>about</span>
-													<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft </p>
-												</li>
-												<li>
-													<span>fav tv show</span>
-													<p>Sacred Games, Spartcus Blood, Games of Theron </p>
-												</li>
-												<li>
-													<span>favourit music</span>
-													<p>Justin Biber, Shakira, Nati Natasah</p>
-												</li>
-											</ul>
-										</div>
+									<aside class="sidebar static">										
 										<div class="widget stick-widget">
 										<h4 class="widget-title">Edit info</h4>
 										<ul class="naves">

@@ -27,7 +27,6 @@
 				</span>
 				<span class="mh-text">
 					<a href="{{ url('newsfeed') }}" title=""><img src="images/logo2.png" alt=""></a>
-
 				</span>
 				<span class="mh-btns-right">
 					<a class="fa fa-sliders" href="#shoppingbag"></a>

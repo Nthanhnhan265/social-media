@@ -321,7 +321,7 @@
 						<div class="row" id="page-contents">
 							<div class="col-lg-3">
 								<aside class="sidebar static">
-									<div class="widget">
+									<!-- <div class="widget">
 											<h4 class="widget-title">Shortcuts</h4>
 											<ul class="naves">
 												<li>
@@ -369,8 +369,8 @@
 													<a href="landing" title="">Logout</a>
 												</li>
 											</ul>
-										</div><!-- Shortcuts -->
-									<div class="widget stick-widget">
+										</div>Shortcuts -->
+									<!-- <div class="widget stick-widget">
 										<h4 class="widget-title">Profile intro</h4>
 										<ul class="short-profile">
 											<li>
@@ -386,7 +386,7 @@
 												<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
 											</li>
 										</ul>
-									</div><!-- profile intro widget -->
+								</div> profile intro widget -->
 
 								</aside>
 							</div><!-- sidebar -->
@@ -625,7 +625,7 @@
 							</div><!-- centerl meta -->
 							<div class="col-lg-3">
 								<aside class="sidebar static">
-									<div class="widget">
+									<!-- <div class="widget">
 										<h4 class="widget-title">Who's follownig</h4>
 										<ul class="followers">
 											<li>
@@ -664,8 +664,8 @@
 												</div>
 											</li>
 										</ul>
-									</div><!-- who's following -->
-									<div class="widget friend-list stick-widget">
+									</div>who's following -->
+									<!-- <div class="widget friend-list stick-widget">
 										<h4 class="widget-title">Friends</h4>
 										<div id="searchDir"></div>
 										<ul id="people-list" class="friendz-list">
@@ -827,7 +827,7 @@
 												</form>
 											</div>
 										</div>
-									</div><!-- friends list sidebar -->
+									</div>friends list sidebar -->
 									
 								</aside>
 							</div><!-- sidebar -->

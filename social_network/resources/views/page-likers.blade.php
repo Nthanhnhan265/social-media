@@ -18,253 +18,67 @@
 </head>
 <body>
 <!--<div class="se-pre-con"></div>-->
-<div class="theme-layout">
-	
-	<div class="responsive-header">
-		<div class="mh-head first Sticky">
-			<span class="mh-btns-left">
-				<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
-			</span>
-			<span class="mh-text">
-				<a href="newsfeed" title=""><img src="images/logo2.png" alt=""></a>
-			</span>
-			<span class="mh-btns-right">
-				<a class="fa fa-sliders" href="#shoppingbag"></a>
-			</span>
-		</div>
-		<div class="mh-head second">
-			<form class="mh-form">
-				<input placeholder="search" />
-				<a href="#/" class="fa fa-search"></a>
-			</form>
-		</div>
-		<nav id="menu" class="res-menu">
-			<ul>
-				<li><span>Home</span>
-					<ul>
-						<li><a href="index-2" title="">Home Social</a></li>
-						<li><a href="index2" title="">Home Social 2</a></li>
-						<li><a href="index-company" title="">Home Company</a></li>
-						<li><a href="landing" title="">Login page</a></li>
-						<li><a href="logout" title="">Logout Page</a></li>
-						<li><a href="newsfeed" title="">news feed</a></li>
-					</ul>
-				</li>
-				<li><span>Time Line</span>
-					<ul>
-						<li><a href="time-line" title="">timeline</a></li>
-						<li><a href="timeline-friends" title="">timeline friends</a></li>
-						<li><a href="timeline-groups" title="">timeline groups</a></li>
-						<li><a href="timeline-pages" title="">timeline pages</a></li>
-						<li><a href="timeline-photos" title="">timeline photos</a></li>
-						<li><a href="timeline-videos" title="">timeline videos</a></li>
-						<li><a href="fav-page" title="">favourit page</a></li>
-						<li><a href="groups" title="">groups page</a></li>
-						<li><a href="page-likers" title="">Likes page</a></li>
-						<li><a href="people-nearby" title="">people nearby</a></li>
-						
-						
-					</ul>
-				</li>
-				<li><span>Account Setting</span>
-					<ul>
-						<li><a href="create-fav-page" title="">create fav page</a></li>
-						<li><a href="edit-account-setting" title="">edit account setting</a></li>
-						<li><a href="edit-interest" title="">edit-interest</a></li>
-						<li><a href="edit-password" title="">edit-password</a></li>
-						<li><a href="edit-profile-basic" title="">edit profile basics</a></li>
-						<li><a href="edit-work-eductation" title="">edit work educations</a></li>
-						<li><a href="messages" title="">message box</a></li>
-						<li><a href="inbox" title="">Inbox</a></li>
-						<li><a href="notifications" title="">notifications page</a></li>
-					</ul>
-				</li>
-				<li><span>forum</span>
-					<ul>
-						<li><a href="forum" title="">Forum Page</a></li>
-						<li><a href="forums-category" title="">Fourm Category</a></li>
-						<li><a href="forum-open-topic" title="">Forum Open Topic</a></li>
-						<li><a href="forum-create-topic" title="">Forum Create Topic</a></li>
-					</ul>
-				</li>
-				<li><span>Our Shop</span>
-					<ul>
-						<li><a href="shop" title="">Shop Products</a></li>
-						<li><a href="shop-masonry" title="">Shop Masonry Products</a></li>
-						<li><a href="shop-single" title="">Shop Detail Page</a></li>
-						<li><a href="shop-cart" title="">Shop Product Cart</a></li>
-						<li><a href="shop-checkout" title="">Product Checkout</a></li>
-					</ul>
-				</li>
-				<li><span>Our Blog</span>
-					<ul>
-						<li><a href="blog-grid-wo-sidebar" title="">Our Blog</a></li>
-						<li><a href="blog-grid-right-sidebar" title="">Blog with R-Sidebar</a></li>
-						<li><a href="blog-grid-left-sidebar" title="">Blog with L-Sidebar</a></li>
-						<li><a href="blog-masonry" title="">Blog Masonry Style</a></li>
-						<li><a href="blog-list-wo-sidebar" title="">Blog List Style</a></li>
-						<li><a href="blog-list-right-sidebar" title="">Blog List with R-Sidebar</a></li>
-						<li><a href="blog-list-left-sidebar" title="">Blog List with L-Sidebar</a></li>
-						<li><a href="blog-detail" title="">Blog Post Detail</a></li>
-					</ul>
-				</li>
-				<li><span>Portfolio</span>
-					<ul>
-						<li><a href="portfolio-2colm" title="">Portfolio 2col</a></li>
-						<li><a href="portfolio-3colm" title="">Portfolio 3col</a></li>
-						<li><a href="portfolio-4colm" title="">Portfolio 4col</a></li>
-					</ul>
-				</li>
-				<li><span>Support & Help</span>
-					<ul>
-						<li><a href="support-and-help" title="">Support & Help</a></li>
-						<li><a href="support-and-help-detail" title="">Support & Help Detail</a></li>
-						<li><a href="support-and-help-search-result" title="">Support & Help Search Result</a></li>
-					</ul>
-				</li>
-				<li><span>More pages</span>
-					<ul>
-						<li><a href="careers" title="">Careers</a></li>
-						<li><a href="career-detail" title="">Career Detail</a></li>
-						<li><a href="404" title="">404 error page</a></li>
-						<li><a href="404-2" title="">404 Style2</a></li>
-						<li><a href="faq" title="">faq's page</a></li>
-						<li><a href="insights" title="">insights</a></li>
-						<li><a href="knowledge-base" title="">knowledge base</a></li>
-					</ul>
-				</li>
-				<li><a href="about" title="">about</a></li>
-				<li><a href="about-company" title="">About Us2</a></li>
-				<li><a href="contact" title="">contact</a></li>
-				<li><a href="contact-branches" title="">Contact Us2</a></li>
-				<li><a href="widgets" title="">Widgts</a></li>
-			</ul>
-		</nav>
-		<nav id="shoppingbag">
-			<div>
-				<div class="">
-					<form method="post">
-						<div class="setting-row">
-							<span>use night mode</span>
-							<input type="checkbox" id="nightmode"/> 
-							<label for="nightmode" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Notifications</span>
-							<input type="checkbox" id="switch2"/> 
-							<label for="switch2" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Notification sound</span>
-							<input type="checkbox" id="switch3"/> 
-							<label for="switch3" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>My profile</span>
-							<input type="checkbox" id="switch4"/> 
-							<label for="switch4" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Show profile</span>
-							<input type="checkbox" id="switch5"/> 
-							<label for="switch5" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-					</form>
-					<h4 class="panel-title">Account Setting</h4>
-					<form method="post">
-						<div class="setting-row">
-							<span>Sub users</span>
-							<input type="checkbox" id="switch6" /> 
-							<label for="switch6" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>personal account</span>
-							<input type="checkbox" id="switch7" /> 
-							<label for="switch7" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Business account</span>
-							<input type="checkbox" id="switch8" /> 
-							<label for="switch8" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Show me online</span>
-							<input type="checkbox" id="switch9" /> 
-							<label for="switch9" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Delete history</span>
-							<input type="checkbox" id="switch10" /> 
-							<label for="switch10" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Expose author name</span>
-							<input type="checkbox" id="switch11" /> 
-							<label for="switch11" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-					</form>
-				</div>
-			</div>
-		</nav>
-	</div><!-- responsive header -->
-	
+<!-- responsive header -->
+@extends('/layouts.header')
+	@section('content')
+	@endsection
 	<div class="topbar stick">
 		<div class="logo">
-			<a title="" href="newsfeed"><img src="images/logo.png" alt=""></a>
+			<a title="" href="{{ url('newsfeed') }}"><img src="images/logo.png" alt=""></a>
 		</div>
-		
+
 		<div class="top-area">
 			<ul class="main-menu">
 				<li>
 					<a href="#" title="">Home</a>
 					<ul>
-						<li><a href="index-2" title="">Home Social</a></li>
-						<li><a href="index2" title="">Home Social 2</a></li>
-						<li><a href="index-company" title="">Home Company</a></li>
-						<li><a href="landing" title="">Login page</a></li>
-						<li><a href="logout" title="">Logout Page</a></li>
-						<li><a href="newsfeed" title="">news feed</a></li>
+						<li><a href="{{ url('index-2') }}" title="">Home Social</a></li>
+						<li><a href="{{ url('index2') }}" title="">Home Social 2</a></li>
+						<li><a href="{{ url('index-company') }}" title="">Home Company</a></li>
+						<li><a href="{{ url('landing') }}" title="">Login page</a></li>
+						<li><a href="{{ url('logout') }}" title="">Logout Page</a></li>
+						<li><a href="{{ url('newsfeed') }}" title="">news feed</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="#" title="">timeline</a>
 					<ul>
-						<li><a href="time-line" title="">timeline</a></li>
-						<li><a href="timeline-friends" title="">timeline friends</a></li>
-						<li><a href="timeline-groups" title="">timeline groups</a></li>
-						<li><a href="timeline-pages" title="">timeline pages</a></li>
-						<li><a href="timeline-photos" title="">timeline photos</a></li>
-						<li><a href="timeline-videos" title="">timeline videos</a></li>
-						<li><a href="fav-page" title="">favourit page</a></li>
-						<li><a href="groups" title="">groups page</a></li>
-						<li><a href="page-likers" title="">Likes page</a></li>
-						<li><a href="people-nearby" title="">people nearby</a></li>
+						<li><a href="{{ url('time-line')  }}" title="">timeline</a></li>
+						<li><a href="{{ url('timeline-friends') }}" title="">timeline friends</a></li>
+						<li><a href="{{ url('timeline-groups') }}" title="">timeline groups</a></li>
+						<li><a href="{{ url('timeline-pages') }}" title="">timeline pages</a></li>
+						<li><a href="{{ url('timeline-photos') }}" title="">timeline photos</a></li>
+						<li><a href="{{ url('timeline-videos') }}" title="">timeline videos</a></li>
+						<li><a href="{{ url('fav-page') }}" title="">favourit page</a></li>
+						<li><a href="{{ url('groups') }}" title="">groups page</a></li>
+						<li><a href="{{ url('page-likers') }}" title="">Likes page</a></li>
+						<li><a href="{{ url('people-nearby') }}" title="">people nearby</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="#" title="">account settings</a>
 					<ul>
-						<li><a href="create-fav-page" title="">create fav page</a></li>
-						<li><a href="edit-account-setting" title="">edit account setting</a></li>
-						<li><a href="edit-interest" title="">edit-interest</a></li>
-						<li><a href="edit-password" title="">edit-password</a></li>
-						<li><a href="edit-profile-basic" title="">edit profile basics</a></li>
-						<li><a href="edit-work-eductation" title="">edit work educations</a></li>
-						<li><a href="messages" title="">message box</a></li>
-						<li><a href="inbox" title="">Inbox</a></li>
-						<li><a href="notifications" title="">notifications page</a></li>
+						<li><a href="{{ url('create-fav-page') }}" title="">create fav page</a></li>
+						<li><a href="{{ url('edit-account-setting') }}" title="">edit account setting</a></li>
+						<li><a href="{{ url('edit-interest') }}" title="">edit-interest</a></li>
+						<li><a href="{{ url('edit-password') }}" title="">edit-password</a></li>
+						<li><a href="{{ url('edit-profile-basic') }}" title="">edit profile basics</a></li>
+						<li><a href="{{ url('edit-work-eductation') }}" title="">edit work educations</a></li>
+						<li><a href="{{ url('messages') }}" title="">message box</a></li>
+						<li><a href="{{ url('inbox') }}" title="">Inbox</a></li>
+						<li><a href="{{ url('notifications') }}" title="">notifications page</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="#" title="">more pages</a>
 					<ul>
-						<li><a href="404" title="">404 error page</a></li>
-						<li><a href="about" title="">about</a></li>
-						<li><a href="contact" title="">contact</a></li>
-						<li><a href="faq" title="">faq's page</a></li>
-						<li><a href="insights" title="">insights</a></li>
-						<li><a href="knowledge-base" title="">knowledge base</a></li>
-						<li><a href="widgets" title="">Widgts</a></li>
+						<li><a href="{{ url('404') }}" title="">404 error page</a></li>
+						<li><a href="{{ url('about') }}" title="">about</a></li>
+						<li><a href="{{ url('contact') }}" title="">contact</a></li>
+						<li><a href="{{ url('faq') }}" title="">faq's page</a></li>
+						<li><a href="{{ url('insights') }}" title="">insights</a></li>
+						<li><a href="{{ url('knowledge-base') }}" title="">knowledge base</a></li>
+						<li><a href="{{ url('widgets') }}" title="">Widgts</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -278,7 +92,7 @@
 						</form>
 					</div>
 				</li>
-				<li><a href="newsfeed" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
+				<li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
 				<li>
 					<a href="#" title="Notification" data-ripple="">
 						<i class="ti-bell"></i><span>20</span>
@@ -287,7 +101,7 @@
 						<span>4 New Notifications</span>
 						<ul class="drops-menu">
 							<li>
-								<a href="notifications" title="">
+								<a href="{{ url('notifications') }}" title="">
 									<img src="images/resources/thumb-1.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>sarah Loren</h6>
@@ -298,7 +112,8 @@
 								<span class="tag green">New</span>
 							</li>
 							<li>
-								<a href="notifications" title="">
+								
+							<a href="{{ url('notifications') }}" title="">
 									<img src="images/resources/thumb-2.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Jhon doe</h6>
@@ -309,7 +124,8 @@
 								<span class="tag red">Reply</span>
 							</li>
 							<li>
-								<a href="notifications" title="">
+								
+							<a href="{{ url('notifications') }}" title="">
 									<img src="images/resources/thumb-3.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Andrew</h6>
@@ -320,7 +136,8 @@
 								<span class="tag blue">Unseen</span>
 							</li>
 							<li>
-								<a href="notifications" title="">
+							
+							<a href="{{ url('notifications') }}" title="">
 									<img src="images/resources/thumb-4.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Tom cruse</h6>
@@ -331,7 +148,8 @@
 								<span class="tag">New</span>
 							</li>
 							<li>
-								<a href="notifications" title="">
+								
+							<a href="{{ url('notifications') }}" title="">
 									<img src="images/resources/thumb-5.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Amy</h6>
@@ -342,7 +160,7 @@
 								<span class="tag">New</span>
 							</li>
 						</ul>
-						<a href="notifications" title="" class="more-mesg">view more</a>
+						<a href="{{ url('notifications') }}" title="" class="more-mesg">view more</a>
 					</div>
 				</li>
 				<li>
@@ -351,7 +169,8 @@
 						<span>5 New Messages</span>
 						<ul class="drops-menu">
 							<li>
-								<a href="notifications" title="">
+							
+							<a href="{{ url('notifications') }}" title="">
 									<img src="images/resources/thumb-1.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>sarah Loren</h6>
@@ -362,7 +181,8 @@
 								<span class="tag green">New</span>
 							</li>
 							<li>
-								<a href="notifications" title="">
+				
+							<a href="{{ url('notifications') }}" title="">
 									<img src="images/resources/thumb-2.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Jhon doe</h6>
@@ -373,7 +193,8 @@
 								<span class="tag red">Reply</span>
 							</li>
 							<li>
-								<a href="notifications" title="">
+							
+							<a href="{{ url('notifications') }}" title="">
 									<img src="images/resources/thumb-3.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Andrew</h6>
@@ -384,7 +205,8 @@
 								<span class="tag blue">Unseen</span>
 							</li>
 							<li>
-								<a href="notifications" title="">
+								
+							<a href="{{ url('notifications') }}" title="">
 									<img src="images/resources/thumb-4.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Tom cruse</h6>
@@ -395,7 +217,8 @@
 								<span class="tag">New</span>
 							</li>
 							<li>
-								<a href="notifications" title="">
+							
+							<a href="{{ url('notifications') }}" title="">
 									<img src="images/resources/thumb-5.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Amy</h6>
@@ -406,7 +229,7 @@
 								<span class="tag">New</span>
 							</li>
 						</ul>
-						<a href="messages" title="" class="more-mesg">view more</a>
+						<a href="{{ url('messages') }}" title="" class="more-mesg">view more</a>
 					</div>
 				</li>
 				<li><a href="#" title="Languages" data-ripple=""><i class="fa fa-globe"></i></a>
@@ -474,12 +297,12 @@
 								  <span>@amazonshop</span>
 								</li>
 								<li>
-									<a data-ripple="" title="" href="fav-page" class="">Page</a>
-									<a data-ripple="" title="" href="notifications" class="">Notifications</a>
-									<a data-ripple="" title="" href="inbox" class="">inbox</a>
-									<a data-ripple="" title="" href="insights" class="">insights</a>
-									<a data-ripple="" title="" href="fav-page" class="">posts</a>
-									<a data-ripple="" title="" href="page-likers" class="active">likers</a>
+									<a data-ripple="" title="" href="{{ url('fav-page') }}" class="">Page</a>
+									<a data-ripple="" title="" href="{{ url('notifications') }}" class="">Notifications</a>
+									<a data-ripple="" title="" href="{{ url('inbox') }}" class="">inbox</a>
+									<a data-ripple="" title="" href="{{ url('insights') }}" class="">insights</a>
+									<a data-ripple="" title="" href="{{ url('post') }}" class="">posts</a>
+									<a data-ripple="" title="" href="{{ url('page-likers') }}" class="active">likers</a>
 								</li>
 							</ul>
 						</div>
@@ -500,50 +323,50 @@
 									<div class="widget">
 											<h4 class="widget-title">Shortcuts</h4>
 											<ul class="naves">
-												<li>
-													<i class="ti-clipboard"></i>
-													<a href="newsfeed" title="">News feed</a>
-												</li>
-												<li>
-													<i class="ti-mouse-alt"></i>
-													<a href="inbox" title="">Inbox</a>
-												</li>
-												<li>
-													<i class="ti-files"></i>
-													<a href="fav-page" title="">My pages</a>
-												</li>
-												<li>
-													<i class="ti-user"></i>
-													<a href="timeline-friends" title="">friends</a>
-												</li>
-												<li>
-													<i class="ti-image"></i>
-													<a href="timeline-photos" title="">images</a>
-												</li>
-												<li>
-													<i class="ti-video-camera"></i>
-													<a href="timeline-videos" title="">videos</a>
-												</li>
-												<li>
-													<i class="ti-comments-smiley"></i>
-													<a href="messages" title="">Messages</a>
-												</li>
-												<li>
-													<i class="ti-bell"></i>
-													<a href="notifications" title="">Notifications</a>
-												</li>
-												<li>
-													<i class="ti-share"></i>
-													<a href="people-nearby" title="">People Nearby</a>
-												</li>
-												<li>
-													<i class="fa fa-bar-chart-o"></i>
-													<a href="insights" title="">insights</a>
-												</li>
-												<li>
-													<i class="ti-power-off"></i>
-													<a href="landing" title="">Logout</a>
-												</li>
+											<li>
+												<i class="ti-clipboard"></i>
+												<a href="{{ url('newsfeed') }}" title="">News feed</a>
+											</li>
+											<li>
+												<i class="ti-mouse-alt"></i>
+												<a href="{{ url('inbox') }}" title="">Inbox</a>
+											</li>
+											<li>
+												<i class="ti-files"></i>
+												<a href="{{ url('fav-page') }}" title="">My pages</a>
+											</li>
+											<li>
+												<i class="ti-user"></i>
+												<a href="{{ url('timeline-friends') }}" title="">friends</a>
+											</li>
+											<li>
+												<i class="ti-image"></i>
+												<a href="{{ url('timeline-photos') }}" title="">images</a>
+											</li>
+											<li>
+												<i class="ti-video-camera"></i>
+												<a href="{{ url('timeline-videos') }}" title="">videos</a>
+											</li>
+											<li>
+												<i class="ti-comments-smiley"></i>
+												<a href="{{ url('messages') }}" title="">Messages</a>
+											</li>
+											<li>
+												<i class="ti-bell"></i>
+												<a href="{{ url('notifications') }}" title="">Notifications</a>
+											</li>
+											<li>
+												<i class="ti-share"></i>
+												<a href="{{ url('people-nearby') }}" title="">People Nearby</a>
+											</li>
+											<li>
+												<i class="fa fa-bar-chart-o"></i>
+												<a href="{{ url('insights') }}" title="">insights</a>
+											</li>
+											<li>
+												<i class="ti-power-off"></i>
+												<a href="{{ url('landing') }}" title="">Logout</a>
+											</li>
 											</ul>
 										</div><!-- Shortcuts -->
 									<div class="widget stick-widget">
@@ -581,96 +404,96 @@
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">jhon kates</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
 														<span>ftv model</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly1.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly1.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">sophia Gate</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">sophia Gate</a></h4>
 														<span>tv actresses</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">sara grey</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">sara grey</a></h4>
 														<span>work at IBM</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly3.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly3.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">Sexy cat</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">Sexy cat</a></h4>
 														<span>Student</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly4.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly4.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">Sara grey</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">Sara grey</a></h4>
 														<span>ftv model</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly5.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly5.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">Amy watson</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">Amy watson</a></h4>
 														<span>Study in university</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly6.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly6.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">caty lasbo</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">caty lasbo</a></h4>
 														<span>work as dancers</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">Ema watson</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">Ema watson</a></h4>
 														<span>personal business</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -682,12 +505,12 @@
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly5.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly5.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">Amy watson</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">Amy watson</a></h4>
 														<span>ftv model</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>	
@@ -695,84 +518,84 @@
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly1.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly1.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">sophia Gate</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">sophia Gate</a></h4>
 														<span>ftv model</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly6.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly6.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">caty lasbo</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">caty lasbo</a></h4>
 														<span>ftv model</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">jhon kates</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
 														<span>ftv model</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">sara grey</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">sara grey</a></h4>
 														<span>ftv model</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly4.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly4.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">Sara grey</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">Sara grey</a></h4>
 														<span>ftv model</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/nearly3.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly3.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">Sexy cat</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">Sexy cat</a></h4>
 														<span>ftv model</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line" title="">jhon kates</a></h4>
+														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
 														<span>ftv model</span>
-														<a href="time-line" title="" class="add-butn" data-ripple="">view profile</a>
+														<a href="{{ url('time-line') }}" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -790,35 +613,35 @@
 											<li>
 												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
 												<div class="friend-meta">
-													<h4><a href="time-line" title="">Kelly Bill</a></h4>
+													<h4><a href="{{ url('time-line') }}" title="">Kelly Bill</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
 												<div class="friend-meta">
-													<h4><a href="time-line" title="">Issabel</a></h4>
+													<h4><a href="{{ url('time-line') }}" title="">Issabel</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
 												<div class="friend-meta">
-													<h4><a href="time-line" title="">Andrew</a></h4>
+													<h4><a href="{{ url('time-line') }}" title="">Andrew</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
 												<div class="friend-meta">
-													<h4><a href="time-line" title="">Sophia</a></h4>
+													<h4><a href="{{ url('time-line') }}" title="">Sophia</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
 												<div class="friend-meta">
-													<h4><a href="time-line" title="">Allen</a></h4>
+													<h4><a href="{{ url('time-line') }}" title="">Allen</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
@@ -834,7 +657,7 @@
 													<span class="status f-online"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line">bucky barnes</a>
+													<a href="{{ url('time-line') }}">bucky barnes</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82f5ebecf6e7f0f1edeee6e7f0c2e5efe3ebeeace1edef">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -844,7 +667,7 @@
 													<span class="status f-away"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line">Sarah Loren</a>
+													<a href="{{ url('time-line') }}">Sarah Loren</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcbebdaeb2b9af9cbbb1bdb5b0f2bfb3b1">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -854,7 +677,7 @@
 													<span class="status f-off"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line">jason borne</a>
+													<a href="{{ url('time-line') }}">jason borne</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef858e9c80818daf88828e8683c18c8082">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -864,7 +687,7 @@
 													<span class="status f-off"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line">Cameron diaz</a>
+													<a href="{{ url('time-line') }}">Cameron diaz</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2e444f5d41404c6e49434f4742004d4143">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -875,7 +698,7 @@
 													<span class="status f-online"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line">daniel warber</a>
+													<a href="{{ url('time-line') }}">daniel warber</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="305a51435f5e5270575d51595c1e535f5d">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -886,7 +709,7 @@
 													<span class="status f-away"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line">andrew</a>
+													<a href="{{ url('time-line') }}">andrew</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f757e6c70717d5f78727e7673317c7072">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -897,7 +720,7 @@
 													<span class="status f-off"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line">amy watson</a>
+													<a href="{{ url('time-line') }}">amy watson</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d373c2e32333f1d3a303c3431733e3230">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -908,7 +731,7 @@
 													<span class="status f-online"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line">daniel warber</a>
+													<a href="{{ url('time-line') }}">daniel warber</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f09a91839f9e92b0979d91999cde939f9d">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -919,7 +742,7 @@
 													<span class="status f-away"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line">Sarah Loren</a>
+													<a href="{{ url('time-line') }}">Sarah Loren</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f99b988b979c8ab99e94989095d79a9694">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -1037,11 +860,11 @@
 					<div class="widget">
 						<div class="widget-title"><h4>Navigate</h4></div>
 						<ul class="list-style">
-							<li><a href="about" title="">about us</a></li>
-							<li><a href="contact" title="">contact us</a></li>
-							<li><a href="terms" title="">terms & Conditions</a></li>
+							<li><a href="{{ url('about') }}" title="">about us</a></li>
+							<li><a href="{{ url('contact') }}" title="">contact us</a></li>
+							<li><a href="{{ url('terms') }}" title="">terms & Conditions</a></li>
 							<li><a href="#" title="">RSS syndication</a></li>
-							<li><a href="sitemap" title="">Sitemap</a></li>
+							<li><a href="{{ url('sitemap') }}" title="">Sitemap</a></li>
 						</ul>
 					</div>
 				</div>

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email')->nullable(false); 
             $table->date('DOB'); 
             $table->boolean('gender'); 
-            $table->string('password',length:20); 
+            $table->string('password'); 
             $table->string('description'); 
             $table->string('avatar'); 
             $table->string('background'); 

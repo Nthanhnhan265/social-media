@@ -15,5 +15,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+
+        $this->call([
+            postgroupSeeder::class,
+            migrationsSeeder::class,
+            shareSeeder::class,
+            usergroupSeeder::class,
+            videolocationSeeder::class,
+            videosSeeder::class,
+        ]);
     }
 }

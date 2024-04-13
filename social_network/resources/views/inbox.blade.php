@@ -1,7 +1,9 @@
 @extends('/layouts.app')
 @section('content')
-{{ $post->$id }}
-{{ $post->content }}
+	
+
+
+	
 	<section>
 			<div class="feature-photo">
 				<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
@@ -16,6 +18,11 @@
 					<input type="file"/>
 					</label>
 				</form>
+				@foreach ($posts as $post)
+            <h3>{{ $post->id }}</h3>
+            <h3>{{ $post->content }}</h3>
+            <!-- Thêm các phần khác của bài viết nếu cần -->
+     		   @endforeach
 				<div class="container-fluid">
 					<div class="row merged">
 						<div class="col-lg-2 col-sm-3">

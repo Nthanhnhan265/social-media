@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Posts; 
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -14,7 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+           $posts = Posts::all();
+
+        // Trả về view "inbox" và truyền dữ liệu bài viết vào view
+        return view('inbox')->with('posts', $posts);
+        
     }
 
     /**
@@ -46,9 +51,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Posts::find($id);
-        dd($post);
-        return view('inbox')->with('post', $post);
+        // $post = Posts::find($id);
+        // dd($post);
+        // return view('inbox')->with('post', $post);
+        $posts = Posts::all();
+        //  dd($posts);
+           return view('/inbox')->with('posts', $posts);
     }
 
     /**

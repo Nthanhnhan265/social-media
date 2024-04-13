@@ -43,7 +43,13 @@ use App\Http\Controllers\PostController;
 
 //     return isset($pages[$namePage]) ? view($pages[$namePage]) : view('error');
 // });
+
+
+
+Route::get('/inbox', [PostController::class, 'index']);
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);
 });
-Route::get('/inbox/{id}', [PostController::class, 'show']);
+
+//Route::get('/inbox', [PostController::class, 'index']);
+//Route::resource('index',PostController::class);

@@ -12,15 +12,24 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $primaryKey = 'user_id'; // Thiết lập khóa chính tùy chỉnh
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'first_name', 
+        'last_name', 
+        'email', 
+        'DOB', 
+        'gender', 
+        'password', 
+        'description', 
+        'avatar', 
+        'background', 
+        'role_id_fk'
     ];
 
     /**
@@ -29,7 +38,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'password', 
+        'two_factor_secret', 
+        'two_factor_recovery_codes', 
         'remember_token',
     ];
 
@@ -40,5 +51,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'two_factor_confirmed_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }

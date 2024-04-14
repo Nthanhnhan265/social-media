@@ -168,6 +168,170 @@
 												</ul>
 											</div>
 										</form>
+												<!-- <i class="ti-clipboard"></i>
+												<a href="{{ url('newsfeed') }}" title="">News feed</a>
+											</li>
+											<li>
+												<i class="ti-mouse-alt"></i>
+												<a href="{{ url('inbox') }}" title="">Inbox</a>
+											</li>
+											<li>
+												<i class="ti-files"></i>
+												<a href="{{ url('fav-page') }}" title="">My pages</a>
+											</li>
+											<li>
+												<i class="ti-user"></i>
+												<a href="{{ url('timeline-friends') }}" title="">friends</a>
+											</li>
+											<li>
+												<i class="ti-image"></i>
+												<a href="{{ url('timeline-photos') }}" title="">images</a>
+											</li>
+											<li>
+												<i class="ti-video-camera"></i>
+												<a href="{{ url('timeline-videos') }}" title="">videos</a>
+											</li>
+											<li>
+												<i class="ti-comments-smiley"></i>
+												<a href="{{ url('messages') }}" title="">Messages</a>
+											</li>
+											<li>
+												<i class="ti-bell"></i>
+												<a href="{{ url('notifications') }}" title="">Notifications</a>
+											</li>
+											<li>
+												<i class="ti-share"></i>
+												<a href="{{ url('people-nearby') }}" title="">People Nearby</a>
+											</li>
+											<li>
+												<i class="fa fa-bar-chart-o"></i>
+												<a href="{{ url('insights') }}" title="">insights</a>
+											</li>
+											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+												@csrf
+												
+											</form>
+											<li>
+													<i class="ti-power-off"></i>
+													<a href="#" title="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+											</li>
+											
+										</ul>
+									</div>-->
+									<!-- Shortcuts -->
+									<!-- <div class="widget">
+										<h4 class="widget-title">Recent Activity</h4>
+										<ul class="activitiez">
+											<li>
+												<div class="activity-meta">
+													<i>10 hours Ago</i>
+													<span><a href="#" title="">Commented on Video posted </a></span>
+													<h6>by <a href="{{ url('time-line') }}">black demon.</a></h6>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>30 Days Ago</i>
+													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>2 Years Ago</i>
+													<span><a href="#" title="">Share a video on her timeline.</a></span>
+													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
+												</div>
+											</li>
+										</ul>
+									</div> -->
+									<!-- recent activites -->
+									<!-- <div class="widget stick-widget">
+										<h4 class="widget-title">Who's follownig</h4>
+										<ul class="followers">
+											<li>
+												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="{{ url('time-line') }}" title="">Kelly Bill</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="{{ url('time-line') }}" title="">Issabel</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="{{ url('time-line') }}" title="">Andrew</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="{{ url('time-line') }}" title="">Sophia</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="{{ url('time-line') }}" title="">Allen</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+										</ul>
+									</div> -->
+									<!-- who's following -->
+								<!-- </aside> -->
+							<!-- </div> -->
+							<!-- sidebar -->
+							<!-- <div class="col-lg-6">
+								<div class="central-meta">
+									<div class="new-postbox">
+										<figure>
+											<img src="images/resources/admin2.jpg" alt="">
+										</figure>
+										<div class="newpst-input">
+											<form method="post">
+												<textarea rows="2" placeholder="write something"></textarea>
+												<div class="attachments">
+													<ul>
+														<li>
+															<i class="fa fa-music"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-image"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-video-camera"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-camera"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<button type="submit">Post</button>
+														</li>
+													</ul>
+												</div>
+											</form>
+										</div> -->
+
 									</div>
 								</div>
 							</div><!-- add post new box -->

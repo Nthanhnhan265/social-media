@@ -48,7 +48,6 @@
 										<a class="" href="{{ url('timeline-groups') }}" title=""
 											data-ripple="">Groups</a>
 										<a class="active" href="{{ url('about') }}" title="" data-ripple="">About</a>
-										<a class="" href="#" title="" data-ripple="">More</a>
 
 									</li>
 								</ul>
@@ -74,12 +73,7 @@
 												<li>
 													<i class="ti-info-alt"></i>
 													<a title="" href="{{ url('edit-profile-basic') }}">Basic info</a>
-												</li>
-												<li>
-													<i class="ti-mouse-alt"></i>
-													<a title="" href="{{ url('edit-work-eductation') }}">Education &amp;
-														Work</a>
-												</li>
+												</li>												
 												<li>
 													<i class="ti-heart"></i>
 													<a title="" href="{{ url('edit-interest') }}">My interests</a>
@@ -351,3 +345,4 @@
 			</div>
 		</section>
 @endsection
+

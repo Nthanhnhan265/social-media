@@ -14,11 +14,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        // \App\Models\User::factory(10)->create();
+
+        $this->call([
+            postgroupSeeder::class,
+            migrationsSeeder::class,
+            shareSeeder::class,
+            usergroupSeeder::class,
+            videolocationSeeder::class,
+            videosSeeder::class,
+        ]);
+
         $this->call(UsersTableSeeder::class);
         $this->call(PasswordResetsTableSeeder::class);
         $this->call(FailedJobsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(PersonalAccessTokensTableSeeder::class);
         $this->call(ContentsTableSeeder::class);
+
     }
 }

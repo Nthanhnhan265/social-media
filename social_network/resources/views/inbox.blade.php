@@ -1,5 +1,7 @@
 @extends('/layouts.app')
 @section('content')
+{{ $post->$id }}
+{{ $post->content }}
 	<section>
 			<div class="feature-photo">
 				<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
@@ -10,7 +12,7 @@
 				<form class="edit-phto">
 					<i class="fa fa-camera-retro"></i>
 					<label class="fileContainer">
-						Edit Cover Photo
+						Edit Cover Photo 
 					<input type="file"/>
 					</label>
 				</form>

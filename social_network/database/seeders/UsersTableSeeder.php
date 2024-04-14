@@ -1,0 +1,173 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
+class UsersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('users')->insert([
+            [
+                'user_id' => 1,
+                'last_name' => 'Doe',
+                'first_name' => 'John',
+                'email' => 'john.doe@amonic.com',
+                'DOB' => '1990-01-01',
+                'gender' => 1,
+                'password' => Hash::make('1'),
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'avatar' => 'avatar1.jpg',
+                'background' => 'background1.jpg',
+                'role_id_fk' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 2,
+                'last_name' => 'Smith',
+                'first_name' => 'Jane',
+                'email' => 'jane.smith@gmail.com',
+                'DOB' => '1985-05-15',
+                'gender' => 0,
+                'password' => Hash::make('111'),
+                'description' => 'Ut enim ad mmodo consequat.',
+                'avatar' => 'avatar2.jpg',
+                'background' => 'background2.jpg',
+                'role_id_fk' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 3,
+                'last_name' => 'Johnson',
+                'first_name' => 'Michael',
+                'email' => 'michael.johnson@yahoo.com',
+                'DOB' => '1988-09-20',
+                'gender' => 1,
+                'password' => Hash::make('abc'),
+                'description' => 'Sed do eiusmod tempor',
+                'avatar' => 'avatar3.jpg',
+                'background' => 'background3.jpg',
+                'role_id_fk' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 4,
+                'last_name' => 'Brown',
+                'first_name' => 'Emily',
+                'email' => 'emily.brown@gmail.com',
+                'DOB' => '1992-03-10',
+                'gender' => 0,
+                'password' => Hash::make('123'),
+                'description' => 'Duis aute irure a pariatur.',
+                'avatar' => 'avatar4.jpg',
+                'background' => 'background4.jpg',
+                'role_id_fk' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 5,
+                'last_name' => 'Wilson',
+                'first_name' => 'William',
+                'email' => 'william.wilson@example.com',
+                'DOB' => '1976-11-25',
+                'gender' => 1,
+                'password' => Hash::make('password'),
+                'description' => 'Excepteurcia deserunt mollit anim id est laborum.',
+                'avatar' => 'avatar5.jpg',
+                'background' => 'background5.jpg',
+                'role_id_fk' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 6,
+                'last_name' => 'Taylor',
+                'first_name' => 'Sophia',
+                'email' => 'sophia.taylor@gmail.com',
+                'DOB' => '1983-07-12',
+                'gender' => 0,
+                'password' => Hash::make('aaa'),
+                'description' => 'Nemo enim ipsam volione voluptatem sequi nesciunt.',
+                'avatar' => 'avatar6.jpg',
+                'background' => 'background6.jpg',
+                'role_id_fk' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 7,
+                'last_name' => 'Martinez',
+                'first_name' => 'Alexander',
+                'email' => 'alexander.martinez@amonic.com',
+                'DOB' => '1980-12-03',
+                'gender' => 1,
+                'password' => Hash::make('abc'),
+                'description' => 'Neque ctetur, adipisci velit.',
+                'avatar' => 'avatar7.jpg',
+                'background' => 'background7.jpg',
+                'role_id_fk' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 8,
+                'last_name' => 'Anderson',
+                'first_name' => 'Olivia',
+                'email' => 'olivia.anderson@example.com',
+                'DOB' => '1979-06-28',
+                'gender' => 0,
+                'password' => Hash::make('123'),
+                'description' => 'At vero eosint occaecati cupiditate non provident.',
+                'avatar' => 'avatar8.jpg',
+                'background' => 'background8.jpg',
+                'role_id_fk' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 9,
+                'last_name' => 'Thomas',
+                'first_name' => 'Noah',
+                'email' => 'noah.thomas@gmail.com',
+                'DOB' => '1987-04-17',
+                'gender' => 1,
+                'password' => Hash::make('1'),
+                'description' => 'Nam libero quod mar repellendus.',
+                'avatar' => 'avatar9.jpg',
+                'background' => 'background9.jpg',
+                'role_id_fk' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 10,
+                'last_name' => 'Jackson',
+                'first_name' => 'Emma',
+                'email' => 'emma.jackson@yahoo.com',
+                'DOB' => '1989-10-08',
+                'gender' => 0,
+                'password' => Hash::make('123'),
+                'description' => 'Et harum quidem obis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.',
+                'avatar' => 'avatar10.jpg',
+                'background' => 'background10.jpg',
+                'role_id_fk' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+    }
+}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,9 @@ use Illuminate\Support\Facades\Route;
 
 //     return isset($pages[$namePage]) ? view($pages[$namePage]) : view('error');
 // });
+Route::get('/newsfeed',[PostsController::class, 'index']); 
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);
 });
+
+Route::post('/post',[PostsController::class, 'store']); 

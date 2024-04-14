@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('background'); 
             $table->integer('role_id_fk');
             $table->rememberToken();
+         
             $table->timestamps();
         });
 

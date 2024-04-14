@@ -18,6 +18,10 @@ return new class extends Migration
             $table->unsignedInteger('user_id_fk'); 
             $table->longText('content');             
             $table->timestamps();
+            // $table->foreign('user_id_fk') 
+            // ->references('user_id') 
+            // ->on('users') 
+            // ->onDelete('cascade'); 
         });
     }
 

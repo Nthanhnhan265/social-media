@@ -52,10 +52,15 @@
 												<i class="fa fa-bar-chart-o"></i>
 												<a href="{{ url('insights') }}" title="">insights</a>
 											</li>
+											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+												@csrf
+												
+											</form>
 											<li>
-												<i class="ti-power-off"></i>
-												<a href="{{ url('landing') }}" title="">Logout</a>
+													<i class="ti-power-off"></i>
+													<a href="#" title="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 											</li>
+											
 										</ul>
 									</div><!-- Shortcuts -->
 									<div class="widget">

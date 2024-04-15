@@ -48,7 +48,7 @@ use App\Http\Controllers\PostController;
 
 //     return isset($pages[$namePage]) ? view($pages[$namePage]) : view('error');
 // });
-Route::get('/newsfeed',[PostsController::class, 'index']); 
+Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']); 
 
 Route::post('/post',[PostsController::class, 'store']); 
 Route::get('/', function () {
@@ -59,8 +59,6 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('auth.register'); 
 })->name('register');  
-
-
 
 Route::get('/dashboard', [PostsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 

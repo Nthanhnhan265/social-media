@@ -1,9 +1,5 @@
 @extends('/layouts.app')
 @section('content')
-	
-
-
-	
 	<section>
 			<div class="feature-photo">
 				<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>

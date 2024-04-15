@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Users;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
-class LikePostController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,11 @@ class LikePostController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $users = User::all(); // Lấy tất cả các người dùng từ cơ sở dữ liệu
 
+        return view('newsfeed', compact('users'));
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -41,14 +44,16 @@ class LikePostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $id 
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($userId)
     {
-        //
-    }
+        $user = User::findOrFail($userId); 
 
+        return view('time-line', compact('user'));
+    }
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -57,7 +62,7 @@ class LikePostController extends Controller
      */
     public function edit($id)
     {
-        //
+       
     }
 
     /**

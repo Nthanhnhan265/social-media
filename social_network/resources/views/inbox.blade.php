@@ -1,6 +1,5 @@
 @extends('/layouts.app')
 @section('content')
- 
 	<section>
 			<div class="feature-photo">
 				<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
@@ -15,6 +14,7 @@
 					<input type="file"/>
 					</label>
 				</form>
+			
 				<div class="container-fluid">
 					<div class="row merged">
 						<div class="col-lg-2 col-sm-3">
@@ -244,4 +244,16 @@
 			</div>
 		</div>	
 	</section>
+		@foreach ($posts as $post)
+            <h3>{{ $post->id }}</h3>
+            <h3>{{ $post->content }}</h3>
+            <!-- Thêm các phần khác của bài viết nếu cần -->
+     		   @endforeach
+			   <form action="inbox" method="post">
+				@csrf
+					<input type="text" name="count">
+					<button>
+						submit
+					</button>	
+			   </form>
 	@endsection

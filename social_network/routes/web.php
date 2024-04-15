@@ -3,8 +3,10 @@ require __DIR__.'/auth.php';
 
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,10 +67,22 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+//Route::get('/inbox', [PostController::class, 'index']);
+  Route::get('/inbox/{id}', [PostController::class, 'show']);
 
-Route::get('/inbox/{id}', [PostController::class, 'show']);
-
+// //Route::get('/newsfeed', [UsersController::class, 'index']);
+// Route::get('/inbox', [PostController::class, 'store']);
+// Route::post('/inbox', [PostController::class, 'edit']);
+// Route::post('/inbox', [PostController::class, 'show']);
+// Route::resource('/posts', PostController::class);
+Route::get('/time-line/{userId}', [UsersController::class, 'show']);
+// Route::get('/users/{id}', 'UserController@show');
+// Route::get('time-line/{userId}', 'TimelineController@index')->name('timeline');
+//Route::get('time-line',[UsersController::class,'index']);
 
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);
 });
+
+//Route::get('/inbox', [PostController::class, 'index']);
+//Route::resource('index',PostController::class);

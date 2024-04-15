@@ -55,4 +55,8 @@ class User extends Authenticatable
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+    public function posts()
+    {
+        return $this->hasMany(Posts::class);
+    }
 }

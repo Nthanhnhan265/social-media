@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Users extends Model
 {
     use HasFactory;
-    protected $table = 'roles';
-    protected $primaryKey = 'role_id';
+    protected $table = 'users';
+    protected $primaryKey = 'user_id';
     protected $timestapms = true;
-    public function users()
+    public function posts()
     {
-        return $this->hasMany(UserGroup::class);
+        return $this->hasMany(Posts::class);
     }
-    
 }

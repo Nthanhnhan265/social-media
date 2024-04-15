@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\Models\Posts;
 use \App\Models\Comment;
 use \App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\DB;
 
 
 class CommentController extends Controller

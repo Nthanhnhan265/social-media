@@ -1278,7 +1278,7 @@ header.sticky {
 .central-meta {
     background: #fdfdfd none repeat scroll 0 0;
     border: 1px solid #ede9e9;
-    border-radius: 3px;
+    border-radius: 6px;
     display: inline-block;
     width: 100%;
     margin-bottom: 20px;
@@ -1613,6 +1613,7 @@ form button {
 
 .menu .rotater {
     position: absolute;
+    z-index: 2;
     top: 0;
     left: 0;
     width: 100%;
@@ -1767,7 +1768,9 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
 .coment-area {
     display: inline-block;
     margin-top: 10px;
+    padding: 20px; 
     width: 100%;
+    background-color: rgba(241, 241, 241,.11);
 }
 
 .we-comet {

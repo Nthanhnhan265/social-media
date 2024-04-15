@@ -422,25 +422,25 @@
 				<div class="user-img">
 					<img src="images/resources/admin.jpg" alt="">
 					<span class="status f-online"></span>
-					<div class="user-setting">
-						<a href="#" title=""><span class="status f-online"></span>online</a>
-						<a href="#" title=""><span class="status f-away"></span>away</a>
-						<a href="#" title=""><span class="status f-off"></span>offline</a>
-						<a href="#" title=""><i class="ti-user"></i> view profile</a>
-						<a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
-						<a href="#" title=""><i class="ti-target"></i>activity log</a>
-						<a href="#" title=""><i class="ti-settings"></i>account setting</a>
+				</div>
+				<div class="user-setting">
+					<a href="#" title=""><span class="status f-online"></span>online</a>
+					<a href="#" title=""><span class="status f-away"></span>away</a>
+					<a href="#" title=""><span class="status f-off"></span>offline</a>
+					<a href="{{url('time-line')}} " title=""><i class="ti-user"></i> view profile</a>
+					<a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
+					<a href="#" title=""><i class="ti-target"></i>activity log</a>
+					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
 
-				
-						<form method="POST" action="{{ route('logout') }}">
-							@csrf
-							<x-dropdown-link style="display: inline-block!important;font-size: 13px!important;padding: 10px 15px!important;text-transform: capitalize!important;width: 100%!important;background: #fafafa!important;position: relative!important;color:#4f9ad6!important" :href="route('logout')" onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-								<i class="ti-power-off pr-1"></i>
-									{{ __('Log Out') }}
-								</x-dropdown-link>
-							</form>
-					</div>
+			
+					<form method="POST" action="{{ route('logout') }}">
+						@csrf
+						<x-dropdown-link style="display: inline-block!important;font-size: 13px!important;padding: 10px 15px!important;text-transform: capitalize!important;width: 100%!important;background: #fafafa!important;position: relative!important;color:#4f9ad6!important" :href="route('logout')" onclick="event.preventDefault();
+											this.closest('form').submit();">
+							<i class="ti-power-off pr-1"></i>
+								{{ __('Log Out') }}
+							</x-dropdown-link>
+						</form>
 				</div>
 			</div>
 		</div><!-- topbar -->

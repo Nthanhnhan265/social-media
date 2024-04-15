@@ -2336,7 +2336,7 @@ footer .logo {
     background: #fff none repeat scroll 0 0;
     border-radius: 0 0 3px 3px;
     position: absolute;
-    left: -15px;
+    right: -5px;
     text-align: left;
     top: 100%;
     width: 150px;
@@ -2346,7 +2346,7 @@ footer .logo {
     border: 1px solid #e1e8ed;
 }
 
-.user-setting.active {
+.user-img.active + .user-setting {
     opacity: 1;
     visibility: visible;
 }

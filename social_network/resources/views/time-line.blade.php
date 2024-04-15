@@ -36,9 +36,10 @@
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-								  <h5>{{ $user->first_name }} {{ $user->last_name }} Janice Griffith</h5>
+
+								  <h5>{{$user->last_name}}Janice Griffith</h5>
 								  <span>Group Admin</span>
-								</li>
+								</li>	
 								<li>
 								<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
 										<a class="" href="{{ url('timeline-photos') }}" title="" data-ripple="">Photos</a>

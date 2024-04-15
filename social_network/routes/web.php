@@ -69,21 +69,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+//Route::get('/inbox', [PostController::class, 'index']);
+  Route::get('/inbox/{id}', [PostController::class, 'show']);
 
-Route::get('/inbox/{id}', [PostController::class, 'show']);
-
-
-
-
-
-Route::get('/inbox', [PostController::class, 'index']);
-Route::get('/newsfeed', [UsersController::class, 'index']);
-Route::get('/inbox', [PostController::class, 'store']);
-Route::post('/inbox', [PostController::class, 'edit']);
-Route::post('/inbox', [PostController::class, 'show']);
-Route::resource('/posts', PostController::class);
+// //Route::get('/newsfeed', [UsersController::class, 'index']);
+// Route::get('/inbox', [PostController::class, 'store']);
+// Route::post('/inbox', [PostController::class, 'edit']);
+// Route::post('/inbox', [PostController::class, 'show']);
+// Route::resource('/posts', PostController::class);
 Route::get('/time-line/{userId}', [UsersController::class, 'show']);
-Route::get('/users/{id}', 'UserController@show');
+// Route::get('/users/{id}', 'UserController@show');
 // Route::get('time-line/{userId}', 'TimelineController@index')->name('timeline');
 //Route::get('time-line',[UsersController::class,'index']);
 

@@ -2,6 +2,7 @@
 @section('content')
 
 <section>
+	
 	<div class="gap gray-bg">
 		<div class="container-fluid">
 			<div class="row">
@@ -258,7 +259,7 @@
 												</div>
 											</li>
 										</ul>
-									</div> -->
+									</div> 
 									<!-- recent activites -->
 									<!-- <div class="widget stick-widget">
 										<h4 class="widget-title">Who's follownig</h4>
@@ -352,7 +353,7 @@
 							</div><!-- add post new box -->
 							<div class="loadMore">
 								@foreach ($posts as $post)
-								{{$post->id}}
+								{{ $post->id }}
 								<div class="central-meta item rounded-5">
 									<div class="user-post">
 										<div class="friend-info">
@@ -368,6 +369,7 @@
 
 												@if(!empty($post->content))
 												<div class="description pb-2">
+
 													{{$post->content}}
 												</div>
 												@endif
@@ -539,10 +541,12 @@
 											<figure>
 												<img alt="" src="images/resources/friend-avatar10.jpg">
 											</figure>
-											<div class="friend-name">
-												<ins><a title="" href="{{ url('time-line') }}">Janice Griffith</a></ins>
-												<span>published: june,2 2018 19:PM</span>
-											</div>
+										
+												<div class="friend-name">
+												<ins><a title="" href="{{ url('time-line') }}"></a></ins>
+													<span>published: june,2 2018 19:PM</span>
+												</div>
+											
 											<div class="description">
 													
 													<p>
@@ -624,6 +628,7 @@
 									</div>
 								</div>
 								</div>
+								@endforeach 
 							</div><!-- centerl meta -->
 							<div class="col-lg-3">
 								<aside class="sidebar static">

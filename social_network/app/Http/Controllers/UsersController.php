@@ -19,7 +19,7 @@ class UsersController extends Controller
 
         return view('newsfeed', compact('users'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -44,18 +44,16 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $id 
      * @return \Illuminate\Http\Response
      */
     public function show($userId)
     {
-        $user = User::findOrFail($userId);
-    
-        if (!$user) {
-            abort(404); 
-        }
-        return view('time-line',  ['user' => $user]);
+        $user = User::findOrFail($userId); 
+
+        return view('time-line', compact('user'));
     }
+    
     /**
      * Show the form for editing the specified resource.
      *

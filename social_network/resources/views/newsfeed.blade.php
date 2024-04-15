@@ -14,9 +14,7 @@
 									<h4 class="widget-title">Shortcuts</h4>
 									<ul class="naves">
 										<li>
-<<<<<<< HEAD
 												<i class="ti-clipboard"></i>
-=======
 											<i class="ti-clipboard"></i>
 											<a href="{{ url('newsfeed') }}" title="">News feed</a>
 										</li>
@@ -179,7 +177,6 @@
 											</div>
 										</form>
 										<!-- <i class="ti-clipboard"></i>
->>>>>>> 1d99a9c6b35eb06b07a3b410682b427769d066f5
 												<a href="{{ url('newsfeed') }}" title="">News feed</a>
 											</li>
 											<li>
@@ -223,14 +220,11 @@
 												<a href="{{ url('landing') }}" title="">Logout</a>
 											</li>
 										</ul>
-<<<<<<< HEAD
 									</div><!-- Shortcuts -->
 									<div class="widget">
-=======
+
 									</div>-->
 										<!-- Shortcuts -->
-										<!-- <div class="widget">
->>>>>>> 1d99a9c6b35eb06b07a3b410682b427769d066f5
 										<h4 class="widget-title">Recent Activity</h4>
 										<ul class="activitiez">
 											<li>
@@ -254,7 +248,6 @@
 												</div>
 											</li>
 										</ul>
-<<<<<<< HEAD
 									</div><!-- recent activites -->
 									<div class="widget stick-widget">
 										<h4 class="widget-title">Who's follownig</h4>
@@ -434,11 +427,9 @@
 									</div> 
 									<!-- recent activites -->
 									<!-- <div class="widget stick-widget">
-=======
 									</div> -->
 										<!-- recent activites -->
 										<!-- <div class="widget stick-widget">
->>>>>>> 1d99a9c6b35eb06b07a3b410682b427769d066f5
 										<h4 class="widget-title">Who's follownig</h4>
 										<ul class="followers">
 											<li>
@@ -530,10 +521,7 @@
 							</div><!-- add post new box -->
 							<div class="loadMore">
 								@foreach ($posts as $post)
-<<<<<<< HEAD
 								{{ $post->id }}
-=======
->>>>>>> 1d99a9c6b35eb06b07a3b410682b427769d066f5
 								<div class="central-meta item rounded-5">
 									<div class="user-post">
 										<div class="friend-info">

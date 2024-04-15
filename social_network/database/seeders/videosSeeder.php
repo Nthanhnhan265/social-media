@@ -23,7 +23,7 @@ class videosSeeder extends Seeder
             "videos/video4.mp4",
         ];
 
-        for ($i=0; $i < count($arrImgrList); $i++) {
+        for ($i=1; $i < count($arrImgrList); $i++) {
             $videoArr[] = [
                 "video_id" => $i,
                 "url" => $arrImgrList[$i],

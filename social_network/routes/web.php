@@ -1,4 +1,5 @@
 <?php
+require __DIR__.'/auth.php';
 
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
@@ -46,18 +47,20 @@ use App\Http\Controllers\PostController;
 //     return isset($pages[$namePage]) ? view($pages[$namePage]) : view('error');
 // });
 Route::get('/newsfeed',[PostsController::class, 'index']); 
-Route::get('/{page?}', function ($page = "newsfeed") {  
-    return view($page);
-});
 
 Route::post('/post',[PostsController::class, 'store']); 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('auth.login'); 
 });
 
-Route::get('/dashboard', function () {
-    return view('newsfeed');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/register', function () {
+    return view('auth.register'); 
+})->name('register');  
+
+
+
+Route::get('/dashboard', [PostsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -65,6 +68,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
 Route::get('/inbox/{id}', [PostController::class, 'show']);
 
+
+Route::get('/{page?}', function ($page = "newsfeed") {  
+    return view($page);
+});

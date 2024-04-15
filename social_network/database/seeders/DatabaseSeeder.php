@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ImageLocation;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,14 +25,23 @@ class DatabaseSeeder extends Seeder
             usergroupSeeder::class,
             videolocationSeeder::class,
             videosSeeder::class,
+            CommentsTableSeeder::class, 
+            ContentsTableSeeder::class, 
+            GroupsTableSeeder::class, 
+            ImagesTableSeeder::class, 
+            ImageLocationsTableSeeder::class, 
+            LikeCommentsTableSeeder::class, 
+            LikePostsTableSeeder::class, 
+            postgroupSeeder::class, 
+            RolesTableSeeder::class, 
+          
         ]);
 
         $this->call(UsersTableSeeder::class);
         $this->call(PasswordResetsTableSeeder::class);
         $this->call(FailedJobsTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
         $this->call(PersonalAccessTokensTableSeeder::class);
-        $this->call(ContentsTableSeeder::class);
+
 
     }
 }

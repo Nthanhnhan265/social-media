@@ -350,7 +350,15 @@
 												<img src="images/resources/friend-avatar10.jpg" alt="">
 											</figure>
 											<div class="friend-name">
-												<ins><a href="{{ url('time-line') }}" title="">{{$post->user_id_fk}}</a></ins>
+												<ins><a href="{{ url('time-line').'/'.$post->user_id_fk }}" title="">
+												@foreach ($user_tb as $user) 
+													@if ($user->user_id==$post->user_id_fk)
+														{{$user->last_name}}
+														{{$user->first_name}}
+													@endif 
+												@endforeach
+												
+												</a></ins>
 												<span>published: {{$post->created_at}}</span>
 											</div>
 											<div class="post-meta">

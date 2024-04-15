@@ -47,6 +47,7 @@ use App\Http\Controllers\PostController;
 //     return isset($pages[$namePage]) ? view($pages[$namePage]) : view('error');
 // });
 Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']); 
+Route::get('/time-line/:id',[]); 
 
 Route::post('/post',[PostsController::class, 'store']); 
 Route::get('/', function () {

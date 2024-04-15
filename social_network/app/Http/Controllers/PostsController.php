@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Posts;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -17,7 +18,7 @@ class PostsController extends Controller
     {
         //hiển thị giao diện trang chính 
         //hiển thị mọi bài viết trong db -> chưa hợp lý cho việc hiển thị phù hợp với từng tài khoản 
-        return view('newsfeed',["posts"=>Posts::orderBy('created_at','desc')->get()]); 
+        return view('newsfeed',["posts"=>Posts::orderBy('created_at','desc')->get(),"user_tb"=>User::all()]); 
 
     }
 

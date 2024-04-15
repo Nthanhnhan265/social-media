@@ -220,10 +220,11 @@
 												<a href="{{ url('landing') }}" title="">Logout</a>
 											</li>
 										</ul>
-									</div><!-- Shortcuts -->
+									</div>
+									<Shortcuts -->
 									<div class="widget">
 
-									</div>-->
+									</div>
 										<!-- Shortcuts -->
 										<h4 class="widget-title">Recent Activity</h4>
 										<ul class="activitiez">

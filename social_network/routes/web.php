@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +49,16 @@ use App\Http\Controllers\PostController;
 
 
 Route::get('/inbox', [PostController::class, 'index']);
+Route::get('/newsfeed', [UsersController::class, 'index']);
+Route::get('/inbox', [PostController::class, 'store']);
+Route::post('/inbox', [PostController::class, 'edit']);
+Route::post('/inbox', [PostController::class, 'show']);
+Route::resource('/posts', PostController::class);
+Route::get('/time-line/{userId}', [UsersController::class, 'show']);
+Route::get('/users/{id}', 'UserController@show');
+// Route::get('time-line/{userId}', 'TimelineController@index')->name('timeline');
+//Route::get('time-line',[UsersController::class,'index']);
+
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);
 });

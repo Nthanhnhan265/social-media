@@ -18,11 +18,7 @@
 					<input type="file"/>
 					</label>
 				</form>
-				@foreach ($posts as $post)
-            <h3>{{ $post->id }}</h3>
-            <h3>{{ $post->content }}</h3>
-            <!-- Thêm các phần khác của bài viết nếu cần -->
-     		   @endforeach
+			
 				<div class="container-fluid">
 					<div class="row merged">
 						<div class="col-lg-2 col-sm-3">
@@ -252,4 +248,16 @@
 			</div>
 		</div>	
 	</section>
+		@foreach ($posts as $post)
+            <h3>{{ $post->id }}</h3>
+            <h3>{{ $post->content }}</h3>
+            <!-- Thêm các phần khác của bài viết nếu cần -->
+     		   @endforeach
+			   <form action="inbox" method="post">
+				@csrf
+					<input type="text" name="count">
+					<button>
+						submit
+					</button>	
+			   </form>
 	@endsection

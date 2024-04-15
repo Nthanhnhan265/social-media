@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Users;
 use Illuminate\Http\Request;
-use App\Models\Posts; 
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
-class PostController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-           $posts = Posts::all();
+        $users = User::all(); // Lấy tất cả các người dùng từ cơ sở dữ liệu
 
-        // Trả về view "inbox" và truyền dữ liệu bài viết vào view
-        return view('inbox')->with('posts', $posts);
-        
+        return view('newsfeed', compact('users'));
     }
 
     /**
@@ -40,9 +38,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $count = $request->input('count');
-        dd ($count);
-        //dd('This is sotre POSTCOmintrolr');
+        //
     }
 
     /**
@@ -51,16 +47,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($userId)
     {
-        // $post = Posts::find($id);
-        // dd($post);
-        // return view('inbox')->with('post', $post);
-        $posts = Posts::all();
-        //  dd($posts);
-           return view('/inbox')->with('posts', $posts);
+        $user = User::findOrFail($userId);
+    
+        if (!$user) {
+            abort(404); 
+        }
+        return view('time-line',  ['user' => $user]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -69,7 +64,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+       
     }
 
     /**

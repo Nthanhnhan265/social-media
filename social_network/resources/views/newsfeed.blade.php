@@ -172,14 +172,23 @@
 								<div class="loadMore">
 								<div class="central-meta item">
 									<div class="user-post">
-										<div class="friend-info">
+										@foreach($users as $user)
+											<div class="friend-info">
+									
 											<figure>
-												<img src="images/resources/friend-avatar10.jpg" alt="">
+												<!-- friend-avatar10.jpg -->
+												<img src="images/resources/{{$user->avatar}}" alt="">
 											</figure>
+										
 											<div class="friend-name">
-												<ins><a href="{{ url('time-line') }}" title="">Janice Griffith</a></ins>
+												<!-- Janice Griffith -->
+												<ins>
+													<a href="{{ url('time-line', $user->user_id) }}" title="">{{ $user->first_name}} {{$user->last_name}} </a>
+												</ins>
 												<span>published: june,2 2018 19:PM</span>
+												
 											</div>
+											@endforeach
 											<div class="post-meta">
 												<img src="images/resources/user-post.jpg" alt="">
 												<div class="we-video-info">
@@ -647,7 +656,7 @@
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
-												<img alt="" src="images/resources/friend-avatar10.jpg">
+												<img alt="" src="images/resources/friend-avatar10.jpg"> 
 											</figure>
 											<div class="friend-name">
 												<ins><a title="" href="{{ url('time-line') }}">Janice Griffith</a></ins>

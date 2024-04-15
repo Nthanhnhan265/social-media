@@ -53,8 +53,14 @@
 											<a href="{{ url('insights') }}" title="">insights</a>
 										</li>
 										<li>
-											<i class="ti-power-off"></i>
-											<a href="{{ url('landing') }}" title="">Logout</a>
+											<form method="POST" action="{{ route('logout') }}">
+												@csrf
+												<i class="ti-power-off"></i>
+												<x-dropdown-link style="padding-left:0px!important;" :href="route('logout')" onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+													{{ __('Log Out') }}
+												</x-dropdown-link>
+											</form>
 										</li>
 									</ul>
 								</div><!-- Shortcuts -->
@@ -168,7 +174,7 @@
 												</ul>
 											</div>
 										</form>
-												<!-- <i class="ti-clipboard"></i>
+										<!-- <i class="ti-clipboard"></i>
 												<a href="{{ url('newsfeed') }}" title="">News feed</a>
 											</li>
 											<li>
@@ -218,8 +224,8 @@
 											
 										</ul>
 									</div>-->
-									<!-- Shortcuts -->
-									<!-- <div class="widget">
+										<!-- Shortcuts -->
+										<!-- <div class="widget">
 										<h4 class="widget-title">Recent Activity</h4>
 										<ul class="activitiez">
 											<li>
@@ -244,8 +250,8 @@
 											</li>
 										</ul>
 									</div> -->
-									<!-- recent activites -->
-									<!-- <div class="widget stick-widget">
+										<!-- recent activites -->
+										<!-- <div class="widget stick-widget">
 										<h4 class="widget-title">Who's follownig</h4>
 										<ul class="followers">
 											<li>
@@ -285,11 +291,11 @@
 											</li>
 										</ul>
 									</div> -->
-									<!-- who's following -->
-								<!-- </aside> -->
-							<!-- </div> -->
-							<!-- sidebar -->
-							<!-- <div class="col-lg-6">
+										<!-- who's following -->
+										<!-- </aside> -->
+										<!-- </div> -->
+										<!-- sidebar -->
+										<!-- <div class="col-lg-6">
 								<div class="central-meta">
 									<div class="new-postbox">
 										<figure>
@@ -337,7 +343,6 @@
 							</div><!-- add post new box -->
 							<div class="loadMore">
 								@foreach ($posts as $post)
-								{{$post->id}}
 								<div class="central-meta item rounded-5">
 									<div class="user-post">
 										<div class="friend-info">
@@ -356,7 +361,7 @@
 													{{$post->content}}
 												</div>
 												@endif
-											
+
 												<!-- views, like,dislike, comment, share -->
 												<div class="we-video-info border-top my-3">
 													<ul>
@@ -419,7 +424,7 @@
 														</li> -->
 													</ul>
 												</div>
-											
+
 											</div>
 										</div>
 										<div class="coment-area p-1">

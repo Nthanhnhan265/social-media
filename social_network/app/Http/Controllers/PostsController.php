@@ -6,6 +6,7 @@ use App\Models\Posts;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Users;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -41,7 +42,7 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $newPost = [
-           "user_id_fk"=>1, 
+           "user_id_fk"=>Auth::user()->user_id, 
            "content" =>$request->content
         ]; 
         if ($newPost["content"]) {

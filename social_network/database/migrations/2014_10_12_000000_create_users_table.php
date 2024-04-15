@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('gender')->nullable(true); 
             $table->string('password')->nullable(true);
             $table->string('description')->nullable(true);
-            $table->string('avatar')->nullable(true);
+            $table->string('avatar')->default('default.jpg');
             $table->string('background')->nullable(true);
             $table->integer('role_id_fk')->nullable(true);
 //             $table->increments('user_id');

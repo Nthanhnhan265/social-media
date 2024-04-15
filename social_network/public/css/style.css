@@ -717,6 +717,7 @@ header.sticky {
     display: inline-block;
     transform: scale(0.7);
     vertical-align: inherit;
+    height: 4rem;
 }
 
 .form-search {
@@ -1916,7 +1917,7 @@ li.post-comment .comet-avatar {
 .add-smiles {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 1.25rem;
     transform: translateY(-50%);
     width: auto;
     line-height: 10px;
@@ -1966,7 +1967,7 @@ li.post-comment .comet-avatar {
 }
 
 .post-comt-box form button {
-    bottom: 2px;
+    top: 50%;     
     position: absolute;
     right: 0;
     background: none;

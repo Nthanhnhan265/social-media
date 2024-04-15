@@ -47,7 +47,6 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Posts::find($id);
-        dd($post);
         return view('inbox')->with('post', $post);
     }
 

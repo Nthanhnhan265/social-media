@@ -2,7 +2,6 @@
 @section('content')
 
 <section>
-	
 	<div class="gap gray-bg">
 		<div class="container-fluid">
 			<div class="row">
@@ -14,7 +13,6 @@
 									<h4 class="widget-title">Shortcuts</h4>
 									<ul class="naves">
 										<li>
-												<i class="ti-clipboard"></i>
 											<i class="ti-clipboard"></i>
 											<a href="{{ url('newsfeed') }}" title="">News feed</a>
 										</li>
@@ -215,17 +213,19 @@
 												<i class="fa fa-bar-chart-o"></i>
 												<a href="{{ url('insights') }}" title="">insights</a>
 											</li>
+											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+												@csrf
+												
+											</form>
 											<li>
-												<i class="ti-power-off"></i>
-												<a href="{{ url('landing') }}" title="">Logout</a>
+													<i class="ti-power-off"></i>
+													<a href="#" title="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 											</li>
+											
 										</ul>
-									</div>
-									<!-- Shortcuts -->
-									<div class="widget">
-
-									</div>
+									</div>-->
 										<!-- Shortcuts -->
+										<!-- <div class="widget">
 										<h4 class="widget-title">Recent Activity</h4>
 										<ul class="activitiez">
 											<li>
@@ -249,185 +249,6 @@
 												</div>
 											</li>
 										</ul>
-									</div><!-- recent activites -->
-									<div class="widget stick-widget">
-										<h4 class="widget-title">Who's follownig</h4>
-										<ul class="followers">
-											<li>
-												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Kelly Bill</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Issabel</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Andrew</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Sophia</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Allen</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-										</ul>
-									</div><!-- who's following -->
-								</aside>
-							</div><!-- sidebar -->
-							<div class="col-lg-6">
-								<div class="central-meta">
-									<div class="new-postbox">
-										<figure>
-											<img src="images/resources/admin2.jpg" alt="">
-										</figure>
-										<div class="newpst-input">
-											<form method="post">
-												<textarea rows="2" placeholder="write something"></textarea>
-												<div class="attachments">
-													<ul>
-														<li>
-															<i class="fa fa-music"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-image"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-video-camera"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-camera"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<button type="submit">Post</button>
-														</li>
-													</ul>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div><!-- add post new box -->
-								<div class="loadMore">
-								<div class="central-meta item">
-									<div class="user-post">
-										<div class="friend-info">
-											<figure>
-												<img src="images/resources/friend-avatar10.jpg" alt="">
-											</figure>
-											<div class="friend-name">
-												<ins><a href="{{ url('time-line') }}" title="">Janice Griffith</a></ins>
-												<span>published: june,2 2018 19:PM</span>
-											</div>
-											<div class="post-meta">
-												<img src="images/resources/user-post.jpg" alt="">
-												<div class="we-video-info">
-													<ul>
-														<li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Comments">
-																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
-															</span>
-														</li>
-														<li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li>
-														<li class="social-media">
-															<div class="menu">
-															  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																</div>
-															  </div>
-																<div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																</div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																</div>
-															  </div>
-
-															</div>
-														</li>
-													</ul>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>30 Days Ago</i>
-													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-										</ul>
-									</div> 
-									<!-- recent activites -->
-									<!-- <div class="widget stick-widget">
 									</div> -->
 										<!-- recent activites -->
 										<!-- <div class="widget stick-widget">
@@ -522,7 +343,6 @@
 							</div><!-- add post new box -->
 							<div class="loadMore">
 								@foreach ($posts as $post)
-								{{ $post->id }}
 								<div class="central-meta item rounded-5">
 									<div class="user-post">
 										<div class="friend-info">
@@ -546,7 +366,6 @@
 
 												@if(!empty($post->content))
 												<div class="description pb-2">
-
 													{{$post->content}}
 												</div>
 												@endif
@@ -712,122 +531,30 @@
 										</div>
 									</div>
 								</div>
-								<div class="central-meta item">
-									<div class="user-post">
-										<div class="friend-info">
-											<figure>
-												<img alt="" src="images/resources/friend-avatar10.jpg">
-											</figure>
-										
-												<div class="friend-name">
-												<ins><a title="" href="{{ url('time-line') }}"></a></ins>
-													<span>published: june,2 2018 19:PM</span>
-												</div>
-											
-											<div class="description">
-													
-													<p>
-														Curabitur World's most beautiful car in <a title="" href="#">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
-													</p>
-												</div>
-											<div class="post-meta">
-												<div class="linked-image align-left">
-													<a title="" href="#"><img alt="" src="images/resources/page1.jpg"></a>
-												</div>
-												<div class="detail">
-													<span>Love Maid - ChillGroves</span>
-													<p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... </p>
-													<a title="" href="#">www.sample.com</a>
-												</div>		
-												<div class="we-video-info">
-													<ul>
-														<li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Comments">
-																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
-															</span>
-														</li>
-														<li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li>
-														<li class="social-media">
-															<div class="menu">
-															  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																</div>
-															  </div>
-																<div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																</div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																</div>
-															  </div>
-
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
+								@endforeach
+							</div>
+						</div><!-- centerl meta -->
+						<div class="col-lg-3">
+							<aside class="sidebar static">
+								<div class="widget">
+									<h4 class="widget-title">Your page</h4>
+									<div class="your-page">
+										<figure>
+											<a href="#" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
+										</figure>
+										<div class="page-meta">
+											<a href="#" title="" class="underline">My page</a>
+											<span><i class="ti-comment"></i><a href="{{ url('insight') }}" title="">Messages <em>9</em></a></span>
+											<span><i class="ti-bell"></i><a href="{{ url('insight') }}" title="">Notifications <em>2</em></a></span>
 										</div>
-									</div>
-								</div>
-								</div>
-								@endforeach 
-							</div><!-- centerl meta -->
-							<div class="col-lg-3">
-								<aside class="sidebar static">
-									<div class="widget">
-										<h4 class="widget-title">Your page</h4>	
-										<div class="your-page">
-											<figure>
-												<a href="#" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-											</figure>
-											<div class="page-meta">
-												<a href="#" title="" class="underline">My page</a>
-												<span><i class="ti-comment"></i><a href="{{ url('insight') }}" title="">Messages <em>9</em></a></span>
-												<span><i class="ti-bell"></i><a href="{{ url('insight') }}" title="">Notifications <em>2</em></a></span>
-											</div>
-											<div class="page-likes">
-												<ul class="nav nav-tabs likes-btn">
-													<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">likes</a></li>
-													 <li class="nav-item"><a class="" href="#link2" data-toggle="tab">views</a></li>
-												</ul>
-												<!-- Tab panes -->
-												<div class="tab-content">
-												  <div class="tab-pane active fade show " id="link1" >
+										<div class="page-likes">
+											<ul class="nav nav-tabs likes-btn">
+												<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">likes</a></li>
+												<li class="nav-item"><a class="" href="#link2" data-toggle="tab">views</a></li>
+											</ul>
+											<!-- Tab panes -->
+											<div class="tab-content">
+												<div class="tab-pane active fade show " id="link1">
 													<span><i class="ti-heart"></i>884</span>
 													<a href="#" title="weekly-likes">35 new likes this week</a>
 													<div class="users-thumb-list">

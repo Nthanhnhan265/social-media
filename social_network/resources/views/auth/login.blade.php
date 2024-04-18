@@ -1,50 +1,76 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winku Social Network Toolkit</title>
+    <link rel="icon" href="{{ asset('images/fav.png') }}" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/color.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+</head>
+<body>
+<div class="theme-layout">
+    <div class="container-fluid pdng0">
+        <div class="row merged">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="land-featurearea">
+                    <div class="land-meta">
+                        <h1>Winku</h1>
+                        <p>
+                            Winku is free to use for as long as you want with two active projects.
+                        </p>
+                        <div class="friend-logo">
+                            <span><img src="images/wink.png" alt=""></span>
+                        </div>
+                        <a href="#" title="" class="folow-me">Follow Us on</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="login-reg-bg">
+                    <div class="log-reg-area sign">
+                        <h2 class="log-title">Login</h2>
+                        <!-- Kiểm tra và hiển thị thông báo lỗi -->
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>{{ $errors->first() }}</li>
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <div class="form-group">
+                                <input type="email" name="email" required="required"/>
+                                <label class="control-label">Email</label>
+                                <i class="mtrl-select"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" required="required"/>
+                                <label class="control-label">Password</label>
+                                <i class="mtrl-select"></i>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" checked="checked"/><i class="check-box"></i>Always Remember Me.
+                                </label>
+                            </div>
+                            <a href="{{route('password.request')}}" title="" class="forgot-pwd">Forgot Password?</a>
+                            <div class="submit-btns">
+                                <button class="mtr-btn signin" type="submit"><span>Login</span></button>
+                                <a href="{{ route('register') }}" class="mtr-btn signup"><span>Register</span></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="flex justify-between mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-            <a href="{{url('register')}}" class="ml-2 text-sm text-gray-600 hover:text-green">Create account</a>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-
-        </div>
-    </form>
-</x-guest-layout>
+<script src="{{ asset('js/main.min.js') }}"></script>
+<script src="{{ asset('js/script.js') }}"></script>
+</body>
+</html>

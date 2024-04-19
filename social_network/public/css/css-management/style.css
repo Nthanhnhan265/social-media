@@ -3801,7 +3801,7 @@ form .form-group.half:nth-child(2) {
     margin-right: 0;
 }
 
-.chosen-container-single .chosen-single {
+/* .chosen-container-single .chosen-single {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border-color: -moz-use-text-color -moz-use-text-color #e1e8ed;
     border-radius: 0;
@@ -3812,7 +3812,7 @@ form .form-group.half:nth-child(2) {
     font-size: 16px;
     height: 35px;
     line-height: 35px;
-}
+} */
 
 form .dob .form-group {
     display: inline-block;
@@ -3820,9 +3820,9 @@ form .dob .form-group {
     width: 30.6%;
 }
 
-.chosen-container {
+/* .chosen-container {
     width: 100% !important;
-}
+} */
 
 form .dob .form-group:last-child {
     margin-right: 0;

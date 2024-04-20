@@ -350,7 +350,7 @@
 												<img src="images/resources/friend-avatar10.jpg" alt="">
 											</figure>
 											<div class="friend-name">
-												<ins><a href="{{ url('time-line').'/'.$post->user_id_fk }}" title="">
+												<ins><a href="{{ url('time-line', $post->user_id_fk) }}" title="">
 												@foreach ($user_tb as $user) 
 													@if ($user->user_id==$post->user_id_fk)
 														{{$user->last_name}}

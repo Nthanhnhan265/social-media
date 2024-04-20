@@ -34,7 +34,7 @@
 							<div class="timeline-info">
 								<ul>
 									<li class="admin-name">
-										<h5>Janice Griffith</h5>
+										
 										<span>Group Admin</span>
 									</li>
 									<li>

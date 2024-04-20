@@ -76,7 +76,9 @@ Route::middleware('auth')->group(function () {
 // Route::post('/inbox', [PostController::class, 'edit']);
 // Route::post('/inbox', [PostController::class, 'show']);
 // Route::resource('/posts', PostController::class);
-Route::get('/time-line/{userId}', [UsersController::class, 'show']);
+Route::get('/time-line/{userId}', [UsersController::class, 'show'])->name('time-line');
+Route::get('/about/{userId}', [UsersController::class, 'show'])->name('about');
+Route::get('/about/{userId}', [UsersController::class, 'about'])->name('about');
 // Route::get('/users/{id}', 'UserController@show');
 // Route::get('time-line/{userId}', 'TimelineController@index')->name('timeline');
 //Route::get('time-line',[UsersController::class,'index']);

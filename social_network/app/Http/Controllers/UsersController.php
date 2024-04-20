@@ -47,11 +47,15 @@ class UsersController extends Controller
      * @param  int  $id 
      * @return \Illuminate\Http\Response
      */
-    public function show($userId)
+    public function show($id)
     {
-        $user = User::findOrFail($userId); 
-
-        return view('time-line', compact('user'));
+        $user = User::findOrFail($id); 
+        return view('time-line',["id"=>$id,'user'=>$user]);
+    }
+    public function showAbout($id)
+    {
+        $user = User::findOrFail($id); 
+        return view('about',["id"=>$id,'user'=>$user]);
     }
     
     /**

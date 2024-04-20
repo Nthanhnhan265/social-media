@@ -1,8 +1,13 @@
+<?php
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\Component;
+
+?>
 @extends('layouts.app')
 @section('content')
-
-<section>
-	<div class="gap gray-bg">
+ <section>
+ 	<div class="gap gray-bg">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-12">
@@ -135,240 +140,92 @@
 							<div class="central-meta">
 								<div class="new-postbox">
 									<figure>
-										<img src="images/resources/admin2.jpg" alt="">
+										<?php
+										$avtUser = Auth::user()->avatar;
+										?>
+										<!-- <img src="{{asset('images/resources/'.$avtUser)}}" alt=""> -->
+										<x-user-avt>
+										</x-user-avt>
+
 									</figure>
 									<div class="newpst-input">
-										<form method="post" action="{{url('post')}}">
+										<form method="post" action="{{url('post')}}" enctype="multipart/form-data">
 											@csrf
 											@method("post")
 											<textarea rows="2" name="content" placeholder="write something"></textarea>
 											<div class="attachments">
 												<ul>
-													<li>
-														<i class="fa fa-music"></i>
-														<label class="fileContainer">
-															<input type="file">
-														</label>
-													</li>
+													<!-- ###Task: viet js cho size input -->
 													<li>
 														<i class="fa fa-image"></i>
 														<label class="fileContainer">
-															<input type="file">
+															<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*" >
 														</label>
 													</li>
 													<li>
 														<i class="fa fa-video-camera"></i>
 														<label class="fileContainer">
-															<input type="file">
+															<input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*">
 														</label>
 													</li>
-													<li>
-														<i class="fa fa-camera"></i>
-														<label class="fileContainer">
-															<input type="file">
-														</label>
-													</li>
+
 													<li>
 														<button type="submit">Post</button>
 													</li>
 												</ul>
 											</div>
 										</form>
-										<!-- <i class="ti-clipboard"></i>
-												<a href="{{ url('newsfeed') }}" title="">News feed</a>
-											</li>
-											<li>
-												<i class="ti-mouse-alt"></i>
-												<a href="{{ url('inbox') }}" title="">Inbox</a>
-											</li>
-											<li>
-												<i class="ti-files"></i>
-												<a href="{{ url('fav-page') }}" title="">My pages</a>
-											</li>
-											<li>
-												<i class="ti-user"></i>
-												<a href="{{ url('timeline-friends') }}" title="">friends</a>
-											</li>
-											<li>
-												<i class="ti-image"></i>
-												<a href="{{ url('timeline-photos') }}" title="">images</a>
-											</li>
-											<li>
-												<i class="ti-video-camera"></i>
-												<a href="{{ url('timeline-videos') }}" title="">videos</a>
-											</li>
-											<li>
-												<i class="ti-comments-smiley"></i>
-												<a href="{{ url('messages') }}" title="">Messages</a>
-											</li>
-											<li>
-												<i class="ti-bell"></i>
-												<a href="{{ url('notifications') }}" title="">Notifications</a>
-											</li>
-											<li>
-												<i class="ti-share"></i>
-												<a href="{{ url('people-nearby') }}" title="">People Nearby</a>
-											</li>
-											<li>
-												<i class="fa fa-bar-chart-o"></i>
-												<a href="{{ url('insights') }}" title="">insights</a>
-											</li>
-											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-												@csrf
-												
-											</form>
-											<li>
-													<i class="ti-power-off"></i>
-													<a href="#" title="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-											</li>
-											
-										</ul>
-									</div>-->
-										<!-- Shortcuts -->
-										<!-- <div class="widget">
-										<h4 class="widget-title">Recent Activity</h4>
-										<ul class="activitiez">
-											<li>
-												<div class="activity-meta">
-													<i>10 hours Ago</i>
-													<span><a href="#" title="">Commented on Video posted </a></span>
-													<h6>by <a href="{{ url('time-line') }}">black demon.</a></h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>30 Days Ago</i>
-													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-										</ul>
-									</div> -->
-										<!-- recent activites -->
-										<!-- <div class="widget stick-widget">
-										<h4 class="widget-title">Who's follownig</h4>
-										<ul class="followers">
-											<li>
-												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Kelly Bill</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Issabel</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Andrew</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Sophia</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Allen</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-										</ul>
-									</div> -->
-										<!-- who's following -->
-										<!-- </aside> -->
-										<!-- </div> -->
-										<!-- sidebar -->
-										<!-- <div class="col-lg-6">
-								<div class="central-meta">
-									<div class="new-postbox">
-										<figure>
-											<img src="images/resources/admin2.jpg" alt="">
-										</figure>
-										<div class="newpst-input">
-											<form method="post">
-												<textarea rows="2" placeholder="write something"></textarea>
-												<div class="attachments">
-													<ul>
-														<li>
-															<i class="fa fa-music"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-image"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-video-camera"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-camera"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<button type="submit">Post</button>
-														</li>
-													</ul>
-												</div>
-											</form>
-										</div> -->
 
 									</div>
 								</div>
-							</div><!-- add post new box -->
+							</div><!-- add post new box #loadpost-->
 							<div class="loadMore">
 								@foreach ($posts as $post)
+								<!-- loop to find owner's post -->
+		
 								<div class="central-meta item rounded-5">
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
-												<img src="images/resources/friend-avatar10.jpg" alt="">
+												<img src="{{asset('images/resources/'.$post->user->avatar)}}" alt="">
 											</figure>
 											<div class="friend-name">
-												<ins><a href="{{ url('time-line').'/'.$post->user_id_fk }}" title="">
-												@foreach ($user_tb as $user) 
-													@if ($user->user_id==$post->user_id_fk)
-														{{$user->last_name}}
-														{{$user->first_name}}
-													@endif 
-												@endforeach
-												
-												</a></ins>
+												<ins><a href="{{ url('time-line').'/user-profile/'.$post->user->user_id }}" title="">
+														{{$post->user->last_name." ".$post->user->first_name}}
+																										</a></ins>
 												<span>published: {{$post->created_at}}</span>
 											</div>
 											<div class="post-meta">
 												<!-- <img src="images/resources/user-post.jpg" alt=""> -->
-
+												<!-- Print content if not null -->
+												<!-- {{$post->id}} -->
 												@if(!empty($post->content))
 												<div class="description pb-2">
 													{{$post->content}}
 												</div>
 												@endif
+
+								
+												<!-- Display imgs  -->
+												@if(!empty($post->image))
+													<div class="list-img">
+													 	@foreach ($post->image as $img) 
+															<img src ="{{asset('storage/images/'.$img->url)}}" alt="failed to display"/>
+														@endforeach
+													
+													</div>
+												@endif
+
+												<!-- Display video  -->
+												@if(!empty($post->video) && count($post->video) !=0 )
+												<video class="list-vid" controls alt="err">
+													 	@foreach ($post->video as $video) 
+															<source src="{{asset('storage/videos/'.$video->url)}}">
+														 @endforeach
+												</video>
+												@endif
+
+												
 
 												<!-- views, like,dislike, comment, share -->
 												<div class="we-video-info border-top my-3">
@@ -501,13 +358,35 @@
 												</li>
 												<li class="post-comment">
 													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
+														<x-user-avt>
+														</x-user-avt>
 													</div>
 													<div class="post-comt-box">
 														<form method="post">
+
 															<textarea placeholder="Post your comment"></textarea>
 															<div class="add-smiles">
 																<span class="em em-expressionless" title="add icon"></span>
+															</div>
+															<div class="">
+																<ul class="m-0 d-flex">
+																	<li>
+																		<i class="fa fa-image"></i>
+																		<label class="fileContainer">
+																			<input type="file">
+																		</label>
+																	</li>
+																	<li>
+																		<i class="fa fa-video-camera"></i>
+																		<label class="fileContainer">
+																			<input type="file">
+																		</label>
+																	</li>
+
+																	<li>
+																		<button type="submit" class="bg-dark">Post</button>
+																	</li>
+																</ul>
 															</div>
 															<div class="smiles-bunch">
 																<i class="em em---1"></i>
@@ -523,6 +402,7 @@
 																<i class="em em-rage"></i>
 																<i class="em em-stuck_out_tongue"></i>
 															</div>
+
 															<button type="submit"></button>
 														</form>
 													</div>

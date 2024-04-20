@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
             'DOB' => $request->DOB ?? null, 
             'gender' => $request->gender ?? null,
             'description' => $request->description ?? null,
-            'avatar' => $request->avatar ?? null,
+            'avatar' => $request->avatar ?? "default.jpg",
             'background' => $request->background ?? null,
             'role_id_fk' => $request->role_id_fk ?? random_int(1, 10),
         ]);

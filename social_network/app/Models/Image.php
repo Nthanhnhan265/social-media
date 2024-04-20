@@ -10,10 +10,11 @@ class Image extends Model
     use HasFactory;
     protected $table = 'images';
     protected $primaryKey = 'img_id';
-    protected $timestapms = true;
+    protected $fillable = ["img_id","url","ref_id_fk","img_location_fk"]; 
+    public $timestamps = true;
     public function post()
     {
-        return $this->belongsTo(Posts::class, 'ref_id_fk');
+        return $this->belongsTo(Posts::class, 'id');
     }
     public function comment(){
         return $this->belongsTo(Comment::class);

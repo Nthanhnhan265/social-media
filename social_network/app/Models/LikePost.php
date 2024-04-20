@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class LikePost extends Model
 {
     use HasFactory;
-    protected $table = 'likrpost';
+    protected $table = 'likepost';
     protected $primaryKey = 'likepost_id';
-    protected $timestapms = true;
-    public function post()
+    public $timestamps = true;
+    public function posts()
     {
-        return $this->belongsTo(Posts::class, 'post_id_fk');
+        return $this->belongsToMany(Posts::class);
     }
 
     public function user()

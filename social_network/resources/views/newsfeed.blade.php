@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
+
 ?>
 @extends('layouts.app')
 @section('content')
-
-<section>
-	<div class="gap gray-bg">
+ <section>
+ 	<div class="gap gray-bg">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-12">
@@ -149,22 +149,23 @@ use Illuminate\View\Component;
 
 									</figure>
 									<div class="newpst-input">
-										<form method="post" action="{{url('post')}}">
+										<form method="post" action="{{url('post')}}" enctype="multipart/form-data">
 											@csrf
 											@method("post")
 											<textarea rows="2" name="content" placeholder="write something"></textarea>
 											<div class="attachments">
 												<ul>
+													<!-- ###Task: viet js cho size input -->
 													<li>
 														<i class="fa fa-image"></i>
 														<label class="fileContainer">
-															<input type="file">
+															<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*" >
 														</label>
 													</li>
 													<li>
 														<i class="fa fa-video-camera"></i>
 														<label class="fileContainer">
-															<input type="file">
+															<input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*">
 														</label>
 													</li>
 
@@ -181,36 +182,50 @@ use Illuminate\View\Component;
 							<div class="loadMore">
 								@foreach ($posts as $post)
 								<!-- loop to find owner's post -->
-								<?php
-								$owner = '';
-								?>
-								@foreach ($user_tb as $user)
-								@if ($user->user_id==$post->user_id_fk)
-								<?php
-								$owner = $user;
-								?>
-								@endif
-								@endforeach
+		
 								<div class="central-meta item rounded-5">
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
-												<img src="{{asset('images/resources/'.$owner->avatar)}}" alt="">
+												<img src="{{asset('images/resources/'.$post->user->avatar)}}" alt="">
 											</figure>
 											<div class="friend-name">
-												<ins><a href="{{ url('time-line').'/user-profile/'.$post->user_id_fk }}" title="">
-														{{$owner->last_name." ".$owner->first_name}}
-													</a></ins>
+												<ins><a href="{{ url('time-line').'/user-profile/'.$post->user->user_id }}" title="">
+														{{$post->user->last_name." ".$post->user->first_name}}
+																										</a></ins>
 												<span>published: {{$post->created_at}}</span>
 											</div>
 											<div class="post-meta">
 												<!-- <img src="images/resources/user-post.jpg" alt=""> -->
-
+												<!-- Print content if not null -->
+												<!-- {{$post->id}} -->
 												@if(!empty($post->content))
 												<div class="description pb-2">
 													{{$post->content}}
 												</div>
 												@endif
+
+								
+												<!-- Display imgs  -->
+												@if(!empty($post->image))
+													<div class="list-img">
+													 	@foreach ($post->image as $img) 
+															<img src ="{{asset('storage/images/'.$img->url)}}" alt="failed to display"/>
+														@endforeach
+													
+													</div>
+												@endif
+
+												<!-- Display video  -->
+												@if(!empty($post->video) && count($post->video) !=0 )
+												<video class="list-vid" controls alt="err">
+													 	@foreach ($post->video as $video) 
+															<source src="{{asset('storage/videos/'.$video->url)}}">
+														 @endforeach
+												</video>
+												@endif
+
+												
 
 												<!-- views, like,dislike, comment, share -->
 												<div class="we-video-info border-top my-3">

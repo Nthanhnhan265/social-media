@@ -10050,4 +10050,9 @@ aside.sidebar.full-style {
     text-transform: uppercase;
 }
 
-
+/* 
+.list-img > img { 
+} */
+.list-vid { 
+    height: 50vh;
+}

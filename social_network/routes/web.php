@@ -52,6 +52,9 @@ Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','v
 Route::get('/time-line/:id',[]); 
 
 Route::post('/post',[PostsController::class, 'store']); 
+Route::delete('/post/{id}',[PostsController::class, 'destroy'])->name('posts.destroy'); 
+Route::put('/post/{id}',[PostsController::class, 'update'])->name('posts.update'); 
+
 Route::get('/', function () {
     return view('auth.login'); 
 });
@@ -87,3 +90,8 @@ Route::get('/{page?}', function ($page = "newsfeed") {
 
 //Route::get('/inbox', [PostController::class, 'index']);
 //Route::resource('index',PostController::class);
+
+
+
+Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
+Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 

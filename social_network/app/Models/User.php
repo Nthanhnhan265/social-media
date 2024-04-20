@@ -12,7 +12,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $primaryKey = 'user_id'; // Thiết lập khóa chính tùy chỉnh
+    protected $table ="users"; 
+    protected $primaryKey = "user_id";  
+    public $timestamps = true;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +22,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'first_name', 
         'last_name', 
         'email', 
@@ -31,7 +34,7 @@ class User extends Authenticatable
         'background', 
         'role_id_fk'
     ];
-
+    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -43,7 +46,7 @@ class User extends Authenticatable
         'two_factor_recovery_codes', 
         'remember_token',
     ];
-
+    
     /**
      * The attributes that should be cast.
      *
@@ -55,8 +58,9 @@ class User extends Authenticatable
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
     public function posts()
     {
-        return $this->hasMany(Posts::class);
+        return $this->hasMany(Posts::class, "user_id_fk");
     }
 }

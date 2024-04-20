@@ -22,9 +22,9 @@ class Posts extends Model
     {
         return $this->belongsTo(User::class, 'user_id_fk');
     }
-    public function likes()
+    public function likeposts()
     {
-        return $this->hasMany(LikePost::class);
+        return $this->belongsToMany(LikePost::class);
     }
 
     public function groups()
@@ -32,5 +32,11 @@ class Posts extends Model
         return $this->belongsToMany(Group::class, 'postgroup');
     }
     
+    public function image() { 
+        return $this->hasMany(Image::class,'ref_id_fk'); 
+    }
+    public function video() { 
+        return $this->hasMany(Video::class,'ref_id_fk'); 
+    }
 
 }

@@ -1,58 +1,83 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>Winku Social Network Toolkit</title>
+    <link rel="icon" href="{{ asset('images/fav.png') }}" type="image/png" sizes="16x16"> 
+    
+    <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/color.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
-        <!-- F-Name -->
-        <div>
-            <x-input-label for="name" :value="__('First Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="first_name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+</head>
+<body>
+<div class="theme-layout">
+    <div class="container-fluid pdng0">
+        <div class="row merged">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="land-featurearea">
+                    <div class="land-meta">
+                        <h1>Winku</h1>
+                        <p>
+                            Winku is free to use for as long as you want with two active projects.
+                        </p>
+                        <div class="friend-logo">
+                            <span><img src="images/wink.png" alt=""></span>
+                        </div>
+                        <a href="#" title="" class="folow-me">Follow Us on</a>
+                    </div>  
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="login-reg-bg show">
+                    <div class="log-reg-area reg">
+                        <h2 class="log-title">Register</h2>
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
+                            <div class="form-group">
+                                <input type="text" name="first_name" required="required" value="{{ old('first_name') }}" />
+                                <label class="control-label">First Name</label><i class="mtrl-select"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="last_name" required="required" value="{{ old('last_name') }}" />
+                                <label class="control-label">Last Name</label><i class="mtrl-select"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" required="required" value="{{ old('email') }}" />
+                                <label class="control-label">Email</label><i class="mtrl-select"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" required="required" />
+                                <label class="control-label">Password</label><i the="mtrl-select"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password_confirmation" required="required" />
+                                <label class="control-label">Confirm Password</label><i class="mtrl-select"></i>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" required="required"/><i class="check-box"></i>Accept Terms & Conditions?
+                                </label>
+                            </div>
+                            <a href="{{ route('login') }}" title="" class="already-have">Already have an account</a>
+                            <div class="submit-btns">
+                                <button class="mtr-btn signin" type="submit"><span>Register</span></button>
+                                <a href="{{ route('login') }}" class="mtr-btn signin"><span>Login</span></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- L-Name -->
-        <div>
-            <x-input-label for="name" :value="__('Last Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="last_name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+    </div>
+</div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+<script src="{{ asset('js/main.min.js') }}"></script>
+<script src="{{ asset('js/script.js') }}"></script>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ml-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</body> 
+</html>

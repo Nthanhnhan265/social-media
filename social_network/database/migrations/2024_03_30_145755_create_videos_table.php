@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('video_id');
             $table->string('url');
             $table->integer("ref_id_fk"); 
-            $table->string('video_location_fk'); //where the image belongs to EX: in post or comment
+            $table->string('video_location_fk'); //where the video belongs to EX: in post or comment
             $table->timestamps();
         });
     }

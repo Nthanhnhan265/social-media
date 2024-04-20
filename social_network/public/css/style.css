@@ -717,6 +717,7 @@ header.sticky {
     display: inline-block;
     transform: scale(0.7);
     vertical-align: inherit;
+    height: 4rem;
 }
 
 .form-search {
@@ -1916,7 +1917,7 @@ li.post-comment .comet-avatar {
 .add-smiles {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 1.25rem;
     transform: translateY(-50%);
     width: auto;
     line-height: 10px;
@@ -1966,7 +1967,7 @@ li.post-comment .comet-avatar {
 }
 
 .post-comt-box form button {
-    bottom: 2px;
+    top: 50%;     
     position: absolute;
     right: 0;
     background: none;
@@ -10048,5 +10049,36 @@ aside.sidebar.full-style {
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
+.container-fluid {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row.merged {
+    margin: 0; /* Remove any default margin */
+}
+
+.col-xs-12, .col-sm-6, .col-md-6, .col-lg-6 {
+    position: relative;
+    width: 50%; /* Ensure each column takes half of the screen */
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.land-featurearea, .login-reg-bg {
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+}
 
 
+/* 
+.list-img > img { 
+} */
+.list-vid { 
+    height: 50vh;
+}

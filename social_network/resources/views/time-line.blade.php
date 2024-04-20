@@ -46,6 +46,7 @@ use Illuminate\Support\Facades\Auth;
 								  <span>Group Admin</span>
 								</li>	
 								<li>
+<<<<<<< HEAD
 
 										<a class="" href="{{ url('time-line/' . Auth::id()) }}" title="" data-ripple="">time line</a>
 
@@ -55,6 +56,14 @@ use Illuminate\Support\Facades\Auth;
 										<a class="" href="{{ url('groups') }}" title="" data-ripple="">Groups</a>
 										<a class="" href="{{ route('about', ['userId' => Auth::id()]) }}" title="" data-ripple="">about</a>
 
+=======
+								<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
+										<a class="" href="{{ url('timeline-photos').'/user-profile/'.$id }}" title="" data-ripple="">Photos</a>
+										<a class="" href="{{ url('timeline-videos') }}t" title="" data-ripple="">Videos</a>
+										<a class="" href="{{ url('timeline-friends') }}" title="" data-ripple="">Friends</a>
+										<a class="" href="{{ url('groups') }}" title="" data-ripple="">Groups</a>
+										<a class="" href="{{ url('about').'/user-profile/'.$id }}" title="" data-ripple="">about</a>
+>>>>>>> 63fc208b4c904a74473e11eeb65c0514ca7632d2
 										<a class="active" href="#" title="" data-ripple="">more</a>
 								</li>
 							</ul>

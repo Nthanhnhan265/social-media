@@ -48,31 +48,17 @@ class UsersController extends Controller
      * @param  int  $id 
      * @return \Illuminate\Http\Response
      */
-
-    public function show($userId)
+    public function show($id)
     {
-        $user = User::findOrFail($userId); 
-    
-        // Kiểm tra URI để xác định liệu nó đang truy cập trang "time-line" hay "about"
-        if (request()->is('time-line/*')) {
-            // Nếu URI chứa "/time-line/", trả về trang "time-line"
-            return view('time-line', compact('user'));
-        } elseif (request()->is('about/*')) {
-            // Nếu URI chứa "/about/", trả về trang "about"
-            return view('about', compact('user'));
-        } else {
-            // Nếu không khớp với bất kỳ URI nào trên, bạn có thể xử lý tùy ý ở đây
-            return redirect()->route('home'); // Ví dụ: chuyển hướng người dùng đến trang chính
-        }
+        $user = User::findOrFail($id); 
+        return view('time-line',["id"=>$id,'user'=>$user]);
     }
-
-    
-    public function about()
+    public function showAbout($id)
     {
-        $userId = Auth::id();
-    
-        return view('about', compact('userId'));
+        $user = User::findOrFail($id); 
+        return view('about',["id"=>$id,'user'=>$user]);
     }
+    
     /**
      * Show the form for editing the specified resource.
      *

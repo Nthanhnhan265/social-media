@@ -62,7 +62,7 @@
                 </a>
             </li>
             <li class="sidebar-list-item">
-                <a href="{{ asset('post-management') }}">
+                <a href="#">
                     <span class="material-icons-outlined"></span> Post Management
                 </a>
             </li>
@@ -80,111 +80,83 @@
                             <div class="widget-title"> <span class="icon"><a
                                         href="add_manu.html"> <i class="icon-plus"></i>
                                     </a></span>
-                                <h5>Users Management</h5>
+                                <h5>Posts Management</h5>
                             </div>
                             <div class="widget-content nopadding">
                                 <table class="table table-bordered
                                     table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Avatar</th>
-                                            <th>Users ID</th>
-                                            <th>First name</th>
-                                            <th>Last name</th>
-                                            <th>Email</th>
-                                            <th>Day of birth</th>
-                                            <th>Description</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Post ID</th>
+                                            <th>Owner</th>
+                                            <th>Content</th>
+                                            <th>Created at</th>
+                                            <th>Update at</th>   
+                                            <th>Action</th>                                          
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="">
-                                            <td width="80">                                            
-                                                <img src="{{ asset('images/resources/admin.jpg') }}" alt="">                                                                                                                                     
-                                            </td>
+                                        <tr class="">                                         
                                             <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>1/1/1990</td>  
+                                            <td>John Doe</td>                                                                                        
                                             <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>Active</td>                                        
+                                            <td>20/4/2024</td>  
+                                            <td>20/4/2024</td>                                       
                                             <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
+                                                <a href="{{ asset('post-detail') }}" class="btn
+                                                    btn-success btn-mini">Detail</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>
                                             </td>
                                         </tr>
-                                        <tr class="">
-                                            <td width="80">                                            
-                                                <img src="{{ asset('images/resources/admin.jpg') }}" alt="">                                                                                                                                     
-                                            </td>
+                                        <tr class="">                                         
                                             <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>1/1/1990</td>  
+                                            <td>John Doe</td>                                                                                        
                                             <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>Active</td>                                        
+                                            <td>20/4/2024</td>  
+                                            <td>20/4/2024</td>                                       
                                             <td>
                                                 <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
+                                                    btn-success btn-mini">Detail</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>
                                             </td>
                                         </tr>
-                                        <tr class="">
-                                            <td width="80">                                            
-                                                <img src="{{ asset('images/resources/admin.jpg') }}" alt="">                                                                                                                                     
-                                            </td>
+                                        <tr class="">                                         
                                             <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>1/1/1990</td>  
+                                            <td>John Doe</td>                                                                                        
                                             <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>Active</td>                                        
+                                            <td>20/4/2024</td>  
+                                            <td>20/4/2024</td>                                       
                                             <td>
                                                 <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
+                                                    btn-success btn-mini">Detail</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>
                                             </td>
                                         </tr>
-                                        <tr class="">
-                                            <td width="80">                                            
-                                                <img src="{{ asset('images/resources/admin.jpg') }}" alt="">                                                                                                                                     
-                                            </td>
+                                        <tr class="">                                         
                                             <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>1/1/1990</td>  
+                                            <td>John Doe</td>                                                                                        
                                             <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>Active</td>                                        
+                                            <td>20/4/2024</td>  
+                                            <td>20/4/2024</td>                                       
                                             <td>
                                                 <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
+                                                    btn-success btn-mini">Detail</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>
                                             </td>
                                         </tr>
-                                        <tr class="">
-                                            <td width="80">                                            
-                                                <img src="{{ asset('images/resources/admin.jpg') }}" alt="">                                                                                                                                     
-                                            </td>
+                                        <tr class="">                                         
                                             <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>1/1/1990</td>  
+                                            <td>John Doe</td>                                                                                        
                                             <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>Active</td>                                        
+                                            <td>20/4/2024</td>  
+                                            <td>20/4/2024</td>                                       
                                             <td>
                                                 <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
+                                                    btn-success btn-mini">Detail</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>
                                             </td>

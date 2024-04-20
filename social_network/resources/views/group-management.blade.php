@@ -52,7 +52,7 @@
 
         <ul class="sidebar-list">
             <li class="sidebar-list-item">
-                <a href="#">
+                <a href="{{ asset('user-management') }}">
                     <span class="material-icons-outlined"></span> Users management
                 </a>
             </li>
@@ -80,93 +80,88 @@
                             <div class="widget-title"> <span class="icon"><a
                                         href="add_manu.html"> <i class="icon-plus"></i>
                                     </a></span>
-                                <h5>Users Managements</h5>
+                                <h5>Group Management</h5>
                             </div>
                             <div class="widget-content nopadding">
                                 <table class="table table-bordered
                                     table-striped">
                                     <thead>
                                         <tr>
-                                            <th></th>
-                                            <th>Users ID</th>
-                                            <th>First name</th>
-                                            <th>Last name</th>
-                                            <th>Email</th>
+                                            <th>Group ID</th>
+                                            <th>Group name</th>
+                                            <th>Group creater</th>
+                                            <th>Description</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Created at</th>   
+                                            <th>Action</th>                                         
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="">
-                                            <td width="50"><img
-                                                    src=""></td>
+                                        <tr class="">                                           
                                             <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>Active</td>                                        
+                                            <td>Thức khuya xem bóng đá</td>                                            
+                                            <td>John Doe</td>     
+                                            <td>Hội những người thức khua xem bóng đá</td>  
+                                            <td>Active</td>                                              
+                                            <td>20/4/2024</td>                                        
                                             <td>
-                                                <a href="edit_manu.html" class="btn
+                                                <a href="edit-user" class="btn
                                                     btn-success btn-mini">Edit</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>
                                             </td>
                                         </tr>
-                                        <tr class="">
-                                            <td width="50"><img
-                                                    src=""></td>
+                                        <tr class="">                                           
                                             <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>Active</td>                                        
+                                            <td>Thức khuya xem bóng đá</td>                                            
+                                            <td>John Doe</td>     
+                                            <td>Hội những người thức khua xem bóng đá</td>  
+                                            <td>Active</td>                                              
+                                            <td>20/4/2024</td>                                        
                                             <td>
-                                                <a href="edit_manu.html" class="btn
+                                                <a href="edit-user" class="btn
                                                     btn-success btn-mini">Edit</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>
                                             </td>
                                         </tr>
-                                        <tr class="">
-                                            <td width="50"><img
-                                                    src=""></td>
+                                        <tr class="">                                           
                                             <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>Active</td>                                        
+                                            <td>Thức khuya xem bóng đá</td>                                            
+                                            <td>John Doe</td>     
+                                            <td>Hội những người thức khua xem bóng đá</td>  
+                                            <td>Active</td>                                              
+                                            <td>20/4/2024</td>                                        
                                             <td>
-                                                <a href="edit_manu.html" class="btn
+                                                <a href="edit-user" class="btn
                                                     btn-success btn-mini">Edit</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>
                                             </td>
                                         </tr>
-                                        <tr class="">
-                                            <td width="50"><img
-                                                    src=""></td>
+                                        <tr class="">                                           
                                             <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>Active</td>                                        
+                                            <td>Thức khuya xem bóng đá</td>                                            
+                                            <td>John Doe</td>     
+                                            <td>Hội những người thức khua xem bóng đá</td>  
+                                            <td>Active</td>                                              
+                                            <td>20/4/2024</td>                                        
                                             <td>
-                                                <a href="edit_manu.html" class="btn
+                                                <a href="edit-user" class="btn
                                                     btn-success btn-mini">Edit</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>
                                             </td>
                                         </tr>
-                                        <tr class="">
-                                            <td width="50"><img
-                                                    src=""></td>
+                                        <tr class="">                                           
                                             <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>Active</td>                                        
+                                            <td>Thức khuya xem bóng đá</td>                                            
+                                            <td>John Doe</td>     
+                                            <td>Hội những người thức khua xem bóng đá</td>  
+                                            <td>Active</td>                                              
+                                            <td>20/4/2024</td>                                        
                                             <td>
-                                                <a href="edit_manu.html" class="btn
+                                                <a href="edit-group" class="btn
                                                     btn-success btn-mini">Edit</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>

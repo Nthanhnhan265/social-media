@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
 
 //--- user setting dropdown on topbar	
 $('.user-img').on('click', function() {
-	$('.user-setting').toggleClass("active");
+	$('.user-img').toggleClass("active");
 	return false;
 });	
 	
@@ -400,6 +400,24 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 
 
 });//document ready end
+// SIDEBAR TOGGLE - Management
+
+let sidebarOpen = false;
+const sidebar = document.getElementById('sidebar');
+
+function openSidebar() {
+  if (!sidebarOpen) {
+    sidebar.classList.add('sidebar-responsive');
+    sidebarOpen = true;
+  }
+}
+
+function closeSidebar() {
+  if (sidebarOpen) {
+    sidebar.classList.remove('sidebar-responsive');
+    sidebarOpen = false;
+  }
+}
 
 
 

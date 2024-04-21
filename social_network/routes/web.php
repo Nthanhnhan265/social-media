@@ -1,6 +1,11 @@
 <?php
+require __DIR__.'/auth.php';
 
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -8,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
@@ -43,6 +48,50 @@ use Illuminate\Support\Facades\Route;
 
 //     return isset($pages[$namePage]) ? view($pages[$namePage]) : view('error');
 // });
+Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']); 
+Route::get('/time-line/:id',[]); 
+
+Route::post('/post',[PostsController::class, 'store']); 
+Route::delete('/post/{id}',[PostsController::class, 'destroy'])->name('posts.destroy'); 
+Route::put('/post/{id}',[PostsController::class, 'update'])->name('posts.update'); 
+
+Route::get('/', function () {
+    return view('auth.login'); 
+});
+
+
+Route::get('/register', function () {
+    return view('auth.register'); 
+})->name('register');  
+
+Route::get('/dashboard', [PostsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+//Route::get('/inbox', [PostController::class, 'index']);
+  Route::get('/inbox/{id}', [PostController::class, 'show']);
+
+// //Route::get('/newsfeed', [UsersController::class, 'index']);
+// Route::get('/inbox', [PostController::class, 'store']);
+// Route::post('/inbox', [PostController::class, 'edit']);
+// Route::post('/inbox', [PostController::class, 'show']);
+// Route::resource('/posts', PostController::class);
+Route::get('/time-line/{userId}', [UsersController::class, 'show']);
+// Route::get('/users/{id}', 'UserController@show');
+// Route::get('time-line/{userId}', 'TimelineController@index')->name('timeline');
+//Route::get('time-line',[UsersController::class,'index']);
+
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);
 });
+
+//Route::get('/inbox', [PostController::class, 'index']);
+//Route::resource('index',PostController::class);
+
+
+
+Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
+Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 

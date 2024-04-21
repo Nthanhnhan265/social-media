@@ -20,10 +20,11 @@ class ContentsTableSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             DB::table('posts')->insert([
                 'user_id_fk' => rand(3, 10), 
-                'content' => rand(1, 1000), 
+                'content' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 
                 'created_at' => Carbon::now()->subDays(rand(1, 30)), 
                 'updated_at' => Carbon::now()->subDays(rand(1, 30)), 
             ]);
         }
+      
     }
 }

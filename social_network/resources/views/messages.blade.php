@@ -21,6 +21,7 @@
 @extends('/layouts.header')
 	@section('content')
 	@endsection
+	<h2>{{ $comment}}</h2>
 	<div class="topbar stick">
 		<div class="logo">
 			<a title="" href="{{ url('newsfeed') }}"><img src="images/logo.png" alt=""></a>

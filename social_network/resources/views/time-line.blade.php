@@ -1,5 +1,5 @@
 
-@extends('/layouts.header')
+@extends('layouts.app')
 	@section('content')
 
 	<section>
@@ -36,16 +36,17 @@
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-								  <h5>Janice Griffith</h5>
+
+								  <h5>{{$user->last_name}}Janice Griffith</h5>
 								  <span>Group Admin</span>
-								</li>
+								</li>	
 								<li>
 								<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
-										<a class="" href="{{ url('timeline-photos') }}" title="" data-ripple="">Photos</a>
-										<a class="" href="{{ url('imeline-videos') }}t" title="" data-ripple="">Videos</a>
+										<a class="" href="{{ url('timeline-photos').'/user-profile/'.$id }}" title="" data-ripple="">Photos</a>
+										<a class="" href="{{ url('timeline-videos') }}t" title="" data-ripple="">Videos</a>
 										<a class="" href="{{ url('timeline-friends') }}" title="" data-ripple="">Friends</a>
 										<a class="" href="{{ url('groups') }}" title="" data-ripple="">Groups</a>
-										<a class="" href="{{ url('about') }}" title="" data-ripple="">about</a>
+										<a class="" href="{{ url('about').'/user-profile/'.$id }}" title="" data-ripple="">about</a>
 										<a class="active" href="#" title="" data-ripple="">more</a>
 								</li>
 							</ul>

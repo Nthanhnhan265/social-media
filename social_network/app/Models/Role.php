@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
+    protected $table = 'roles';
+    protected $primaryKey = 'role_id';
+    protected $timestapms = true;
+    public function users()
+    {
+        return $this->hasMany(UserGroup::class);
+    }
+    
 }

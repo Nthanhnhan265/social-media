@@ -38,7 +38,6 @@ Last change:  4/september/18
 28- main menu
 39- blog pages
 40- blog detail
-41- social_network management
 
 */
 
@@ -718,6 +717,7 @@ header.sticky {
     display: inline-block;
     transform: scale(0.7);
     vertical-align: inherit;
+    height: 4rem;
 }
 
 .form-search {
@@ -1279,7 +1279,7 @@ header.sticky {
 .central-meta {
     background: #fdfdfd none repeat scroll 0 0;
     border: 1px solid #ede9e9;
-    border-radius: 3px;
+    border-radius: 6px;
     display: inline-block;
     width: 100%;
     margin-bottom: 20px;
@@ -1614,6 +1614,7 @@ form button {
 
 .menu .rotater {
     position: absolute;
+    z-index: 2;
     top: 0;
     left: 0;
     width: 100%;
@@ -1768,7 +1769,9 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
 .coment-area {
     display: inline-block;
     margin-top: 10px;
+    padding: 20px; 
     width: 100%;
+    background-color: rgba(241, 241, 241,.11);
 }
 
 .we-comet {
@@ -1914,7 +1917,7 @@ li.post-comment .comet-avatar {
 .add-smiles {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 1.25rem;
     transform: translateY(-50%);
     width: auto;
     line-height: 10px;
@@ -1964,7 +1967,7 @@ li.post-comment .comet-avatar {
 }
 
 .post-comt-box form button {
-    bottom: 2px;
+    top: 50%;     
     position: absolute;
     right: 0;
     background: none;
@@ -2334,7 +2337,7 @@ footer .logo {
     background: #fff none repeat scroll 0 0;
     border-radius: 0 0 3px 3px;
     position: absolute;
-    left: -15px;
+    right: -5px;
     text-align: left;
     top: 100%;
     width: 150px;
@@ -2344,7 +2347,7 @@ footer .logo {
     border: 1px solid #e1e8ed;
 }
 
-.user-setting.active {
+.user-img.active + .user-setting {
     opacity: 1;
     visibility: visible;
 }
@@ -10046,5 +10049,36 @@ aside.sidebar.full-style {
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
+.container-fluid {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row.merged {
+    margin: 0; /* Remove any default margin */
+}
+
+.col-xs-12, .col-sm-6, .col-md-6, .col-lg-6 {
+    position: relative;
+    width: 50%; /* Ensure each column takes half of the screen */
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.land-featurearea, .login-reg-bg {
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+}
 
 
+/* 
+.list-img > img { 
+} */
+.list-vid { 
+    height: 50vh;
+}

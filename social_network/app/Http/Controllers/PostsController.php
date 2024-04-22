@@ -247,6 +247,11 @@ class PostsController extends Controller
             //delete image in image table
             $vdElement->delete(); 
         }
+
+        foreach($post->comment as $cmtElement)  { 
+            //delete image in image table
+            $cmtElement->delete(); 
+        }
         
         // //delete post by id 
         Posts::find($id)->delete();        

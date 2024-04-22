@@ -38,5 +38,4 @@ class Posts extends Model
     public function video() { 
         return $this->hasMany(Video::class,'ref_id_fk'); 
     }
-
 }

@@ -28,7 +28,10 @@
 					<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
 				</span>
 				<span class="mh-text">
-					<a href="{{ url ('newsfeed') }}" title=""><img src="images/logo2.png" alt=""></a>
+					<a href="{{ url ('newsfeed') }}" title="">
+					<img src="{{asset('images/logo.png')}}" alt="ERR">
+					kkkk
+					</a>
 				</span>
 				<span class="mh-btns-right">
 					<a class="fa fa-sliders" href="#shoppingbag"></a>
@@ -213,7 +216,7 @@
 		</div>
 		<div class="topbar stick">
 			<div class="logo">
-				<a title="" href="{{ url('newsfeed') }}"><img src="images/logo.png" alt=""></a>
+				<a title="" href="{{ url('newsfeed') }}"><img src="{{asset('images/logo.png')}}" alt=""></a>
 			</div>
 
 			<div class="top-area">

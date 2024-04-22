@@ -17,6 +17,8 @@
 	<link rel="stylesheet" href="{{asset('css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('css/color.css')}}">
 	<link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
 
 </head>
 
@@ -421,6 +423,13 @@
 							<a href="{{ url('messages') }}" title="" class="more-mesg">view more</a>
 						</div>
 					</li>
+					@if (auth()->check() && auth()->user()->role_id_fk == 1)
+						<li>
+							<a href="{{}}" title="Admin" data-ripple="">
+								<i class="fa-solid fa-user fa-bounce"></i> <span>Admin</span>
+							</a>
+						</li>
+					@endif
 
 				</ul>
 				<div class="user-img">

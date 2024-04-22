@@ -3,7 +3,26 @@
 	@section('content')
 
 	<section>
-		<div class="feature-photo">
+	@foreach($posts[0]->posts as $post)
+		<div>
+			{{$post->content}}
+			<!-- {{dump($post->image);}}  -->
+			@foreach($post->image as $img) 
+				<img src="{{asset('storage/images/'.$img->url)}}" alt="">
+	
+			@endforeach
+			<video alt="err" controls >
+				@foreach($post->video as $video) 
+					<source src="{{asset('storage/videos/'.$video->url)}}" alt=""/>
+		
+				@endforeach
+
+			</video>
+		</div>
+
+	@endforeach
+
+	<div class="feature-photo">
 			<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
 			<div class="add-btn">
 				<span>1205 followers</span>

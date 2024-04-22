@@ -46,24 +46,14 @@ use Illuminate\Support\Facades\Auth;
 								  <span>Group Admin</span>
 								</li>	
 								<li>
-<<<<<<< HEAD
 
-										<a class="" href="{{ url('time-line/' . Auth::id()) }}" title="" data-ripple="">time line</a>
-
-										<a class="" href="{{ url('timeline-photos') }}" title="" data-ripple="">Photos</a>
-										<a class="" href="{{ url('timeline-videos') }}t" title="" data-ripple="">Videos</a>
-										<a class="" href="{{ url('timeline-friends') }}" title="" data-ripple="">Friends</a>
-										<a class="" href="{{ url('groups') }}" title="" data-ripple="">Groups</a>
-										<a class="" href="{{ route('about', ['userId' => Auth::id()]) }}" title="" data-ripple="">about</a>
-
-=======
 								<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
 										<a class="" href="{{ url('timeline-photos').'/user-profile/'.$id }}" title="" data-ripple="">Photos</a>
 										<a class="" href="{{ url('timeline-videos') }}t" title="" data-ripple="">Videos</a>
 										<a class="" href="{{ url('timeline-friends') }}" title="" data-ripple="">Friends</a>
 										<a class="" href="{{ url('groups') }}" title="" data-ripple="">Groups</a>
-										<a class="" href="{{ url('about').'/user-profile/'.$id }}" title="" data-ripple="">about</a>
->>>>>>> 63fc208b4c904a74473e11eeb65c0514ca7632d2
+										<a class="" href="{{ url('about'.'/user-profile/'.$id) }}" title="" data-ripple="">about</a>
+
 										<a class="active" href="#" title="" data-ripple="">more</a>
 								</li>
 							</ul>
@@ -217,7 +207,7 @@ use Illuminate\Support\Facades\Auth;
 									<div class="central-meta item">
 										<div class="new-postbox">
 											<figure>
-												<img src="{{asset('images/resources/admin2.jpg')}}" alt="">
+												<img src="{{asset('images/resources/' .$user->avatar)}}" alt="">
 											</figure>
 											<div class="newpst-input">
 												<form method="post">
@@ -261,10 +251,10 @@ use Illuminate\Support\Facades\Auth;
 										<div class="user-post">
 											<div class="friend-info">
 												<figure>
-													<img src="images/resources/friend-avatar10.jpg" alt="">
+													<img src="{{asset('images/resources/' .$user->avatar)}}" alt="">
 												</figure>
 												<div class="friend-name">
-													<ins><a href="{{ url('time-line') }}" title="">Janice Griffith</a></ins>
+													<ins><a href="{{ url('#') }}" title="">{{$user->last_name}} {{$user->first_name}}</a></ins>
 													<span>published: june,2 2018 19:PM</span>
 												</div>
 												<div class="description">
@@ -275,7 +265,7 @@ use Illuminate\Support\Facades\Auth;
 													</div>
 												<div class="post-meta">
 													<div class="linked-image align-left">
-														<a href="#" title=""><img src="images/resources/page1.jpg" alt=""></a>
+														<a href="#" title=""><img src="{{asset('images/resources/page1.jpg')}}" alt=""></a>
 													</div>
 													<div class="detail">
 														<span>Love Maid - ChillGroves</span>

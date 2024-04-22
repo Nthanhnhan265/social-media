@@ -190,7 +190,7 @@ use Illuminate\View\Component;
 												<img src="{{asset('images/resources/'.$post->user->avatar)}}" alt="">
 											</figure>
 											<div class="friend-name">
-<<<<<<< HEAD
+
 												<ins><a href="{{ url('time-line', $post->user_id_fk) }}" title="">
 												@foreach ($user_tb as $user) 
 													@if ($user->user_id==$post->user_id_fk)
@@ -200,11 +200,11 @@ use Illuminate\View\Component;
 												@endforeach
 												
 												</a></ins>
-=======
+
 												<ins><a href="{{ url('time-line').'/user-profile/'.$post->user->user_id }}" title="">
 														{{$post->user->last_name." ".$post->user->first_name}}
-																										</a></ins>
->>>>>>> 63fc208b4c904a74473e11eeb65c0514ca7632d2
+																												</a></ins>
+
 												<span>published: {{$post->created_at}}</span>
 											</div>
 											<div class="post-meta">

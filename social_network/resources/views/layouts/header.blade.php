@@ -28,7 +28,10 @@
 					<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
 				</span>
 				<span class="mh-text">
-					<a href="{{ url ('newsfeed') }}" title=""><img src="images/logo2.png" alt=""></a>
+					<a href="{{ url ('newsfeed') }}" title="">
+					<img src="{{asset('images/logo.png')}}" alt="ERR">
+					kkkk
+					</a>
 				</span>
 				<span class="mh-btns-right">
 					<a class="fa fa-sliders" href="#shoppingbag"></a>

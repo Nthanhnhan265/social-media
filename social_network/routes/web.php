@@ -7,23 +7,8 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-// Route::get('index', function () {
-//     return view('index');
-// });
-// Route::get('logout', function () {
-//     return view('logout');
-// });
+
 
 // Route::get('/{namePage?}', function ($namePage = "index") {
 //     $pages = [
@@ -79,7 +64,7 @@ Route::middleware('auth')->group(function () {
 // Route::post('/inbox', [PostController::class, 'edit']);
 // Route::post('/inbox', [PostController::class, 'show']);
 // Route::resource('/posts', PostController::class);
-Route::get('/time-line/{userId}', [UsersController::class, 'show'])->name('time-line');
+// Route::get('/time-line/user-profile/{userId}', [UsersController::class, 'show'])->name('time-line');
 Route::get('/about/{userId}', [UsersController::class, 'show'])->name('about');
 Route::get('/about/{userId}', [UsersController::class, 'about'])->name('about');
 // Route::get('/users/{id}', 'UserController@show');
@@ -97,3 +82,4 @@ Route::get('/{page?}', function ($page = "newsfeed") {
 
 Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
 Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 
+Route::get('edit-profile-basic/{id}',[UsersController::class,'showProfile']);

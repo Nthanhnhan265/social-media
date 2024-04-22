@@ -2334,7 +2334,7 @@ footer .logo {
     background: #fff none repeat scroll 0 0;
     border-radius: 0 0 3px 3px;
     position: absolute;
-    left: -15px;
+    /* left: -15px; */
     text-align: left;
     top: 100%;
     width: 150px;

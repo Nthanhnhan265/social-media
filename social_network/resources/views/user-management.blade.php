@@ -1,4 +1,3 @@
-
 @extends('layouts.app-management')
 @section('content')
     <!-- Main -->

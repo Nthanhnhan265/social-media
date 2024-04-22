@@ -2,7 +2,7 @@
 @section('content')
 		<section>
 			<div class="feature-photo">
-				<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
+				<figure><img src="{{asset('images/resources/'.$user->background)}}" alt=""></figure>
 				<div class="add-btn">
 					<span>1205 followers</span>
 					<a href="#" title="" data-ripple="">Add Friend</a>
@@ -19,7 +19,7 @@
 						<div class="col-lg-2 col-sm-3">
 							<div class="user-avatar">
 								<figure>
-									<img src="images/resources/user-avatar.jpg" alt="">
+									<img src="{{asset('images/resources/'.$user->avatar) }}" alt="">
 									<form class="edit-phto">
 										<i class="fa fa-camera-retro"></i>
 										<label class="fileContainer">
@@ -34,7 +34,7 @@
 							<div class="timeline-info">
 								<ul>
 									<li class="admin-name">
-										<h5>Janice Griffith</h5>
+										
 										<span>Group Admin</span>
 									</li>
 									<li>
@@ -72,7 +72,7 @@
 											<ul class="naves">
 												<li>
 													<i class="ti-info-alt"></i>
-													<a title="" href="{{ url('edit-profile-basic') }}">Basic info</a>
+													<a title="" href="{{ url('edit-profile-basic'.'/'.$id) }}">Basic info</a>
 												</li>												
 												<li>
 													<i class="ti-heart"></i>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 class UsersController extends Controller
 {
     /**
@@ -19,6 +19,7 @@ class UsersController extends Controller
 
         return view('newsfeed', compact('users'));
     }
+
     
     /**
      * Show the form for creating a new resource.
@@ -59,7 +60,10 @@ class UsersController extends Controller
         $user = User::findOrFail($id); 
         return view('about',["id"=>$id,'user'=>$user]);
     }
-    
+    public function showProfile($id){
+        $user = User::findOrFail($id);
+        return view('edit-profile-basic',["id"=>$id,'user'=>$user]);
+    }
     /**
      * Show the form for editing the specified resource.
      *

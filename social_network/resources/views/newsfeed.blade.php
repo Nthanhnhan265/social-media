@@ -192,6 +192,7 @@ use Illuminate\View\Component;
 												<ins><a href="{{ url('time-line').'/user-profile/'.$post->user->user_id }}" title="">
 														{{$post->user->last_name." ".$post->user->first_name}}
 													</a></ins>
+
 												<span>published: {{$post->created_at}}</span>
 											</div>
 											<div class="post-meta">

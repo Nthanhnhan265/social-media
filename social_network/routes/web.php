@@ -1,6 +1,7 @@
 <?php
 require __DIR__.'/auth.php';
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
@@ -52,11 +53,12 @@ Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','v
 Route::get('/time-line/:id',[]); 
 
 Route::post('/post',[PostsController::class, 'store']); 
+Route::post('/comment',[CommentController::class, 'store']); 
 Route::delete('/post/{id}',[PostsController::class, 'destroy'])->name('posts.destroy'); 
 Route::put('/post/{id}',[PostsController::class, 'update'])->name('posts.update'); 
 
 Route::get('/', function () {
-    return view('auth.login'); 
+    return redirect ('/newsfeed');   
 });
 
 

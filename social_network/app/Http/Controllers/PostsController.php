@@ -23,7 +23,21 @@ class PostsController extends Controller
     {
         //hiển thị giao diện trang chính 
         //hiển thị mọi bài viết trong db -> chưa hợp lý cho việc hiển thị phù hợp với từng tài khoản 
-        return view('newsfeed', ["posts" => Posts::orderBy('created_at','desc')->with('user','image','video')->get()]);
+        return view('newsfeed', ["posts" => Posts::orderBy('created_at','desc')
+        ->with(['user',
+                'image',
+                'video',
+                'comments'=> function($q) { 
+                    $q->with([
+                        'user', 
+                        'image'=>function($qImg) { 
+                            $qImg->where('img_location_fk',1); 
+                        }, 
+                        'video'=>function($qVid) { 
+                            $qVid->where('video_location_fk',1); 
+                        }]); 
+                }
+            ])->get()]);
     }
 
     /**

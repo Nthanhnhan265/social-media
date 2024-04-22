@@ -128,13 +128,13 @@
 											  <label class="control-label" for="input">Last Name</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	
-											  <input type="text" required="required"/>
+											  <input type="text" required="required" value="{{$user->email}}"/>
 											  <label class="control-label" for="input"><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b0e262a22270b">[email&#160;protected]</a></label><i class="mtrl-select"></i>
 											</div>
-											<div class="form-group">	
+											<!-- <div class="form-group">	
 											  <input type="text" required="required"/>
 											  <label class="control-label" for="input">Phone No.</label><i class="mtrl-select"></i>
-											</div>
+											</div> -->
 											<div class="dob">
 												<div class="form-group">
 													<select>

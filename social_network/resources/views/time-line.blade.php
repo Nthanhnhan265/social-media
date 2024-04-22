@@ -253,6 +253,7 @@ use Illuminate\Support\Facades\Auth;
 												<figure>
 													<img src="{{asset('images/resources/' .$user->avatar)}}" alt="">
 												</figure>
+											
 												<div class="friend-name">
 													<ins><a href="{{ url('#') }}" title="">{{$user->last_name}} {{$user->first_name}}</a></ins>
 													<span>published: june,2 2018 19:PM</span>

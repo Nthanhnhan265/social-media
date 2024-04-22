@@ -51,7 +51,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id); 
-        return view('time-line',["id"=>$id,'user'=>$user]);
+        return view('time-line',["id"=>$id,'user'=>$user.'comments']);
     }
     public function showAbout($id)
     {

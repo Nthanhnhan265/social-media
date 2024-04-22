@@ -22,7 +22,7 @@ class usergroupSeeder extends Seeder
             $usergroupArr[] = [
                 "usergroup" => $i,
                 "user_id_fk" => $i,
-                "role_id_fk" => $i,
+                "role_id_fk" => rand(1, 2),
                 "group_id_fk" => $i,
                 "created_at" => now(),
                 "updated_at" => now(),

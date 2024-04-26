@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\GroupController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -84,9 +86,7 @@ Route::get('/time-line/{userId}', [UsersController::class, 'show']);
 // Route::get('time-line/{userId}', 'TimelineController@index')->name('timeline');
 //Route::get('time-line',[UsersController::class,'index']);
 
-Route::get('/{page?}', function ($page = "newsfeed") {  
-    return view($page);
-});
+
 
 //Route::get('/inbox', [PostController::class, 'index']);
 //Route::resource('index',PostController::class);
@@ -95,3 +95,15 @@ Route::get('/{page?}', function ($page = "newsfeed") {
 
 Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
 Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 
+Route::get('user-management',[UsersController::class, 'getAllUsers']);
+Route::get('/edit-user/{user_id}', [UsersController::class, 'getUserByID']);
+//Route::get('/edit-user/{id}', 'UsersController@getUserByID')->name('users.edit');
+
+Route::get('/edit-group/{group_id}', [GroupController::class, 'getGroupByID']);
+Route::get('group-management',[GroupController::class, 'getAllGroups']);
+
+Route::get('post-management',[PostsController::class, 'getAllPosts']);
+
+Route::get('/{page?}', function ($page = "newsfeed") {  
+    return view($page);
+});

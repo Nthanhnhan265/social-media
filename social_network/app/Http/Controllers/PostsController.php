@@ -26,6 +26,14 @@ class PostsController extends Controller
         return view('newsfeed', ["posts" => Posts::orderBy('created_at','desc')->with('user','image','video')->get()]);
     }
 
+    public function getAllPosts(Request $request)
+    {
+        $perPage = 5; 
+        $posts = Posts::paginate($perPage); 
+
+        return view('post-management', compact('posts'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -26,82 +26,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($posts as $post)
                                         <tr class="">                                         
-                                            <td>1</td>                                       
-                                            <td>John Doe</td>                                                                                        
-                                            <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>20/4/2024</td>  
-                                            <td>20/4/2024</td>                                       
+                                            <td>{{ $post->id }}</td>                                       
+                                            <td>{{ $post->user_id_fk }}</td>                                                                                        
+                                            <td style="width: 100px">{{ $post->content }}</td>  
+                                            <td>{{ $post->created_at }}</td>  
+                                            <td>{{ $post->updated_at }}</td>                                       
                                             <td>
                                                 <a href="{{ asset('post-detail') }}" class="btn
                                                     btn-success btn-mini">Detail</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>
                                             </td>
-                                        </tr>
-                                        <tr class="">                                         
-                                            <td>1</td>                                       
-                                            <td>John Doe</td>                                                                                        
-                                            <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>20/4/2024</td>  
-                                            <td>20/4/2024</td>                                       
-                                            <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Detail</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr class="">                                         
-                                            <td>1</td>                                       
-                                            <td>John Doe</td>                                                                                        
-                                            <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>20/4/2024</td>  
-                                            <td>20/4/2024</td>                                       
-                                            <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Detail</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr class="">                                         
-                                            <td>1</td>                                       
-                                            <td>John Doe</td>                                                                                        
-                                            <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>20/4/2024</td>  
-                                            <td>20/4/2024</td>                                       
-                                            <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Detail</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr class="">                                         
-                                            <td>1</td>                                       
-                                            <td>John Doe</td>                                                                                        
-                                            <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>20/4/2024</td>  
-                                            <td>20/4/2024</td>                                       
-                                            <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Detail</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
+                                        </tr>   
+                                        @endforeach                                   
                                     </tbody>
                                 </table>
                                 <div class="row" style="margin-left: 18px;">
                                     <ul class="pagination">
-                                        <li><a href="#" class="prev">&laquo; Previous</a></li>
-                                        <li><a href="#" class="active">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#" class="next">Next &raquo;</a></li>
+                                        <li class="{{ !$posts->onFirstPage() ? '' : 'disabled' }}">
+                                            <a href="{{ $posts->previousPageUrl() }}" class="prev">&laquo; Previous</a>
+                                        </li>
+                                        @for ($i = 1; $i <= $posts->lastPage(); $i++)
+                                            <li class="{{ $posts->currentPage() == $i ? 'active' : '' }}">
+                                                <a href="{{ $posts->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+                                        <li class="{{ !$posts->hasMorePages() ? 'disabled' : '' }}">
+                                            <a href="{{ $posts->nextPageUrl() }}" class="next">Next &raquo;</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

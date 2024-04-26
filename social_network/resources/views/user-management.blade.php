@@ -29,107 +29,39 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach ($users as $user)
                                         <tr class="">
-                                            <td width="80">                                            
-                                                <img src="{{ asset('images/resources/admin.jpg') }}" alt="">                                                                                                                                     
+                                            <td width="80">
+                                                <img src="{{ asset('images/resources/' . $user->avatar) }}" alt="Avatar">
                                             </td>
-                                            <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>1/1/1990</td>  
-                                            <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>Active</td>                                        
-                                            <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
+                                            <td>{{ $user->user_id }}</td>
+                                            <td>{{ $user->first_name }}</td>
+                                            <td>{{ $user->last_name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->DOB }}</td>
+                                            <td style="width: 100px">{{ $user->description }}</td>
+                                            <td>{{ $user->status }}</td>
+                                            <td>                                          
+                                                <a href="{{ url('edit-user/' . $user->user_id) }}" class="btn btn-success btn-mini">Edit</a>
+                                                <a href="#" class="btn btn-danger btn-mini">Delete</a>
                                             </td>
                                         </tr>
-                                        <tr class="">
-                                            <td width="80">                                            
-                                                <img src="{{ asset('images/resources/admin.jpg') }}" alt="">                                                                                                                                     
-                                            </td>
-                                            <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>1/1/1990</td>  
-                                            <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>Active</td>                                        
-                                            <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr class="">
-                                            <td width="80">                                            
-                                                <img src="{{ asset('images/resources/admin.jpg') }}" alt="">                                                                                                                                     
-                                            </td>
-                                            <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>1/1/1990</td>  
-                                            <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>Active</td>                                        
-                                            <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr class="">
-                                            <td width="80">                                            
-                                                <img src="{{ asset('images/resources/admin.jpg') }}" alt="">                                                                                                                                     
-                                            </td>
-                                            <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>1/1/1990</td>  
-                                            <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>Active</td>                                        
-                                            <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr class="">
-                                            <td width="80">                                            
-                                                <img src="{{ asset('images/resources/admin.jpg') }}" alt="">                                                                                                                                     
-                                            </td>
-                                            <td>1</td>                                       
-                                            <td>John</td>                                            
-                                            <td>Doe</td>     
-                                            <td>johnDoe@amonic.com</td>  
-                                            <td>1/1/1990</td>  
-                                            <td style="width: 100px">AAAAAAAAAAAAAAAA<br>AAAAAAAAAAAAAAAAAAAAA</td>  
-                                            <td>Active</td>                                        
-                                            <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
+                                    @endforeach                                       
                                     </tbody>
                                 </table>
                                 <div class="row" style="margin-left: 18px;">
                                     <ul class="pagination">
-                                        <li><a href="#" class="prev">&laquo; Previous</a></li>
-                                        <li><a href="#" class="active">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#" class="next">Next &raquo;</a></li>
+                                        <li class="{{ !$users->onFirstPage() ? '' : 'disabled' }}">
+                                            <a href="{{ $users->previousPageUrl() }}" class="prev">&laquo; Previous</a>
+                                        </li>
+                                        @for ($i = 1; $i <= $users->lastPage(); $i++)
+                                            <li class="{{ $users->currentPage() == $i ? 'active' : '' }}">
+                                                <a href="{{ $users->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+                                        <li class="{{ !$users->hasMorePages() ? 'disabled' : '' }}">
+                                            <a href="{{ $users->nextPageUrl() }}" class="next">Next &raquo;</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

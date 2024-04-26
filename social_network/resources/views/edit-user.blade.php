@@ -20,7 +20,7 @@
                                         <div class="controls">
                                             <input type="text" class="span11"
                                                 placeholder="UserID"
-                                                name="name" value="1" readonly/> 
+                                                name="name" value="{{ $user->user_id }}" readonly/> 
                                         </div>                                     
                                     </div>
                                     <div class="control-group">
@@ -28,7 +28,7 @@
                                         <div class="controls">
                                             <input type="text" class="span11"
                                                 placeholder="Firstname"
-                                                name="name" value=""/> *
+                                                name="name" value="{{ $user->first_name }}"/> *
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -36,7 +36,7 @@
                                         <div class="controls">
                                             <input type="text" class="span11"
                                                 placeholder="Lastname"
-                                                name="name" value=""/> *
+                                                name="name" value="{{ $user->last_name }}"/> *
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -44,7 +44,7 @@
                                         <div class="controls">
                                             <input type="text" class="span11"
                                                 placeholder="Email"
-                                                name="name" value=""/> *
+                                                name="name" value="{{ $user->email }}"/> *
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -67,9 +67,9 @@
                                     <div class="control-group">
                                         <label class="control-label">Day of birth :</label>
                                         <div class="controls">
-                                            <input type="password" class="span11"
+                                            <input type="text" class="span11"
                                                 placeholder="dd/MM/yyyy"
-                                                name="name" value=""> *
+                                                name="name" value="{{ $user->DOB }}"> *
                                         </div>
                                     </div>    
                                     <div class="control-group">
@@ -77,7 +77,7 @@
                                         <div class="controls">
                                             <textarea class="span11"
                                                 placeholder="Description"
-                                                name="description"></textarea>
+                                                name="description">{{ $user->description }}</textarea>
                                         </div>  
                                     </div>                              
                                     <div class="control-group">                                                                         

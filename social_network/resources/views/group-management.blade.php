@@ -28,87 +28,37 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($groups as $group)
                                         <tr class="">                                           
-                                            <td>1</td>                                       
-                                            <td>Thức khuya xem bóng đá</td>                                            
-                                            <td>John Doe</td>     
-                                            <td>Hội những người thức khua xem bóng đá</td>  
-                                            <td>Active</td>                                              
-                                            <td>20/4/2024</td>                                        
+                                            <td>{{ $group->group_id }}</td>                                       
+                                            <td>{{ $group->name_group }}</td>                                            
+                                            <td>No one</td>     
+                                            <td>{{ $group->description }}</td>  
+                                            <td>{{ $group->status }}</td>                                              
+                                            <td>{{ $group->created_at }}</td>                                        
                                             <td>
-                                                <a href="edit-group" class="btn
+                                                <a href="{{ url('edit-group/' . $group->group_id) }}" class="btn
                                                     btn-success btn-mini">Edit</a>
                                                 <a href="#" class="btn
                                                     btn-danger btn-mini">Delete</a>
                                             </td>
                                         </tr>
-                                        <tr class="">                                           
-                                            <td>1</td>                                       
-                                            <td>Thức khuya xem bóng đá</td>                                            
-                                            <td>John Doe</td>     
-                                            <td>Hội những người thức khua xem bóng đá</td>  
-                                            <td>Active</td>                                              
-                                            <td>20/4/2024</td>                                        
-                                            <td>
-                                                <a href="edit-group" class="btn
-                                                    btn-success btn-mini">Edit</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr class="">                                           
-                                            <td>1</td>                                       
-                                            <td>Thức khuya xem bóng đá</td>                                            
-                                            <td>John Doe</td>     
-                                            <td>Hội những người thức khua xem bóng đá</td>  
-                                            <td>Active</td>                                              
-                                            <td>20/4/2024</td>                                        
-                                            <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr class="">                                           
-                                            <td>1</td>                                       
-                                            <td>Thức khuya xem bóng đá</td>                                            
-                                            <td>John Doe</td>     
-                                            <td>Hội những người thức khua xem bóng đá</td>  
-                                            <td>Active</td>                                              
-                                            <td>20/4/2024</td>                                        
-                                            <td>
-                                                <a href="edit-user" class="btn
-                                                    btn-success btn-mini">Edit</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr class="">                                           
-                                            <td>1</td>                                       
-                                            <td>Thức khuya xem bóng đá</td>                                            
-                                            <td>John Doe</td>     
-                                            <td>Hội những người thức khua xem bóng đá</td>  
-                                            <td>Active</td>                                              
-                                            <td>20/4/2024</td>                                        
-                                            <td>
-                                                <a href="edit-group" class="btn
-                                                    btn-success btn-mini">Edit</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
-                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                                 <div class="row" style="margin-left: 18px;">
                                     <ul class="pagination">
-                                        <li><a href="#" class="prev">&laquo; Previous</a></li>
-                                        <li><a href="#" class="active">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#" class="next">Next &raquo;</a></li>
+                                        <li class="{{ !$groups->onFirstPage() ? '' : 'disabled' }}">
+                                            <a href="{{ $groups->previousPageUrl() }}" class="prev">&laquo; Previous</a>
+                                        </li>
+                                        @for ($i = 1; $i <= $groups->lastPage(); $i++)
+                                            <li class="{{ $groups->currentPage() == $i ? 'active' : '' }}">
+                                                <a href="{{ $groups->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+                                        <li class="{{ !$groups->hasMorePages() ? 'disabled' : '' }}">
+                                            <a href="{{ $groups->nextPageUrl() }}" class="next">Next &raquo;</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

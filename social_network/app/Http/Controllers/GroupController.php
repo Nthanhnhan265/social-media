@@ -17,7 +17,19 @@ class GroupController extends Controller
     {
         //
     }
+    public function getAllGroups(Request $request)
+    {
+        $perPage = 5; 
+        $groups = Group::paginate($perPage); 
 
+        return view('group-management', compact('groups'));
+    }
+
+    public function getGroupByID($group_id)
+    {
+        $group = Group::findOrFail($group_id);
+        return view('edit-group', compact('group'));
+    }
     /**
      * Show the form for creating a new resource.
      *

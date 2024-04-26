@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -15,11 +15,24 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all(); // Lấy tất cả các người dùng từ cơ sở dữ liệu
-
-        return view('newsfeed', compact('users'));
+        $users = User::all(); 
+        return view('newsfeed', ['users' => $users]);
     }
-    
+
+    public function getAllUsers(Request $request)
+    {
+        $perPage = 5; 
+        $users = User::paginate($perPage); 
+
+        return view('user-management', compact('users'));
+    }
+
+    public function getUserByID($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        return view('edit-user', compact('user'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -64,9 +77,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-       
+        
+        return view('edit-user', compact('user'));
     }
 
     /**

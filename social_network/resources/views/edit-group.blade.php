@@ -20,7 +20,7 @@
                                         <div class="controls">
                                             <input type="text" class="span11"
                                                 placeholder="UserID"
-                                                name="name" value="1" readonly/> 
+                                                name="name" value="{{ $group->group_id }}" readonly/> 
                                         </div>                                     
                                     </div>
                                     <div class="control-group">
@@ -28,7 +28,7 @@
                                         <div class="controls">
                                             <input type="text" class="span11"
                                                 placeholder="Group name"
-                                                name="name" value=""/> *
+                                                name="name" value="{{ $group->name_group }}"/> *
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -36,7 +36,7 @@
                                         <div class="controls">
                                             <textarea class="span11"
                                                 placeholder="Description"
-                                                name="description"></textarea>
+                                                name="description">{{ $group->description }}</textarea>
                                         </div>  
                                     </div>                                                                                                                                 
                                     <div class="control-group">                                                                                                                
@@ -53,8 +53,8 @@
                                             <label class="control-label">Status:</label>
                                             <div class="controls">
                                                 <select id="role" name="role">
-                                                    <option value="usa">Active</option>
-                                                    <option value="canada">Deactive</option>                                               
+                                                    <option value="1">Active</option>
+                                                    <option value="2">Deactive</option>                                               
                                                 </select>  
                                             </div>  
                                         </div>                      

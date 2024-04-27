@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('avatar')->default('default.jpg');
             $table->string('background')->nullable(true);
             $table->integer('role_id_fk')->nullable(true);
+            $table->integer('status')->nullable(true);
 //             $table->increments('user_id');
 //             $table->string('last_name',length:20); 
 //             $table->string('first_name',length:20); 

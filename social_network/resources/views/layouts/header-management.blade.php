@@ -19,8 +19,8 @@
 <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<link rel="stylesheet" href="{{asset('css/styles_admin.css')}}">
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
+<link rel="stylesheet" href="{{asset('css/styles_admin.css')}}">
 <link
     href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'
     rel='stylesheet' type='text/css'>
@@ -212,8 +212,6 @@
 				</div>
 			</div>
 </header>
-
-
     <!-- Sidebar -->
     <aside id="sidebar">
         <div class="sidebar-title">
@@ -240,4 +238,4 @@
                 </a>
             </li>
         </ul>
-    </aside>
+    </aside> 

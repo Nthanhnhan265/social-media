@@ -419,6 +419,26 @@ function closeSidebar() {
   }
 }
 
+function previewImage(event) {
+	const input = event.target;
+	if (input.files && input.files[0]) {
+		const reader = new FileReader();
+		reader.onload = function (e) {
+			document.getElementById('avatarPreview').src = e.target.result;
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+//Xác nhận xóa người dùng
+function confirmDeleteUser(userId) {
+	if (confirm('Are you sure you want to delete this user?')) {
+		window.location.href = "{{ url('user-delete') }}/" + userId;
+	} else {
+		return false;
+	}
+}
+
 
 
 

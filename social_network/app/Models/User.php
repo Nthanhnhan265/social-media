@@ -33,7 +33,8 @@ class User extends Authenticatable
         'description', 
         'avatar', 
         'background', 
-        'role_id_fk'
+        'role_id_fk',
+        'status'
     ];
     
     /**

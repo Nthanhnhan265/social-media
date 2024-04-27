@@ -82,7 +82,7 @@ class UsersController extends Controller
         
         return view('edit-user', compact('user'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -104,5 +104,39 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function deleteUser($userId) {
+        $user = User::find($userId);
+    
+        if ($user) {
+            $user->delete();
+            return redirect()->back()->with('success', 'User deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'User not found.');
+        }
+    }   
+    
+    public function updateUser(Request $request, $userId) {
+        $user = User::find($userId);
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        $user->gender = $request->input('gender');
+        $user->password = $request->input('password');
+        $user->DOB = $request->input('DOB');
+        $user->description = $request->input('description');
+        $user->role_id_fk = $request->input('role_id_fk');
+        $user->status = $request->input('status');
+    
+        if ($request->hasFile('fileUpload')) {
+            $image = $request->file('fileUpload');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images/resources'), $imageName);
+            $user->avatar = $imageName;
+        }
+    
+        $user->save();
+        return redirect()->back()->with('success', 'User updated successfully.');
     }
 }

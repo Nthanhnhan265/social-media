@@ -3812,10 +3812,16 @@ form .form-group.half:nth-child(2) {
     border-style: none none solid;
     border-width: 0 0 1px;
     box-shadow: none;
-    color: #b7b7b7 !important;
+    color: #b7b7b7;
     font-size: 16px;
     height: 35px;
     line-height: 35px;
+}
+
+.chosen-container-single .chosen-single {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border-style: none none solid;
+    box-shadow: none;
 }
 
 form .dob .form-group {

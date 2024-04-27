@@ -92,12 +92,14 @@ Route::get('/time-line/{userId}', [UsersController::class, 'show']);
 //Route::resource('index',PostController::class);
 
 
-
+//user-management
 Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
 Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 
 Route::get('user-management',[UsersController::class, 'getAllUsers']);
 Route::get('/edit-user/{user_id}', [UsersController::class, 'getUserByID']);
 //Route::get('/edit-user/{id}', 'UsersController@getUserByID')->name('users.edit');
+Route::delete('/delete-user/{userId}', [UsersController::class, 'deleteUser'])->name('delete-user');
+Route::put('/update-user/{userId}', [UsersController::class, 'updateUser'])->name('update-user');
 
 Route::get('/edit-group/{group_id}', [GroupController::class, 'getGroupByID']);
 Route::get('group-management',[GroupController::class, 'getAllGroups']);

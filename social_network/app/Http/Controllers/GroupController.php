@@ -17,13 +17,17 @@ class GroupController extends Controller
     {
         //
     }
+
     public function getAllGroups(Request $request)
     {
         $perPage = 5; 
-        $groups = Group::paginate($perPage); 
+        $groups = Group::with(['usergroups' => function ($query) {
+            $query->where('role_id_fk', 0); 
+        }])->paginate($perPage); 
 
         return view('group-management', compact('groups'));
     }
+
 
     public function getGroupByID($group_id)
     {

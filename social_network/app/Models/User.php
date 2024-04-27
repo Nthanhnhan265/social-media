@@ -65,4 +65,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Posts::class, "user_id_fk");
     }
+
+    public function usergroups()
+    {
+        return $this->hasMany(Usergroup::class, 'user_id_fk');
+    }
 }

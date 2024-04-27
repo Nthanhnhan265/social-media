@@ -16,10 +16,6 @@ class Group extends Model
     {
         return $this->hasMany(UserGroup::class);
     }
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'usergroup');
-    }
     public function post_group(){
         return $this->hasMany(PostGroup::class);
     }
@@ -28,5 +24,8 @@ class Group extends Model
     {
         return $this->belongsToMany(Posts::class, 'postgroup');
     }
-
+    public function usergroups()
+    {
+        return $this->hasMany(Usergroup::class, 'group_id_fk');
+    }
 }

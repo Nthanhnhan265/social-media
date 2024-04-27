@@ -39,16 +39,7 @@
                                                 name="description">{{ $group->description }}</textarea>
                                         </div>  
                                     </div>                                                                                                                                 
-                                    <div class="control-group">                                                                                                                
-                                        <div class="control-group">  
-                                        <label class="control-label">Manager:</label>
-                                            <div class="controls">
-                                                <select id="role" name="role">
-                                                    <option value="usa">John Doe</option>
-                                                    <option value="canada">Ronaldo</option>                                               
-                                                </select>  
-                                            </div> 
-                                        </div> 
+                                    <div class="control-group">                                                                                                                                                    
                                         <div class="control-group">
                                             <label class="control-label">Status:</label>
                                             <div class="controls">
@@ -63,7 +54,7 @@
                                                 btn-success">Update</button>
                                         </div>
                                         </div>
-                                    </div>                                   
+                                    </div>                                                                     
                                 </form>
                                 <!-- END USER FORM -->
                             </div>

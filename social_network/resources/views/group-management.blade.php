@@ -32,7 +32,13 @@
                                         <tr class="">                                           
                                             <td>{{ $group->group_id }}</td>                                       
                                             <td>{{ $group->name_group }}</td>                                            
-                                            <td>No one</td>     
+                                            <td>
+                                                @if ($group->usergroups->isNotEmpty())
+                                                    {{ $group->usergroups->first()->user->first_name }} {{ $group->usergroups->first()->user->last_name }}
+                                                @else
+                                                    No user
+                                                @endif
+                                            </td>     
                                             <td>{{ $group->description }}</td>  
                                             <td>{{ $group->status }}</td>                                              
                                             <td>{{ $group->created_at }}</td>                                        

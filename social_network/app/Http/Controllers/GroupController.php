@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Group;
+use \App\Models\UserGroup;
 use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
@@ -84,11 +85,26 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $group_id)
     {
-        //
+        $group = Group::find($group_id);
+        $group->name_group = $request->input('name_group');  
+        $group->description = $request->input('description');  
+        $group->status = $request->input('status');    
+        $group->save();
+        return redirect()->back()->with('success', 'Group updated successfully.');   
     }
-
+    public function deleteGroup($groupID) {
+        UserGroup::where('group_id_fk', $groupID)->delete();
+        $group = Group::find($groupID);
+    
+        if ($group) {
+            $group->delete();
+            return redirect()->back()->with('success', 'Group deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Group not found.');
+        }
+    }  
     /**
      * Remove the specified resource from storage.
      *

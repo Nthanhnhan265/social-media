@@ -40,14 +40,23 @@
                                                 @endif
                                             </td>     
                                             <td>{{ $group->description }}</td>  
-                                            <td>{{ $group->status }}</td>                                              
+                                            <td>
+                                                @if ($group->status == 1)
+                                                    Active
+                                                @else
+                                                    Deactive
+                                                @endif
+                                            </td>                                              
                                             <td>{{ $group->created_at }}</td>                                        
                                             <td>
                                                 <a href="{{ url('edit-group/' . $group->group_id) }}" class="btn
-                                                    btn-success btn-mini">Edit</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
-                                            </td>
+                                                    btn-success btn-mini">Edit</a>                            
+                                                <form action="{{ route('delete-group', $group->group_id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-mini" onclick="return confirm('Are you sure you want to delete this group?')">Delete</button>
+                                                </form>
+                                        </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

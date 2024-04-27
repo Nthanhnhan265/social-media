@@ -13,17 +13,17 @@
                         <div class="widget-box">                          
                             <div class="widget-content nopadding">  
                             <div class="control-group">
-                                        <label class="control-label">Post ID : 1</label>                                                                             
+                                        <label class="control-label">Post ID : {{ $post->id }}</label>                                                                             
                             </div>                             
                             <div class="central-meta item">                                   
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
-												<img src="images/resources/friend-avatar10.jpg" alt="">
+												<img src="{{ asset('images/resources/' . $post->user->avatar) }}" alt="">
 											</figure>
 											<div class="friend-name">
-												<ins><a href="{{ url('time-line') }}" title="">Janice Griffith</a></ins>
-												<span>published: june,2 2018 19:PM</span>
+												<ins><a href="{{ url('time-line') }}" title="">{{$post->user->last_name." ".$post->user->first_name}}</a></ins>
+												<span>published: {{$post->created_at }}</span>
                                                 
 											</div>                                           
 											<div class="post-meta">
@@ -75,7 +75,7 @@
 															<h5><a href="{{ url('time-line') }}" title="">Jason borne</a></h5>
 															<span>1 year ago</span>
 															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-                                                            <a href="" class="btn btn-mini">Hide</a>
+                                                            <a href="" class="btn btn-mini">{{ $post->status == 1? 'Show' : 'Hide' }}</a>
                                                             <a href="" class="btn btn-mini">Delete</a>
 														</div>
 														<p>we are working for the dance and sing songs. this car is very awesome for the youngster. please vote this car and like our post</p>
@@ -138,7 +138,7 @@
 									</div>                                    
 								</div>
                             </div>
-                            <a href="" class="btn btn-mini">Hide</a>
+                            <a href="" class="btn btn-mini">{{ $post->status == 0 ? 'Show' : 'Hide' }}</a>
                             <a href="" class="btn btn-mini">Delete</a>
                         </div>
                     </div>

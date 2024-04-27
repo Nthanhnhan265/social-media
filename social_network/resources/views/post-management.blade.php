@@ -20,6 +20,7 @@
                                             <th>Post ID</th>
                                             <th>Owner</th>
                                             <th>Content</th>
+                                            <th>Status</th>
                                             <th>Created at</th>
                                             <th>Update at</th>   
                                             <th>Action</th>                                          
@@ -29,15 +30,21 @@
                                         @foreach($posts as $post)
                                         <tr class="">                                         
                                             <td>{{ $post->id }}</td>                                       
-                                            <td>{{ $post->user_id_fk }}</td>                                                                                        
-                                            <td style="width: 100px">{{ $post->content }}</td>  
+                                            <td>                                         
+                                                {{ $post->user->first_name }} {{ $post->user->last_name }}                                       
+                                            </td>                                                                                        
+                                            <td>{{ $post->content }}</td>  
+                                            <td >{{ $post->status == 1? 'Show' : 'Hide' }}</td>  
                                             <td>{{ $post->created_at }}</td>  
                                             <td>{{ $post->updated_at }}</td>                                       
                                             <td>
-                                                <a href="{{ asset('post-detail') }}" class="btn
-                                                    btn-success btn-mini">Detail</a>
-                                                <a href="#" class="btn
-                                                    btn-danger btn-mini">Delete</a>
+                                                <a href="{{ url('post-detail', $post->id) }}" class="btn
+                                                    btn-success btn-mini">Detail</a>                               
+                                                <form action="{{ route('delete-post', $post->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-mini" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>   
                                         @endforeach                                   

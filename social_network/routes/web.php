@@ -101,10 +101,16 @@ Route::get('/edit-user/{user_id}', [UsersController::class, 'getUserByID']);
 Route::delete('/delete-user/{userId}', [UsersController::class, 'deleteUser'])->name('delete-user');
 Route::put('/update-user/{userId}', [UsersController::class, 'updateUser'])->name('update-user');
 
+//group-management
 Route::get('/edit-group/{group_id}', [GroupController::class, 'getGroupByID']);
 Route::get('group-management',[GroupController::class, 'getAllGroups']);
+Route::put('/update-group/{group_id}', [GroupController::class, 'update'])->name('update-group');
+Route::delete('/delete-group/{groupID}', [GroupController::class, 'deleteGroup'])->name('delete-group');
 
+//post-management
 Route::get('post-management',[PostsController::class, 'getAllPosts']);
+Route::delete('/delete-post/{id}', [PostsController::class, 'deletePost'])->name('delete-post');
+Route::get('/post-detail/{id}', [PostsController::class, 'getPostById']);
 
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);

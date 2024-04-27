@@ -11,6 +11,7 @@ use App\Models\Video;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Comment;
 
 class PostsController extends Controller
 {
@@ -29,11 +30,17 @@ class PostsController extends Controller
     public function getAllPosts(Request $request)
     {
         $perPage = 5; 
-        $posts = Posts::paginate($perPage); 
+        $posts = Posts::paginate($perPage);
 
         return view('post-management', compact('posts'));
     }
 
+    
+    public function getPostByID($id)
+    {
+        $post = Posts::findOrFail($id);
+        return view('post-detail', compact('post'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -261,6 +268,31 @@ class PostsController extends Controller
         return redirect('welcome');  
     }
 
+
+    public function deletePost($postID) {
+        //delete comment in this post
+        Comment::where('post_id_fk', $postID)->delete();
+
+        $post = Posts::where('id',$postID)->with('image','video')->get()[0]; 
+        
+        foreach($post->image as $imgElement)  { 
+            //delete images in storage
+            Storage::delete('public/images/'.$imgElement->url);
+            //delete image in image table
+            $imgElement->delete(); 
+        }
+
+        //delete videos of post 
+        foreach($post->video as $vdElement)  { 
+            //delete images in storage
+            Storage::delete('public/videos/'.$vdElement->url);
+            //delete image in image table
+            $vdElement->delete(); 
+        }
+
+        Posts::find($postID)->delete(); 
+        return redirect()->back()->with('success', 'Group deleted successfully.');      
+    }  
     /* 
         remove all images and videos of Post
     */ 

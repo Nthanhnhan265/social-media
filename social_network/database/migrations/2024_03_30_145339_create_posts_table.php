@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id_fk'); 
-            $table->longText('content');             
+            $table->longText('content');  
+            $table->integer('status');    
             $table->timestamps();
             // $table->foreign('user_id_fk') 
             // ->references('user_id') 

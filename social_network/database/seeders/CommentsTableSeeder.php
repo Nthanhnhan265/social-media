@@ -40,6 +40,7 @@ class CommentsTableSeeder extends Seeder
                 'post_id_fk' => rand(1, 50), 
                 'content' => $randomDialogue,
                 'user_id_fk' => rand(1, 10),
+                'status' => rand(0,1),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ];

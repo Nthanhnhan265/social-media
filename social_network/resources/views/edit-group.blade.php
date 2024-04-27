@@ -12,15 +12,17 @@
                         <div class="widget-box">                          
                             <div class="widget-content nopadding">                               
                                 <!-- BEGIN USER FORM -->                                
-                                <form action="" method="post"
+                                <form action="{{ route('update-group', $group->group_id) }}" method="post"
                                     class="form-horizontal"
                                     enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="control-group">
                                         <label class="control-label">Group ID : </label>  
                                         <div class="controls">
                                             <input type="text" class="span11"
                                                 placeholder="UserID"
-                                                name="name" value="{{ $group->group_id }}" readonly/> 
+                                                name="group_id" value="{{ $group->group_id }}" readonly/> 
                                         </div>                                     
                                     </div>
                                     <div class="control-group">
@@ -28,7 +30,7 @@
                                         <div class="controls">
                                             <input type="text" class="span11"
                                                 placeholder="Group name"
-                                                name="name" value="{{ $group->name_group }}"/> *
+                                                name="name_group" value="{{ $group->name_group }}"/> *
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -43,9 +45,9 @@
                                         <div class="control-group">
                                             <label class="control-label">Status:</label>
                                             <div class="controls">
-                                                <select id="role" name="role">
-                                                    <option value="1">Active</option>
-                                                    <option value="2">Deactive</option>                                               
+                                                <select id="status" name="status">
+                                                    <option value="1" {{ $group->status == 1 ? 'selected' : '' }}>Active</option>
+                                                    <option value="0" {{ $group->status == 0 ? 'selected' : '' }}>Deactive</option>                                               
                                                 </select>  
                                             </div>  
                                         </div>                      

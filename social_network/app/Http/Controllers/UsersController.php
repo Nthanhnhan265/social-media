@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -123,7 +124,7 @@ class UsersController extends Controller
         $user->last_name = $request->input('last_name');
         $user->email = $request->input('email');
         $user->gender = $request->input('gender');
-        $user->password = $request->input('password');
+        $user->password = Hash::make($request->input('password'));
         $user->DOB = $request->input('DOB');
         $user->description = $request->input('description');
         $user->role_id_fk = $request->input('role_id_fk');

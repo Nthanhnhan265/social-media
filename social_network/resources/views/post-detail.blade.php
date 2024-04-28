@@ -19,7 +19,11 @@
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
+											@if($post->user->avatar)
 												<img src="{{ asset('images/resources/' . $post->user->avatar) }}" alt="">
+											@else
+												<img src="{{ asset('images/resources/meo.jpg') }}" alt="">
+											@endif
 											</figure>
 											<div class="friend-name">
 												<ins><a href="{{ url('time-line') }}" title="">{{$post->user->last_name." ".$post->user->first_name}}</a></ins>
@@ -27,7 +31,7 @@
                                                 
 											</div>                                           
 											<div class="post-meta">
-												<img src="images/resources/user-post.jpg" alt="">
+												<img src="{{ asset('images/resources/user-post.jpg') }}"  alt="">
 												<div class="we-video-info">
 													<ul>
 														<li>
@@ -56,90 +60,61 @@
 														</li>														
 													</ul>
 												</div>
-												<div class="description">
-													
+												<div class="description">													
 													<p>
-														World's most beautiful car in Curabitur <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
+														{{$post->content }}
 													</p>
 												</div>
 											</div>
 										</div>
 										<div class="coment-area">
 											<ul class="we-comet">
+												@foreach($comments as $comment)
 												<li>
 													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
+														<img src="{{ asset('images/resources/' . $comment->user->avatar) }}" alt="">
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
-															<h5><a href="{{ url('time-line') }}" title="">Jason borne</a></h5>
-															<span>1 year ago</span>
+															<h5><a href="{{ url('time-line') }}" title="">{{ $comment->user->first_name.' '.$comment->user->last_name }}</a></h5>
+															<span>{{ $comment->created_at }}</span>
 															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-                                                            <a href="" class="btn btn-mini">{{ $post->status == 1? 'Show' : 'Hide' }}</a>
-                                                            <a href="" class="btn btn-mini">Delete</a>
-														</div>
-														<p>we are working for the dance and sing songs. this car is very awesome for the youngster. please vote this car and like our post</p>
-													</div>
-													<ul>
-														<li>
-															<div class="comet-avatar">
-																<img src="images/resources/comet-2.jpg" alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5><a href="{{ url('time-line') }}" title="">alexendra dadrio</a></h5>
-																	<span>1 month ago</span>
-																	<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-                                                                    <a href="" class="btn btn-mini">Hide</a>
-                                                                    <a href="" class="btn btn-mini">Delete</a>
-																</div>
-																<p>yes, really very awesome car i see the features of this car in the official website of <a href="#" title="">#Mercedes-Benz</a> and really impressed :-)</p>
-															</div>
-														</li>
-														<li>
-															<div class="comet-avatar">
-																<img src="images/resources/comet-3.jpg" alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5><a href="{{ url('time-line') }}" title="">Olivia</a></h5>
-																	<span>16 days ago</span>
-																	<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-                                                                    <a href="" class="btn btn-mini">Hide</a>
-                                                                    <a href="" class="btn btn-mini">Delete</a>
-																</div>
-																<p>i like lexus cars, lexus cars are most beautiful with the awesome features, but this car is really outstanding than lexus</p>
-															</div>
-														</li>
-													</ul>
+															<form id="update-comment-form-{{ $comment->comment_id }}" action="{{ route('update-comment', $comment->comment_id) }}" method="POST" style="display: inline;">
+																@csrf
+																@method('PUT')
+																<input type="hidden" name="status" value="{{ $comment->status == 0 ? 1 : 0 }}">
+																<button type="submit" class="btn btn-mini">
+																	{{ $comment->status == 0 ? 'Show' : 'Hide' }}
+																</button>
+															</form> 
+                                                            <form action="{{ route('delete-comment', $comment->comment_id) }}" method="POST" style="display: inline;">
+																@csrf
+																@method('DELETE')
+																<button type="submit" class="btn btn-mini" onclick="return confirm('Are you sure you want to delete this comment?')">Delete</button>
+															</form>
+														</div>										
+															<p>{{ $comment->content }}</p>																		
+													</div>	
 												</li>
-												<li>
-													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
-													</div>
-													<div class="we-comment">
-														<div class="coment-head">
-															<h5><a href="{{ url('time-line') }}" title="">Donald Trump</a></h5>
-															<span>1 week ago</span>
-															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-                                                            <a href="" class="btn btn-mini">Hide</a>
-                                                            <a href="" class="btn btn-mini">Delete</a>
-														</div>
-														<p>we are working for the dance and sing songs. this video is very awesome for the youngster. please vote this video and like our channel
-															<i class="em em-smiley"></i>
-														</p>
-													</div>
-												</li>
-												<li>
-													<a href="#" title="" class="showmore underline">more comments</a>
-												</li>												
+												@endforeach																											
 											</ul>
 										</div>
 									</div>                                    
 								</div>
                             </div>
-                            <a href="" class="btn btn-mini">{{ $post->status == 0 ? 'Show' : 'Hide' }}</a>
-                            <a href="" class="btn btn-mini">Delete</a>
+							<form id="update-post-form-{{ $post->id }}" action="{{ route('update-post-status', $post->id) }}" method="POST" style="display: inline;">
+								@csrf
+								@method('PUT')
+								<input type="hidden" name="status" value="{{ $post->status == 0 ? 1 : 0 }}">
+								<button type="submit" class="btn btn-mini">
+									{{ $post->status == 0 ? 'Show' : 'Hide' }}
+								</button>
+							</form>                    
+                            <form action="{{ route('delete-post', $post->id) }}" method="POST" style="display: inline;">
+								@csrf
+								@method('DELETE')
+								<button type="submit" class="btn btn-mini" onclick="return confirm('Are you sure you want to delete this comment?')">Delete</button>
+							</form>
                         </div>
                     </div>
                 </div>
@@ -148,5 +123,24 @@
     <!-- End Main -->
 
 </div>
-
+@if(count($comments) > 0)
+    <script>
+        document.getElementById("update-post-form-{{ $post->id }}").addEventListener("submit", function(event) {
+            var form = this;
+            var confirmMessage = "Are you sure you want to {{ $post->status == 0 ? 'show' : 'hide' }} this post?";
+            if (!confirm(confirmMessage)) {
+                event.preventDefault(); 
+            }
+        });
+        @foreach($comments as $comment)
+            document.getElementById("update-comment-form-{{ $comment->comment_id }}").addEventListener("submit", function(event) {
+                var form = this;
+                var confirmMessage = "Are you sure you want to {{ $comment->status == 0 ? 'show' : 'hide' }} this comment?";
+                if (!confirm(confirmMessage)) {
+                    event.preventDefault(); 
+                }
+            });
+        @endforeach
+    </script>
+@endif
 @endsection

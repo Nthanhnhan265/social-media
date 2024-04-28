@@ -36,11 +36,15 @@ class PostsController extends Controller
     }
 
     
-    public function getPostByID($id)
+    public function getPostAndCommentByPostID($id)
     {
         $post = Posts::findOrFail($id);
-        return view('post-detail', compact('post'));
+        $comments = Comment::where('post_id_fk', $id)
+                   ->orderBy('created_at', 'desc')
+                   ->get();               
+        return view('post-detail')->with('comments', $comments)->with('post', $post);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -291,8 +295,9 @@ class PostsController extends Controller
         }
 
         Posts::find($postID)->delete(); 
-        return redirect()->back()->with('success', 'Group deleted successfully.');      
+        return redirect('/post-management')->with('success', 'Post deleted successfully.');          
     }  
+
     /* 
         remove all images and videos of Post
     */ 
@@ -358,6 +363,12 @@ class PostsController extends Controller
         return true;
     }
 
-    
+    public function updatePostStatus(Request $request, $id)
+    {
+        $post = Posts::find($id); 
+        $post->status = $request->input('status');    
+        $post->save();
+        return redirect()->back()->with('success', 'Post updated successfully.');  
+    }
 
 }

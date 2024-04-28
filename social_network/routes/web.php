@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GroupController;
 
 
@@ -110,7 +111,10 @@ Route::delete('/delete-group/{groupID}', [GroupController::class, 'deleteGroup']
 //post-management
 Route::get('post-management',[PostsController::class, 'getAllPosts']);
 Route::delete('/delete-post/{id}', [PostsController::class, 'deletePost'])->name('delete-post');
-Route::get('/post-detail/{id}', [PostsController::class, 'getPostById']);
+Route::get('/post-detail/{id}', [PostsController::class, 'getPostAndCommentByPostId']);
+Route::put('/update-post/{id}', [PostsController::class, 'updatePostStatus'])->name('update-post-status');
+Route::delete('/delete-comment/{id}', [CommentController::class, 'deleteComment'])->name('delete-comment');
+Route::put('/update-comment/{id}', [CommentController::class, 'updateCommentStatus'])->name('update-comment');
 
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);

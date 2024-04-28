@@ -40,7 +40,7 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->DOB }}</td>
                                             <td style="width: 100px">{{ $user->description }}</td>
-                                            <td>{{ $user->status }}</td>
+                                            <td>{{ $user->status == 1 ? 'Active' : 'Deactive' }}</td>
                                             <td>                                          
                                                 <a href="{{ url('edit-user/' . $user->user_id) }}" class="btn btn-success btn-mini">Edit</a>
                                                 <form action="{{ route('delete-user', $user->user_id) }}" method="POST" style="display: inline;">

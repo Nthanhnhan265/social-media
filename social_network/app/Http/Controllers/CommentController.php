@@ -57,7 +57,6 @@ class CommentController extends Controller
         return view('inbox')->with('comment', $comment)->with('post', $post);
     }
     
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -78,9 +77,21 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
 
+    }
+    public function updateCommentStatus(Request $request, $id)
+    {
+        $commemt = Comment::find($id); 
+        $commemt->status = $request->input('status');    
+        $commemt->save();
+        return redirect()->back()->with('success', 'Comment updated successfully.');
+    }
+    public function deleteComment($id) {
+        $comment = Comment::find($id);
+    
+        $comment->delete();
+        return redirect()->back()->with('success', 'Comment deleted successfully.');
+    } 
     /**
      * Remove the specified resource from storage.
      *

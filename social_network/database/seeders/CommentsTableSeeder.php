@@ -37,7 +37,7 @@ class CommentsTableSeeder extends Seeder
             $randomDialogue = $dialogues[array_rand($dialogues)];
         
             $comments[] = [
-                'post_id_fk' => rand(1, 50), 
+                'post_id_fk' => rand(1, 25), 
                 'content' => $randomDialogue,
                 'user_id_fk' => rand(1, 10),
                 'status' => rand(0,1),

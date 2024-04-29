@@ -1373,13 +1373,14 @@ form button {
     display: inline-block;
     padding-left: 10px;
     vertical-align: middle;
-    width: 90%;
+    width: auto;
+   
 }
 
 .friend-name > ins {
     float: left;
     font-weight: 700;
-    width: 100%;
+    width: 50%;
     font-size: 18px;
     text-decoration: none;
 }
@@ -1391,7 +1392,17 @@ form button {
     text-transform: capitalize;
     width: 100%;
 }
+/* SETTING MENU */
 
+
+
+
+.friend-name .menu-toggle {
+   margin-left: 55px;
+}
+.info-top {
+    display: flex;
+}
 .post-meta {
     float: left;
     margin-top: 15px;

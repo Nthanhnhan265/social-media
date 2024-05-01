@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 	<section>
-	{{-- @foreach($posts[0]->posts as $post)
+	@foreach($posts[0]->posts as $post)
 		<div>
 			{{$post->content}}
 			<!-- {{dump($post->image);}}  -->
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Auth;
 			</video>
 		</div>
 
-	@endforeach --}}
+	@endforeach
 
 	<div class="feature-photo">
 			<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Auth;
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-							{{-- <img src="{{ asset('images/resources/' . $user->avatar) }}" alt=""> --}}
+							<img src="{{ asset('images/resources/' . $user->avatar) }}" alt="">
 
 
 								<form class="edit-phto">
@@ -63,17 +63,17 @@ use Illuminate\Support\Facades\Auth;
 							<ul>
 								<li class="admin-name">
 
-								  {{-- <h5>{{$user->last_name}} {{$user->first_name}}</h5> --}}
+								  <h5>{{$user->last_name}} {{$user->first_name}}</h5>
 								  <span>Group Admin</span>
 								</li>
 								<li>
 
 								<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
-										{{-- <a class="" href="{{ url('timeline-photos').'/user-profile/'.$id }}" title="" data-ripple="">Photos</a> --}}
+										<a class="" href="{{ url('timeline-photos').'/user-profile/'.$id }}" title="" data-ripple="">Photos</a>
 										<a class="" href="{{ url('timeline-videos') }}t" title="" data-ripple="">Videos</a>
 										<a class="" href="{{ url('timeline-friends') }}" title="" data-ripple="">Friends</a>
 										<a class="" href="{{ url('groups') }}" title="" data-ripple="">Groups</a>
-										{{-- <a class="" href="{{ url('about'.'/user-profile/'.$id) }}" title="" data-ripple="">about</a> --}}
+										<a class="" href="{{ url('about'.'/user-profile/'.$id) }}" title="" data-ripple="">about</a>
 
 										<a class="active" href="#" title="" data-ripple="">more</a>
 								</li>
@@ -228,7 +228,7 @@ use Illuminate\Support\Facades\Auth;
 									<div class="central-meta item">
 										<div class="new-postbox">
 											<figure>
-												{{-- <img src="{{asset('images/resources/' .$user->avatar)}}" alt=""> --}}
+												<img src="{{asset('images/resources/' .$user->avatar)}}" alt="">
 											</figure>
 											<div class="newpst-input">
 												<form method="post">
@@ -272,10 +272,10 @@ use Illuminate\Support\Facades\Auth;
 										<div class="user-post">
 											<div class="friend-info">
 												<figure>
-													{{-- <img src="{{asset('images/resources/' .$user->avatar)}}" alt=""> --}}
+													<img src="{{asset('images/resources/' .$user->avatar)}}" alt="">
 												</figure>
 												<div class="friend-name">
-													{{-- <ins><a href="{{ url('#') }}" title="">{{$user->last_name}} {{$user->first_name}}</a></ins> --}}
+													<ins><a href="{{ url('#') }}" title="">{{$user->last_name}} {{$user->first_name}}</a></ins>
 													<span>published: june,2 2018 19:PM</span>
 												</div>
 												<div class="description">
@@ -321,7 +321,37 @@ use Illuminate\Support\Facades\Auth;
 																</span>
 															</li>
 															<li class="social-media">
-																<x-share-btn />
+																<div class="menu">
+																  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																	</div>
+																  </div>
+																	<div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
+																	</div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
+																	</div>
+																  </div>
+
+																</div>
 															</li>
 														</ul>
 													</div>
@@ -369,7 +399,37 @@ use Illuminate\Support\Facades\Auth;
 																</span>
 															</li>
 															<li class="social-media">
-																<x-share-btn />
+																<div class="menu">
+																  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																	</div>
+																  </div>
+																	<div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
+																	</div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
+																	</div>
+																  </div>
+
+																</div>
 															</li>
 														</ul>
 													</div>
@@ -514,7 +574,37 @@ use Illuminate\Support\Facades\Auth;
 																</span>
 															</li>
 															<li class="social-media">
-																<x-share-btn />
+																<div class="menu">
+																  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																	</div>
+																  </div>
+																	<div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
+																	</div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
+																	</div>
+																  </div>
+
+																</div>
 															</li>
 														</ul>
 													</div>

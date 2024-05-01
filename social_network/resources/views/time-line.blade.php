@@ -6,24 +6,24 @@ use Illuminate\Support\Facades\Auth;
 
 
 	<section>
-	@foreach($posts[0]->posts as $post)
+	{{-- @foreach($posts[0]->posts as $post)
 		<div>
 			{{$post->content}}
 			<!-- {{dump($post->image);}}  -->
-			@foreach($post->image as $img) 
+			@foreach($post->image as $img)
 				<img src="{{asset('storage/images/'.$img->url)}}" alt="">
-	
+
 			@endforeach
 			<video alt="err" controls >
-				@foreach($post->video as $video) 
+				@foreach($post->video as $video)
 					<source src="{{asset('storage/videos/'.$video->url)}}" alt=""/>
-		
+
 				@endforeach
 
 			</video>
 		</div>
 
-	@endforeach
+	@endforeach --}}
 
 	<div class="feature-photo">
 			<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
@@ -45,9 +45,9 @@ use Illuminate\Support\Facades\Auth;
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-							<img src="{{ asset('images/resources/' . $user->avatar) }}" alt="">
+							{{-- <img src="{{ asset('images/resources/' . $user->avatar) }}" alt=""> --}}
 
-							
+
 								<form class="edit-phto">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -63,17 +63,17 @@ use Illuminate\Support\Facades\Auth;
 							<ul>
 								<li class="admin-name">
 
-								  <h5>{{$user->last_name}} {{$user->first_name}}</h5>
+								  {{-- <h5>{{$user->last_name}} {{$user->first_name}}</h5> --}}
 								  <span>Group Admin</span>
-								</li>	
+								</li>
 								<li>
 
 								<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
-										<a class="" href="{{ url('timeline-photos').'/user-profile/'.$id }}" title="" data-ripple="">Photos</a>
+										{{-- <a class="" href="{{ url('timeline-photos').'/user-profile/'.$id }}" title="" data-ripple="">Photos</a> --}}
 										<a class="" href="{{ url('timeline-videos') }}t" title="" data-ripple="">Videos</a>
 										<a class="" href="{{ url('timeline-friends') }}" title="" data-ripple="">Friends</a>
 										<a class="" href="{{ url('groups') }}" title="" data-ripple="">Groups</a>
-										<a class="" href="{{ url('about'.'/user-profile/'.$id) }}" title="" data-ripple="">about</a>
+										{{-- <a class="" href="{{ url('about'.'/user-profile/'.$id) }}" title="" data-ripple="">about</a> --}}
 
 										<a class="active" href="#" title="" data-ripple="">more</a>
 								</li>
@@ -84,7 +84,7 @@ use Illuminate\Support\Facades\Auth;
 			</div>
 		</div>
 	</section><!-- top area -->
-		
+
 	<section>
 		<div class="gap gray-bg">
 			<div class="container-fluid">
@@ -228,7 +228,7 @@ use Illuminate\Support\Facades\Auth;
 									<div class="central-meta item">
 										<div class="new-postbox">
 											<figure>
-												<img src="{{asset('images/resources/' .$user->avatar)}}" alt="">
+												{{-- <img src="{{asset('images/resources/' .$user->avatar)}}" alt=""> --}}
 											</figure>
 											<div class="newpst-input">
 												<form method="post">
@@ -272,14 +272,14 @@ use Illuminate\Support\Facades\Auth;
 										<div class="user-post">
 											<div class="friend-info">
 												<figure>
-													<img src="{{asset('images/resources/' .$user->avatar)}}" alt="">
+													{{-- <img src="{{asset('images/resources/' .$user->avatar)}}" alt=""> --}}
 												</figure>
 												<div class="friend-name">
-													<ins><a href="{{ url('#') }}" title="">{{$user->last_name}} {{$user->first_name}}</a></ins>
+													{{-- <ins><a href="{{ url('#') }}" title="">{{$user->last_name}} {{$user->first_name}}</a></ins> --}}
 													<span>published: june,2 2018 19:PM</span>
 												</div>
 												<div class="description">
-														
+
 														<p>
 															World's most beautiful car in Curabitur <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
 														</p>
@@ -292,10 +292,10 @@ use Illuminate\Support\Facades\Auth;
 														<span>Love Maid - ChillGroves</span>
 														<p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... </p>
 														<a href="#" title="">www.sample.com</a>
-													</div>		
+													</div>
 													<div class="we-video-info">
 														<ul>
-															
+
 															<li>
 																<span class="views" data-toggle="tooltip" title="views">
 																	<i class="fa fa-eye"></i>
@@ -321,37 +321,7 @@ use Illuminate\Support\Facades\Auth;
 																</span>
 															</li>
 															<li class="social-media">
-																<div class="menu">
-																  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																	</div>
-																  </div>
-																	<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																	</div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																	</div>
-																  </div>
-
-																</div>
+																<x-share-btn />
 															</li>
 														</ul>
 													</div>
@@ -373,7 +343,7 @@ use Illuminate\Support\Facades\Auth;
 													<img src="images/resources/user-post.jpg" alt="">
 													<div class="we-video-info">
 														<ul>
-															
+
 															<li>
 																<span class="views" data-toggle="tooltip" title="views">
 																	<i class="fa fa-eye"></i>
@@ -399,42 +369,12 @@ use Illuminate\Support\Facades\Auth;
 																</span>
 															</li>
 															<li class="social-media">
-																<div class="menu">
-																  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																	</div>
-																  </div>
-																	<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																	</div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																	</div>
-																  </div>
-
-																</div>
+																<x-share-btn />
 															</li>
 														</ul>
 													</div>
 													<div class="description">
-														
+
 														<p>
 															Curabitur world's most beautiful car in <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
 														</p>
@@ -527,7 +467,7 @@ use Illuminate\Support\Facades\Auth;
 																	<i class="em em-stuck_out_tongue"></i>
 																</div>
 																<button type="submit"></button>
-															</form>	
+															</form>
 														</div>
 													</li>
 												</ul>
@@ -548,7 +488,7 @@ use Illuminate\Support\Facades\Auth;
 													<iframe src="https://player.vimeo.com/video/15232052" height="315" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 													<div class="we-video-info">
 														<ul>
-															
+
 															<li>
 																<span class="views" data-toggle="tooltip" title="views">
 																	<i class="fa fa-eye"></i>
@@ -574,42 +514,12 @@ use Illuminate\Support\Facades\Auth;
 																</span>
 															</li>
 															<li class="social-media">
-																<div class="menu">
-																  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																	</div>
-																  </div>
-																	<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																	</div>
-																  </div>
-																  <div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																	</div>
-																  </div>
-
-																</div>
+																<x-share-btn />
 															</li>
 														</ul>
 													</div>
 													<div class="description">
-														
+
 														<p>
 															Lonely Cat Enjoying in Summer Curabitur <a href="#" title="">#mypage</a> ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc,
 														</p>
@@ -675,7 +585,7 @@ use Illuminate\Support\Facades\Auth;
 																	<i class="em em-stuck_out_tongue"></i>
 																</div>
 																<button type="submit"></button>
-															</form>	
+															</form>
 														</div>
 													</li>
 												</ul>
@@ -686,7 +596,7 @@ use Illuminate\Support\Facades\Auth;
 							</div><!-- centerl meta -->
 							<div class="col-lg-3">
 								<aside class="sidebar static">
-								
+
 									<!-- <div class="widget friend-list stick-widget">
 										<h4 class="widget-title">Friends</h4>
 										<div id="searchDir"></div>
@@ -732,7 +642,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar5.jpg" alt="">
 													<span class="status f-online"></span>
@@ -743,7 +653,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar6.jpg" alt="">
 													<span class="status f-away"></span>
@@ -754,7 +664,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar7.jpg" alt="">
 													<span class="status f-off"></span>
@@ -765,7 +675,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar5.jpg" alt="">
 													<span class="status f-online"></span>
@@ -776,7 +686,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar2.jpg" alt="">
 													<span class="status f-away"></span>
@@ -852,10 +762,10 @@ use Illuminate\Support\Facades\Auth;
 									</div>friends list sidebar -->
 								</aside>
 							</div><!-- sidebar -->
-						</div>	
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</section>
 	@endsection<!-- responsive header -->

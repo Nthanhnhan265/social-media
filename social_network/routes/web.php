@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\ShareController;
 
 
 
@@ -15,7 +15,7 @@ use App\Http\Controllers\PostController;
 //     $pages = [
 //         'login' => 'login',
 //         'logout' => 'logout',
-//         'messages' => 'messages',   
+//         'messages' => 'messages',
 //         'index-2' => 'index-2',
 //         'index2' => 'index2',
 //         'index-company' => 'index-company',
@@ -34,22 +34,22 @@ use App\Http\Controllers\PostController;
 
 //     return isset($pages[$namePage]) ? view($pages[$namePage]) : view('error');
 // });
-Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']); 
-Route::get('/time-line/:id',[]); 
+Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']);
+Route::get('/time-line/:id',[]);
 
-Route::post('/post',[PostsController::class, 'store']); 
-Route::post('/comment',[CommentController::class, 'store']); 
-Route::delete('/post/{id}',[PostsController::class, 'destroy'])->name('posts.destroy'); 
-Route::put('/post/{id}',[PostsController::class, 'update'])->name('posts.update'); 
+Route::post('/post',[PostsController::class, 'store']);
+Route::post('/comment',[CommentController::class, 'store']);
+Route::delete('/post/{id}',[PostsController::class, 'destroy'])->name('posts.destroy');
+Route::put('/post/{id}',[PostsController::class, 'update'])->name('posts.update');
 
 Route::get('/', function () {
-    return redirect ('/newsfeed');   
+    return redirect ('/newsfeed');
 });
 
 
 Route::get('/register', function () {
-    return view('auth.register'); 
-})->name('register');  
+    return view('auth.register');
+})->name('register');
 
 Route::get('/dashboard', [PostsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -73,7 +73,7 @@ Route::get('/about/{userId}', [UsersController::class, 'about'])->name('about');
 // Route::get('time-line/{userId}', 'TimelineController@index')->name('timeline');
 //Route::get('time-line',[UsersController::class,'index']);
 
-Route::get('/{page?}', function ($page = "newsfeed") {  
+Route::get('/{page?}', function ($page = "newsfeed") {
     return view($page);
 });
 
@@ -82,6 +82,9 @@ Route::get('/{page?}', function ($page = "newsfeed") {
 
 
 
-Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
-Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 
+Route::get('time-line/user-profile/{id}',[UsersController::class,'show']);
+Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']);
 Route::get('edit-profile-basic/{id}',[UsersController::class,'showProfile']);
+
+Route::POST('share',[ShareController::class,'store'])->name('share.store');
+

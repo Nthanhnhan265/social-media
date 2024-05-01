@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use \App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ShareController extends Controller
 {
@@ -35,7 +37,13 @@ class ShareController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = Auth::id();
+        $user = User::find($userId);
+        $sharingRange = $request->input('shareOption');
+        $postId = $request->input('post_id');
+
+        $user->share()->attach($postId, ['status' => $sharingRange]);
+        return redirect()->back();
     }
 
     /**

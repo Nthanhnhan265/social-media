@@ -11,7 +11,7 @@ class Posts extends Model
     use HasFactory;
     protected $table = "posts"; 
     protected $primaryKey = "id"; 
-    protected $fillable = ["user_id_fk","content","timestamps"]; 
+    protected $fillable = ["user_id_fk","content","status","timestamps"]; 
     public $timestamps = true;
   
 

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +25,6 @@ class UsersController extends Controller
     {
         $perPage = 5; 
         $users = User::paginate($perPage); 
-
         return view('user-management', compact('users'));
     }
 

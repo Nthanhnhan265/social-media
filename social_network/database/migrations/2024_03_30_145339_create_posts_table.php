@@ -17,8 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id_fk'); 
             $table->longText('content');  
-            $table->integer('status');    
-            $table->longText('content');             
+            $table->integer('status')->default(1);    
             $table->timestamps();
             // $table->foreign('user_id_fk') 
             // ->references('user_id') 

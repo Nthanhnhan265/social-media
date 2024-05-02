@@ -37,7 +37,6 @@ class CommentController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * store imgs, vids and content
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -116,13 +115,10 @@ class CommentController extends Controller
     public function show($id)
     {
         $comment = Comment::find($id);
-        $post = $comment->post(); // Đảm bảo rằng phương thức post() trả về một bài viết
-
+        $post = $comment->post(); // Đảm bảo rằng phương thức post() trả về một bài viết    
         // Truyền biến $comment và $post vào view 'inbox'
         return view('inbox')->with('comment', $comment)->with('post', $post);
     }
-
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -143,9 +139,21 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
 
+    }
+    public function updateCommentStatus(Request $request, $id)
+    {
+        $commemt = Comment::find($id); 
+        $commemt->status = $request->input('status');    
+        $commemt->save();
+        return redirect()->back()->with('success', 'Comment updated successfully.');
+    }
+    public function deleteComment($id) {
+        $comment = Comment::find($id);
+    
+        $comment->delete();
+        return redirect()->back()->with('success', 'Comment deleted successfully.');
+    } 
     /**
      * Remove the specified resource from storage.
      *

@@ -14,6 +14,7 @@ class Posts extends Model
     protected $fillable = ["user_id_fk","content","timestamps"]; 
     public $timestamps = true;
   
+
     public function comments()
     {
         return $this->hasMany (Comment::class,'post_id_fk');

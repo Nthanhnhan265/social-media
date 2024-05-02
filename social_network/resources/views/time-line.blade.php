@@ -74,7 +74,6 @@ use Illuminate\Support\Facades\Auth;
 										<a class="" href="{{ url('timeline-friends') }}" title="" data-ripple="">Friends</a>
 										<a class="" href="{{ url('groups') }}" title="" data-ripple="">Groups</a>
 										<a class="" href="{{ url('about'.'/user-profile/'.$id) }}" title="" data-ripple="">about</a>
-
 										<a class="active" href="#" title="" data-ripple="">more</a>
 								</li>
 							</ul>

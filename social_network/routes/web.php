@@ -1,39 +1,25 @@
 <?php
 require __DIR__.'/auth.php';
-
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\GroupController;
 
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-
-// Route::get('/{namePage?}', function ($namePage = "index") {
-//     $pages = [
-//         'login' => 'login',
-//         'logout' => 'logout',
-//         'messages' => 'messages',   
-//         'index-2' => 'index-2',
-//         'index2' => 'index2',
-//         'index-company' => 'index-company',
-//         'inbox' => 'inbox',
-//         'insight' => 'insight',
-//         'insights' => 'insights',
-//         'knowledge-base' => 'knowledge-base',
-//         'landing' => 'landing',
-//         'location' => 'location',
-//         'newsfeed' => 'newsfeed',
-//         'notifications' => 'notifications',
-//         'page-likers' => 'page-likers',
-//         'page' => 'page',
-//         'widgets' => 'widgets'
-//     ];
-
-//     return isset($pages[$namePage]) ? view($pages[$namePage]) : view('error');
-// });
 Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']); 
 Route::get('/time-line/:id',[]); 
 
@@ -72,6 +58,34 @@ Route::get('/about/{userId}', [UsersController::class, 'about'])->name('about');
 // Route::get('/users/{id}', 'UserController@show');
 // Route::get('time-line/{userId}', 'TimelineController@index')->name('timeline');
 //Route::get('time-line',[UsersController::class,'index']);
+
+
+//Route::get('/inbox', [PostController::class, 'index']);
+//Route::resource('index',PostController::class);
+
+
+//user-management
+Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
+Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 
+Route::get('user-management',[UsersController::class, 'getAllUsers']);
+Route::get('/edit-user/{user_id}', [UsersController::class, 'getUserByID']);
+//Route::get('/edit-user/{id}', 'UsersController@getUserByID')->name('users.edit');
+Route::delete('/delete-user/{userId}', [UsersController::class, 'deleteUser'])->name('delete-user');
+Route::put('/update-user/{userId}', [UsersController::class, 'updateUser'])->name('update-user');
+
+//group-management
+Route::get('/edit-group/{group_id}', [GroupController::class, 'getGroupByID']);
+Route::get('group-management',[GroupController::class, 'getAllGroups']);
+Route::put('/update-group/{group_id}', [GroupController::class, 'update'])->name('update-group');
+Route::delete('/delete-group/{groupID}', [GroupController::class, 'deleteGroup'])->name('delete-group');
+
+//post-management
+Route::get('post-management',[PostsController::class, 'getAllPosts']);
+Route::delete('/delete-post/{id}', [PostsController::class, 'deletePost'])->name('delete-post');
+Route::get('/post-detail/{id}', [PostsController::class, 'getPostAndCommentByPostId']);
+Route::put('/update-post/{id}', [PostsController::class, 'updatePostStatus'])->name('update-post-status');
+Route::delete('/delete-comment/{id}', [CommentController::class, 'deleteComment'])->name('delete-comment');
+Route::put('/update-comment/{id}', [CommentController::class, 'updateCommentStatus'])->name('update-comment');
 
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);

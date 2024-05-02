@@ -17,4 +17,7 @@ class Video extends Model
         return $this->belongsTo(Posts::class, 'ref_id_fk');
     }
 
+    public function comment() { 
+        return $this->belongsTo(Comment::class,'ref_id_fk');
+    }
 }

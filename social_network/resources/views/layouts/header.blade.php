@@ -28,7 +28,10 @@
 					<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
 				</span>
 				<span class="mh-text">
-					<a href="{{ url ('newsfeed') }}" title=""><img src="images/logo2.png" alt=""></a>
+					<a href="{{ url ('newsfeed') }}" title="">
+					<img src="{{asset('images/logo.png')}}" alt="ERR">
+					kkkk
+					</a>
 				</span>
 				<span class="mh-btns-right">
 					<a class="fa fa-sliders" href="#shoppingbag"></a>
@@ -213,10 +216,64 @@
 		</div>
 		<div class="topbar stick">
 			<div class="logo">
-				<a title="" href="{{ url('newsfeed') }}"><img src="images/logo.png" alt=""></a>
+				<a title="" href="{{ url('newsfeed') }}"><img src="{{asset('images/logo.png')}}" alt=""></a>
 			</div>
 
-			<div class="top-area">				
+			<div class="top-area">
+				<!-- <ul class="main-menu">
+				<li>
+					<a href="#" title="">Home</a>
+					<ul>
+						<li><a href="{{ url('index-2') }}" title="">Home Social</a></li>
+						<li><a href="{{ url('index2') }}" title="">Home Social 2</a></li>
+						<li><a href="{{ url('index-company') }}" title="">Home Company</a></li>
+						<li><a href="{{ url('landing') }}" title="">Login page</a></li>
+						<li><a href="{{ url('logout') }}" title="">Logout Page</a></li>
+						<li><a href="{{ url('newsfeed') }}" title="">news feed</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#" title="">timeline</a>
+					<ul>
+						<li><a href="{{ url('time-line')  }}" title="">timeline</a></li>
+						<li><a href="{{ url('timeline-friends') }}" title="">timeline friends</a></li>
+						<li><a href="{{ url('timeline-groups') }}" title="">timeline groups</a></li>
+						<li><a href="{{ url('timeline-pages') }}" title="">timeline pages</a></li>
+						<li><a href="{{ url('timeline-photos') }}" title="">timeline photos</a></li>
+						<li><a href="{{ url('timeline-videos') }}" title="">timeline videos</a></li>
+						<li><a href="{{ url('fav-page') }}" title="">favourit page</a></li>
+						<li><a href="{{ url('groups') }}" title="">groups page</a></li>
+						<li><a href="{{ url('page-likers') }}" title="">Likes page</a></li>
+						<li><a href="{{ url('people-nearby') }}" title="">people nearby</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#" title="">account settings</a>
+					<ul>
+						<li><a href="{{ url('create-fav-page') }}" title="">create fav page</a></li>
+						<li><a href="{{ url('edit-account-setting') }}" title="">edit account setting</a></li>
+						<li><a href="{{ url('edit-interest') }}" title="">edit-interest</a></li>
+						<li><a href="{{ url('edit-password') }}" title="">edit-password</a></li>
+						<li><a href="{{ url('edit-profile-basic') }}" title="">edit profile basics</a></li>
+						<li><a href="{{ url('edit-work-eductation') }}" title="">edit work educations</a></li>
+						<li><a href="{{ url('messages') }}" title="">message box</a></li>
+						<li><a href="{{ url('inbox') }}" title="">Inbox</a></li>
+						<li><a href="{{ url('notifications') }}" title="">notifications page</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#" title="">more pages</a>
+					<ul>
+						<li><a href="{{ url('404') }}" title="">404 error page</a></li>
+						<li><a href="{{ url('about') }}" title="">about</a></li>
+						<li><a href="{{ url('contact') }}" title="">contact</a></li>
+						<li><a href="{{ url('faq') }}" title="">faq's page</a></li>
+						<li><a href="{{ url('insights') }}" title="">insights</a></li>
+						<li><a href="{{ url('knowledge-base') }}" title="">knowledge base</a></li>
+						<li><a href="{{ url('widgets') }}" title="">Widgts</a></li>
+					</ul>
+				</li>
+			</ul> -->
 				<ul class="setting-area">
 					<li>
 						<a href="#" title="Home" data-ripple=""><i class="ti-search"></i></a>

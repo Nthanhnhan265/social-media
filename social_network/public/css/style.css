@@ -780,6 +780,7 @@ header.sticky {
 .feature-photo > figure img {
     display: inline-block;
     width: 100%;
+    
 }
 
 .user-avatar {

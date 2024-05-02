@@ -120,11 +120,11 @@
 
 										<form method="post">
 											<div class="form-group half">	
-											  <input type="text" id="input" required="required"/>
+											  <input type="text" id="input" required="required" value="{{ $user->first_name}}"/>
 											  <label class="control-label" for="input">First Name</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group half">	
-											  <input type="text" required="required"/>
+											  <input type="text" required="required" value="{{ $user->last_name}} "/>
 											  <label class="control-label" for="input">Last Name</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	

@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Users;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -33,7 +35,6 @@ class UsersController extends Controller
         $user = User::findOrFail($user_id);
         return view('edit-user', compact('user'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -64,23 +65,28 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id); 
-        return view('time-line',["id"=>$id,'user'=>$user]);
+        $postOfUser = PostsController::getPostById($id); 
+        return view('time-line',["id"=>$id,'user'=>$user,"posts"=>$postOfUser]);
     }
     public function showAbout($id)
     {
         $user = User::findOrFail($id); 
         return view('about',["id"=>$id,'user'=>$user]);
     }
-    
+
+    public function showProfile($id){
+        $user = User::findOrFail($id);
+        return view('edit-profile-basic',["id"=>$id,'user'=>$user]);
+    }
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit(User $user)
     {
-        
         return view('edit-user', compact('user'));
     }
     

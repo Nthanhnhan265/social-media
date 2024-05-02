@@ -8,32 +8,6 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
-
-
-
-// Route::get('/{namePage?}', function ($namePage = "index") {
-//     $pages = [
-//         'login' => 'login',
-//         'logout' => 'logout',
-//         'messages' => 'messages',   
-//         'index-2' => 'index-2',
-//         'index2' => 'index2',
-//         'index-company' => 'index-company',
-//         'inbox' => 'inbox',
-//         'insight' => 'insight',
-//         'insights' => 'insights',
-//         'knowledge-base' => 'knowledge-base',
-//         'landing' => 'landing',
-//         'location' => 'location',
-//         'newsfeed' => 'newsfeed',
-//         'notifications' => 'notifications',
-//         'page-likers' => 'page-likers',
-//         'page' => 'page',
-//         'widgets' => 'widgets'
-//     ];
-
-//     return isset($pages[$namePage]) ? view($pages[$namePage]) : view('error');
-// });
 Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']); 
 Route::get('/time-line/:id',[]); 
 
@@ -44,6 +18,10 @@ Route::put('/post/{id}',[PostsController::class, 'update'])->name('posts.update'
 
 Route::get('/', function () {
     return redirect ('/newsfeed');   
+});
+
+Route::get('/test/{id}', function ($id='') {
+    return view ('/test',["id"=>$id]);   
 });
 
 

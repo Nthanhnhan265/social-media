@@ -1,7 +1,7 @@
-@php 
-	use Illuminate\View\Component; 
-	use Illuminate\Support\Facades\Auth;
-@endphp 
+@php
+use Illuminate\View\Component;
+use Illuminate\Support\Facades\Auth;
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +17,9 @@
 	<link rel="stylesheet" href="{{asset('css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('css/color.css')}}">
 	<link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	<!-- fancybox -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
 </head>
 
@@ -29,8 +32,8 @@
 				</span>
 				<span class="mh-text">
 					<a href="{{ url ('newsfeed') }}" title="">
-					<img src="{{asset('images/logo.png')}}" alt="ERR">
-					kkkk
+						<img src="{{asset('images/logo.png')}}" alt="ERR">
+						kkkk
 					</a>
 				</span>
 				<span class="mh-btns-right">
@@ -435,8 +438,8 @@
 					<a href="#" title=""><span class="status f-online"></span>online</a>
 					<a href="#" title=""><span class="status f-away"></span>away</a>
 					<a href="#" title=""><span class="status f-off"></span>offline</a>
-					@php 
-						 
+					@php
+
 					@endphp
 					<a href="{{url('time-line/user-profile/'.Auth::user()->user_id)}}" title=""><i class="ti-user"></i> view profile</a>
 					<a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>

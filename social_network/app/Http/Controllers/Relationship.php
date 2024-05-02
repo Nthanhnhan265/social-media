@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
-class UsersController extends Controller
+class Relationship extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +13,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all(); // Lấy tất cả các người dùng từ cơ sở dữ liệu
-
-        return view('newsfeed', compact('users'));
+        //
     }
 
-    
     /**
      * Show the form for creating a new resource.
      *
@@ -47,27 +40,14 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id 
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $user = User::findOrFail($id); 
-        $postOfUser = PostsController::getPostById($id); 
-        $isInFriendList = DB::select("SELECT * FROM relationships WHERE (sender = ? AND receiver = ?)
-        OR (sender = ? AND receiver = ?)",[Auth::user()->user_id,$id,$id,Auth::user()->user_id]);
-        return view('time-line',["id"=>$id,'user'=>$user,"posts"=>$postOfUser,"friend"=>$isInFriendList]);
-         
+        //
     }
-    public function showAbout($id)
-    {
-        $user = User::findOrFail($id); 
-        return view('about',["id"=>$id,'user'=>$user]);
-    }
-    public function showProfile($id){
-        $user = User::findOrFail($id);
-        return view('edit-profile-basic',["id"=>$id,'user'=>$user]);
-    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -76,7 +56,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-       
+        //
     }
 
     /**

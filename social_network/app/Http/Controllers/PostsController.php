@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Posts;
 use App\Models\User;
@@ -51,7 +52,7 @@ class PostsController extends Controller
                     $qImg->where('img_location_fk', 0);
                 },
                 'video' => function ($qVid) {
-                    $qVid->where('video_location_fk', 0);
+                    $qVid->where('video_location_fk', 0); 
                 },
                 'comments' => function ($q) {
                     $q->with([
@@ -283,6 +284,9 @@ class PostsController extends Controller
             $vdElement->delete();
         }
 
+        //delete comments 
+        CommentController::deleteCommentsPostId($id); 
+        
         // //delete post by id 
         Posts::find($id)->delete();
         return redirect('welcome');

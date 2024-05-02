@@ -205,26 +205,46 @@ use Illuminate\View\Component;
 												</div>
 												@endif
 
+												
+												@php
+													$totalMedia = count($post->image) + count($post->video); 
 
+												@endphp
 												<!-- Display imgs  -->
-												@if(!empty($post->image))
-												<div class="list-img">
-													@foreach ($post->image as $img)
-													<img src="{{asset('storage/images/'.$img->url)}}" alt="failed to display" />
-													@endforeach
+												@if ($totalMedia != 0) 
+													<div class="container-fluied">
+														<div class="row">
+																@foreach ($post->image as $img)
+																<a href="{{asset('storage/images/'.$img->url)}}" class="{{$loop->index<3? 'col-4 p-1': 'd-none'}} {{$loop->index == 2 ? 'position-relative': ''}}"  data-fancybox="gallery{{$post->id}}" data-caption="{{$post->user->last_name.' '.$post->user->first_name.'\'s images' }}">
+																	<img src="{{asset('storage/images/'.$img->url)}}" alt="failed to display" class="d-block" />
+																	@if($loop->index == 2 && $loop->count - 3!=0)
+																	 <div style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+																		 +{{$totalMedia - 2}}
+																	</div>
+																	@endif
+																</a>
+																@endforeach
+	
+																@if(!empty($post->video) && count($post->video) !=0 )
+																	@foreach ($post->video as $video)
+																	<a href="{{asset('storage/videos/'.$video->url)}}" data-fancybox="gallery{{$post->id}}" style="max-height:50rem" class="{{
+																		count($post->image)>3 || $loop->iteration + count($post->image) > 3?'d-none':'col-3 p-1'}}{{
+																		count($post->image)>3 || $loop->iteration + count($post->image) == 3?' position-relative':''}}" style="display:block;height: 100%">
+																		<video controls style="height:100%;width:100%" src="{{asset('storage/videos/'.$video->url)}}" ></video>
+																		@if(count($post->image)>3 || $loop->iteration + count($post->image) == 3)
+																		 <div style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+																			 +{{$totalMedia - 2}}
+																		</div>
+																		@endif
+																	</a>
+																	@endforeach
+																@endif
+														</div>
+	
+													</div>
 
-												</div>
 												@endif
-
-												<!-- Display video  -->
-												@if(!empty($post->video) && count($post->video) !=0 )
-												<video class="list-vid" controls alt="err">
-													@foreach ($post->video as $video)
-													<source src="{{asset('storage/videos/'.$video->url)}}">
-													@endforeach
-												</video>
-												@endif
-
+											
 
 
 												<!-- views, like,dislike, comment, share -->

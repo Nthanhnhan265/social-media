@@ -10083,6 +10083,10 @@ aside.sidebar.full-style {
     justify-content: center; /* Center content horizontally */
 }
 
+/* Group-view*/
+.group-description {
+    margin-left: 20px;
+}
 
 /* 
 .list-img > img { 

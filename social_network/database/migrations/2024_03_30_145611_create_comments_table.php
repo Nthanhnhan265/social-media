@@ -17,7 +17,8 @@ return new class extends Migration
             $table->increments('comment_id');
             $table->integer('post_id_fk');
             $table->string('content');
-            $table->integer('user_id_fk');
+            $table->integer('user_id_fk'); 
+            $table->integer('status');     
             $table->timestamps();
         });
     }

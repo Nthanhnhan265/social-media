@@ -21,6 +21,7 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id_fk');
     }
     public function image(){
+
         return $this->hasMany(Image::class,'ref_id_fk');
     }
     public function video()

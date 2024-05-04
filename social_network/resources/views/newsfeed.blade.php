@@ -593,6 +593,15 @@ use Illuminate\View\Component;
 														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
 													</div>
 												</li>
+												<li class="me">
+													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+													<div class="notification-event">
+														<span class="chat-message-item">
+															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+														</span>
+														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+													</div>
+												</li>
 											</ul>
 											<form class="text-box">
 												<textarea placeholder="Post enter to post..."></textarea>

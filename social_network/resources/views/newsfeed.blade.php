@@ -53,8 +53,8 @@ use Illuminate\View\Component;
 											<a href="{{ url('people-nearby') }}" title="">People Nearby</a>
 										</li>
 										<li>
-											<i class="fa fa-bar-chart-o"></i>
-											<a href="{{ url('insights') }}" title="">insights</a>
+											<i class="fa fa-users"></i>
+											<a href="{{ url('groups') }}" title="">Groups</a>
 										</li>
 										<li>
 											<form method="POST" action="{{ route('logout') }}">

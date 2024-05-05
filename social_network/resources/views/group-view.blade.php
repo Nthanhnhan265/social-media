@@ -3,6 +3,10 @@
 	<section>
 		<div class="feature-photo">
 			<figure><img src="images/resources/timeline-4.jpg" alt=""></figure>
+			<div class="add-btn">		
+				<a href="#" title="" data-ripple="">Joined</a>
+				<a href="#" title="" data-ripple="">Leave</a>
+			</div>
 			<form class="edit-phto" style="display: none;">
 				<i class="fa fa-camera-retro"></i>
 				<label class="fileContainer">
@@ -34,8 +38,8 @@
 								  <span>50 members</span>							  
 								</li>
 								<li>
-									<a class="active" href="{{ url('fav-page') }}" title="" data-ripple="">Posts</a>
-									<a class="" href="{{ url('notifications') }}" title="" data-ripple="">Members</a>
+									<a class="active" href="{{ url('group-view') }}" title="" data-ripple="">Posts</a>
+									<a class="" href="{{ url('group-member') }}" title="" data-ripple="">Members</a>
 									<a class="" href="{{ url('inbox') }}" title="" data-ripple="">File</a>
 									<!-- <a class="" href="{{ url('insights') }}" title="" data-ripple="">insights</a>
 									<a class="" href="{{ url('fav-page') }}" title="" data-ripple="">posts</a>
@@ -56,6 +60,66 @@
 					<div class="col-lg-12">
 						<div class="row" id="page-contents">
 							<div class="col-lg-3">
+							<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title">Shortcuts</h4>
+										<ul class="naves">
+											<li>
+												<i class="ti-clipboard"></i>
+												<a href="{{ url('newsfeed') }}" title="">News feed</a>
+											</li>
+											<li>
+												<i class="ti-mouse-alt"></i>
+												<a href="{{ url('inbox') }}" title="">Inbox</a>
+											</li>
+											<li>
+												<i class="ti-files"></i>
+												<a href="{{ url('fav-page') }}" title="">My pages</a>
+											</li>
+											<li>
+												<i class="ti-user"></i>
+												<a href="{{ url('timeline-friends') }}" title="">friends</a>
+											</li>
+											<li>
+												<i class="ti-image"></i>
+												<a href="{{ url('timeline-photos') }}" title="">images</a>
+											</li>
+											<li>
+												<i class="ti-video-camera"></i>
+												<a href="{{ url('timeline-videos') }}" title="">videos</a>
+											</li>
+											<li>
+												<i class="ti-bell"></i>
+												<a href="{{ url('notifications') }}" title="">Notifications</a>
+											</li>
+										</ul>
+									</div><!-- Shortcuts -->
+									<div class="widget">
+										<h4 class="widget-title">Recent Activity</h4>
+										<ul class="activitiez">
+											<li>
+												<div class="activity-meta">
+													<i>10 hours Ago</i>
+													<span><a href="#" title="">Commented on Video posted </a></span>
+													<h6>by <a href="{{ url('time-line') }}">black demon.</a></h6>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>30 Days Ago</i>
+													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>2 Years Ago</i>
+													<span><a href="#" title="">Share a video on her timeline.</a></span>
+													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
+												</div>
+											</li>
+										</ul>
+									</div><!-- recent activites -->					
+								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-6">
 								<div class="central-meta">
@@ -677,36 +741,36 @@
 											<li>
 												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
 												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" class="underline" title="">Sophia hayat</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
+													<h4><a href="{{ url('group-members') }}" class="underline" title="">Sophia hayat</a></h4>
+													<a href="#" title="" class="invite" data-ripple="">Admin</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
 												<div class="friend-meta">
 													<h4><a href="{{ url('time-line') }}" class="underline" title="">Issabel kaif</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
+													<a href="#" title="" class="invite" data-ripple="">Member</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
 												<div class="friend-meta">
 													<h4><a href="{{ url('time-line') }}" class="underline" title="">Kelly Bill</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
+													<a href="#" title="" class="invite" data-ripple="">Member</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
 												<div class="friend-meta">
 													<h4><a href="{{ url('time-line') }}" class="underline" title="">Allen jhon</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
+													<a href="#" title="" class="invite" data-ripple="">Member</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
 												<div class="friend-meta">
 													<h4><a href="{{ url('time-line') }}" class="underline" title="">tom Andrew</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
+													<a href="#" title="" class="invite" data-ripple="">Member</a>
 												</div>
 											</li>
 
@@ -714,7 +778,7 @@
 												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
 												<div class="friend-meta">
 													<h4><a href="{{ url('time-line') }}" title="" class="underline">Allen doe</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
+													<a href="#" title="" class="invite" data-ripple="">Member</a>
 												</div>
 											</li>
 										</ul>

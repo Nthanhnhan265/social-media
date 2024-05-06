@@ -11,6 +11,8 @@ use App\Models\Video;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Comment;
+
 
 class PostsController extends Controller
 {
@@ -23,8 +25,71 @@ class PostsController extends Controller
     {
         //hiển thị giao diện trang chính 
         //hiển thị mọi bài viết trong db -> chưa hợp lý cho việc hiển thị phù hợp với từng tài khoản 
-        return view('newsfeed', ["posts" => Posts::orderBy('created_at','desc')->with('user','image','video')->get()]);
+         return view('newsfeed', ["posts" => Posts::orderBy('created_at', 'desc')
+            ->with([
+                'user',
+                'image',
+                'video',
+                'comments' => function ($q) {
+                    $q->with([
+                        'user',
+                        'image' => function ($qImg) {
+                            $qImg->where('img_location_fk', 1);
+                        },
+                        'video' => function ($qVid) {
+                            $qVid->where('video_location_fk', 1);
+                        }
+                    ]);
+                }
+            ])->get()]);
     }
+
+    public function getAllPosts(Request $request)
+    {
+        $perPage = 5; 
+        $posts = Posts::paginate($perPage);
+
+        return view('post-management', compact('posts'));
+    }
+
+    
+    public function getPostAndCommentByPostID($id)
+    {
+        $post = Posts::findOrFail($id);
+        $comments = Comment::where('post_id_fk', $id)
+                   ->orderBy('created_at', 'desc')
+                   ->get();               
+        return view('post-detail')->with('comments', $comments)->with('post', $post);
+    }
+
+    public static function getPostById($id)
+    {
+        $postOfUser = User::where('user_id', $id)->with(['posts' => function ($q) {
+            $q->with([
+                'user',
+                'image' => function ($qImg) {
+                    $qImg->where('img_location_fk', 0);
+                },
+                'video' => function ($qVid) {
+                    $qVid->where('video_location_fk', 0);
+                },
+                'comments' => function ($q) {
+                    $q->with([
+                        'user',
+                        'image' => function ($qImg) {
+                            $qImg->where('img_location_fk', 1);
+                        },
+                        'video' => function ($qVid) {
+                            $qVid->where('video_location_fk', 1);
+                        }
+                    ]);
+                }
+            ]);
+        }])->get();
+
+        return $postOfUser;
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -139,89 +204,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //find and check if not empty
-        $findPost =  Posts::find($id); 
-        if (!empty($findPost)) { 
-            $editPost = [
-                "content" => $request->content == "" ? "":  $request->content
-            ];
-    
-            // update content of post
-            $findPost->update(
-                $editPost
-            );
-            
-            if(!empty($request->file('imgFileSelected'))) { 
-                $this->clearAllImg($id);
-                // insert images
-                if (!empty($request->file('imgFileSelected'))) {
-                    $newImgs = [];
-                    foreach ($request->file('imgFileSelected') as $imgElement) {
-                        try { 
-                            //luu file vao muc storage
-                            $fileName = uniqid("img") . "." . $imgElement->extension();
-                            $imgElement->storeAs('public/images', $fileName);
-        
-                            //luu thong tin vao mang 
-                            array_push(
-                                $newImgs,
-                                [
-                                    "url" => $fileName,
-                                    "ref_id_fk" => $id,
-                                    "img_location_fk"=> 0 //0 is img in post, 1 is img in comment (later)
-                                ],
-                            );
-        
-                        } catch(Exception $ex) { 
-                            dd($ex->getMessage()); 
-                        }
-                    }
-                    //xóa bộ ảnh cũ trong DB và trong storage
-        
-                    //them vao db 
-                    Image::insert([...$newImgs]); 
-                }
-
-            }
-            if(!empty($request->file('vdFileSelected'))) { 
-                $this->clearAllVid($id);
-                // insert videos
-                if(!empty($request->file('vdFileSelected'))) { 
-                    $newVideos = []; 
-                    foreach($request->file('vdFileSelected') as $vdElement) { 
-                        try { 
-                            //luu file vao muc storage
-                            $fileName = uniqid("vd") . "." . $vdElement->extension();
-                            $vdElement->storeAs('public/videos', $fileName);
-                            //luu thong tin vao mang 
-                            array_push(
-                                $newVideos,
-                                [
-                                    "url" => $fileName,
-                                    "ref_id_fk" => $id,
-                                    "video_location_fk"=> 0 //0 is video in post, 1 is video in comment (later)
-                                ],
-                            );
-                            
-                        } catch(Exception $ex) { 
-                            dd($ex->getMessage()); 
-                        }
-                    }
-                    //them vao db 
-                    Video::insert([...$newVideos]); 
-                }
-
-            }
-            return redirect("newsfeed");
-        }
-
-
-
-
-
-    }
+   
 
     /**
      * Remove the specified resource from storage.
@@ -253,6 +236,32 @@ class PostsController extends Controller
         return redirect('welcome');  
     }
 
+
+    public function deletePost($postID) {
+        //delete comment in this post
+        Comment::where('post_id_fk', $postID)->delete();
+
+        $post = Posts::where('id',$postID)->with('image','video')->get()[0]; 
+        
+        foreach($post->image as $imgElement)  { 
+            //delete images in storage
+            Storage::delete('public/images/'.$imgElement->url);
+            //delete image in image table
+            $imgElement->delete(); 
+        }
+
+        //delete videos of post 
+        foreach($post->video as $vdElement)  { 
+            //delete images in storage
+            Storage::delete('public/videos/'.$vdElement->url);
+            //delete image in image table
+            $vdElement->delete(); 
+        }
+
+        Posts::find($postID)->delete(); 
+        return redirect('/post-management')->with('success', 'Post deleted successfully.');          
+    }  
+
     /* 
         remove all images and videos of Post
     */ 
@@ -278,24 +287,49 @@ class PostsController extends Controller
 
         } else { 
             return false; 
+        $post = Posts::where('id', $post_id)->with('image', 'video')->get()[0];
+        //delete images of post 
+        foreach ($post->image as $imgElement) {
+            //delete images in storage
+            Storage::delete('public/images/' . $imgElement->url);
+            //delete image in image table
+            $imgElement->delete();
         }
-        return true;
+
+        //delete videos of post 
+        foreach ($post->video as $vdElement) {
+            //delete images in storage
+            Storage::delete('public/videos/' . $vdElement->url);
+            //delete image in image table
+            $vdElement->delete();
+        }
+
+        foreach($post->comment as $cmtElement)  { 
+            //delete image in image table
+            $cmtElement->delete(); 
+        }
+        
+        // //delete post by id 
+        Posts::find($post_id)->delete();
+        return redirect('welcome');
     }
-    /* 
-        remove all images of Post
-    */ 
-    public function clearAllImg($post_id) { 
-        $post = Posts::where('id',$post_id)->with('image')->get()[0]; 
-        if(!empty($post)) { 
+}
+    
+ 
+ 
+    public function clearAllImg($post_id)
+    {
+        $post = Posts::where('id', $post_id)->with('image')->get()[0];
+        if (!empty($post)) {
             //delete images of post 
-            foreach($post->image as $imgElement)  { 
+            foreach ($post->image as $imgElement) {
                 //delete images in storage
-                Storage::delete('public/images/'.$imgElement->url);
+                Storage::delete('public/images/' . $imgElement->url);
                 //delete image in image table
-                $imgElement->delete(); 
+                $imgElement->delete();
             }
-        } else { 
-            return false; 
+        } else {
+            return false;
         }
         return true;
     }
@@ -318,6 +352,12 @@ class PostsController extends Controller
         return true;
     }
 
-    
+    public function updatePostStatus(Request $request, $id)
+    {
+        $post = Posts::find($id); 
+        $post->status = $request->input('status');    
+        $post->save();
+        return redirect()->back()->with('success', 'Post updated successfully.');  
+    }
 
 }

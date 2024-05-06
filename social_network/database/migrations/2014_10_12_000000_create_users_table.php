@@ -26,20 +26,8 @@ return new class extends Migration
             $table->string('avatar')->default('default.jpg');
             $table->string('background')->nullable(true);
             $table->integer('role_id_fk')->nullable(true);
-//             $table->increments('user_id');
-//             $table->string('last_name',length:20); 
-//             $table->string('first_name',length:20); 
-//             $table->date('DOB'); 
-//             $table->string('email')->unique();
-//             $table->timestamp('email_verified_at')->nullable();
-//             $table->string('password');
-//             $table->boolean('gender'); 
-//             $table->string('description'); 
-//             $table->string('avatar'); 
-//             $table->string('background'); 
-//             $table->integer('role_id_fk');
-//             $table->rememberToken();
-         
+            $table->integer('status')->nullable(true);
+    
             $table->timestamps();
         });
 

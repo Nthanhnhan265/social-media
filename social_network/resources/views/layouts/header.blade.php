@@ -30,7 +30,10 @@
 					<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
 				</span>
 				<span class="mh-text">
-					<a href="{{ url ('newsfeed') }}" title=""><img src="images/logo2.png" alt=""></a>
+					<a href="{{ url ('newsfeed') }}" title="">
+					<img src="{{asset('images/logo.png')}}" alt="ERR">
+					kkkk
+					</a>
 				</span>
 				<span class="mh-btns-right">
 					<a class="fa fa-sliders" href="#shoppingbag"></a>
@@ -215,7 +218,7 @@
 		</div>
 		<div class="topbar stick">
 			<div class="logo">
-				<a title="" href="{{ url('newsfeed') }}"><img src="images/logo.png" alt=""></a>
+				<a title="" href="{{ url('newsfeed') }}"><img src="{{asset('images/logo.png')}}" alt=""></a>
 			</div>
 
 			<div class="top-area">
@@ -423,13 +426,7 @@
 							<a href="{{ url('messages') }}" title="" class="more-mesg">view more</a>
 						</div>
 					</li>
-					@if (auth()->check() && auth()->user()->role_id_fk == 1)
-						<li>
-							<a href="{{}}" title="Admin" data-ripple="">
-								<i class="fa-solid fa-user fa-bounce"></i> <span>Admin</span>
-							</a>
-						</li>
-					@endif
+					
 
 				</ul>
 				<div class="user-img">
@@ -448,6 +445,11 @@
 					<a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
 					<a href="#" title=""><i class="ti-target"></i>activity log</a>
 					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
+					@if (auth()->check() && auth()->user()->role_id_fk == 1)
+							<a href="{{url('/user-management')}}" title="Admin" data-ripple="">
+								<i class="fa-solid fa-user fa-bounce"></i> <span>Admin</span>
+							</a>
+					@endif
 
 
 					<form method="POST" action="{{ route('logout') }}">

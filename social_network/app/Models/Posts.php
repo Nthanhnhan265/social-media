@@ -11,12 +11,13 @@ class Posts extends Model
     use HasFactory;
     protected $table = "posts"; 
     protected $primaryKey = "id"; 
-    protected $fillable = ["user_id_fk","content","timestamps"]; 
+    protected $fillable = ["user_id_fk","content","status","timestamps"]; 
     public $timestamps = true;
   
-    public function post()
+
+    public function comments()
     {
-        return $this->hasMany (Comment::class);
+        return $this->hasMany (Comment::class,'post_id_fk');
     }
     public function user()  
     {
@@ -38,5 +39,4 @@ class Posts extends Model
     public function video() { 
         return $this->hasMany(Video::class,'ref_id_fk'); 
     }
-
 }

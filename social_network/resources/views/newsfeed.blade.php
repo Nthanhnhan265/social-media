@@ -2,12 +2,11 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
-
 ?>
 @extends('layouts.app')
 @section('content')
- <section>
- 	<div class="gap gray-bg">
+<section>
+	<div class="gap gray-bg">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-12">
@@ -159,7 +158,7 @@ use Illuminate\View\Component;
 													<li>
 														<i class="fa fa-image"></i>
 														<label class="fileContainer">
-															<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*" >
+															<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*">
 														</label>
 													</li>
 													<li>
@@ -182,7 +181,7 @@ use Illuminate\View\Component;
 							<div class="loadMore">
 								@foreach ($posts as $post)
 								<!-- loop to find owner's post -->
-		
+
 								<div class="central-meta item rounded-5">
 									<div class="user-post">
 										<div class="friend-info">
@@ -192,7 +191,8 @@ use Illuminate\View\Component;
 											<div class="friend-name">
 												<ins><a href="{{ url('time-line').'/user-profile/'.$post->user->user_id }}" title="">
 														{{$post->user->last_name." ".$post->user->first_name}}
-																										</a></ins>
+													</a></ins>
+
 												<span>published: {{$post->created_at}}</span>
 											</div>
 											<div class="post-meta">
@@ -205,27 +205,27 @@ use Illuminate\View\Component;
 												</div>
 												@endif
 
-								
+
 												<!-- Display imgs  -->
 												@if(!empty($post->image))
-													<div class="list-img">
-													 	@foreach ($post->image as $img) 
-															<img src ="{{asset('storage/images/'.$img->url)}}" alt="failed to display"/>
-														@endforeach
-													
-													</div>
+												<div class="list-img">
+													@foreach ($post->image as $img)
+													<img src="{{asset('storage/images/'.$img->url)}}" alt="failed to display" />
+													@endforeach
+
+												</div>
 												@endif
 
 												<!-- Display video  -->
 												@if(!empty($post->video) && count($post->video) !=0 )
 												<video class="list-vid" controls alt="err">
-													 	@foreach ($post->video as $video) 
-															<source src="{{asset('storage/videos/'.$video->url)}}">
-														 @endforeach
+													@foreach ($post->video as $video)
+													<source src="{{asset('storage/videos/'.$video->url)}}">
+													@endforeach
 												</video>
 												@endif
 
-												
+
 
 												<!-- views, like,dislike, comment, share -->
 												<div class="we-video-info border-top my-3">
@@ -254,7 +254,7 @@ use Illuminate\View\Component;
 																<ins>200</ins>
 															</span>
 														</li>
-														<!-- <li class="social-media">
+														<li class="social-media">
 															<div class="menu">
 																<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
 																<div class="rotater">
@@ -286,7 +286,7 @@ use Illuminate\View\Component;
 																</div>
 
 															</div>
-														</li> -->
+														</li>
 													</ul>
 												</div>
 
@@ -295,64 +295,9 @@ use Illuminate\View\Component;
 										<div class="coment-area p-1">
 											<ul class="we-comet">
 												<!-- hiện commment cho mỗi bình luận tại đây -->
-												<!-- hiện khoảng 2 cái -->
-												<!-- <li>
-													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
-													</div>
-													<div class="we-comment">
-														<div class="coment-head">
-															<h5><a href="{{ url('time-line') }}" title="">Jason borne</a></h5>
-															<span>1 year ago</span>
-															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-														</div>
-														<p>we are working for the dance and sing songs. this car is very awesome for the youngster. please vote this car and like our post</p>
-													</div>
-													<ul>
-														<li>
-															<div class="comet-avatar">
-																<img src="images/resources/comet-2.jpg" alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5><a href="{{ url('time-line') }}" title="">alexendra dadrio</a></h5>
-																	<span>1 month ago</span>
-																	<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>yes, really very awesome car i see the features of this car in the official website of <a href="#" title="">#Mercedes-Benz</a> and really impressed :-)</p>
-															</div>
-														</li>
-														<li>
-															<div class="comet-avatar">
-																<img src="images/resources/comet-3.jpg" alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5><a href="{{ url('time-line') }}" title="">Olivia</a></h5>
-																	<span>16 days ago</span>
-																	<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>i like lexus cars, lexus cars are most beautiful with the awesome features, but this car is really outstanding than lexus</p>
-															</div>
-														</li>
-													</ul>
-												</li>
-												<li>
-													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
-													</div>
-													<div class="we-comment">
-														<div class="coment-head">
-															<h5><a href="{{ url('time-line') }}" title="">Donald Trump</a></h5>
-															<span>1 week ago</span>
-															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-														</div>
-														<p>we are working for the dance and sing songs. this video is very awesome for the youngster. please vote this video and like our channel
-															<i class="em em-smiley"></i>
-														</p>
-													</div>
-												</li> -->
-
+												@foreach ($post->comments as $comment)
+													<x-comment :commenter=$comment></x-comment>
+												@endforeach
 												<li>
 													<a href="#" title="" class="showmore underline">more comments</a>
 												</li>
@@ -362,24 +307,26 @@ use Illuminate\View\Component;
 														</x-user-avt>
 													</div>
 													<div class="post-comt-box">
-														<form method="post">
-
-															<textarea placeholder="Post your comment"></textarea>
+														<form method="post" action = "comment" enctype="multipart/form-data">
+															@csrf
+															@method("POST")
+															<input type="hidden" name="post_id" value="{{$post->id}}">
+															<textarea placeholder="Post your comment" name = "content"></textarea>
 															<div class="add-smiles">
 																<span class="em em-expressionless" title="add icon"></span>
 															</div>
-															<div class="">
+															<div class="attachments">
 																<ul class="m-0 d-flex">
 																	<li>
 																		<i class="fa fa-image"></i>
 																		<label class="fileContainer">
-																			<input type="file">
+																			<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*">
 																		</label>
 																	</li>
 																	<li>
 																		<i class="fa fa-video-camera"></i>
 																		<label class="fileContainer">
-																			<input type="file">
+																			<input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*">
 																		</label>
 																	</li>
 
@@ -630,6 +577,15 @@ use Illuminate\View\Component;
 												</li>
 												<li class="you">
 													<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
+													<div class="notification-event">
+														<span class="chat-message-item">
+															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+														</span>
+														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+													</div>
+												</li>
+												<li class="me">
+													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
 													<div class="notification-event">
 														<span class="chat-message-item">
 															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks

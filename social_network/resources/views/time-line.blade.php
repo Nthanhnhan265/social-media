@@ -1,10 +1,34 @@
-
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
 @extends('layouts.app')
 	@section('content')
 
+
 	<section>
-		<div class="feature-photo">
+	@foreach($posts[0]->posts as $post)
+		<div>
+			{{$post->content}}
+			<!-- {{dump($post->image);}}  -->
+			@foreach($post->image as $img) 
+				<img src="{{asset('storage/images/'.$img->url)}}" alt="">
+	
+			@endforeach
+			<video alt="err" controls >
+				@foreach($post->video as $video) 
+					<source src="{{asset('storage/videos/'.$video->url)}}" alt=""/>
+		
+				@endforeach
+
+			</video>
+		</div>
+
+	@endforeach
+
+	<div class="feature-photo">
 			<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
+		<div class="feature-photo">
+			<figure><img src="{{ asset('images/resources/timeline-1.jpg')}}" alt=""></figure>
 			<div class="add-btn">
 				<span>1205 followers</span>
 				<a href="#" title="" data-ripple="">Add Friend</a>
@@ -21,7 +45,9 @@
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img src="images/resources/user-avatar.jpg" alt="">
+							<img src="{{ asset('images/resources/' . $user->avatar) }}" alt="">
+
+							
 								<form class="edit-phto">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -37,16 +63,17 @@
 							<ul>
 								<li class="admin-name">
 
-								  <h5>{{$user->last_name}}Janice Griffith</h5>
+								  <h5>{{$user->last_name}} {{$user->first_name}}</h5>
 								  <span>Group Admin</span>
 								</li>	
 								<li>
+
 								<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
 										<a class="" href="{{ url('timeline-photos').'/user-profile/'.$id }}" title="" data-ripple="">Photos</a>
 										<a class="" href="{{ url('timeline-videos') }}t" title="" data-ripple="">Videos</a>
 										<a class="" href="{{ url('timeline-friends') }}" title="" data-ripple="">Friends</a>
 										<a class="" href="{{ url('groups') }}" title="" data-ripple="">Groups</a>
-										<a class="" href="{{ url('about').'/user-profile/'.$id }}" title="" data-ripple="">about</a>
+										<a class="" href="{{ url('about'.'/user-profile/'.$id) }}" title="" data-ripple="">about</a>
 										<a class="active" href="#" title="" data-ripple="">more</a>
 								</li>
 							</ul>
@@ -135,20 +162,20 @@
 												<div class="activity-meta">
 													<i>10 hours Ago</i>
 													<span><a href="#" title="">Commented on Video posted </a></span>
-													<h6>by <a href="newsfeed">black demon.</a></h6>
+													<h6>by <a href="{{ url('newsfeed') }}">black demon.</a></h6>
 												</div>
 											</li>
 											<li>
 												<div class="activity-meta">
 													<i>30 Days Ago</i>
-													<span><a href="newsfeed" title="">Posted your status. “Hello guys, how are you?”</a></span>
+													<span><a href="{{ url('newsfeed') }}" title="">Posted your status. “Hello guys, how are you?”</a></span>
 												</div>
 											</li>
 											<li>
 												<div class="activity-meta">
 													<i>2 Years Ago</i>
 													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="newsfeed">you are so funny mr.been.</a>"</h6>
+													<h6>"<a href="{{ url('newsfeed') }}">you are so funny mr.been.</a>"</h6>
 												</div>
 											</li>
 										</ul>
@@ -200,7 +227,7 @@
 									<div class="central-meta item">
 										<div class="new-postbox">
 											<figure>
-												<img src="images/resources/admin2.jpg" alt="">
+												<img src="{{asset('images/resources/' .$user->avatar)}}" alt="">
 											</figure>
 											<div class="newpst-input">
 												<form method="post">
@@ -244,10 +271,10 @@
 										<div class="user-post">
 											<div class="friend-info">
 												<figure>
-													<img src="images/resources/friend-avatar10.jpg" alt="">
+													<img src="{{asset('images/resources/' .$user->avatar)}}" alt="">
 												</figure>
 												<div class="friend-name">
-													<ins><a href="{{ url('time-line') }}" title="">Janice Griffith</a></ins>
+													<ins><a href="{{ url('#') }}" title="">{{$user->last_name}} {{$user->first_name}}</a></ins>
 													<span>published: june,2 2018 19:PM</span>
 												</div>
 												<div class="description">
@@ -258,7 +285,7 @@
 													</div>
 												<div class="post-meta">
 													<div class="linked-image align-left">
-														<a href="#" title=""><img src="images/resources/page1.jpg" alt=""></a>
+														<a href="#" title=""><img src="{{asset('images/resources/page1.jpg')}}" alt=""></a>
 													</div>
 													<div class="detail">
 														<span>Love Maid - ChillGroves</span>

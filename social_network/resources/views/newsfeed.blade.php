@@ -206,38 +206,9 @@ use Illuminate\View\Component;
 															</span>
 														</li>
 														<li class="social-media">
-															<div class="menu">
-																<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																	</div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																	</div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																	</div>
-																</div>
-
-															</div>
+															<x-share-btn>{{ $post->id }}</x-share-btn>
 														</li>
+                                                        {{ $post->id }}
 													</ul>
 												</div>
 
@@ -423,6 +394,15 @@ use Illuminate\View\Component;
 												</li>
 												<li class="you">
 													<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
+													<div class="notification-event">
+														<span class="chat-message-item">
+															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+														</span>
+														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+													</div>
+												</li>
+												<li class="me">
+													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
 													<div class="notification-event">
 														<span class="chat-message-item">
 															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks

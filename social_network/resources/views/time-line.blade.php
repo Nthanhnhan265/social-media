@@ -7,11 +7,18 @@ use Illuminate\Support\Facades\Auth;
 
 <section>
 	@foreach($posts[0]->posts as $post)
-	<div>
-		{{$post->content}}
-		<!-- {{dump($post->image);}}  -->
-		@foreach($post->image as $img)
-		<img src="{{asset('storage/images/'.$img->url)}}" alt="">
+		<div>
+			{{$post->content}}
+			<!-- {{dump($post->image);}}  -->
+			@foreach($post->image as $img)
+				<img src="{{asset('storage/images/'.$img->url)}}" alt="">
+
+			@endforeach
+			<video alt="err" controls >
+				@foreach($post->video as $video)
+					<source src="{{asset('storage/videos/'.$video->url)}}" alt=""/>
+
+				@endforeach
 
 		@endforeach
 		<video alt="err" controls>
@@ -120,6 +127,10 @@ use Illuminate\Support\Facades\Auth;
 								<img src="{{ asset('images/resources/' . $user->avatar) }}" alt="">
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 15f988fcd657c30b72bef21cb8a1fe6c9371b126
 								<form class="edit-phto">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -804,7 +815,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar5.jpg" alt="">
 													<span class="status f-online"></span>
@@ -815,7 +826,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar6.jpg" alt="">
 													<span class="status f-away"></span>
@@ -826,7 +837,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar7.jpg" alt="">
 													<span class="status f-off"></span>
@@ -837,7 +848,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar5.jpg" alt="">
 													<span class="status f-online"></span>
@@ -848,7 +859,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar2.jpg" alt="">
 													<span class="status f-away"></span>

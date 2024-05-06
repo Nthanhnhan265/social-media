@@ -668,6 +668,7 @@ header.sticky {
     text-align: right;
     vertical-align: middle;
     width: 84%;
+    position: relative;
 }
 
 .top-area > ul {
@@ -3844,10 +3845,16 @@ form .form-group.half:nth-child(2) {
     border-style: none none solid;
     border-width: 0 0 1px;
     box-shadow: none;
-    color: #b7b7b7 !important;
+    color: #b7b7b7;
     font-size: 16px;
     height: 35px;
     line-height: 35px;
+}
+
+.chosen-container-single .chosen-single {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border-style: none none solid;
+    box-shadow: none;
 }
 
 form .dob .form-group {
@@ -10108,6 +10115,10 @@ aside.sidebar.full-style {
     justify-content: center; /* Center content horizontally */
 }
 
+/* Group-view*/
+.group-description {
+    margin-left: 20px;
+}
 
 /* 
 .list-img > img { 

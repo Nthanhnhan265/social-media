@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Auth;
 		<div>
 			{{$post->content}}
 			<!-- {{dump($post->image);}}  -->
-			@foreach($post->image as $img) 
+			@foreach($post->image as $img)
 				<img src="{{asset('storage/images/'.$img->url)}}" alt="">
-	
+
 			@endforeach
 			<video alt="err" controls >
-				@foreach($post->video as $video) 
+				@foreach($post->video as $video)
 					<source src="{{asset('storage/videos/'.$video->url)}}" alt=""/>
-		
+
 				@endforeach
 
 			</video>
@@ -47,7 +47,7 @@ use Illuminate\Support\Facades\Auth;
 							<figure>
 							<img src="{{ asset('images/resources/' . $user->avatar) }}" alt="">
 
-							
+
 								<form class="edit-phto">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -65,7 +65,7 @@ use Illuminate\Support\Facades\Auth;
 
 								  <h5>{{$user->last_name}} {{$user->first_name}}</h5>
 								  <span>Group Admin</span>
-								</li>	
+								</li>
 								<li>
 
 								<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
@@ -83,7 +83,7 @@ use Illuminate\Support\Facades\Auth;
 			</div>
 		</div>
 	</section><!-- top area -->
-		
+
 	<section>
 		<div class="gap gray-bg">
 			<div class="container-fluid">
@@ -278,7 +278,7 @@ use Illuminate\Support\Facades\Auth;
 													<span>published: june,2 2018 19:PM</span>
 												</div>
 												<div class="description">
-														
+
 														<p>
 															World's most beautiful car in Curabitur <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
 														</p>
@@ -291,10 +291,10 @@ use Illuminate\Support\Facades\Auth;
 														<span>Love Maid - ChillGroves</span>
 														<p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... </p>
 														<a href="#" title="">www.sample.com</a>
-													</div>		
+													</div>
 													<div class="we-video-info">
 														<ul>
-															
+
 															<li>
 																<span class="views" data-toggle="tooltip" title="views">
 																	<i class="fa fa-eye"></i>
@@ -372,7 +372,7 @@ use Illuminate\Support\Facades\Auth;
 													<img src="images/resources/user-post.jpg" alt="">
 													<div class="we-video-info">
 														<ul>
-															
+
 															<li>
 																<span class="views" data-toggle="tooltip" title="views">
 																	<i class="fa fa-eye"></i>
@@ -433,7 +433,7 @@ use Illuminate\Support\Facades\Auth;
 														</ul>
 													</div>
 													<div class="description">
-														
+
 														<p>
 															Curabitur world's most beautiful car in <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
 														</p>
@@ -526,7 +526,7 @@ use Illuminate\Support\Facades\Auth;
 																	<i class="em em-stuck_out_tongue"></i>
 																</div>
 																<button type="submit"></button>
-															</form>	
+															</form>
 														</div>
 													</li>
 												</ul>
@@ -547,7 +547,7 @@ use Illuminate\Support\Facades\Auth;
 													<iframe src="https://player.vimeo.com/video/15232052" height="315" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 													<div class="we-video-info">
 														<ul>
-															
+
 															<li>
 																<span class="views" data-toggle="tooltip" title="views">
 																	<i class="fa fa-eye"></i>
@@ -608,7 +608,7 @@ use Illuminate\Support\Facades\Auth;
 														</ul>
 													</div>
 													<div class="description">
-														
+
 														<p>
 															Lonely Cat Enjoying in Summer Curabitur <a href="#" title="">#mypage</a> ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc,
 														</p>
@@ -674,7 +674,7 @@ use Illuminate\Support\Facades\Auth;
 																	<i class="em em-stuck_out_tongue"></i>
 																</div>
 																<button type="submit"></button>
-															</form>	
+															</form>
 														</div>
 													</li>
 												</ul>
@@ -685,7 +685,7 @@ use Illuminate\Support\Facades\Auth;
 							</div><!-- centerl meta -->
 							<div class="col-lg-3">
 								<aside class="sidebar static">
-								
+
 									<!-- <div class="widget friend-list stick-widget">
 										<h4 class="widget-title">Friends</h4>
 										<div id="searchDir"></div>
@@ -731,7 +731,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar5.jpg" alt="">
 													<span class="status f-online"></span>
@@ -742,7 +742,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar6.jpg" alt="">
 													<span class="status f-away"></span>
@@ -753,7 +753,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar7.jpg" alt="">
 													<span class="status f-off"></span>
@@ -764,7 +764,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar5.jpg" alt="">
 													<span class="status f-online"></span>
@@ -775,7 +775,7 @@ use Illuminate\Support\Facades\Auth;
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
 													<img src="images/resources/friend-avatar2.jpg" alt="">
 													<span class="status f-away"></span>
@@ -851,10 +851,10 @@ use Illuminate\Support\Facades\Auth;
 									</div>friends list sidebar -->
 								</aside>
 							</div><!-- sidebar -->
-						</div>	
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</section>
 	@endsection<!-- responsive header -->

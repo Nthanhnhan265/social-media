@@ -24,16 +24,17 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'user_id',
-        'first_name',
-        'last_name',
-        'email',
-        'DOB',
-        'gender',
-        'password',
-        'description',
-        'avatar',
-        'background',
-        'role_id_fk'
+        'first_name', 
+        'last_name', 
+        'email', 
+        'DOB', 
+        'gender', 
+        'password', 
+        'description', 
+        'avatar', 
+        'background', 
+        'role_id_fk',
+        'status'
     ];
 
     /**
@@ -63,6 +64,10 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Posts::class, "user_id_fk");
+    }
+    public function usergroups()
+    {
+        return $this->hasMany(Usergroup::class, 'user_id_fk');
     }
     public function comments()
     {

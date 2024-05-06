@@ -53,8 +53,8 @@ use Illuminate\View\Component;
 											<a href="{{ url('people-nearby') }}" title="">People Nearby</a>
 										</li>
 										<li>
-											<i class="fa fa-bar-chart-o"></i>
-											<a href="{{ url('insights') }}" title="">insights</a>
+											<i class="fa fa-users"></i>
+											<a href="{{ url('groups') }}" title="">Groups</a>
 										</li>
 										<li>
 											<form method="POST" action="{{ route('logout') }}">
@@ -548,6 +548,15 @@ use Illuminate\View\Component;
 												</li>
 												<li class="you">
 													<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
+													<div class="notification-event">
+														<span class="chat-message-item">
+															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+														</span>
+														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+													</div>
+												</li>
+												<li class="me">
+													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
 													<div class="notification-event">
 														<span class="chat-message-item">
 															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks

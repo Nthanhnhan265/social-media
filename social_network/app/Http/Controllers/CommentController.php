@@ -11,7 +11,7 @@ use App\Models\Video;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
 
 class CommentController extends Controller
 {
@@ -45,10 +45,10 @@ class CommentController extends Controller
         if ($request->post_id) {
             $newComment = [
                 "post_id_fk" => $request->post_id,
-                "content" => empty($request->content)? "" : $request->content,
+                "content" => empty($request->content) ? "" : $request->content,
                 "user_id_fk" => Auth::user()->user_id
             ];
-            
+
             $cmt = Comment::create($newComment);
 
             //check and add images 
@@ -99,11 +99,8 @@ class CommentController extends Controller
                 //them vao db 
                 Video::insert([...$newVideos]);
             }
-
-            
-            
         }
-        return redirect('newsfeed'); 
+        return redirect('newsfeed');
     }
 
     /**
@@ -162,6 +159,37 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+    }
+
+    /**
+     * Remove all comments of a post
+     * @param int $post_id 
+     *
+     * 
+     */
+    public static function deleteCommentsPostId($post_id)
+    {
+        $allComments = Comment::where("post_id_fk", $post_id)->with('image','video');
+        //loop each comment 
+        foreach ($allComments as $cmt) {
+            //delete images of comments
+            foreach ($cmt->image as $imgElement) {
+                //delete images in storage
+                Storage::delete('public/images/' . $imgElement->url);
+                //delete image in image table
+                $imgElement->delete();
+            }
+
+            //delete videos of comments
+            foreach ($cmt->video as $vdElement) {
+                //delete images in storage
+                Storage::delete('public/videos/' . $vdElement->url);
+                //delete image in image table
+                $vdElement->delete();
+            }
+
+        }
+        //delete the comment
+        Comment::where('post_id_fk',$post_id)->delete();
     }
 }

@@ -12,7 +12,7 @@ class Comment extends Model
     protected $table = 'comments';
     protected $primaryKey = 'comment_id';
     public $timestamps = true;
-    protected $fillable = ['comments', 'comments_id', "post_id_fk", "user_id_fk", "content"]; 
+    protected $fillable = ['comments', 'comments_id', "post_id_fk", "user_id_fk","status", "content"]; 
     public function post() {
         return $this->belongsTo(Comment::class, 'post_id_fk');
     }

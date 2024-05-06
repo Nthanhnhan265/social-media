@@ -1,11 +1,31 @@
 <?php
 require __DIR__.'/auth.php';
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Notification;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Relationship;
+use App\Models\Relationship as ModelsRelationship;
+use App\Models\User;
+
+Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']); 
+Route::get('/time-line/:id',[]); 
+Route::post('/post',[PostsController::class, 'store']); 
+Route::post('/comment',[CommentController::class, 'store']); 
+Route::delete('/post/{id}',[PostsController::class, 'destroy'])->name('posts.destroy'); 
+Route::put('/post/{id}',[PostsController::class, 'update'])->name('posts.update'); 
+Route::post('/relationship',[Relationship::class,'store'])->name('relationships.store'); 
+Route::put('/relationship/{id}/{redirect?}',[Relationship::class,'update'])->name('relationships.update'); 
+Route::delete('/relationship/{id}/{redirect?}',[Relationship::class,'destroy'])->name('relationships.destroy');
+Route::get('/timeline-friends/{id}',function($id) { 
+    return view('timeline-friends',
+    ["friends"=>ModelsRelationship::getFriendListOfUser(),
+    "requests"=>ModelsRelationship::getRequestListOfUser()]);
+});  
+Route::put('/read-notification/{id}',[Notification::class,'update']);  
 use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
 
@@ -19,29 +39,7 @@ use App\Http\Controllers\GroupController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Route::get('/{namePage?}', function ($namePage = "index") {
-//     $pages = [
-//         'login' => 'login',
-//         'logout' => 'logout',
-//         'messages' => 'messages',
-//         'index-2' => 'index-2',
-//         'index2' => 'index2',
-//         'index-company' => 'index-company',
-//         'inbox' => 'inbox',
-//         'insight' => 'insight',
-//         'insights' => 'insights',
-//         'knowledge-base' => 'knowledge-base',
-//         'landing' => 'landing',
-//         'location' => 'location',
-//         'newsfeed' => 'newsfeed',
-//         'notifications' => 'notifications',
-//         'page-likers' => 'page-likers',
-//         'page' => 'page',
-//         'widgets' => 'widgets'
-//     ];
 
-//     return isset($pages[$namePage]) ? view($pages[$namePage]) : view('error');
-// });
 Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']);
 Route::get('/time-line/:id',[]);
 
@@ -53,6 +51,10 @@ Route::put('/post/{id}',[PostsController::class, 'update'])->name('posts.update'
 
 Route::get('/', function () {
     return redirect ('/newsfeed');
+});
+
+Route::get('/test/{id}', function ($id='') {
+    return view ('/test',["id"=>$id]);   
 });
 
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Posts;
+use App\Models\Relationship;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Users;
@@ -11,7 +13,6 @@ use App\Models\Video;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Comment;
 
 
 class PostsController extends Controller
@@ -23,7 +24,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //hiển thị giao diện trang chính 
+        //lấy danh sách bạn bè của user hiện tại 
+         
         //hiển thị mọi bài viết trong db -> chưa hợp lý cho việc hiển thị phù hợp với từng tài khoản 
          return view('newsfeed', ["posts" => Posts::orderBy('created_at', 'desc')
             ->with([
@@ -41,7 +43,9 @@ class PostsController extends Controller
                         }
                     ]);
                 }
-            ])->get()]);
+            ])->get(), 
+            "friends"=>Relationship::getFriendListOfUser()
+        ], );
     }
 
     public function getAllPosts(Request $request)
@@ -71,7 +75,7 @@ class PostsController extends Controller
                     $qImg->where('img_location_fk', 0);
                 },
                 'video' => function ($qVid) {
-                    $qVid->where('video_location_fk', 0);
+                    $qVid->where('video_location_fk', 0); 
                 },
                 'comments' => function ($q) {
                     $q->with([
@@ -304,10 +308,8 @@ class PostsController extends Controller
             $vdElement->delete();
         }
 
-        foreach($post->comment as $cmtElement)  { 
-            //delete image in image table
-            $cmtElement->delete(); 
-        }
+        //delete comments 
+        CommentController::deleteCommentsPostId($post_id); 
         
         // //delete post by id 
         Posts::find($post_id)->delete();

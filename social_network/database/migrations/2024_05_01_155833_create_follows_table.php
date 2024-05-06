@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('follows', function (Blueprint $table) {
             $table->increments('follow_id');
-            $table->integer('user_id'); 
+            $table->integer('user_id_fk'); 
             $table->integer('follow_id_fk');    
             $table->string('follow_type'); //friend, group
             $table->timestamps();

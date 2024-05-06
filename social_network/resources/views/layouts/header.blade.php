@@ -1,7 +1,12 @@
-@php
+<?php
+
+use App\Models\Notification;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Auth;
-@endphp
+$notifications = Notification::getAllNotification();
+?>
+<div>
+</div>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -289,73 +294,34 @@ use Illuminate\Support\Facades\Auth;
 					</li>
 					<li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
 					<li>
-						<a href="#" title="Notification" data-ripple="">
-							<i class="ti-bell"></i><span>20</span>
+						<a href="#" title="Notification" data-ripple="" class="notification-e">
+							<i class="ti-bell"></i><span>{{count($notifications->where('status','unread'))}}</span>
 						</a>
 						<div class="dropdowns">
-							<span>4 New Notifications</span>
+							<span>{{count($notifications->where('status','unread'))}} New Notifications</span>
 							<ul class="drops-menu">
+								@foreach($notifications as $notification) 
 								<li>
-									<a href="{{ url('notifications') }}" title="">
-										<img src="images/resources/thumb-1.jpg" alt="">
-										<div class="mesg-meta">
-											<h6>sarah Loren</h6>
-											<span>Hi, how r u dear ...?</span>
-											<i>2 min ago</i>
-										</div>
-									</a>
-									<span class="tag green">New</span>
+										<form action="{{ url('read-notification/'.$notification->notification_id)}}" method="post">
+											@csrf
+											@method('put') 
+											<input type="hidden" name="type_id" value="{{$notification->type_id}}">
+											<input type="hidden" name="type" value="{{$notification->type}}">
+											<button type="submit" class={{$notification->status == 'read' ? "read-noti" : "unread-noti	"}}>
+												@if($notification->type=="friend_request")
+												<i class="fa-solid fa-paper-plane"></i>
+												@elseif($notification->type=="accept")
+												<i class="fa-solid fa-check"></i>
+												@endif
+												<div class="mesg-meta">
+													{!! $notification->content!!}
+												</div>
+	
+											</button>
+										</form>
 								</li>
-								<li>
-
-									<a href="{{ url('notifications') }}" title="">
-										<img src="images/resources/thumb-2.jpg" alt="">
-										<div class="mesg-meta">
-											<h6>Jhon doe</h6>
-											<span>Hi, how r u dear ...?</span>
-											<i>2 min ago</i>
-										</div>
-									</a>
-									<span class="tag red">Reply</span>
-								</li>
-								<li>
-
-									<a href="{{ url('notifications') }}" title="">
-										<img src="images/resources/thumb-3.jpg" alt="">
-										<div class="mesg-meta">
-											<h6>Andrew</h6>
-											<span>Hi, how r u dear ...?</span>
-											<i>2 min ago</i>
-										</div>
-									</a>
-									<span class="tag blue">Unseen</span>
-								</li>
-								<li>
-
-									<a href="{{ url('notifications') }}" title="">
-										<img src="images/resources/thumb-4.jpg" alt="">
-										<div class="mesg-meta">
-											<h6>Tom cruse</h6>
-											<span>Hi, how r u dear ...?</span>
-											<i>2 min ago</i>
-										</div>
-									</a>
-									<span class="tag">New</span>
-								</li>
-								<li>
-
-									<a href="{{ url('notifications') }}" title="">
-										<img src="images/resources/thumb-5.jpg" alt="">
-										<div class="mesg-meta">
-											<h6>Amy</h6>
-											<span>Hi, how r u dear ...?</span>
-											<i>2 min ago</i>
-										</div>
-									</a>
-									<span class="tag">New</span>
-								</li>
-							</ul>
-							<a href="{{ url('notifications') }}" title="" class="more-mesg">view more</a>
+								@endforeach
+							</ul>	
 						</div>
 					</li>
 					<li>

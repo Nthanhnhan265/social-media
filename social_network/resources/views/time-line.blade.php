@@ -30,53 +30,77 @@ use Illuminate\Support\Facades\Auth;
 		<div class="feature-photo">
 			<figure><img src="{{ asset('images/resources/timeline-1.jpg')}}" alt=""></figure>
 			<div class="container-btn">
-			@if (Auth::user()->user_id != $id)
+				@if (Auth::user()->user_id != $user->user_id)
 				@if ($friend)
 				<?php
 				if (!empty($friend[0])) {
 					$n = $friend[0];
 				}
 				?>
-					@if ($n->status == "friend")
-						<div class="dropdown">
-							<button class="btn dropdown-toggle btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<a href="#" title="" data-ripple="">Friend <i class="fa-solid fa-user-group ml-1"></i></a>
-							</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<div class="dropdown-item" href="#">Unfriend <i class="fa-solid fa-user-slash"></i></div>
-								<div class="dropdown-item" href="#">
-									<div class="notify-btn">
-										Unfollow
-										<a href="#" title="" data-ripple="" title="follow"><i class="fa-solid fa-bell-slash"></i></a>
-									</div>
-								</div>
+				@if ($n->status == "accept")
+				<div class="dropdown">
+					<button class="btn dropdown-toggle btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a href="#" title="" data-ripple="">Friend <i class="fa-solid fa-user-group ml-1"></i></a>
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<div class="dropdown-item" href="#">
+							<form action="{{url('relationship/'.$user->user_id)}}"  method="post">
+								@csrf
+								@method('delete')
+							<button type="submit" class="btn-warning">Unfriend <i class="fa-solid fa-x ml-1"></i></button>
+							</form>
+
+						</div>
+						<div class="dropdown-item" href="#">
+							<div class="notify-btn">
+								Unfollow
+								<a href="#" title="" data-ripple="" title="follow"><i class="fa-solid fa-bell-slash"></i></a>
 							</div>
 						</div>
-				
-					@else
-						@if($n->sender == $id)
-						
-						<div class="add-btn btn-filled">
-							<a href="#" title="" data-ripple="">Accept <i class="fa-solid fa-check ml-1"></i></a>
-						</div>
-						<div class="reject-btn btn-outline">
-							<a href="#" title="" data-ripple="">Reject <i class="fa-solid fa-x ml-1"></i></a>
-						</div>
-						@else
-							<div class="pending-btn btn-filled">
-								<a href="#" title="" data-ripple="">Pending <i class="fa-solid fa-paper-plane ml-1"></i></a>
-							</div>
-							<div class="cancel-btn btn-outline">
-								<a href="#" title="" data-ripple="">Cancel <i class="fa-solid fa-x ml-1"></i></a>
-							</div>
-						@endif
-					@endif
+					</div>
+				</div>
+
 				@else
-						<div class="add-btn btn-filled">
-							<a href="#" title="" data-ripple="">Add Friend</a>
-						</div>
+				@if($n->sender == $user->user_id)
+				<form action="{{url('relationship/'.$user->user_id)}}" method="post">
+					@csrf
+					@method('put')
+					<div class="add-btn btn-filled">
+						<button type="submit">Accept <i class="fa-solid fa-check ml-1"></i></button>
+					</div>
+				</form>
+				<form action="{{url('relationship/'.$user->user_id)}}" method="post">
+					@csrf
+					@method('delete')
+					<div class="reject-btn btn-outline">
+						<button type="submit" class=""><i class="fa-solid fa-trash"></i></button>
+					</div>
+
+				</form>
+				@else
+					<div class="text-white">Pending <i class="fa-solid fa-paper-plane ml-1"></i></div>
+				<form action="{{url('relationship/'.$user->user_id)}}" method="post">
+					@csrf
+					@method('delete')
+					<div class="reject-btn btn-outline">
+						<button type="submit" class="btn-warning">Cancel <i class="fa-solid fa-x ml-1"></i></button>
+					</div>
+				</form>
 				@endif
-			@endif
+				@endif
+				@else
+				<form action="{{url('relationship')}}" method="post">
+					@csrf
+					@method('post')
+					<input type="hidden" name="receiver" value="{{$user->user_id}}">
+					<div class="add-btn btn-filled">
+						<button type="submit">
+							Add friend <i class="fa-solid fa-user-plus"></i>
+						</button>
+					</div>
+				</form>
+				@endif
+				@endif
 
 			</div>
 

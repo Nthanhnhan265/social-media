@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification as ModelsNotification;
 use Illuminate\Http\Request;
 
 class Notification extends Controller
@@ -68,7 +69,17 @@ class Notification extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $noti_id = $id; 
+        if(isset($request->type,$request->type_id)) { 
+            if (ModelsNotification::markReadNotify($noti_id)) {
+                if($request->type == "friend_request" || $request->type == "accept") { 
+                    return redirect(url("time-line/user-profile/".$request->type_id)); 
+                }
+                
+            }else { 
+                dd('marked');
+            }
+        }
     }
 
     /**

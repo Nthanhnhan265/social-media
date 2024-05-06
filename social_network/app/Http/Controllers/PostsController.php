@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Posts;
+use App\Models\Relationship;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Users;
@@ -22,7 +23,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //hiển thị giao diện trang chính 
+        //lấy danh sách bạn bè của user hiện tại 
+         
         //hiển thị mọi bài viết trong db -> chưa hợp lý cho việc hiển thị phù hợp với từng tài khoản 
         return view('newsfeed', ["posts" => Posts::orderBy('created_at', 'desc')
             ->with([
@@ -40,7 +42,9 @@ class PostsController extends Controller
                         }
                     ]);
                 }
-            ])->get()]);
+            ])->get(), 
+            "friends"=>Relationship::getFriendListOfUser()
+        ], );
     }
 
     public static function getPostById($id)

@@ -400,6 +400,44 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 
 
 });//document ready end
+// SIDEBAR TOGGLE - Management
+
+let sidebarOpen = false;
+const sidebar = document.getElementById('sidebar');
+
+function openSidebar() {
+  if (!sidebarOpen) {
+    sidebar.classList.add('sidebar-responsive');
+    sidebarOpen = true;
+  }
+}
+
+function closeSidebar() {
+  if (sidebarOpen) {
+    sidebar.classList.remove('sidebar-responsive');
+    sidebarOpen = false;
+  }
+}
+
+function previewImage(event) {
+	const input = event.target;
+	if (input.files && input.files[0]) {
+		const reader = new FileReader();
+		reader.onload = function (e) {
+			document.getElementById('avatarPreview').src = e.target.result;
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+//Xác nhận xóa người dùng
+function confirmDeleteUser(userId) {
+	if (confirm('Are you sure you want to delete this user?')) {
+		window.location.href = "{{ url('user-delete') }}/" + userId;
+	} else {
+		return false;
+	}
+}
 
 
 

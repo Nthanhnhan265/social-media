@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('group_id');
             $table->string('name_group',length:100); 
             $table->string('description',length:500);
-            $table->boolean('status'); //private or public group  
+            $table->boolean('status'); 
             $table->timestamps();
         });
     }

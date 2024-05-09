@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Posts extends Model
 {
     use HasFactory;
-    protected $table = "posts";
-    protected $primaryKey = "id";
-    protected $fillable = ["user_id_fk","content","timestamps"];
+    protected $table = "posts"; 
+    protected $primaryKey = "id"; 
+    protected $fillable = ["user_id_fk","content","status","timestamps"]; 
     public $timestamps = true;
+
 
     public function comments()
     {
@@ -43,5 +44,4 @@ class Posts extends Model
     {
         return $this->belongsToMany(User::class, 'share', 'user_id_fk','post_id_fk')->withPivot('status');
     }
-
 }

@@ -5,63 +5,62 @@ use Illuminate\View\Component;
 ?>
 @extends('layouts.app')
 @section('content')
-    <section>
-        <div class="gap gray-bg">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="row" id="page-contents">
-                            <div class="col-lg-3">
-                                <aside class="sidebar static">
-                                    <div class="widget">
-                                        <h4 class="widget-title">Shortcuts</h4>
-                                        <ul class="naves">
-                                            <li>
-                                                <i class="ti-clipboard"></i>
-                                                <a href="{{ url('newsfeed') }}" title="">News feed</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-mouse-alt"></i>
-                                                <a href="{{ url('inbox') }}" title="">Inbox</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-files"></i>
-                                                <a href="{{ url('fav-page') }}" title="">My pages</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-user"></i>
-                                                <a href="{{ url('timeline-friends') }}" title="">friends</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-image"></i>
-                                                <a href="{{ url('timeline-photos') }}" title="">images</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-video-camera"></i>
-                                                <a href="{{ url('timeline-videos') }}" title="">videos</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-comments-smiley"></i>
-                                                <a href="{{ url('messages') }}" title="">Messages</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-bell"></i>
-                                                <a href="{{ url('notifications') }}" title="">Notifications</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-share"></i>
-                                                <a href="{{ url('people-nearby') }}" title="">People Nearby</a>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-bar-chart-o"></i>
-                                                <a href="{{ url('insights') }}" title="">insights</a>
-                                            </li>
-                                            <li>
-                                                <form method="POST" action="{{ route('logout') }}">
-                                                    @csrf
-                                                    <i class="ti-power-off"></i>
-                                                    <x-dropdown-link style="padding-left:0px!important;" :href="route('logout')"
-                                                        onclick="event.preventDefault();
+<section>
+	<div class="gap gray-bg">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="row" id="page-contents">
+						<div class="col-lg-3">
+							<aside class="sidebar static">
+								<div class="widget">
+									<h4 class="widget-title">Shortcuts</h4>
+									<ul class="naves">
+										<li>
+											<i class="ti-clipboard"></i>
+											<a href="{{ url('newsfeed') }}" title="">News feed</a>
+										</li>
+										<li>
+											<i class="ti-mouse-alt"></i>
+											<a href="{{ url('inbox') }}" title="">Inbox</a>
+										</li>
+										<li>
+											<i class="ti-files"></i>
+											<a href="{{ url('fav-page') }}" title="">My pages</a>
+										</li>
+										<li>
+											<i class="ti-user"></i>
+											<a href="{{ url('timeline-friends') }}" title="">friends</a>
+										</li>
+										<li>
+											<i class="ti-image"></i>
+											<a href="{{ url('timeline-photos') }}" title="">images</a>
+										</li>
+										<li>
+											<i class="ti-video-camera"></i>
+											<a href="{{ url('timeline-videos') }}" title="">videos</a>
+										</li>
+										<li>
+											<i class="ti-comments-smiley"></i>
+											<a href="{{ url('messages') }}" title="">Messages</a>
+										</li>
+										<li>
+											<i class="ti-bell"></i>
+											<a href="{{ url('notifications') }}" title="">Notifications</a>
+										</li>
+										<li>
+											<i class="ti-share"></i>
+											<a href="{{ url('people-nearby') }}" title="">People Nearby</a>
+										</li>
+										<li>
+											<i class="fa fa-users"></i>
+											<a href="{{ url('groups') }}" title="">Groups</a>
+										</li>
+										<li>
+											<form method="POST" action="{{ route('logout') }}">
+												@csrf
+												<i class="ti-power-off"></i>
+												<x-dropdown-link style="padding-left:0px!important;" :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                                         {{ __('Log Out') }}
                                                     </x-dropdown-link>
@@ -584,102 +583,94 @@ use Illuminate\View\Component;
                                             </li>
                                             <li>
 
-                                                <figure>
-                                                    <img src="images/resources/friend-avatar2.jpg" alt="">
-                                                    <span class="status f-away"></span>
-                                                </figure>
-                                                <div class="friendz-meta">
-                                                    <a href="{{ url('time-line') }}">Sarah Loren</a>
-                                                    <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection"
-                                                            class="__cf_email__"
-                                                            data-cfemail="d5b7b4a7bbb0a695b2b8b4bcb9fbb6bab8">[email&#160;protected]</a></i>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="chat-box">
-                                            <div class="chat-head">
-                                                <span class="status f-online"></span>
-                                                <h6>Bucky Barnes</h6>
-                                                <div class="more">
-                                                    <span><i class="ti-more-alt"></i></span>
-                                                    <span class="close-mesage"><i class="ti-close"></i></span>
-                                                </div>
-                                            </div>
-                                            <div class="chat-list">
-                                                <ul>
-                                                    <li class="me">
-                                                        <div class="chat-thumb"><img src="images/resources/chatlist1.jpg"
-                                                                alt=""></div>
-                                                        <div class="notification-event">
-                                                            <span class="chat-message-item">
-                                                                Hi James! Please remember to buy the food for tomorrow! I’m
-                                                                gonna be handling the gifts and Jake’s gonna get the drinks
-                                                            </span>
-                                                            <span class="notification-date"><time
-                                                                    datetime="2004-07-24T18:18"
-                                                                    class="entry-date updated">Yesterday at
-                                                                    8:10pm</time></span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="you">
-                                                        <div class="chat-thumb"><img src="images/resources/chatlist2.jpg"
-                                                                alt=""></div>
-                                                        <div class="notification-event">
-                                                            <span class="chat-message-item">
-                                                                Hi James! Please remember to buy the food for tomorrow! I’m
-                                                                gonna be handling the gifts and Jake’s gonna get the drinks
-                                                            </span>
-                                                            <span class="notification-date"><time
-                                                                    datetime="2004-07-24T18:18"
-                                                                    class="entry-date updated">Yesterday at
-                                                                    8:10pm</time></span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="me">
-                                                        <div class="chat-thumb"><img src="images/resources/chatlist1.jpg"
-                                                                alt=""></div>
-                                                        <div class="notification-event">
-                                                            <span class="chat-message-item">
-                                                                Hi James! Please remember to buy the food for tomorrow! I’m
-                                                                gonna be handling the gifts and Jake’s gonna get the drinks
-                                                            </span>
-                                                            <span class="notification-date"><time
-                                                                    datetime="2004-07-24T18:18"
-                                                                    class="entry-date updated">Yesterday at
-                                                                    8:10pm</time></span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <form class="text-box">
-                                                    <textarea placeholder="Post enter to post..."></textarea>
-                                                    <div class="add-smiles">
-                                                        <span title="add icon" class="em em-expressionless"></span>
-                                                    </div>
-                                                    <div class="smiles-bunch">
-                                                        <i class="em em---1"></i>
-                                                        <i class="em em-smiley"></i>
-                                                        <i class="em em-anguished"></i>
-                                                        <i class="em em-laughing"></i>
-                                                        <i class="em em-angry"></i>
-                                                        <i class="em em-astonished"></i>
-                                                        <i class="em em-blush"></i>
-                                                        <i class="em em-disappointed"></i>
-                                                        <i class="em em-worried"></i>
-                                                        <i class="em em-kissing_heart"></i>
-                                                        <i class="em em-rage"></i>
-                                                        <i class="em em-stuck_out_tongue"></i>
-                                                    </div>
-                                                    <button type="submit"></button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div><!-- friends list sidebar -->
-                                </aside>
-                            </div><!-- sidebar -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+											<figure>
+												<img src="images/resources/friend-avatar2.jpg" alt="">
+												<span class="status f-away"></span>
+											</figure>
+											<div class="friendz-meta">
+												<a href="{{ url('time-line') }}">Sarah Loren</a>
+												<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5b7b4a7bbb0a695b2b8b4bcb9fbb6bab8">[email&#160;protected]</a></i>
+											</div>
+										</li>
+									</ul>
+									<div class="chat-box">
+										<div class="chat-head">
+											<span class="status f-online"></span>
+											<h6>Bucky Barnes</h6>
+											<div class="more">
+												<span><i class="ti-more-alt"></i></span>
+												<span class="close-mesage"><i class="ti-close"></i></span>
+											</div>
+										</div>
+										<div class="chat-list">
+											<ul>
+												<li class="me">
+													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+													<div class="notification-event">
+														<span class="chat-message-item">
+															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+														</span>
+														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+													</div>
+												</li>
+												<li class="you">
+													<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
+													<div class="notification-event">
+														<span class="chat-message-item">
+															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+														</span>
+														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+													</div>
+												</li>
+												<li class="me">
+													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+													<div class="notification-event">
+														<span class="chat-message-item">
+															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+														</span>
+														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+													</div>
+												</li>
+												<li class="me">
+													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+													<div class="notification-event">
+														<span class="chat-message-item">
+															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+														</span>
+														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+													</div>
+												</li>
+											</ul>
+											<form class="text-box">
+												<textarea placeholder="Post enter to post..."></textarea>
+												<div class="add-smiles">
+													<span title="add icon" class="em em-expressionless"></span>
+												</div>
+												<div class="smiles-bunch">
+													<i class="em em---1"></i>
+													<i class="em em-smiley"></i>
+													<i class="em em-anguished"></i>
+													<i class="em em-laughing"></i>
+													<i class="em em-angry"></i>
+													<i class="em em-astonished"></i>
+													<i class="em em-blush"></i>
+													<i class="em em-disappointed"></i>
+													<i class="em em-worried"></i>
+													<i class="em em-kissing_heart"></i>
+													<i class="em em-rage"></i>
+													<i class="em em-stuck_out_tongue"></i>
+												</div>
+												<button type="submit"></button>
+											</form>
+										</div>
+									</div>
+								</div><!-- friends list sidebar -->
+							</aside>
+						</div><!-- sidebar -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 @endsection

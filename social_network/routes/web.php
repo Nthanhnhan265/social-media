@@ -7,6 +7,7 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\NewsController;
 
 
 /*
@@ -99,3 +100,7 @@ Route::get('/{page?}', function ($page = "newsfeed") {
 Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
 Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 
 Route::get('edit-profile-basic/{id}',[UsersController::class,'showProfile']);
+
+
+// Trong Routes/web.php
+Route::get('/newsfeed', [PostsController::class, 'index'])->middleware(['auth','verified']);

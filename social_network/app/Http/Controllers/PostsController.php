@@ -12,6 +12,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Log;
 
 
 class PostsController extends Controller
@@ -21,28 +22,36 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //hiển thị giao diện trang chính 
-        //hiển thị mọi bài viết trong db -> chưa hợp lý cho việc hiển thị phù hợp với từng tài khoản 
-         return view('newsfeed', ["posts" => Posts::orderBy('created_at', 'desc')
-            ->with([
+    public function index(Request $request)
+{
+    $posts = Posts::orderBy('created_at', 'desc')
+    ->with([
+        'user',
+        'image',
+        'video',
+        'comments' => function ($q) {
+            $q->with([
                 'user',
-                'image',
-                'video',
-                'comments' => function ($q) {
-                    $q->with([
-                        'user',
-                        'image' => function ($qImg) {
-                            $qImg->where('img_location_fk', 1);
-                        },
-                        'video' => function ($qVid) {
-                            $qVid->where('video_location_fk', 1);
-                        }
-                    ]);
+                'image' => function ($qImg) {
+                    $qImg->where('img_location_fk', 1);
+                },
+                'video' => function ($qVid) {
+                    $qVid->where('video_location_fk', 1);
                 }
-            ])->get()]);
-    }
+            ])->orderBy('created_at', 'desc');
+        }
+    ])->paginate(5);
+
+// Log posts data to check if it is fetching properly
+Log::info('Fetched posts:', ['posts' => $posts->toArray()]); // Convert posts collection to array for logging
+
+if ($request->ajax()) {
+    return view('partials.posts', compact('posts'))->render();
+}
+
+return view('newsfeed', compact('posts'));
+}
+
 
     public function getAllPosts(Request $request)
     {

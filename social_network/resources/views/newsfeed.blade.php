@@ -178,8 +178,8 @@ use Illuminate\View\Component;
 									</div>
 								</div>
 							</div><!-- add post new box #loadpost-->
-							<div class="loadMore">
-								@foreach ($posts as $post)
+							<div id="news-container" class="loadMore">
+							@foreach ($posts as $post)
 								<!-- loop to find owner's post -->
 
 								<div class="central-meta item rounded-5">
@@ -360,6 +360,10 @@ use Illuminate\View\Component;
 								</div>
 								@endforeach
 							</div>
+							<div id="loading-spinner" style="display: none; text-align: center; margin: 20px;">
+								<img src="{{asset('images/ZKZg.gif')}}" alt="Loading..."/>
+							</div>
+
 						</div><!-- centerl meta -->
 						<div class="col-lg-3">
 							<aside class="sidebar static">
@@ -635,4 +639,5 @@ use Illuminate\View\Component;
 		</div>
 	</div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection

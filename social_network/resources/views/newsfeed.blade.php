@@ -38,109 +38,176 @@ use Illuminate\View\Component;
 												<i class="ti-power-off"></i>
 												<x-dropdown-link style="padding-left:0px!important;font-size:15px" :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-													{{ __('Log out') }}
-												</x-dropdown-link>
-											</form>
-										</li>
-									</ul>
-								</div><!-- Shortcuts -->
-								<div class="widget">
-									<h4 class="widget-title">Recent Activity</h4>
-									<ul class="activitiez">
-										<li>
-											<div class="activity-meta">
-												<i>10 hours Ago</i>
-												<span><a href="#" title="">Commented on Video posted </a></span>
-												<h6>by <a href="{{ url('time-line') }}">black demon.</a></h6>
-											</div>
-										</li>
-										<li>
-											<div class="activity-meta">
-												<i>30 Days Ago</i>
-												<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
-											</div>
-										</li>
-										<li>
-											<div class="activity-meta">
-												<i>2 Years Ago</i>
-												<span><a href="#" title="">Share a video on her timeline.</a></span>
-												<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-											</div>
-										</li>
-									</ul>
-								</div><!-- recent activites -->
-								
-							</aside>
-						</div><!-- sidebar -->
-						<div class="col-lg-6">
-							<div class="central-meta">
-								<div class="new-postbox">
-									<figure>
-										<?php
-										$avtUser = Auth::user()->avatar;
-										?>
-										<!-- <img src="{{asset('images/resources/'.$avtUser)}}" alt=""> -->
-										<x-user-avt>
-										</x-user-avt>
+                                                        {{ __('Log Out') }}
+                                                    </x-dropdown-link>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div><!-- Shortcuts -->
+                                    <div class="widget">
+                                        <h4 class="widget-title">Recent Activity</h4>
+                                        <ul class="activitiez">
+                                            {{-- $activityHistorys --}}
+                                            @foreach ($postActivityHistors as $postActivityHistor)
+                                                <li>
+                                                    <div class="activity-meta">
+                                                        <i>{{ $postActivityHistor->created_at }}</i>
 
-									</figure>
-									<div class="newpst-input">
-										<form method="post" action="{{url('post')}}" enctype="multipart/form-data">
-											@csrf
-											@method("post")
-											<textarea rows="2" name="content" placeholder="write something"></textarea>
-											<div class="attachments">
-												<ul>
-													<!-- ###Task: viet js cho size input -->
-													<li>
-														<i class="fa fa-image"></i>
-														<label class="fileContainer">
-															<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*">
-														</label>
-													</li>
-													<li>
-														<i class="fa fa-video-camera"></i>
-														<label class="fileContainer">
-															<input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*">
-														</label>
-													</li>
+                                                        <span><a href="#" title="">Posted your status.
+                                                                “{{ $postActivityHistor->content }}”</a></span>
+                                                    </div>
+                                                </li>
+                                            @endforeach
 
-													<li>
-														<button type="submit">Post</button>
-													</li>
-												</ul>
-											</div>
-										</form>
+                                            @foreach ($commentsActivityHistorys as $commentsActivityHistory)
+                                                <li>
+                                                    <div class="activity-meta">
+                                                        <i>{{ $commentsActivityHistory->created_at }}</i>
+                                                        <span><a href="#" title="">Commented on Video posted
+                                                            </a></span>
+                                                        <h6>by <a href="{{ url('time-line') }}">
+                                                                {{ $commentsActivityHistory->user_first_name }}
+                                                                {{ $commentsActivityHistory->user_last_name }} </a></h6>
+                                                    </div>
+                                                </li>
+                                            @endforeach
 
-									</div>
-								</div>
-							</div><!-- add post new box #loadpost-->
-							<div class="loadMore">
-								@foreach ($posts as $post)
-								<!-- loop to find owner's post -->
+                                            @foreach ($shareActivityHistorys as $shareActivityHistory)
+                                                <li>
+                                                    <div class="activity-meta">
+                                                        <i>{{ $shareActivityHistory->created_at }}</i>
+                                                        <span><a href="#" title="">Share a @if ($shareActivityHistory->status === 0)
+                                                                    privary
+                                                                @else
+                                                                    public
+                                                                @endif
+                                                                video on your timeline.</a></span>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div><!-- recent activites -->
+                                    <div class="widget stick-widget">
+                                        <h4 class="widget-title">Who's follownig</h4>
+                                        <ul class="followers">
+                                            <li>
+                                                <figure><img src="images/resources/friend-avatar2.jpg" alt="">
+                                                </figure>
+                                                <div class="friend-meta">
+                                                    <h4><a href="{{ url('time-line') }}" title="">Kelly Bill</a></h4>
+                                                    <a href="#" title="" class="underline">Add Friend</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <figure><img src="images/resources/friend-avatar4.jpg" alt="">
+                                                </figure>
+                                                <div class="friend-meta">
+                                                    <h4><a href="{{ url('time-line') }}" title="">Issabel</a></h4>
+                                                    <a href="#" title="" class="underline">Add Friend</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <figure><img src="images/resources/friend-avatar6.jpg" alt="">
+                                                </figure>
+                                                <div class="friend-meta">
+                                                    <h4><a href="{{ url('time-line') }}" title="">Andrew</a></h4>
+                                                    <a href="#" title="" class="underline">Add Friend</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <figure><img src="images/resources/friend-avatar8.jpg" alt="">
+                                                </figure>
+                                                <div class="friend-meta">
+                                                    <h4><a href="{{ url('time-line') }}" title="">Sophia</a></h4>
+                                                    <a href="#" title="" class="underline">Add Friend</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <figure><img src="images/resources/friend-avatar3.jpg" alt="">
+                                                </figure>
+                                                <div class="friend-meta">
+                                                    <h4><a href="{{ url('time-line') }}" title="">Allen</a></h4>
+                                                    <a href="#" title="" class="underline">Add Friend</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div><!-- who's following -->
+                                </aside>
+                            </div><!-- sidebar -->
+                            <div class="col-lg-6">
+                                <div class="central-meta">
+                                    <div class="new-postbox">
+                                        <figure>
+                                            <?php
+                                            $avtUser = Auth::user()->avatar;
+                                            ?>
+                                            <!-- <img src="{{ asset('images/resources/' . $avtUser) }}" alt=""> -->
+                                            <x-user-avt>
+                                            </x-user-avt>
 
-								<div class="central-meta item rounded-5">
-									<div class="user-post">
-										<div class="friend-info">
-											<figure>
-												<img src="{{asset('images/resources/'.$post->user->avatar)}}" alt="">
-											</figure>
-											<div class="friend-name">
-												<ins><a href="{{ url('time-line').'/user-profile/'.$post->user->user_id }}" title="">
-														{{$post->user->last_name." ".$post->user->first_name}}
-													</a></ins>
+                                        </figure>
+                                        <div class="newpst-input">
+                                            <form method="post" action="{{ url('post') }}"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                @method('post')
+                                                <textarea rows="2" name="content" placeholder="write something"></textarea>
+                                                <div class="attachments">
+                                                    <ul>
+                                                        <!-- ###Task: viet js cho size input -->
+                                                        <li>
+                                                            <i class="fa fa-image"></i>
+                                                            <label class="fileContainer">
+                                                                <input type="file" name="imgFileSelected[]"
+                                                                    id="imgFileSelected" multiple accept="image/*">
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-video-camera"></i>
+                                                            <label class="fileContainer">
+                                                                <input type="file" name="vdFileSelected[]"
+                                                                    id="vdFileSelected" multiple accept="video/*">
+                                                            </label>
+                                                        </li>
 
-												<span>published: {{$post->created_at}}</span>
-											</div>
-											<div class="post-meta">
-												<!-- <img src="images/resources/user-post.jpg" alt=""> -->
-												<!-- Print content if not null -->
-												<!-- {{$post->id}} -->
-												@if(!empty($post->content))
-												<div class="description pb-2">
-													{{$post->content}}
-												</div>
-												@endif
+                                                        <li>
+                                                            <button type="submit">Post</button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div><!-- add post new box #loadpost-->
+                                <div class="loadMore">
+                                    @foreach ($posts as $post)
+                                        <!-- loop to find owner's post -->
+
+                                        <div class="central-meta item rounded-5">
+                                            <div class="user-post">
+                                                <div class="friend-info">
+                                                    <figure>
+                                                        <img src="{{ asset('images/resources/' . $post->user->avatar) }}"
+                                                            alt="">
+                                                    </figure>
+                                                    <div class="friend-name">
+                                                        <ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}"
+                                                                title="">
+                                                                {{ $post->user->last_name . ' ' . $post->user->first_name }}
+                                                            </a></ins>
+
+                                                        <span>published: {{ $post->created_at }}</span>
+                                                    </div>
+                                                    <div class="post-meta">
+                                                        <!-- <img src="images/resources/user-post.jpg" alt=""> -->
+                                                        <!-- Print content if not null -->
+                                                        <!-- {{ $post->id }} -->
+                                                        @if (!empty($post->content))
+                                                            <div class="description pb-2">
+                                                                {{ $post->content }}
+                                                            </div>
+                                                        @endif
 
 												
 												@php
@@ -208,69 +275,80 @@ use Illuminate\View\Component;
 														<li class="social-media">
 															<x-share-btn>{{ $post->id }}</x-share-btn>
 														</li>
-                                                        {{ $post->id }}
+                                                
 													</ul>
 												</div>
 
-											</div>
-										</div>
-										<div class="coment-area p-1">
-											<ul class="we-comet">
-												<!-- hiện commment cho mỗi bình luận tại đây -->
-												@foreach ($post->comments as $comment)
-													<x-comment :commenter=$comment></x-comment>
-												@endforeach
-												<li>
-													<a href="#" title="" class="showmore underline">more comments</a>
-												</li>
-												<li class="post-comment">
-													<div class="comet-avatar">
-														<x-user-avt>
-														</x-user-avt>
-													</div>
-													<div class="post-comt-box">
-														<form method="post" action = "comment" enctype="multipart/form-data">
-															@csrf
-															@method("POST")
-															<input type="hidden" name="post_id" value="{{$post->id}}">
-															<textarea placeholder="Post your comment" name = "content"></textarea>
-															<div class="add-smiles">
-																<span class="em em-expressionless" title="add icon"></span>
-															</div>
-															<div class="attachments">
-																<ul class="m-0 d-flex">
-																	<li>
-																		<i class="fa fa-image"></i>
-																		<label class="fileContainer">
-																			<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*">
-																		</label>
-																	</li>
-																	<li>
-																		<i class="fa fa-video-camera"></i>
-																		<label class="fileContainer">
-																			<input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*">
-																		</label>
-																	</li>
+                                                    </div>
+                                                </div>
+                                                <div class="coment-area p-1">
+                                                    <ul class="we-comet">
+                                                        <!-- hiện commment cho mỗi bình luận tại đây -->
+                                                        @foreach ($post->comments as $comment)
+                                                            <x-comment :commenter=$comment></x-comment>
+                                                        @endforeach
+                                                        <li>
+                                                            <a href="#" title=""
+                                                                class="showmore underline">more comments</a>
+                                                        </li>
+                                                        <li class="post-comment">
+                                                            <div class="comet-avatar">
+                                                                <x-user-avt>
+                                                                </x-user-avt>
+                                                            </div>
+                                                            <div class="post-comt-box">
+                                                                <form method="post" action = "comment"
+                                                                    enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    @method('POST')
+                                                                    <input type="hidden" name="post_id"
+                                                                        value="{{ $post->id }}">
+                                                                    <textarea placeholder="Post your comment" name = "content"></textarea>
+                                                                    <div class="add-smiles">
+                                                                        <span class="em em-expressionless"
+                                                                            title="add icon"></span>
+                                                                    </div>
+                                                                    <div class="attachments">
+                                                                        <ul class="m-0 d-flex">
+                                                                            <li>
+                                                                                <i class="fa fa-image"></i>
+                                                                                <label class="fileContainer">
+                                                                                    <input type="file"
+                                                                                        name="imgFileSelected[]"
+                                                                                        id="imgFileSelected" multiple
+                                                                                        accept="image/*">
+                                                                                </label>
+                                                                            </li>
+                                                                            <li>
+                                                                                <i class="fa fa-video-camera"></i>
+                                                                                <label class="fileContainer">
+                                                                                    <input type="file"
+                                                                                        name="vdFileSelected[]"
+                                                                                        id="vdFileSelected" multiple
+                                                                                        accept="video/*">
+                                                                                </label>
+                                                                            </li>
 
-																	<li>
-																		<button type="submit" class="bg-dark">Post</button>
-																	</li>
-																</ul>
-															</div>
-															<div class="smiles-bunch">
-																<i class="em em---1"></i>
-																<i class="em em-smiley"></i>
-																<i class="em em-anguished"></i>
-																<i class="em em-laughing"></i>
-																<i class="em em-angry"></i>
-																<i class="em em-astonished"></i>
-																<i class="em em-blush"></i>
-																<i class="em em-disappointed"></i>
-																<i class="em em-worried"></i>
-																<i class="em em-kissing_heart"></i>
-																<i class="em em-rage"></i>
-																<i class="em em-stuck_out_tongue"></i>
-															</div>
+                                                                            <li>
+                                                                                <button type="submit"
+                                                                                    class="bg-dark">Post</button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="smiles-bunch">
+                                                                        <i class="em em---1"></i>
+                                                                        <i class="em em-smiley"></i>
+                                                                        <i class="em em-anguished"></i>
+                                                                        <i class="em em-laughing"></i>
+                                                                        <i class="em em-angry"></i>
+                                                                        <i class="em em-astonished"></i>
+                                                                        <i class="em em-blush"></i>
+                                                                        <i class="em em-disappointed"></i>
+                                                                        <i class="em em-worried"></i>
+                                                                        <i class="em em-kissing_heart"></i>
+                                                                        <i class="em em-rage"></i>
+                                                                        <i class="em em-stuck_out_tongue"></i>
+                                                                    </div>
 
 															<button type="submit"></button>
 														</form>

@@ -1,15 +1,7 @@
 
-<head>
-    <link rel="icon" href="{{ asset('images/fav.png') }}" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/color.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/popupShare.css') }}">
-</head>
 
 <div class="menu">
-    <a onclick="openModal(this)" data-post-id="{{ $slot }}" class="btn trigger"><i
+    <a onclick="openModal(this)" data-post-id="{{ $slot }}" class="btn trigger share_modal"><i
     class="fa fa-share-alt"></i></a>
 </div>
 

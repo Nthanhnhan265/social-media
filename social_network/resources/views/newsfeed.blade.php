@@ -275,7 +275,7 @@ use Illuminate\View\Component;
 														<li class="social-media">
 															<x-share-btn>{{ $post->id }}</x-share-btn>
 														</li>
-                                                        {{ $post->id }}
+                                                
 													</ul>
 												</div>
 

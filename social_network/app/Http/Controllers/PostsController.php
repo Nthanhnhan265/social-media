@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Posts;
+use App\Models\Relationship;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Users;
@@ -12,7 +14,6 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Comment;
 
 
 class PostsController extends Controller
@@ -29,7 +30,7 @@ class PostsController extends Controller
         $commentsActivityHistorys = DB::select('select comments.*, users.first_name as user_first_name ,users.last_name as user_last_name from comments inner join users on comments.comment_id = users.user_id where user_id_fk != ?', [$userId]);
         $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]);
 
-// $results = DB::select('select * from users where id = :id', ['id' => 1]);
+        // $results = DB::select('select * from users where id = :id', ['id' => 1]);
         // dd($postActivityHistorys);
 
         //hiển thị giao diện trang chính
@@ -54,6 +55,7 @@ class PostsController extends Controller
                             ]);
                         }
                     ])->get(),
+                    "friends"=>Relationship::getFriendListOfUser(),
                     'postActivityHistors' => $postActivityHistorys,
                     'commentsActivityHistorys' => $commentsActivityHistorys,
                     'shareActivityHistorys' => $shareActivityHistorys
@@ -88,7 +90,7 @@ class PostsController extends Controller
                     $qImg->where('img_location_fk', 0);
                 },
                 'video' => function ($qVid) {
-                    $qVid->where('video_location_fk', 0);
+                    $qVid->where('video_location_fk', 0); 
                 },
                 'comments' => function ($q) {
                     $q->with([
@@ -320,12 +322,10 @@ class PostsController extends Controller
             $vdElement->delete();
         }
 
-        foreach($post->comment as $cmtElement)  {
-            //delete image in image table
-            $cmtElement->delete();
-        }
-
-        // //delete post by id
+        //delete comments 
+        CommentController::deleteCommentsPostId($post_id); 
+        
+        // //delete post by id 
         Posts::find($post_id)->delete();
         return redirect('welcome');
     }

@@ -20,17 +20,17 @@ use Illuminate\Support\Facades\Auth;
 
 				@endforeach
 
-		@endforeach
+
 		<video alt="err" controls>
 			@foreach($post->video as $video)
 			<source src="{{asset('storage/videos/'.$video->url)}}" alt="" />
 
 			@endforeach
-
 		</video>
 	</div>
 
 	@endforeach
+
 
 	<div class="feature-photo">
 		<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
@@ -127,10 +127,7 @@ use Illuminate\Support\Facades\Auth;
 								<img src="{{ asset('images/resources/' . $user->avatar) }}" alt="">
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 15f988fcd657c30b72bef21cb8a1fe6c9371b126
 								<form class="edit-phto">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -369,7 +366,7 @@ use Illuminate\Support\Facades\Auth;
 											</div>
 											<div class="post-meta">
 												<div class="linked-image align-left">
-													<a href="#" title=""><img src="{{asset('images/resources/page1.jpg')}}" alt=""></a>
+													<a href="#" title=""><img src="{{asset('images/resources/page1.jpg')}}" alt=""></a>	
 												</div>
 												<div class="detail">
 													<span>Love Maid - ChillGroves</span>
@@ -453,7 +450,7 @@ use Illuminate\Support\Facades\Auth;
 												<span>published: june,2 2018 19:PM</span>
 											</div>
 											<div class="post-meta">
-												<img src="images/resources/user-post.jpg" alt="">
+												<img src="{{asset('images/resources/user-post.jpg')}}" alt="">
 												<div class="we-video-info">
 													<ul>
 

@@ -91,6 +91,10 @@ Route::get('/{page?}', function ($page = "newsfeed") {
     return view($page);
 });
 
+
+//group
+Route::post('/newgroup',[GroupController::class, 'store']); 
+
 //Route::get('/inbox', [PostController::class, 'index']);
 //Route::resource('index',PostController::class);
 

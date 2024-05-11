@@ -1,8 +1,6 @@
 
 @extends('/layouts.app')
-@section('content')
-
-		
+@section('content')	
 	<section>
 		<div class="page-header">
 			<div class="header-inner">
@@ -81,6 +79,9 @@
 								<div class="central-meta">
 									<div class="groups">
 										<span><i class="fa fa-users"></i> Groups</span>
+									</div>
+									<div class="groups">
+										<span> <a href="{{ asset('create-new-group') }}" title="" ><i class="fa-solid fa-plus"></i> Create new group</a> </span>
 									</div>
 									<ul class="nearby-contct">
 										<li>

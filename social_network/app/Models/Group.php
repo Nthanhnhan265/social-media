@@ -11,6 +11,7 @@ class Group extends Model
     protected $table = 'groups';
     protected $primaryKey = 'group_id';
     protected $timestapms = true;
+    protected $fillable = ['name_group', 'description', 'status'];
   
     public function group()
     {

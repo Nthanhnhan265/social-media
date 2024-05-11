@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use \App\Models\Group;
 use \App\Models\UserGroup;
@@ -42,7 +43,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -53,7 +54,28 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newGroup = [
+            "name_group" => $request->name,
+            "description" => $request->description,
+            "status" => 1,
+        ];
+
+        // Create a new group
+        $group = Group::create($newGroup);
+        
+        $groupId = $group->group_id;
+
+        // Get the ID of the currently authenticated user (assuming you're using authentication)
+        $userId = Auth::user()->user_id;
+
+        // Create a new record in the usergroup table
+        UserGroup::create([
+            'group_id_fk' => $groupId,
+            'user_id_fk' => $userId,
+            'role_id_fk' => 0,
+        ]);
+
+        return redirect('groups');
     }
 
     /**

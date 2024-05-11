@@ -41,8 +41,10 @@ class ShareController extends Controller
         $user = User::find($userId);
         $sharingRange = $request->input('shareOption');
         $postId = $request->input('post_id');
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $currentDateTime = date('Y-m-d H:i:s');
 
-        $user->share()->attach($postId, ['status' => $sharingRange]);
+        $user->share()->attach($postId, ['status' => $sharingRange, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime]);
         return redirect()->back();
     }
 

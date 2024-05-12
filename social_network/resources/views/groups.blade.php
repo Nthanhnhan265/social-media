@@ -1,18 +1,6 @@
 
 @extends('/layouts.app')
-@section('content')	
-	<section>
-		<div class="page-header">
-			<div class="header-inner">
-				<h2>your Searched Groups</h2>
-				<nav class="breadcrumb">
-				  <a href="{{ url('index-2') }}" class="breadcrumb-item"><i class="fa fa-home"></i></a>
-				  <span class="breadcrumb-item active">Groups</span>
-				</nav>
-			</div>
-		</div>
-	</section>
-		
+@section('content')		
 	<section>
 		<div class="gap gray-bg">
 			<div class="container-fluid">
@@ -88,12 +76,12 @@
 										<li>
 											<div class="nearly-pepls">
 												<figure>
-													<a href="{{ url('time-line') }}" title=""><img src="images/resources/group1.jpg" alt=""></a>
+													<a href="{{ url('group-view', $group->group_id_fk) }}" title=""><img src="images/resources/group1.jpg" alt=""></a>
 												</figure>
 												<div class="pepl-info">
-													<h4><a href="{{ url('time-line') }}" title="">{{ $group->group->name_group }} </a></h4>
+													<h4><a href="{{ url('group-view', $group->group_id_fk) }}" title="">{{ $group->group->name_group }} </a></h4>
 													<span>public group</span>
-													<em>32k Members</em>
+													<em>5 Members</em>
 													<a href="#" title="" class="add-butn" data-ripple="">joined</a>
 												</div>
 											</div>

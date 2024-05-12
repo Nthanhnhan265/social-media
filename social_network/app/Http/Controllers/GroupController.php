@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use \App\Models\Group;
 use \App\Models\UserGroup;
+use \App\Models\PostGroup;
 use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
@@ -47,7 +48,7 @@ class GroupController extends Controller
     {
         $userId = Auth::user()->user_id;
         $groups = UserGroup::where('user_id_fk', $userId)
-               ->get();               
+                ->get();                
         return view('groups')->with('groups', $groups);
     }
     /**
@@ -74,19 +75,20 @@ class GroupController extends Controller
             "status" => 1,
         ];
 
-        // Create a new group
+        // Tạo group mới
         $group = Group::create($newGroup);
         
         $groupId = $group->group_id;
 
-        // Get the ID of the currently authenticated user (assuming you're using authentication)
+        // Lấy User_id của người đang đăng nhập
         $userId = Auth::user()->user_id;
 
-        // Create a new record in the usergroup table
+        // Tạo usergroup
         UserGroup::create([
             'group_id_fk' => $groupId,
             'user_id_fk' => $userId,
             'role_id_fk' => 0,
+            'request' => 0,
         ]);
 
         return redirect('groups');
@@ -150,5 +152,36 @@ class GroupController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    //Lấy các post của group theo group_id
+    public function getPostByGroupId($group_id)
+    {
+        $userId = Auth::user()->user_id;
+
+        $userRole = UserGroup::where('user_id_fk', $userId)
+                     ->where('group_id_fk', $group_id)
+                     ->first();
+
+        $posts = PostGroup::where('group_id_fk', $group_id)
+                ->get();
+
+        //Đếm số thành viên nhóm
+        $memberCount = UserGroup::where('group_id_fk', $group_id)
+                    ->count();
+                    
+        $members = UserGroup::where('group_id_fk', $group_id)                   
+                    ->get();
+
+        $group = Group::where('group_id', $group_id)
+                ->first();
+
+        // $comments = Comment::where('post_id_fk', $id)
+        //            ->orderBy('created_at', 'desc')
+        //            ->get();               
+        // return view('post-detail')->with('comments', $comments)->with('post', $post);
+        return view('group-view')->with('posts', $posts)->with('userRole', $userRole)
+        ->with('memberCount', $memberCount)->with('group', $group)->with('members', $members);
     }
 }

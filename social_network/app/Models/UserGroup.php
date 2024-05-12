@@ -11,7 +11,7 @@ class UserGroup extends Model
     protected $table = 'usergroup';
     protected $primaryKey = 'usergroup';
     protected $timestapms = true;
-    protected $fillable = ['user_id_fk', 'group_id_fk', 'role_id_fk'];
+    protected $fillable = ['user_id_fk', 'group_id_fk', 'role_id_fk','request'];
   
     public function post()
     {

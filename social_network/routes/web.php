@@ -90,6 +90,7 @@ Route::put('/update-comment/{id}', [CommentController::class, 'updateCommentStat
 //group
 Route::post('/newgroup',[GroupController::class, 'store']); 
 Route::get('/groups', [GroupController::class, 'getGroupByUserID']);
+Route::get('/group-view/{group_id}', [GroupController::class, 'getPostByGroupId']);
 
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);

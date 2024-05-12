@@ -53,7 +53,7 @@ class PostsController extends Controller
     }
 
     
-    public function getPostAndCommentByPostID($id)
+    public function getPostAndCommentByPostId($id)
     {
         $post = Posts::findOrFail($id);
         $comments = Comment::where('post_id_fk', $id)

@@ -60,7 +60,7 @@
 											<div class="form-group">  
 												<textarea rows="4" id="description" name="description" required="required"></textarea>
 												<label class="control-label" for="description">Description</label><i class="mtrl-select"></i>
-											</div>
+											</div>										
 											<div class="submit-btns">                                                
 												<button type="submit" class="mtr-btn"><span>Create</span></button>
 											</div>

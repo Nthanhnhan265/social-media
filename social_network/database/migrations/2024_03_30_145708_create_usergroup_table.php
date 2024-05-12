@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id_fk');
             $table->integer('group_id_fk');
             $table->integer('role_id_fk');
+            $table->integer('request');
             $table->timestamps();
         });
     }

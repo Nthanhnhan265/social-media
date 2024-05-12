@@ -87,13 +87,14 @@ Route::put('/update-post/{id}', [PostsController::class, 'updatePostStatus'])->n
 Route::delete('/delete-comment/{id}', [CommentController::class, 'deleteComment'])->name('delete-comment');
 Route::put('/update-comment/{id}', [CommentController::class, 'updateCommentStatus'])->name('update-comment');
 
+//group
+Route::post('/newgroup',[GroupController::class, 'store']); 
+Route::get('/groups', [GroupController::class, 'getGroupByUserID']);
+
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);
 });
 
-
-//group
-Route::post('/newgroup',[GroupController::class, 'store']); 
 
 //Route::get('/inbox', [PostController::class, 'index']);
 //Route::resource('index',PostController::class);

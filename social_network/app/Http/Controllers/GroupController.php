@@ -30,11 +30,25 @@ class GroupController extends Controller
         return view('group-management', compact('groups'));
     }
 
+    public function getAllGroups2(Request $request)
+    {
+        $groups = Group::all();
+
+        return view('groups')->with('groupsAll', $groups);
+    }
 
     public function getGroupByID($group_id)
     {
         $group = Group::findOrFail($group_id);
         return view('edit-group', compact('group'));
+    }
+
+    public function getGroupByUserID()
+    {
+        $userId = Auth::user()->user_id;
+        $groups = UserGroup::where('user_id_fk', $userId)
+               ->get();               
+        return view('groups')->with('groups', $groups);
     }
     /**
      * Show the form for creating a new resource.

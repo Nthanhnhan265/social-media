@@ -181,7 +181,7 @@ use Illuminate\View\Component;
 							<div class="loadMore">
 								@foreach ($posts as $post)
 								<!-- loop to find owner's post -->
-
+						
 								<div class="central-meta item rounded-5">
 									<div class="user-post">
 										<div class="friend-info">

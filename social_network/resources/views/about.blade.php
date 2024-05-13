@@ -41,7 +41,7 @@
 									</li>
 									<li>
 										<a class="" href="{{ url('time-line').'/user-profile/'.$user->user_id }}" title="" data-ripple="">Time Line</a>
-										<a class="" href="{{ url('timeline-photos') }}" title=""
+										<a class="" href="{{ url('timeline-photos'.'/user-profile/'.$user->user_id) }}" title=""
 											data-ripple="">Photos</a>
 										<a class="" href="{{ url('timeline-videos') }}" title=""
 											data-ripple="">Videos</a>

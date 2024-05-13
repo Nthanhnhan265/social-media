@@ -6,7 +6,7 @@
 			<div class="add-btn">		
 				<a href="#" title="" data-ripple="">Joined</a>
 				<a href="#" title="" data-ripple="">
-					@if($userRole->role_id_fk == 2) Leave;" 
+					@if($userRole->role_id_fk == 2) Leave
 					@else
 						Delete group
 					@endif</a>
@@ -43,7 +43,7 @@
 								</li>
 								<li>
 									<a class="active" href="{{ url('group-view') }}" title="" data-ripple="">Posts</a>
-									<a class="" href="{{ url('group-member') }}" title="" data-ripple="">Members</a>
+									<a class="" href="{{ url('group-member', $group->group_id) }}" title="" data-ripple="">Members</a>
 									<a class="" href="{{ url('inbox') }}" title="" data-ripple="">File</a>								
 								</li>
 							</ul>
@@ -263,10 +263,7 @@
 															<i class="em em-smiley"></i>
 														</p>
 													</div>
-												</li>												
-												<li>
-													<a href="#" title="" class="showmore underline">more comments</a>
-												</li>
+												</li>																			
 												<li class="post-comment">
 													<div class="comet-avatar">
 														<img src="images/resources/comet-4.jpg" alt="">
@@ -317,7 +314,7 @@
 											@foreach($members as $member)								
 											<li>
 												<figure>
-													<img src="{{ asset('images/resources/' . $member->user->avatar) }}" alt="">
+													<img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('images/resources/' . $member->user->avatar) }}" alt="">
 												</figure>
 												<div class="friend-meta">
 													<h4><a href="{{ url('group-members') }}" class="underline" title="">{{$member->user->first_name.' '.$member->user->last_name }}</a></h4>

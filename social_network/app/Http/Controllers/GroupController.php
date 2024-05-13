@@ -169,9 +169,11 @@ class GroupController extends Controller
 
         //Đếm số thành viên nhóm
         $memberCount = UserGroup::where('group_id_fk', $group_id)
+                    ->where('request', 0)
                     ->count();
                     
-        $members = UserGroup::where('group_id_fk', $group_id)                   
+        $members = UserGroup::where('group_id_fk', $group_id)   
+                    ->where('request', 0)                
                     ->get();
 
         $group = Group::where('group_id', $group_id)
@@ -183,5 +185,45 @@ class GroupController extends Controller
         // return view('post-detail')->with('comments', $comments)->with('post', $post);
         return view('group-view')->with('posts', $posts)->with('userRole', $userRole)
         ->with('memberCount', $memberCount)->with('group', $group)->with('members', $members);
+    }
+
+    public function getAllForGroupMember($group_id)
+    {
+        $userId = Auth::user()->user_id;
+
+        $userRole = UserGroup::where('user_id_fk', $userId)
+                     ->where('group_id_fk', $group_id)
+                     ->first();
+
+        $posts = PostGroup::where('group_id_fk', $group_id)
+                ->get();
+
+        //Đếm số thành viên nhóm
+        $memberCount = UserGroup::where('group_id_fk', $group_id)
+                    ->where('request', 0)
+                    ->count();
+        
+        $requestCount = UserGroup::where('group_id_fk', $group_id)
+                    ->where('request', 1)
+                    ->count();
+
+        $requests = UserGroup::where('group_id_fk', $group_id)
+                    ->where('request', 1)
+                    ->get();
+         
+        $members = UserGroup::where('group_id_fk', $group_id)  
+                    ->where('request', 0)                 
+                    ->get();
+
+        $group = Group::where('group_id', $group_id)
+                ->first();
+
+        // $comments = Comment::where('post_id_fk', $id)
+        //            ->orderBy('created_at', 'desc')
+        //            ->get();               
+        // return view('post-detail')->with('comments', $comments)->with('post', $post);
+        return view('group-member')->with('posts', $posts)->with('userRole', $userRole)
+        ->with('memberCount', $memberCount)->with('group', $group)->with('members', $members)->with('requestCount', $requestCount)
+        ->with('requests', $requests);
     }
 }

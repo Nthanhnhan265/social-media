@@ -35,11 +35,11 @@
 							<ul>
 								<li class="admin-name">
 								  <h5>Nhóm số 1</h5>	
-								  <span>50 members</span>							  
+								  <span>{{ $memberCount }} members</span>							  
 								</li>
 								<li>
-									<a class="" href="{{ url('group-view') }}" title="" data-ripple="">Posts</a>
-									<a class="active" href="{{ url('group-member') }}" title="" data-ripple="">Members</a>
+									<a class="" href="{{ url('group-view', $group->group_id) }}" title="" data-ripple="">Posts</a>
+									<a class="active" href="#" title="" data-ripple="">Members</a>
 									<a class="" href="{{ url('inbox') }}" title="" data-ripple="">File</a>
 									<!-- <a class="" href="{{ url('insights') }}" title="" data-ripple="">insights</a>
 									<a class="" href="{{ url('fav-page') }}" title="" data-ripple="">posts</a>
@@ -93,262 +93,70 @@
 												<a href="{{ url('notifications') }}" title="">Notifications</a>
 											</li>
 										</ul>
-									</div><!-- Shortcuts -->
-									<div class="widget">
-										<h4 class="widget-title">Recent Activity</h4>
-										<ul class="activitiez">
-											<li>
-												<div class="activity-meta">
-													<i>10 hours Ago</i>
-													<span><a href="#" title="">Commented on Video posted </a></span>
-													<h6>by <a href="{{ url('time-line') }}">black demon.</a></h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>30 Days Ago</i>
-													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-										</ul>
-									</div><!-- recent activites -->					
+									</div><!-- Shortcuts -->			
 								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-6">
 							<div class="central-meta">
 									<div class="frnds">
 										<ul class="nav nav-tabs">
-											 <li class="nav-item"><a class="active" href="#frends" data-toggle="tab">Members</a> <span>55</span></li>
-											 <li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Join requests</a><span>60</span></li>
+											<li class="nav-item"><a class="active" href="#frends" data-toggle="tab">Members</a> <span>{{ $memberCount }}</span></li>
+											@if($userRole->role_id_fk != 2)
+											<li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Join requests</a><span>{{ $requestCount }}</span></li>																		
+											@endif			 
 										</ul>
 
 										<!-- Tab panes -->
 										<div class="tab-content">
 										  <div class="tab-pane active fade show " id="frends" >
 											<ul class="nearby-contct">
+											@foreach($members as $member)
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img style="width: 60px; height: 60px; overflow: hidden" src="{{ asset('images/resources/' . $member->user->avatar) }}" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>	
-														<span><a href="#" title="" data-ripple="">demoted to member</a></span>																									
-														<a href="#" title="" class="add-butn more-action" data-ripple="">admin</a>
+														<h4><a href="{{ url('time-line') }}" title="">{{$member->user->first_name.' '.$member->user->last_name }}</a></h4>
+														<span>
+															@if($member->role_id_fk == 0) Super admin
+															@elseif($member->role_id_fk == 1) Admin
+															@else Member
+															@endif
+														<span>
+														<br>
+														<span><a href="#" title="" data-ripple="">
+															@if($userRole->role_id_fk == 0 && $member->role_id_fk == 1) demote to member	
+															@elseif($userRole->role_id_fk == 0 && $member->role_id_fk == 2) promote to admin															
+															@endif
+														</a><span>	
+														@if($userRole->role_id_fk == 0 && $member->role_id_fk == 1) 
 														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
+														@endif																																															@if($member->role_id_fk != 0) 
+														@endif									
 													</div>
 												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>	
-														<span><a href="#" title="" data-ripple="">Promoted to administrator</a></span>												
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
+											</li>	
+											@endforeach										
 										</ul>
 											<div class="lodmore"><button class="btn-view btn-load-more"></button></div>
 										  </div>
+										  @foreach($requests as $request)
 										  <div class="tab-pane fade" id="frends-req" >
 											<ul class="nearby-contct">
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly5.jpg" alt=""></a>
-													</figure>
+														<a href="{{ url('time-line') }}" title=""><img style="width: 60px; height: 60px; overflow: hidden" src="{{ asset('images/resources/' . $request->user->avatar) }}" alt=""></a>
+													</figure>>
 													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Amy watson</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
+														<h4><a href="{{ url('time-line') }}" title="">{{$request->user->first_name.' '.$request->user->last_name }}</a></h4>
+														<a href="#" title="" class="add-butn more-action" data-ripple="">Delete request</a>
 														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
 													</div>
 												</div>
 											</li>	
-
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly1.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">sophia Gate</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly6.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">caty lasbo</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">sara grey</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly4.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Sara grey</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly3.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Sexy cat</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
+											@endforeach											
 										</ul>	
 											  <button class="btn-view btn-load-more"></button>
 										  </div>
@@ -362,55 +170,28 @@
 								<div class="widget">
 										<h4 class="widget-title">Description</h4>
 										<div class="group-description">
-											<h6 class="">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et excepturi quasi cum, corporis quae atque in nemo nam dolorem. Minima natus repudiandae eum dicta, ratione cumque autem illum rerum similique.</h6>
+											<h6 class="">{{ $group->description }}</h6>
 										</div>
 									</div>								
 									<div class="widget">
 										<h4 class="widget-title">Members</h4>
 										<ul class="invition">
+										@foreach($members as $member)								
 											<li>
-												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
+												<figure>
+													<img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('images/resources/' . $member->user->avatar) }}" alt="">
+												</figure>
 												<div class="friend-meta">
-													<h4><a href="{{ url('group-members') }}" class="underline" title="">Sophia hayat</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Admin</a>
+													<h4><a href="{{ url('group-members') }}" class="underline" title="">{{$member->user->first_name.' '.$member->user->last_name }}</a></h4>
+													<a href="#" title="" class="invite" data-ripple="">
+														@if($member->role_id_fk == 0) Super admin
+														@elseif($member->role_id_fk == 1) Admin
+														@else Member
+														@endif
+													</a>
 												</div>
 											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" class="underline" title="">Issabel kaif</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Member</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" class="underline" title="">Kelly Bill</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Member</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" class="underline" title="">Allen jhon</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Member</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" class="underline" title="">tom Andrew</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Member</a>
-												</div>
-											</li>
-
-											<li>
-												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="" class="underline">Allen doe</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Member</a>
-												</div>
-											</li>
+											@endforeach	
 										</ul>
 									</div>
 								

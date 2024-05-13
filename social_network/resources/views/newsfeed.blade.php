@@ -46,7 +46,7 @@ use Illuminate\View\Component;
                                     </div><!-- Shortcuts -->
                                     <div class="widget">
                                         <h4 class="widget-title">Recent Activity</h4>
-                                        <ul class="activitiez">
+                                        <ul class="activitiez"  style="height: 400px; overflow: scroll">
                                             {{-- $activityHistorys --}}
                                             @foreach ($postActivityHistors as $postActivityHistor)
                                                 <li>
@@ -209,13 +209,13 @@ use Illuminate\View\Component;
                                                             </div>
                                                         @endif
 
-												
+
 												@php
-													$totalMedia = count($post->image) + count($post->video); 
+													$totalMedia = count($post->image) + count($post->video);
 
 												@endphp
 												<!-- Display imgs  -->
-												@if ($totalMedia != 0) 
+												@if ($totalMedia != 0)
 													<div class="container-fluied">
 														<div class="row">
 																@foreach ($post->image as $img)
@@ -228,7 +228,7 @@ use Illuminate\View\Component;
 																	@endif
 																</a>
 																@endforeach
-	
+
 																@if(!empty($post->video) && count($post->video) !=0 )
 																	@foreach ($post->video as $video)
 																	<a href="{{asset('storage/videos/'.$video->url)}}" data-fancybox="gallery{{$post->id}}" style="max-height:50rem" class="{{
@@ -244,11 +244,11 @@ use Illuminate\View\Component;
 																	@endforeach
 																@endif
 														</div>
-	
+
 													</div>
 
 												@endif
-											
+
 
 
 												<!-- views, like,dislike, comment, share -->
@@ -275,7 +275,7 @@ use Illuminate\View\Component;
 														<li class="social-media">
 															<x-share-btn>{{ $post->id }}</x-share-btn>
 														</li>
-                                                
+
 													</ul>
 												</div>
 
@@ -439,7 +439,7 @@ use Illuminate\View\Component;
 										</div>
 									</div>
 								</div><!-- page like widget -->
-							
+
 								<div class="widget friend-list stick-widget">
 									<h4 class="widget-title">Friends</h4>
 									<div id="searchDir"></div>
@@ -448,7 +448,7 @@ use Illuminate\View\Component;
 										<x-friendlist :friend=$friend></x-friendlist>
 
 										@endforeach
-										
+
 									</ul>
 									<div class="chat-box">
 										<div class="chat-head">

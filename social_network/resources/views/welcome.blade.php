@@ -19,3 +19,22 @@ use App\Models\Posts;
 ?> 
 
 
+@foreach($posts as $post)
+        <div>
+		{{$post->content}}
+        
+            @if(isset($post->image))
+                @foreach($post->image as $img) 
+                    <img src="{{asset('storage/images/'.$img->url)}}" alt="">
+                @endforeach
+            @endif
+
+            <video alt="err" controls >
+                @if(isset($post->video))
+                    @foreach($post->video as $video) 
+                        <source src="{{asset('storage/videos/'.$video->url)}}" alt=""/>
+                    @endforeach
+                @endif
+            </video>
+        </div>
+    @endforeach

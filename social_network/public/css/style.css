@@ -739,8 +739,9 @@ header.sticky {
     border-width: medium medium 1px;
     color: #999999;
     font-size: 15px;
-    padding: 9px 18px;
+    padding: 15px 18px;
     width: 100%;
+    border-radius: 10px;
 }
 
 .form-search button {
@@ -777,8 +778,11 @@ header.sticky {
 }
 
 .feature-photo > figure img {
-    display: inline-block;
+    display: block;
     width: 100%;
+    height: 650px;
+    object-fit: cover; 
+    object-position: center; 
     
 }
 
@@ -791,6 +795,7 @@ header.sticky {
     overflow: hidden;
     position: relative;
     width: 100%;
+    border-radius: 50%;
 }
 
 .user-avatar > figure > img {
@@ -939,16 +944,17 @@ header.sticky {
 .user-avatar .edit-phto {
     border-radius: 0;
     bottom: -40px;
-    left: 0;
+    left: -20px;
     opacity: 0;
     visibility: hidden;
     width: 100%;
     transition: all 0.3s linear 0s;
     padding: 5px;
     text-align: center;
+    z-index: 100;
 }
 
-.user-avatar:hover .edit-phto {
+.user-avatar .edit-phto {
     bottom: 0;
     opacity: 1;
     visibility: visible;
@@ -1285,7 +1291,35 @@ header.sticky {
     width: 100%;
     margin-bottom: 20px;
     padding: 25px;
+}   
+.photos li img {
+    border-radius: 10px;
+    padding: 3px;
 }
+/* .central-meta ul {
+    position: relative;
+    border: 5px solid transparent;
+    transition: border-color 1s;
+    animation: animate 3s linear infinite;
+} */
+/* .central-meta ul::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: gray;
+}
+
+
+@keyframes animate {
+    0% { border-color: red;  } 
+    25% { border-color: blue; }
+    50% { border-color: green; } 
+    75% { border-color: yellow; } 
+    100% { border-color: red; } 
+} */
+
+
+
 
 .new-postbox {
     display: inline-block;
@@ -1393,10 +1427,68 @@ form button {
     width: 100%;
 }
 /* SETTING MENU */
+.friend-name .setting {
+    width: 20px;
+    height: auto;
+    border-radius: 50%;
+    /* background: #2e2a2a; */
+    padding: 15px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+.friend-name .setting:hover {
+    /* background: yellow; */
+    background: rgba(172, 167, 167, 0.8);
+}
+
+.friend-name .setting i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+}
+.friend-name .setting .menu-setting {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 5px #443939;
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    right: 30px;
+    top: 25px;
+    padding-left: 0;
+    display: none;
+}
+
+
+.friend-name .setting .menu-setting li {
+    list-style: none;
+    display: block;
+
+    width: 100%;
+}
+.friend-name .setting .menu-setting li a{
+ 
+    width: 100%;
+    display: block;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 500;
+}
+.friend-name .setting .menu-setting li a:hover {
+    /* background: pink; */
+    background: linear-gradient(93deg, rgba(23,85,164,1) 33%, rgba(24,216,182,1) 100%);
+    color: #ffffff;
+    
+}
 
 
 
-
+/*  */
 .friend-name .menu-toggle {
    margin-left: 55px;
 }
@@ -1489,7 +1581,7 @@ form button {
 }
 
 .we-video-info > ul li span.dislike {
-    color: red;
+    color: gray;
     cursor: pointer;
     transition: all 0.2s linear 0s;
 }
@@ -1503,7 +1595,7 @@ form button {
 }
 
 .we-video-info > ul li span.like {
-    color: green;
+    color: gray;
     cursor: pointer;
     transition: all 0.2s linear 0s;
 }
@@ -3486,7 +3578,7 @@ a.add-butn {
     display: inline-block;
     padding-left: 10px;
     vertical-align: middle;
-    width: 69.8%;
+    /* width: 69.8%; */
 }
 
 .your-page {
@@ -10093,4 +10185,61 @@ aside.sidebar.full-style {
 } */
 .list-vid { 
     height: 50vh;
+}
+/* EDIT BTN EDIT AVATAR  */
+.btn-edit-avatar {
+    position: absolute;
+    bottom: 10%;
+    left: 60%;
+    transform: translate(-50%,-50%);
+    
+    background: transparent;
+    border-radius: 50%;
+    display: inline;
+    z-index: 100;
+    transform: scale(1.2);
+    /* width: 100%; */
+}
+.toggleComment {
+    /* background: gray; */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.toggleComment i {
+    position: absolute;
+    right: 8px;
+    top: 2px;
+}
+.toggleComment:hover{
+    background: rgba(172, 167, 167, 0.8);
+}
+
+/*  */
+
+
+.modal-backdrop.show {
+    display: none!important;
+    position: relative !important;
+    z-index : 0 !important;
+}
+
+.modal.fade::after {
+    content: '';
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: #000;
+    opacity: 50%;
+    top: 0; 
+    left: 0; 
+}
+.modal-dialog { 
+    z-index: 2;
+    position: absolute;
+}
+#webHighlightsGlobalStyling { 
+    display: none!important;
 }

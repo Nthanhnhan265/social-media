@@ -17,6 +17,8 @@ return new class extends Migration
             $table->increments('likepost_id');
             $table->integer('user_id_fk');
             $table->integer('post_id_fk');
+            // Thêm status cho likepost để hiển thị like and dislike (0 = dislike , 1 = like )
+            $table->integer('status');
             $table->timestamps();
         });
     }

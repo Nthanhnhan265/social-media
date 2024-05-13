@@ -2,7 +2,7 @@
 @section('content')
 		<section>
 			<div class="feature-photo">
-				<figure><img src="{{asset('images/resources/'.$user->background)}}" alt=""></figure>
+				<figure><img src="{{asset('storage/images/'.$user->background)}}" alt=""></figure>
 				<div class="add-btn">
 					<span>1205 followers</span>
 					<a href="#" title="" data-ripple="">Add Friend</a>
@@ -19,14 +19,16 @@
 						<div class="col-lg-2 col-sm-3">
 							<div class="user-avatar">
 								<figure>
-									<img src="{{asset('images/resources/'.$user->avatar) }}" alt="">
-									<form class="edit-phto">
+									<img src="{{asset('storage/images/'.$user->avatar) }}" alt="">
+									<form class="edit-phto" action="{{ url('update-avatar/'. Auth::User()->user_id)}}" method="post" enctype="multipart/form-data">
+										@csrf
+										@method('PUT')
 										<i class="fa fa-camera-retro"></i>
 										<label class="fileContainer">
-											Edit Display Photo
-											<input type="file" />
+											<input type="file" name="avatar" id="avatar" accept="image/*">
 										</label>
-									</form>
+										<button  class="btn-edit-avatar" type="submit"><i class="fas fa-cloud-upload-alt"></i></button>
+								</form>
 								</figure>
 							</div>
 						</div>
@@ -34,11 +36,11 @@
 							<div class="timeline-info">
 								<ul>
 									<li class="admin-name">
-										
+									<h5>{{$user->last_name}} {{$user->first_name}}</h5>
 										<span>Group Admin</span>
 									</li>
 									<li>
-										<a class="" href="{{ url('time-line') }}" title="" data-ripple="">Time Line</a>
+										<a class="" href="{{ url('time-line').'/user-profile/'.$user->user_id }}" title="" data-ripple="">Time Line</a>
 										<a class="" href="{{ url('timeline-photos') }}" title=""
 											data-ripple="">Photos</a>
 										<a class="" href="{{ url('timeline-videos') }}" title=""

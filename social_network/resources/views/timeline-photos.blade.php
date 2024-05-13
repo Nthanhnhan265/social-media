@@ -4,7 +4,8 @@
 
 	<section>
 		<div class="feature-photo">
-			<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
+			
+			<figure><img src="{{asset('storage/images/'.$user->background)}}" alt=""></figure>
 			<div class="add-btn">
 				<span>1205 followers</span>
 				<a href="#" title="" data-ripple="">Add Friend</a>
@@ -21,7 +22,7 @@
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img src="images/resources/user-avatar.jpg" alt="">
+								<img src="{{asset('storage/images/'.$user->avatar)}}" alt="">
 								<form class="edit-phto">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -40,7 +41,7 @@
 								  <span>Group Admin</span>
 								</li>
 								<li>
-									<a class="" href="time-line" title="" data-ripple="">time line</a>
+									<a class="" href="{{ url('time-line/user-profile/'.$user->user_id) }}" title="" data-ripple="">time line</a>
 									<a class="active" href="timeline-photos" title="" data-ripple="">Photos</a>
 									<a class="" href="timeline-videos" title="" data-ripple="">Videos</a>
 									<a class="" href="timeline-friends" title="" data-ripple="">Friends</a>
@@ -64,14 +65,21 @@
 						<div class="row" id="page-contents">
 
 							<div class="col-lg-12">
-								<div class="central-meta">
-									<ul class="photos">
 
+								
+
+								<div class="central-meta">
+								<ul class="photos">
+									@foreach($posts as $post)
+									@foreach($post->image as $img)
 										<li>
 											<a class="strip" href="images/resources/photo-22.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="images/resources/photo2.jpg" alt=""></a>
+
+											<img src="{{ asset('storage/images/'.$img->url) }}" alt="Selected Image">
 										</li>
-										<li>
+										@endforeach
+								@endforeach
+										<!-- <li>
 											<a class="strip" href="images/resources/photo-33.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
 												<img src="images/resources/photo3.jpg" alt=""></a>
 										</li>
@@ -128,10 +136,11 @@
 										<li>
 											<a class="strip" href="images/resources/photo-66.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
 												<img src="images/resources/photo13.jpg" alt=""></a>
-										</li>
+										</li> -->
 									</ul>
 									<div class="lodmore"><button class="btn-view btn-load-more"></button></div>
 								</div><!-- photos -->
+								
 							</div><!-- centerl meta -->
 
 						</div>

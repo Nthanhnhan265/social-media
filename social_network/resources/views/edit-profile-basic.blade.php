@@ -2,7 +2,7 @@
 @section('content')
 	<section>
 		<div class="feature-photo">
-			<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
+			<figure><img src="{{asset('storage/images/'.$user->background)}}" alt=""></figure>
 			<div class="add-btn">
 				<span>1205 followers</span>
 				<a href="#" title="" data-ripple="">Add Friend</a>
@@ -19,7 +19,7 @@
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img src="images/resources/user-avatar.jpg" alt="">
+								<img src="{{asset('storage/images/'.$user->avatar)}}" alt="">
 								<form class="edit-phto">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -34,7 +34,7 @@
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-								  <h5>Janice Griffith</h5>
+								  <h5>{{$user->last_name}} {{$user->first_name}}</h5>
 								  <span>Group Admin</span>
 								</li>
 								<li>
@@ -118,17 +118,19 @@
 									<div class="editing-info">
 										<h5 class="f-title"><i class="ti-info-alt"></i> Edit Basic Information</h5>
 
-										<form method="post">
-											<div class="form-group half">	
-											  <input type="text" id="input" required="required" value="{{ $user->first_name}}"/>
-											  <label class="control-label" for="input">First Name</label><i class="mtrl-select"></i>
+										<form method="post" action="{{ url('update-Info-User/'.$user->user_id)}}">
+											@csrf
+											@method('PUT')
+											<div class="form-group half">
+												<input type="text" id="first_name" name="first_name" required="required" value="{{ $user->first_name}}"/>
+												<label class="control-label" for="first_name">First Name</label><i class="mtrl-select"></i>
 											</div>
-											<div class="form-group half">	
-											  <input type="text" required="required" value="{{ $user->last_name}} "/>
-											  <label class="control-label" for="input">Last Name</label><i class="mtrl-select"></i>
+											<div class="form-group half">  
+												<input type="text" id="last_name" name="last_name" required="required" value="{{ $user->last_name}} "/>
+												<label class="control-label" for="last_name">Last Name</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	
-											  <input type="text" required="required" value="{{$user->email}}"/>
+											  <input type="text" required="required" value="{{$user->email}}" name="email" id="email"/>
 											  <label class="control-label" for="input"><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b0e262a22270b">[email&#160;protected]</a></label><i class="mtrl-select"></i>
 											</div>
 											<!-- <div class="form-group">	
@@ -137,89 +139,55 @@
 											</div> -->
 											<div class="dob">
 												<div class="form-group">
-													<select>
-														<option value="Day">Day</option>
-														  <option>1</option>
-														  <option>2</option>
-														  <option>3</option>
-														  <option>4</option>
-														  <option>5</option>
-														  <option>6</option>
-														  <option>7</option>
-														  <option>8</option>
-														  <option>9</option>
-														  <option>10</option>
-														  <option>11</option>
-														  <option>12</option>
-														  <option>13</option>
-														  <option>14</option>
-														  <option>15</option>
-														  <option>16</option>
-														  <option>17</option>
-														  <option>18</option>
-														  <option>19</option>
-														  <option>20</option>
-														  <option>21</option>
-														  <option>22</option>
-														  <option>23</option>
-														  <option>24</option>
-														  <option>25</option>
-														  <option>26</option>
-														  <option>27</option>
-														  <option>28</option>
-														  <option>29</option>
-														  <option>30</option>
-														  <option>31</option>
-													</select>
+												<select name="day">
+												<option value="Day">Day</option>
+												@for ($i = 1; $i <= 31; $i++)
+													<option {{ date('d', strtotime($user->DOB)) == $i ? 'selected' : '' }}>{{ $i }}</option>
+												@endfor
+												</select>
+
 												</div>
 												<div class="form-group">
-													<select>
-														<option value="month">Month</option>
-														  <option>Jan</option>
-														  <option>Feb</option>
-														  <option>Mar</option>
-														  <option>Apr</option>
-														  <option>May</option>
-														  <option>Jun</option>
-														  <option>Jul</option>
-														  <option>Aug</option>
-														  <option>Sep</option>
-														  <option>Oct</option>
-														  <option>Nov</option>
-														  <option>Dec</option>
-													</select>
+												<select name="month">
+													<option value="month">Month</option>
+													@for ($m = 1; $m <= 12; $m++)
+														@php
+															$monthName = date('M', mktime(0, 0, 0, $m, 1));
+														@endphp
+														<option {{ date('m', strtotime($user->DOB)) == $m ? 'selected' : '' }}>{{ $monthName }}</option>
+													@endfor
+												</select>
+
 												</div>
 												<div class="form-group">
-													<select>
-													  <option value="year">Year</option>
-													  <option>2000</option>
-													  <option>2001</option>
-													  <option>2002</option>
-													  <option>2004</option>
-													  <option>2005</option>
-													  <option>2006</option>
-													  <option>2007</option>
-													  <option>2008</option>
-													  <option>2009</option>
-													  <option>2010</option>
-													  <option>2011</option>
-													  <option>2012</option>
+												<select name="year">
+														<option value="year">Year</option>
+														@php
+															$currentYear = date('Y');
+														@endphp
+														@for ($y = $currentYear; $y >= 1900; $y--)
+															<option {{ date('Y', strtotime($user->DOB)) == $y ? 'selected' : '' }}>{{ $y }}</option>
+														@endfor
 													</select>
+
 												</div>
 											</div>
 											<div class="form-radio">
-											  <div class="radio">
-												<label>
-												  <input type="radio" checked="checked" name="radio"><i class="check-box"></i>Male
-												</label>
-											  </div>
-											  <div class="radio">
-												<label>
-												  <input type="radio" name="radio"><i class="check-box"></i>Female
-												</label>
-											  </div>
-											</div>
-											<div class="form-group">	
+  										  <div class="radio">
+											<label>
+												<input type="radio" name="gender" value="0" {{ $user->gender == 0 ? 'checked' : '' }}>
+												<i class="check-box"></i>Male
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="gender" value="1" {{ $user->gender == 1 ? 'checked' : '' }}>
+												<i class="check-box"></i>Female
+											</label>
+										</div>
+										</div>
+
+											<!-- <div class="form-group">	
 											  <input type="text" required="required"/>
 											  <label class="control-label" for="input">City</label><i class="mtrl-select"></i>
 											</div>
@@ -476,14 +444,17 @@
 												  <option value="ZMB">Zambia</option>
 												  <option value="ZWE">Zimbabwe</option>
 											  </select>
-											</div>
+											</div> -->
+											
 											<div class="form-group">	
-											  <textarea rows="4" id="textarea" required="required"></textarea>
-											  <label class="control-label" for="textarea">About Me</label><i class="mtrl-select"></i>
+												<textarea rows="4" id="description" name="description" required="required" maxlength="250">{{ $user->description }}</textarea>
+												<label class="control-label" for="description">About Me (maximum 20 characters)</label><i class="mtrl-select"></i>
+												<span id="char-count">20 characters remaining</span>
 											</div>
+
 											<div class="submit-btns">
-												<button type="button" class="mtr-btn"><span>Cancel</span></button>
-												<button type="button" class="mtr-btn"><span>Update</span></button>
+												<button type="button" class="mtr-btn"><span> <a href="{{ url('time-line/user-profile/' .$user->user_id) }}" class="mtr-btn"><span>Cancel</span></a></span></button>
+												<button type="submit" class="mtr-btn"><span>Update</span></button>
 											</div>
 										</form>
 									</div>

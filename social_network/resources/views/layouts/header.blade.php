@@ -17,6 +17,8 @@
 	<link rel="stylesheet" href="{{asset('css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('css/color.css')}}">
 	<link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </head>
 
@@ -30,7 +32,7 @@
 				<span class="mh-text">
 					<a href="{{ url ('newsfeed') }}" title="">
 					<img src="{{asset('images/logo.png')}}" alt="ERR">
-					kkkk
+					
 					</a>
 				</span>
 				<span class="mh-btns-right">
@@ -38,9 +40,11 @@
 				</span>
 			</div>
 			<div class="mh-head second">
-				<form class="mh-form">
+				<form class="mh-form" action="#">
 					<input placeholder="search" />
-					<a href="#/" class="fa fa-search"></a>
+					<button type="submit">
+						find
+					</button>
 				</form>
 			</div>
 			<!-- <nav id="menu" class="res-menu">
@@ -274,16 +278,26 @@
 					</ul>
 				</li>
 			</ul> -->
-				<ul class="setting-area">
-					<li>
-						<a href="#" title="Home" data-ripple=""><i class="ti-search"></i></a>
-						<div class="searched">
-							<form method="post" class="form-search">
-								<input type="text" placeholder="Search Friend">
-								<button data-ripple><i class="ti-search"></i></button>
-							</form>
-						</div>
-					</li>
+			<!-- <div class="searched"> -->
+					
+						<!-- <form method="GET" action="{{ route('posts.search')}}" class="form-search">
+							{{@csrf_field()}}
+								
+								<input type="text" name="search" placeholder="Search ..." value="{{ isset($search) ? $search : ''}}">
+								<button class="btn btn-primary" type="submit" data-ripple>Search <i class="ti-search"></i></button>
+						</form> -->
+
+			<!-- </div>	 -->
+			
+			<div class="position-relative">
+			<form class="d-flex position-absolute" style="width:30vw; transform:translate(90%,30%)" role="search" action="{{route('posts.search')}}" method="GET">
+				<input class="form-control me-2" type="search"  name ="search" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success" type="submit">Search</button>
+			</form>
+				
+			</div>
+			<ul class="setting-area">
+
 					<li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
 					<li>
 						<a href="#" title="Notification" data-ripple="">

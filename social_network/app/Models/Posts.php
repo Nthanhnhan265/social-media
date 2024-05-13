@@ -26,6 +26,10 @@ class Posts extends Model
     {
         return $this->belongsToMany(LikePost::class);
     }
+    public function likes()
+    {
+        return $this->hasMany(LikePost::class, 'post_id_fk', 'post_id');
+    }
 
     public function groups()
     {

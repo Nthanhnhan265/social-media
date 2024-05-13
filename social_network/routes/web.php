@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\LikePostController;
 
 
 
@@ -40,11 +40,12 @@ Route::get('/time-line/:id',[]);
 Route::post('/post',[PostsController::class, 'store']); 
 Route::post('/comment',[CommentController::class, 'store']); 
 Route::delete('/post/{id}',[PostsController::class, 'destroy'])->name('posts.destroy'); 
-Route::put('/post/{id}',[PostsController::class, 'update'])->name('posts.update'); 
+// Route::put('/edit-post/{id}',[PostsController::class, 'update'])->name('posts.update'); 
 
 Route::get('/', function () {
     return redirect ('/newsfeed');   
 });
+
 
 
 Route::get('/register', function () {
@@ -82,6 +83,37 @@ Route::get('/{page?}', function ($page = "newsfeed") {
 
 
 
-Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
+Route::get('time-line/user-profile/{id}',[UsersController::class,'show'])->name('user-profile');
+
+// Route::get('timeline-photos/user-profile/{id}',[UsersController::class,'showImagePost']); 
 Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 
 Route::get('edit-profile-basic/{id}',[UsersController::class,'showProfile']);
+Route::get('edit-post/{id}',[PostsController::class,'showEditForm']);
+Route::put('update-post/{id}', [PostsController::class, 'update'])->name('posts.update');
+Route::delete('time-line/user-profile/{id}', [PostsController::class,'destroy'])->name('posts.destroy');
+
+// Route::get('editInfo/{id}/edit', [UsersController::class, 'edit'])->name('user.edit');
+
+// Route Update thông tin cá nhân của user 
+Route::get('editInfo/{id}', [UsersController::class, 'show'])->name('user.update');
+Route::put('update-Info-User/{id}', [UsersController::class,'update'])->name('user-profile');
+
+Route::put('update-avatar/{id}', [UsersController::class, 'updateAvatar'])->name('user.update');
+Route::put('update-background/{id}', [UsersController::class, 'updateBackground'])->name('user.update');
+
+Route::get('timeline-photos/user-profile/{id}', [UsersController::class, 'showImagePost']);
+Route::get('timeline-videos/user-profile/{id}', [UsersController::class, 'showVideoPost']);
+// Route comment posts trong file time-line
+Route::post('time-line/user-profile/{id}',[CommentController::class, 'store']); 
+// Route đăng bài post trong trang time-line 
+Route::post('/time-line/user-profile/{id}',[PostsController::class, 'postOfTimeLine']);
+
+// Route tìm kiếm bài post 
+Route::get('search', [PostsController::class, 'search'])->name('posts.search');
+
+
+// like 
+Route::post('likepost', [LikePostController::class,'like'])->name('posts.like');
+Route::post('dislikepost', [LikePostController::class,'dislike'])->name('posts.dislike');
+
+Route::get('modal',[PostsController::class,'updateComment']);

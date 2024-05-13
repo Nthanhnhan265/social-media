@@ -39,7 +39,7 @@
 									  <span>Group Admin</span>
 									</li>
 									<li>
-										<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
+										<a class="" href="{{ url('time-line/user-profile/') }}" title="" data-ripple="">time line 22</a>
 										<a class="" href="timeline-photos" title="" data-ripple="">Photos</a>
 										<a class="" href="timeline-videos" title="" data-ripple="">Videos</a>
 										<a class="active" href="timeline-friends" title="" data-ripple="">Friends</a>

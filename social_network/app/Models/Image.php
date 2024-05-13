@@ -19,4 +19,7 @@ class Image extends Model
     public function comment(){
         return $this->belongsTo(Comment::class, 'comment_id');
     }
+    public function users() {
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

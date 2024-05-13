@@ -104,9 +104,10 @@ class CommentController extends Controller
             
             
         }
-        return redirect('newsfeed'); 
+         return redirect('newsfeed');
+       
     }
-
+    
     /**
      * Display the specified resource.
      *

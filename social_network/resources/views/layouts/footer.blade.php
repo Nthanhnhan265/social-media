@@ -148,9 +148,13 @@
 		</div><!-- side panel -->		
 	
 	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-	<script src="{{ asset('js/main.min.js') }}"></script>
+		<script src="{{ asset('js/main.min.js') }}"></script>
 		<script src="{{ asset('js/script.js') }}"></script>
 		<script src="{{ asset('js/map-init.js') }}"></script>
+		<script src="{{asset('js/setting.js')}}"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>	
 </html>

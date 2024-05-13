@@ -243,19 +243,18 @@ use Illuminate\View\Component;
 																<ins>52</ins>
 															</span>
 														</li>
-																<li>
-																	<span class="like" data-toggle="tooltip" title="Like" data-post-id="{{ $post->id }}">
-																		<i class="ti-heart"></i>
-																		
-																		<ins id="like{{$post->id}}">{{$post->likes}}</ins>
-																	</span>
-																</li>
-																<li>
-																	<span class="dislike" data-toggle="tooltip" title="Dislike" data-post-id="{{ $post->id }}">
-																		<i class="ti-heart-broken"></i>
-																		<ins id="dislike{{$post->id}}">{{ $post->likes()->where('status', 0)->count() }}</ins>
-																	</span>
-																</li>
+														<li>
+															<span class="like" data-toggle="tooltip" title="like">
+																<i class="ti-heart"></i>
+																<ins>2.2k</ins>
+															</span>
+														</li>
+														<li>
+															<span class="dislike" data-toggle="tooltip" title="dislike">
+																<i class="ti-heart-broken"></i>
+																<ins>200</ins>
+															</span>
+														</li>
 														<li class="social-media">
 															<div class="menu">
 																<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
@@ -300,7 +299,6 @@ use Illuminate\View\Component;
 												@foreach ($post->comments as $comment)
 													<x-comment :commenter=$comment></x-comment>
 												@endforeach
-												
 												<li>
 													<a href="#" title="" class="showmore underline">more comments</a>
 												</li>
@@ -379,7 +377,7 @@ use Illuminate\View\Component;
 										</div>
 										<div class="page-likes">
 											<ul class="nav nav-tabs likes-btn">
-												<li class="nav-item"><a class="active" href="#link1" data-	="tab">likes</a></li>
+												<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">likes</a></li>
 												<li class="nav-item"><a class="" href="#link2" data-toggle="tab">views</a></li>
 											</ul>
 											<!-- Tab panes -->

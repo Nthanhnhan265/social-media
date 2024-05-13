@@ -74,9 +74,9 @@ Route::get('/about/{userId}', [UsersController::class, 'about'])->name('about');
 // Route::get('time-line/{userId}', 'TimelineController@index')->name('timeline');
 //Route::get('time-line',[UsersController::class,'index']);
 
-Route::get('/{page?}', function ($page = "newsfeed") {  
-    return view($page);
-});
+// Route::get('/{page?}', function ($page = "newsfeed") {  
+//     return view($page);
+// });
 
 //Route::get('/inbox', [PostController::class, 'index']);
 //Route::resource('index',PostController::class);

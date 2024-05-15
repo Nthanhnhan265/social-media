@@ -979,16 +979,31 @@ header.sticky {
     visibility: visible;
 
 }
+.read-noti, .unread-noti { 
+    width: 100%!important;
+    padding-bottom: 10px;
+}
 .read-noti { 
     background-color: #ffffff;
     color: #000;
     font-weight: 400;
+
 }
 .unread-noti { 
     background-color: #f1f1f1;
     color: #000;
     font-weight: 400;
 }
+.corner-time { 
+    font-size: 0.5rem;
+    font-weight: bold;
+    color: #000;
+    text-align: left;
+}
+.read-noti:hover > .corner-time, .unread-noti:hover > .corner-time { 
+    color: #fff;
+}
+  
 
 
 .drops-menu {
@@ -1156,6 +1171,7 @@ header.sticky {
     color: #fff;
 }
 .btn-outline > button {
+    height: 100%;
     margin-left: 10px;
     border-radius: 2px;
     color: #ffffff;
@@ -1820,6 +1836,11 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
     margin-bottom: 20px;
     width: 100%;
 }
+.we-comet > li.hideComment {
+    display: none;
+    margin-bottom: 20px;
+    width: 100%;
+}
 
 .we-comet > li:last-child {
     margin-bottom: 0;
@@ -1872,7 +1893,7 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
 }
 
 .we-comet > li ul li {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .we-comet li a.showmore {
@@ -2004,6 +2025,7 @@ li.post-comment .comet-avatar {
     top: 50%;     
     position: absolute;
     right: 0;
+    transform: translateX(-20%);
     background: none;
 }
 
@@ -10125,4 +10147,63 @@ aside.sidebar.full-style {
 } */
 .list-vid { 
     height: 50vh;
+}
+.countdown { 
+    transform: translateY(-100%);
+    transition: all 1s;
+    animation: showAndRemove 5s; 
+}
+.showComment { 
+    
+}
+.hideComment { 
+    display: none;
+}
+.border-post { 
+    border: 1px solid rgb(0,0,0, .4);
+}
+.border-share { 
+    /* box-shadow: 0px 0px 3px rgb(0,0,0, .2); */
+    border: 1px solid rgb(0,0,0, .3);
+}
+.sharer {
+    padding: 0px 20px;
+    background: #FFF;
+    margin-bottom: 1rem;
+    border: 1px solid rgb(0,0,0, .1);   
+    border-radius: 0.5rem;
+}
+.publicTime{ 
+    font-size: 10px;
+}
+.user-shared { 
+    display: flex; 
+    align-items: center;
+    padding: 15px 0px 10px 0px; 
+}
+.user-shared .avatar { 
+    width: 2.8125rem;
+    height: 2.8125rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+@keyframes showAndRemove {
+    0% { 
+        top: 100%;
+        left: -100%; 
+    }
+    25% { 
+        top: 100%;
+        left: 0%; 
+    }
+    85%  { 
+        top: 100%;
+        left: 0%; 
+    }
+    100% { 
+        top: 100%;
+        left: -100%; 
+    }
+    
 }

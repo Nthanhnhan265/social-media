@@ -7,15 +7,17 @@ use Illuminate\View\Component;
 class comment extends Component
 {
     public $commenter; 
+    public $isHidden;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($commenter)
+    public function __construct($commenter,$isHidden)
     {
         $this->commenter = $commenter;
+        $this->isHidden = $isHidden; 
     }
 
     /**

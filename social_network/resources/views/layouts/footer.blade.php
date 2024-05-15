@@ -162,6 +162,7 @@
 <script src="{{ asset('js/main.min.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
 <script src="{{ asset('js/map-init.js') }}"></script>
+<script src="{{ asset('js/handleEvent.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
 <!-- custom fancybox -->
 <script>

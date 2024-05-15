@@ -44,4 +44,5 @@ class Posts extends Model
     {
         return $this->belongsToMany(User::class, 'share', 'user_id_fk','post_id_fk')->withPivot('status');
     }
+    
 }

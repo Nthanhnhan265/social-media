@@ -170,21 +170,29 @@ $notifications = Notification::getAllNotification();
 							<ul class="drops-menu">
 								@foreach($notifications as $notification) 
 								<li>
-										<form action="{{ url('read-notification/'.$notification->notification_id)}}" method="post">
+										<form action="{{ url('read-notification/'.$notification->notification_id)}}" method="post" class="">
 											@csrf
 											@method('put') 
 											<input type="hidden" name="type_id" value="{{$notification->type_id}}">
 											<input type="hidden" name="type" value="{{$notification->type}}">
-											<button type="submit" class={{$notification->status == 'read' ? "read-noti" : "unread-noti	"}}>
-												@if($notification->type=="friend_request")
-												<i class="fa-solid fa-paper-plane"></i>
-												@elseif($notification->type=="accept")
-												<i class="fa-solid fa-check"></i>
-												@endif
-												<div class="mesg-meta">
-													{!! $notification->content!!}
-												</div>
-	
+											<button disabled type="submit" class={{$notification->status == 'read' ? "read-noti" : "unread-noti	"}}>
+                                                <div class="corner-time">At: {{$notification->created_at}}</div>
+                                                <div style="width: 100%">
+                                                    @if($notification->type=="friend_request")
+                                                    <i class="fa-solid fa-paper-plane"></i>
+                                                    @elseif($notification->type=="accept")
+                                                    <i class="fa-solid fa-check"></i>
+                                                    @elseif($notification->type=="newpost")
+                                                    <i class="fa-solid fa-file-pen"></i>
+                                                    @elseif($notification->type=="sharepost")
+                                                    <i class="fa-solid fa-share"></i>
+                                                    @endif
+                                                    <div class="mesg-meta text-left">
+                                                        {!! $notification->content!!}
+                                                    </div>
+
+                                                </div>
+                                                
 											</button>
 										</form>
 								</li>
@@ -295,3 +303,7 @@ $notifications = Notification::getAllNotification();
                 </div>
             </div>
         </div><!-- topbar -->
+        <div id="user-profile" style="display: none">
+            <span id="fullname" data-value = "{{Auth::user()->last_name." ".Auth::user()->first_name}}"></span>
+            
+        </div>

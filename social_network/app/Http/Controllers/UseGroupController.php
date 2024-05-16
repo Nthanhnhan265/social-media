@@ -69,11 +69,14 @@ class UseGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Chỉnh sửa quyền, xác nhận tham gia group cho user
     public function update(Request $request, $group_id)
     {
         $usergroup = Usergroup::where('group_id_fk', $group_id)
                       ->where('user_id_fk', $request->input('user_id'))
                       ->first();  
+        $usergroup->role_id_fk = $request->input('role');
         $usergroup->request = $request->input('request');    
         $usergroup->save();
         return redirect()->back();   

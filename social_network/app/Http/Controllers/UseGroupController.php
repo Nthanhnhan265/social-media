@@ -105,7 +105,7 @@ class UseGroupController extends Controller
 
     //Xoá yêu cầu vào nhóm
     public function deleteRequest(Request $request, $group_id)
-    {
+    {       
         $usergroup = Usergroup::where('group_id_fk', $group_id)
                       ->where('user_id_fk', $request->input('user_id'))
                       ->first();       

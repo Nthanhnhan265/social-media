@@ -5,14 +5,14 @@
 			<figure><img src="{{ asset('images/resources/timeline-4.jpg')}}" alt=""></figure>
 			<div class="add-btn">
 				<a href="#" title="" data-ripple="">Joined</a>
-				@if($userRole->role_id_fk != 0)
+				@if($userRole->role_id_fk == !0)
 					<form action="{{ route('leave-group', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to leave this group?');">
 						@csrf
 						@method('DELETE')
 						<button type="submit" title="" data-ripple="" class="delete-group">Leave</button>
 					</form>
 				@else
-					<form action="{{ route('delete-group', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this group?');">
+					<form action="{{ route('disband-groups', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this group?');">
 						@csrf
 						@method('DELETE')
 						<button type="submit" title="" data-ripple="" class="delete-group">Delete group</button>

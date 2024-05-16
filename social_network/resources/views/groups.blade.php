@@ -91,7 +91,7 @@
 												<div class="pepl-info">
 													<h4><a href="#" title="">{{ $group->group->name_group }} </a></h4>
 													<span>private group</span>		
-													<form action="{{ route('delete-request', $group->group_id_fk) }}" method="POST" style="display: inline;" onsubmit="">
+													<form action="{{ route('delete-request-by-user', $group->group_id_fk) }}" method="POST" style="display: inline;" onsubmit="">
 														@csrf
 														@method('DELETE')
 														<button type="submit" title="" data-ripple="" class="request-join">Delete request</button>

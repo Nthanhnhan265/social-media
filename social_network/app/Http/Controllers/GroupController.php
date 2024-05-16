@@ -153,6 +153,11 @@ class GroupController extends Controller
      */
     public function destroy($group_id)
     {
+          
+    }
+
+    public function deleteGroupByGroupAdmin($group_id)
+    {
         DB::transaction(function () use ($group_id) {
             // Tìm nhóm theo ID
             $group = Group::findOrFail($group_id);

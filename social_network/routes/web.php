@@ -93,11 +93,12 @@ Route::post('/newgroup',[GroupController::class, 'store']);
 Route::get('/groups', [GroupController::class, 'getGroupByUserID']);
 Route::get('/group-view/{group_id}', [GroupController::class, 'getPostByGroupId']);
 Route::get('/group-member/{group_id}', [GroupController::class, 'getAllForGroupMember']);
-Route::delete('/groups-view/{group_id}', [GroupController::class, 'destroy'])->name('delete-group');
-Route::delete('/groups-view/{group_id}', [UseGroupController::class, 'destroy'])->name('leave-group');
-Route::delete('/groups/{group_id}', [UseGroupController::class, 'destroy'])->name('delete-request');;
+Route::delete('/disband-groups/{group_id}/', [GroupController::class, 'deleteGroupByGroupAdmin'])->name('disband-groups');
+Route::delete('/leave-group/{group_id}', [UseGroupController::class, 'destroy'])->name('leave-group');
+Route::delete('/delete-request-by-user/{group_id}', [UseGroupController::class, 'destroy'])->name('delete-request-by-user');;
 Route::delete('/groups-member/{group_id}', [UseGroupController::class, 'deleteRequest'])->name('delete-request');
 Route::put('/groups-member/{group_id}', [UseGroupController::class, 'update'])->name('update');
+
 
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);

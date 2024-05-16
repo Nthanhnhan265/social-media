@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use \App\Models\Group;
 use \App\Models\UserGroup;
+use \App\Models\Comment;
+use \App\Models\Posts;
 use \App\Models\PostGroup;
 use Illuminate\Support\Facades\DB;
 
@@ -149,9 +151,32 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($group_id)
     {
-        //
+        DB::transaction(function () use ($group_id) {
+            // Tìm nhóm theo ID
+            $group = Group::findOrFail($group_id);
+    
+            // Xóa tất cả các user trong nhóm từ bảng usergroup
+            UserGroup::where('group_id_fk', $group_id)->delete();
+    
+            // Lấy danh sách post_id từ bảng postgroup liên quan đến group_id
+            $postIds = PostGroup::where('group_id_fk', $group_id)->pluck('post_id_fk');
+    
+            // Xóa tất cả các bài viết liên quan từ bảng postgroup
+            PostGroup::where('group_id_fk', $group_id)->delete();
+    
+            // Xóa các bình luận liên quan từ bảng comments
+            Comment::whereIn('post_id_fk', $postIds)->delete();
+    
+            // Xóa các bài viết từ bảng post
+            Posts::whereIn('id', $postIds)->delete();
+    
+            // Xóa nhóm
+            $group->delete();
+        });
+    
+        return redirect('groups');  
     }
 
 

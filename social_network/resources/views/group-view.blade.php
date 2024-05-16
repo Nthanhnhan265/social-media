@@ -3,13 +3,21 @@
 	<section>
 		<div class="feature-photo">
 			<figure><img src="{{ asset('images/resources/timeline-4.jpg')}}" alt=""></figure>
-			<div class="add-btn">		
+			<div class="add-btn">
 				<a href="#" title="" data-ripple="">Joined</a>
-				<a href="#" title="" data-ripple="">
-					@if($userRole->role_id_fk == 2) Leave
-					@else
-						Delete group
-					@endif</a>
+				@if($userRole->role_id_fk != 0)
+					<form action="{{ route('leave-group', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to leave this group?');">
+						@csrf
+						@method('DELETE')
+						<button type="submit" title="" data-ripple="" class="delete-group">Leave</button>
+					</form>
+				@else
+					<form action="{{ route('delete-group', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this group?');">
+						@csrf
+						@method('DELETE')
+						<button type="submit" title="" data-ripple="" class="delete-group">Delete group</button>
+					</form>
+				@endif
 			</div>
 			<form class="edit-phto" @if($userRole->role_id_fk == 2) style="display: none;" @endif >
 				<i class="fa fa-camera-retro"></i>
@@ -38,7 +46,7 @@
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-								  <h5>Nhóm số 1</h5>	
+								  <h5>{{ $group->name_group }}</h5>	
 								  <span>{{ $memberCount }} members</span>							  
 								</li>
 								<li>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use \App\Models\UserGroup;
 
 class UseGroupController extends Controller
 {
@@ -67,9 +69,14 @@ class UseGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $group_id)
     {
-        //
+        $usergroup = Usergroup::where('group_id_fk', $group_id)
+                      ->where('user_id_fk', $request->input('user_id'))
+                      ->first();  
+        $usergroup->request = $request->input('request');    
+        $usergroup->save();
+        return redirect()->back();   
     }
 
     /**
@@ -78,8 +85,28 @@ class UseGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($group_id)
     {
-        //
+        DB::transaction(function () use ($group_id) {
+
+            //lấy user_id
+            $userId = Auth::user()->user_id;
+            // Xóa user ở bảng usergroup
+            UserGroup::where('group_id_fk', $group_id)
+                        ->where('user_id_fk', $userId)
+                        ->delete();
+        });
+    
+        return redirect('groups');
+    }
+
+    //Xoá yêu cầu vào nhóm
+    public function deleteRequest(Request $request, $group_id)
+    {
+        $usergroup = Usergroup::where('group_id_fk', $group_id)
+                      ->where('user_id_fk', $request->input('user_id'))
+                      ->first();       
+        $usergroup->delete();
+        return redirect()->back();   
     }
 }

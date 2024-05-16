@@ -75,15 +75,29 @@
 									@foreach ($groups as $group)
 										<li>
 											<div class="nearly-pepls">
+											@if($group->request == 0)
 												<figure>
 													<a href="{{ url('group-view', $group->group_id_fk) }}" title=""><img src="images/resources/group1.jpg" alt=""></a>
 												</figure>
 												<div class="pepl-info">
 													<h4><a href="{{ url('group-view', $group->group_id_fk) }}" title="">{{ $group->group->name_group }} </a></h4>
-													<span>public group</span>
-													<em>5 Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">joined</a>
+													<span>private group</span>
+														<a href="#" title="" class="add-butn" data-ripple="">Joined</a>												
 												</div>
+											@elseif($group->request == 1)
+												<figure>
+													<a href="#" title=""><img src="images/resources/group1.jpg" alt=""></a>
+												</figure>
+												<div class="pepl-info">
+													<h4><a href="#" title="">{{ $group->group->name_group }} </a></h4>
+													<span>private group</span>		
+													<form action="{{ route('delete-request', $group->group_id_fk) }}" method="POST" style="display: inline;" onsubmit="">
+														@csrf
+														@method('DELETE')
+														<button type="submit" title="" data-ripple="" class="request-join">Delete request</button>
+													</form>																									
+												</div>
+											@endif
 											</div>
 										</li>	
 									@endforeach								

@@ -2,17 +2,21 @@
 @section('content')		
 	<section>
 		<div class="feature-photo">
-			<figure><img src="images/resources/timeline-4.jpg" alt=""></figure>
+			<figure><img src="{{ asset('images/resources/timeline-4.jpg')}}" alt=""></figure>
 			<div class="add-btn">		
 				<a href="#" title="" data-ripple="">Joined</a>
-				<a href="#" title="" data-ripple="">Leave</a>
+				@if($userRole->role_id_fk == 2) 
+					<a href="#" title="" data-ripple="">Leave</a>
+				@else
+					<a href="#" title="" data-ripple="">Delete group</a>
+				@endif
 			</div>
-			<form class="edit-phto" style="display: none;">
+			<form class="edit-phto" @if($userRole->role_id_fk == 2) style="display: none;" @endif >
 				<i class="fa fa-camera-retro"></i>
 				<label class="fileContainer">
 					Edit Cover Photo
-				<input type="file"/>
-			</label>
+					<input type="file"/>
+				</label>
 			</form>
 			<div class="container-fluid">
 				<div class="row merged">
@@ -34,8 +38,8 @@
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-								  <h5>Nhóm số 1</h5>	
-								  <span>{{ $memberCount }} members</span>							  
+									<h5>{{ $group->name_group }}</h5>	
+								  	<span>{{ $memberCount }} members</span>							  
 								</li>
 								<li>
 									<a class="" href="{{ url('group-view', $group->group_id) }}" title="" data-ripple="">Posts</a>
@@ -93,7 +97,7 @@
 												<a href="{{ url('notifications') }}" title="">Notifications</a>
 											</li>
 										</ul>
-									</div><!-- Shortcuts -->			
+									</div><!-- Shortcuts -->											
 								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-6">
@@ -130,35 +134,57 @@
 															@elseif($userRole->role_id_fk == 0 && $member->role_id_fk == 2) promote to admin															
 															@endif
 														</a><span>	
-														@if($userRole->role_id_fk == 0 && $member->role_id_fk == 1) 
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
+														@if($userRole->role_id_fk == 0 && ($member->role_id_fk == 1 || $member->role_id_fk == 2)) 
+														<form action="{{ route('delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+															@csrf
+															@method('DELETE')
+															<input type="text" name="user_id" value="{{ $member->user->user_id }}" style="display: none;"/>
+															<button type="submit" title="" data-ripple="" class="kickout-group">Kick out</button>
+														</form>
+														@elseif($userRole->role_id_fk == 1 && $member->role_id_fk == 2)
+														<form action="{{ route('delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+															@csrf
+															@method('DELETE')
+															<input type="text" name="user_id" value="{{ $member->user->user_id }}" style="display: none;"/>
+															<button type="submit" title="" data-ripple="" class="kickout-group">Kick out</button>
+														</form>			
 														@endif																																															@if($member->role_id_fk != 0) 
 														@endif									
 													</div>
 												</div>
 											</li>	
 											@endforeach										
-										</ul>
-											<div class="lodmore"><button class="btn-view btn-load-more"></button></div>
+										</ul>											
 										  </div>
-										  @foreach($requests as $request)
 										  <div class="tab-pane fade" id="frends-req" >
 											<ul class="nearby-contct">
+											@foreach($requests as $request)
 											<li>
 												<div class="nearly-pepls">
 													<figure>
 														<a href="{{ url('time-line') }}" title=""><img style="width: 60px; height: 60px; overflow: hidden" src="{{ asset('images/resources/' . $request->user->avatar) }}" alt=""></a>
-													</figure>>
+													</figure>
 													<div class="pepl-info">
 														<h4><a href="{{ url('time-line') }}" title="">{{$request->user->first_name.' '.$request->user->last_name }}</a></h4>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">Delete request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+														<form action="{{ route('delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+															@csrf
+															@method('DELETE')
+															<input type="text" name="user_id" value="{{ $request->user->user_id }}" style="display: none;"/>
+															<button type="submit" title="" data-ripple="" class="request-delete">Delete request</button>
+														</form>
+														<form action="{{ route('confirm-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+															@csrf
+															@method('PUT')				
+															<input type="text" name="user_id" value="{{ $request->user->user_id }}" style="display: none;"/> 							
+															<input type="text" name="request" value='0' style="display: none;"/>															
+															<button type="submit" title="" data-ripple="" class="request-join">Confirm</button>
+														</form>
 													</div>
 												</div>
 											</li>	
 											@endforeach											
 										</ul>	
-											  <button class="btn-view btn-load-more"></button>
+											  <!-- <button class="btn-view btn-load-more"></button> -->
 										  </div>
 										</div>
 									</div>
@@ -176,7 +202,7 @@
 									<div class="widget">
 										<h4 class="widget-title">Members</h4>
 										<ul class="invition">
-										@foreach($members as $member)								
+											@foreach($members as $member)								
 											<li>
 												<figure>
 													<img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('images/resources/' . $member->user->avatar) }}" alt="">
@@ -191,10 +217,9 @@
 													</a>
 												</div>
 											</li>
-											@endforeach	
+											@endforeach									
 										</ul>
-									</div>
-								
+									</div>								
 								</aside>
 							</div><!-- sidebar -->
 						</div>	

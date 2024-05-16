@@ -130,8 +130,24 @@
 														<span>
 														<br>
 														<span><a href="#" title="" data-ripple="">
-															@if($userRole->role_id_fk == 0 && $member->role_id_fk == 1) demote to member	
-															@elseif($userRole->role_id_fk == 0 && $member->role_id_fk == 2) promote to admin															
+															@if($userRole->role_id_fk == 0 && $member->role_id_fk == 1) 
+															<form action="{{ route('update', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+																@csrf
+																@method('PUT')
+																<input type="text" name="user_id" value="{{ $member->user->user_id }}" style="display: none;"/>
+																<input type="text" name="role" value="2" style="display: none;"/>
+																<input type="text" name="request" value='0' style="display: none;"/>
+																<button type="submit" title="" data-ripple="" class="change-role">Demote to Member</button>
+															</form>	
+															@elseif($userRole->role_id_fk == 0 && $member->role_id_fk == 2) 
+															<form action="{{ route('update', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+																@csrf
+																@method('PUT')
+																<input type="text" name="user_id" value="{{ $member->user->user_id }}" style="display: none;"/>
+																<input type="text" name="role" value="1" style="display: none;"/>
+																<input type="text" name="request" value='0' style="display: none;"/>
+																<button type="submit" title="" data-ripple="" class="change-role">Promote to Admin</button>
+															</form>																
 															@endif
 														</a><span>	
 														@if($userRole->role_id_fk == 0 && ($member->role_id_fk == 1 || $member->role_id_fk == 2)) 
@@ -172,10 +188,11 @@
 															<input type="text" name="user_id" value="{{ $request->user->user_id }}" style="display: none;"/>
 															<button type="submit" title="" data-ripple="" class="request-delete">Delete request</button>
 														</form>
-														<form action="{{ route('confirm-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+														<form action="{{ route('update', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
 															@csrf
 															@method('PUT')				
-															<input type="text" name="user_id" value="{{ $request->user->user_id }}" style="display: none;"/> 							
+															<input type="text" name="user_id" value="{{ $request->user->user_id }}" style="display: none;"/> 
+															<input type="text" name="role" value="2" style="display: none;"/>						
 															<input type="text" name="request" value='0' style="display: none;"/>															
 															<button type="submit" title="" data-ripple="" class="request-join">Confirm</button>
 														</form>

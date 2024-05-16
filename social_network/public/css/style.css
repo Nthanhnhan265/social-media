@@ -10164,3 +10164,9 @@ aside.sidebar.full-style {
     font-size: 13px !important;
     font: inherit; 
 }
+
+.change-role {
+    background: none; 
+    color: #098dcd;
+    padding: 0;
+}

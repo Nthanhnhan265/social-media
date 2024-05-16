@@ -97,7 +97,7 @@ Route::delete('/groups-view/{group_id}', [GroupController::class, 'destroy'])->n
 Route::delete('/groups-view/{group_id}', [UseGroupController::class, 'destroy'])->name('leave-group');
 Route::delete('/groups/{group_id}', [UseGroupController::class, 'destroy'])->name('delete-request');;
 Route::delete('/groups-member/{group_id}', [UseGroupController::class, 'deleteRequest'])->name('delete-request');
-Route::put('/groups-member/{group_id}', [UseGroupController::class, 'update'])->name('confirm-request');
+Route::put('/groups-member/{group_id}', [UseGroupController::class, 'update'])->name('update');
 
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);

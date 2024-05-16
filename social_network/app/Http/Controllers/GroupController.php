@@ -40,12 +40,19 @@ class GroupController extends Controller
         return view('groups')->with('groupsAll', $groups);
     }
 
+    //lấy chi tiết nhóm trong group-management
     public function getGroupByID($group_id)
     {
         $group = Group::findOrFail($group_id);
         return view('edit-group', compact('group'));
     }
 
+    //lấy chi tiết nhóm trong group
+    public function getGroupByID2($group_id)
+    {
+        $group = Group::findOrFail($group_id);
+        return view('edit-group-2', compact('group'));
+    }
     public function getGroupByUserID()
     {
         $userId = Auth::user()->user_id;
@@ -125,6 +132,8 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //sửa group trong group-management
     public function update(Request $request, $group_id)
     {
         $group = Group::find($group_id);
@@ -134,6 +143,8 @@ class GroupController extends Controller
         $group->save();
         return redirect()->back()->with('success', 'Group updated successfully.');   
     }
+
+    //xoá group trong group-management
     public function deleteGroup($groupID) {
         UserGroup::where('group_id_fk', $groupID)->delete();
         $group = Group::find($groupID);
@@ -253,6 +264,46 @@ class GroupController extends Controller
         //            ->get();               
         // return view('post-detail')->with('comments', $comments)->with('post', $post);
         return view('group-member')->with('posts', $posts)->with('userRole', $userRole)
+        ->with('memberCount', $memberCount)->with('group', $group)->with('members', $members)->with('requestCount', $requestCount)
+        ->with('requests', $requests);
+    }
+
+    public function getAllInfoForEditGroup($group_id)
+    {
+        $userId = Auth::user()->user_id;
+
+        $userRole = UserGroup::where('user_id_fk', $userId)
+                     ->where('group_id_fk', $group_id)
+                     ->first();
+
+        $posts = PostGroup::where('group_id_fk', $group_id)
+                ->get();
+
+        //Đếm số thành viên nhóm
+        $memberCount = UserGroup::where('group_id_fk', $group_id)
+                    ->where('request', 0)
+                    ->count();
+        
+        $requestCount = UserGroup::where('group_id_fk', $group_id)
+                    ->where('request', 1)
+                    ->count();
+
+        $requests = UserGroup::where('group_id_fk', $group_id)
+                    ->where('request', 1)
+                    ->get();
+         
+        $members = UserGroup::where('group_id_fk', $group_id)  
+                    ->where('request', 0)                 
+                    ->get();
+
+        $group = Group::where('group_id', $group_id)
+                ->first();
+
+        // $comments = Comment::where('post_id_fk', $id)
+        //            ->orderBy('created_at', 'desc')
+        //            ->get();               
+        // return view('post-detail')->with('comments', $comments)->with('post', $post);
+        return view('edit-group-2')->with('posts', $posts)->with('userRole', $userRole)
         ->with('memberCount', $memberCount)->with('group', $group)->with('members', $members)->with('requestCount', $requestCount)
         ->with('requests', $requests);
     }

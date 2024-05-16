@@ -98,6 +98,7 @@ Route::delete('/leave-group/{group_id}', [UseGroupController::class, 'destroy'])
 Route::delete('/delete-request-by-user/{group_id}', [UseGroupController::class, 'destroy'])->name('delete-request-by-user');;
 Route::delete('/groups-member/{group_id}', [UseGroupController::class, 'deleteRequest'])->name('delete-request');
 Route::put('/groups-member/{group_id}', [UseGroupController::class, 'update'])->name('update');
+Route::get('/edit-group-2/{group_id}', [GroupController::class, 'getAllInfoForEditGroup']);
 
 
 Route::get('/{page?}', function ($page = "newsfeed") {  

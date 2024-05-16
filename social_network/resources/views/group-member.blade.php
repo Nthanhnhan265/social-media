@@ -45,9 +45,9 @@
 									<a class="" href="{{ url('group-view', $group->group_id) }}" title="" data-ripple="">Posts</a>
 									<a class="active" href="#" title="" data-ripple="">Members</a>
 									<a class="" href="{{ url('inbox') }}" title="" data-ripple="">File</a>
-									<!-- <a class="" href="{{ url('insights') }}" title="" data-ripple="">insights</a>
-									<a class="" href="{{ url('fav-page') }}" title="" data-ripple="">posts</a>
-									<a class="" href="{{ url('page-likers') }}" title="" data-ripple="">likers</a> -->
+									@if($userRole->role_id_fk != 2)
+									<a class="" href="{{ url('edit-group-2', $group->group_id) }}" title="" data-ripple="">Edit group</a>	
+									@endif	
 								</li>
 							</ul>
 						</div>
@@ -151,14 +151,14 @@
 															@endif
 														</a><span>	
 														@if($userRole->role_id_fk == 0 && ($member->role_id_fk == 1 || $member->role_id_fk == 2)) 
-														<form action="{{ route('delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+														<form action="{{ route('delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to kick out this member?')">
 															@csrf
 															@method('DELETE')
 															<input type="text" name="user_id" value="{{ $member->user->user_id }}" style="display: none;"/>
 															<button type="submit" title="" data-ripple="" class="kickout-group">Kick out</button>
 														</form>
 														@elseif($userRole->role_id_fk == 1 && $member->role_id_fk == 2)
-														<form action="{{ route('delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+														<form action="{{ route('delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to kick out this member?')">
 															@csrf
 															@method('DELETE')
 															<input type="text" name="user_id" value="{{ $member->user->user_id }}" style="display: none;"/>

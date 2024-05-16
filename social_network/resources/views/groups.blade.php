@@ -77,20 +77,42 @@
 											<div class="nearly-pepls">
 											@if($group->request == 0)
 												<figure>
-													<a href="{{ url('group-view', $group->group_id_fk) }}" title=""><img src="images/resources/group1.jpg" alt=""></a>
+													@if($group->group->status == 0)
+													<a href="{{ url('group-deactive') }}"
+													title=""><img src="images/resources/group1.jpg" alt=""></a>
+													@else
+													<a href="{{ url('group-view', $group->group_id_fk) }}"
+													title=""><img src="images/resources/group1.jpg" alt=""></a>													
+													@endif
 												</figure>
 												<div class="pepl-info">
+													@if($group->group->status == 0)
+													<h4><a href="{{ url('group-deactive') }}" title="">{{ $group->group->name_group }} </a></h4>
+													<span>Deactive group</span>
+													@else
 													<h4><a href="{{ url('group-view', $group->group_id_fk) }}" title="">{{ $group->group->name_group }} </a></h4>
-													<span>private group</span>
-														<a href="#" title="" class="add-butn" data-ripple="">Joined</a>												
+													<span>Active group</span>
+													@endif
+													<a href="#" title="" class="add-butn" data-ripple="">Joined</a>												
 												</div>
 											@elseif($group->request == 1)
-												<figure>
-													<a href="#" title=""><img src="images/resources/group1.jpg" alt=""></a>
+											<figure>
+													@if($group->group->status == 0)
+													<a href="{{ url('group-deactive') }}"
+													title=""><img src="images/resources/group1.jpg" alt=""></a>
+													@else
+													<a href="{{ url('group-view', $group->group_id_fk) }}"
+													title=""><img src="images/resources/group1.jpg" alt=""></a>													
+													@endif
 												</figure>
 												<div class="pepl-info">
-													<h4><a href="#" title="">{{ $group->group->name_group }} </a></h4>
-													<span>private group</span>		
+												@if($group->group->status == 0)
+													<h4><a href="{{ url('group-deactive') }}" title="">{{ $group->group->name_group }} </a></h4>
+													<span>Deactive group</span>
+													@else
+													<h4><a href="{{ url('group-view', $group->group_id_fk) }}" title="">{{ $group->group->name_group }} </a></h4>
+													<span>Active group</span>
+													@endif	
 													<form action="{{ route('delete-request-by-user', $group->group_id_fk) }}" method="POST" style="display: inline;" onsubmit="">
 														@csrf
 														@method('DELETE')

@@ -52,7 +52,10 @@
 								<li>
 									<a class="active" href="{{ url('group-view') }}" title="" data-ripple="">Posts</a>
 									<a class="" href="{{ url('group-member', $group->group_id) }}" title="" data-ripple="">Members</a>
-									<a class="" href="{{ url('inbox') }}" title="" data-ripple="">File</a>								
+									<a class="" href="{{ url('inbox') }}" title="" data-ripple="">File</a>	
+									@if($userRole->role_id_fk != 2)
+									<a class="" href="{{ url('edit-group-2', $group->group_id) }}" title="" data-ripple="">Edit group</a>	
+									@endif							
 								</li>
 							</ul>
 						</div>

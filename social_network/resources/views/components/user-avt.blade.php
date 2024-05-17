@@ -6,7 +6,7 @@ $avtUser = Auth::user()->avatar
 ?> 
 
 @if ($avtUser != null) 
-<img src="{{asset('images/resources/'.$avtUser)}}" alt="error to load">
+<img src="{{asset('storage/images/'.$avtUser)}}" alt="error to load">
 @else 
-<img src="{{asset('images/resources/default.jpg')}}" alt="error to load">
+<img src="{{asset('storage/images/default.jpg')}}" alt="error to load">
 @endif

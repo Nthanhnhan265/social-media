@@ -14,6 +14,58 @@ class Posts extends Model
     protected $fillable = ["user_id_fk","content","status","timestamps"]; 
     public $timestamps = true;
 
+    public static function getPostAndShare($user_id)
+     {
+ 
+             //  get user's shared posts 
+             $sharedPost = Share::where('user_id_fk', $user_id)
+                 ->with([
+                     'user',
+                     'post' => function ($q) {
+                         $q->with([
+                             'user',
+                             'image',
+                             'video',
+                             'comments' => function ($q) {
+                                 $q->with([
+                                     'user',
+                                     'image' => function ($qImg) {
+                                         $qImg->where('img_location_fk', 1);
+                                     },
+                                     'video' => function ($qVid) {
+                                         $qVid->where('video_location_fk', 1);
+                                     }
+                                 ])->orderBy('created_at','desc');
+                             }
+                         ]);
+                     }
+                 ])
+                 ->get();
+ 
+             
+             //  get user's posts 
+             $posts = Posts::where('user_id_fk', $user_id)->orderBy('created_at', 'desc')
+                 ->with([
+                     'user',
+                     'image',
+                     'video',
+                     'comments' => function ($q) {
+                         $q->with([
+                             'user',
+                             'image' => function ($qImg) {
+                                 $qImg->where('img_location_fk', 1);
+                             },
+                             'video' => function ($qVid) {
+                                 $qVid->where('video_location_fk', 1);
+                             }
+                         ])->orderBy('created_at','desc');
+                     }
+                 ])->get();
+       
+        
+         return [...$posts,...$sharedPost];
+     }
+ 
 
     public function comments()
     {

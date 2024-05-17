@@ -2,56 +2,185 @@
 @section('content')
 
 <section>
+
 	<div class="feature-photo">
-		<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
-		<div class="add-btn">
-			<span>1205 followers</span>
-			<a href="#" title="" data-ripple="">Add Friend</a>
+		<figure><img src="{{asset('storage/images/' . Auth::user()->avatar)}}" alt=""></figure>
+		{{-- Nút kết bạn, hủy kết bạn, unfollow
+		=> cần chuyển sang component để tái sử dụng cho nhiều trang trong profile
+		--}}
+		<div class="container-btn">
+			@if (Auth::user()->user_id != $user->user_id)
+					@if ($friend)
+							<?php
+						if (!empty($friend[0])) {
+							$n = $friend[0];
+						}
+																																																																																												?>
+							@if ($n->status == "accept")
+								<div class="dropdown">
+									<button class="btn dropdown-toggle btn-primary" type="button" id="dropdownMenuButton"
+										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<a href="#" title="" data-ripple="">Friend <i class="fa-solid fa-user-group ml-1"></i></a>
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<div class="dropdown-item" href="#">
+											<form action="{{url('relationship/' . $user->user_id)}}" method="post" class="m-0">
+												@csrf
+												@method('delete')
+												<button type="submit" class="btn-warning">Unfriend <i
+														class="fa-solid fa-x ml-1"></i></button>
+											</form>
+
+										</div>
+										<div class="dropdown-item" href="#">
+											<div class="notify-btn">
+
+												@if(Follow::checkFollow(Auth::user()->user_id, $user->user_id))
+													<form action="{{url('follow/' . $user->user_id)}}" method="post" class="m-0">
+														@csrf
+														@method('delete')
+														<button type="submit" class="btn-warning">Unfollow <i
+																class="fa-solid fa-x ml-1"></i></button>
+													</form>
+
+												@else
+													<form action="{{url('follow')}}" method="post" class="m-0">
+														@csrf
+														@method('post')
+														<input type="hidden" value="{{$user->user_id}}" name="friend_id">
+														<button type="submit" class="btn-primary">Follow <i
+																class="fa-solid fa-bell ml-1"></i></button>
+													</form>
+
+
+												@endif
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+							@else
+								@if($n->sender == $user->user_id)
+									<form action="{{url('relationship/' . $user->user_id)}}" method="post">
+										@csrf
+										@method('put')
+										<div class="add-btn btn-filled">
+											<button type="submit">Accept <i class="fa-solid fa-check ml-1"></i></button>
+										</div>
+									</form>
+									<form action="{{url('relationship/' . $user->user_id)}}" method="post">
+										@csrf
+										@method('delete')
+										<div class="reject-btn btn-outline">
+											<button type="submit" class=""><i class="fa-solid fa-trash"></i></button>
+										</div>
+
+									</form>
+								@else
+									<div class="text-white">Pending <i class="fa-solid fa-paper-plane ml-1"></i></div>
+									<form action="{{url('relationship/' . $user->user_id)}}" method="post">
+										@csrf
+										@method('delete')
+										<div class="reject-btn btn-outline">
+											<button type="submit" class="btn-warning">Cancel <i class="fa-solid fa-x ml-1"></i></button>
+										</div>
+									</form>
+								@endif
+							@endif
+					@else
+						<form action="{{url('relationship')}}" method="post">
+							@csrf
+							@method('post')
+							<input type="hidden" name="receiver" value="{{$user->user_id}}">
+							<div class="add-btn btn-filled">
+								<button type="submit">
+									Add friend <i class="fa-solid fa-user-plus"></i>
+								</button>
+							</div>
+						</form>
+					@endif
+			@endif
+
 		</div>
-		<form class="edit-phto">
+	</div>
+	@if(auth()->check() && $user->user_id == auth()->user()->user_id)
+		<form class="edit-phto" action="{{ url('update-background/' . Auth::User()->user_id)}}" method="post"
+			enctype="multipart/form-data">
+			@csrf
+			@method('PUT')
 			<i class="fa fa-camera-retro"></i>
 			<label class="fileContainer">
-				Edit Cover Photo
-				<input type="file" />
-			</label>
+
+				<input type="file" name="background" id="background" accept="image/*">
+
+			</label>	
+			<button type="submit">Edit Backgroup</button>
 		</form>
-		<div class="container-fluid">
-			<div class="row merged">
-				<div class="col-lg-2 col-sm-3">
-					<div class="user-avatar">
-						<figure>
-							<img src="images/resources/user-avatar.jpg" alt="">
-							<form class="edit-phto">
+
+	@endif
+
+
+	<!-- </form> -->
+	<div class="container-fluid">
+		<div class="row merged">
+			<div class="col-lg-2 col-sm-3">
+				<div class="user-avatar">
+					<figure>
+						<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="">
+						@if(auth()->check() && $user->user_id == auth()->user()->user_id)
+							<form class="edit-phto" action="{{ url('update-avatar/' . Auth::User()->user_id)}}"
+								method="post" enctype="multipart/form-data">
+								@csrf
+								@method('PUT')
 								<i class="fa fa-camera-retro"></i>
 								<label class="fileContainer">
-									Edit Display Photo
-									<input type="file" />
+									<input type="file" name="avatar" id="avatar" accept="image/*">
 								</label>
+								<button class="btn-edit-avatar" type="submit"><i
+										class="fas fa-cloud-upload-alt"></i></button>
 							</form>
-						</figure>
-					</div>
+						@endif
+
+
+					</figure>
+
 				</div>
-				<div class="col-lg-10 col-sm-9">
-					<div class="timeline-info">
-						<ul>
-							<li class="admin-name">
-								<h5>Janice Griffith</h5>
-								<span>Group Admin</span>
-							</li>
-							<li>
-								<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
-								<a class="" href="timeline-photos" title="" data-ripple="">Photos</a>
-								<a class="" href="timeline-videos" title="" data-ripple="">Videos</a>
-								<a class="active" href="timeline-friends" title="" data-ripple="">Friends</a>
-								<a class="" href="timeline-groups" title="" data-ripple="">Groups</a>
-								<a class="" href="about" title="" data-ripple="">about</a>
-								<a class="" href="#" title="" data-ripple="">more</a>
-							</li>
-						</ul>
-					</div>
+			</div>
+			<div class="col-lg-10 col-sm-9">
+				<div class="timeline-info">
+					<ul>
+						<li class="admin-name">
+
+							<h5>{{$user->last_name}} {{$user->first_name}}</h5>
+							<!-- <span style="position:absoulte; bottom:50%;"> {{$user->description}}</span> -->
+						</li>
+						<li>
+							<a class="{{Request::is('timeline-friends') ? 'active' : ''}}" href="{{ url('time-line/user-profile/' . $user->user_id) }}" title=""
+								data-ripple="">time line</a>
+
+							<a class="{{Request::is('timeline-photos' . '/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('timeline-photos' . '/user-profile/' . $user->user_id) }}" title=""
+								data-ripple="">Photos</a>
+
+							<a class="{{Request::is('timeline-videos' . '/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('timeline-videos' . '/user-profile/' . $user->user_id) }}" title=""
+								data-ripple="">Videos</a>
+							<a class="{{Request::is('timeline-friends/'.$user->user_id) ? 'active' : ''}}" href="{{ url('timeline-friends/'. Auth::user()->user_id) }}" title="" data-ripple="">Friends</a>
+							<a class="{{Request::is('time-line/groups/'.$user->user_id) ? 'active' : ''}}" href="{{ url('groups') }}" title="" data-ripple="">Groups</a>
+
+							@if(auth()->check() && $user->user_id == auth()->user()->user_id)
+								<a class="{{Request::is('about' . '/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('about' . '/user-profile/' . auth()->user()->user_id) }}" title=""
+									data-ripple="">about</a>
+
+
+							@endif
+
+							<a class="=" href="#" title="" data-ripple="">more</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </section><!-- top area -->
 

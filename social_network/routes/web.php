@@ -26,7 +26,7 @@ use App\Http\Controllers\GroupController;
 */
 
 Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']); 
-Route::get('/time-line/:id',[]); 
+
 Route::post('/post',[PostsController::class, 'store']); 
 Route::post('/comment',[CommentController::class, 'store']); 
 Route::delete('/post/{id}',[PostsController::class, 'destroy'])->name('posts.destroy'); 
@@ -35,16 +35,29 @@ Route::post('/relationship',[Relationship::class,'store'])->name('relationships.
 Route::put('/relationship/{id}/{redirect?}',[Relationship::class,'update'])->name('relationships.update'); 
 Route::delete('/relationship/{id}/{redirect?}',[Relationship::class,'destroy'])->name('relationships.destroy');
 Route::get('/timeline-friends/{id}',function($id) { 
-    return view('timeline-friends',
-    ["friends"=>ModelsRelationship::getFriendListOfUser(),
-    "requests"=>ModelsRelationship::getRequestListOfUser()]);
+    $userId = User::where('user_id',$id)->first(); 
+    if (!empty($userId)) { 
+        return view('timeline-friends',
+        ["friends"=>ModelsRelationship::getFriendListOfUser(),
+        "requests"=>ModelsRelationship::getRequestListOfUser(),
+        "user"=>$userId
+        
+        
+        ]
+    );
+    }else  {
+
+    }
+   
 });  
 Route::delete('/follow/{id}',[Follow::class, 'destroy' ]); //unfollow a friend
 Route::post('/follow',[Follow::class, 'store' ]); //follow a friend
 Route::put('/read-notification/{id}',[Notification::class,'update']);  
 
 Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']);
-Route::get('/time-line/:id',[]);
+
+
+
 
 
 Route::post('/post',[PostsController::class, 'store']);
@@ -114,14 +127,16 @@ Route::put('/update-post/{id}', [PostsController::class, 'updatePostStatus'])->n
 Route::delete('/delete-comment/{id}', [CommentController::class, 'deleteComment'])->name('delete-comment');
 Route::put('/update-comment/{id}', [CommentController::class, 'updateCommentStatus'])->name('update-comment');
 
-Route::get('/{page?}', function ($page = "newsfeed") {  
-    return view($page);
-});
+Route::put('update-background/{id}', [UsersController::class, 'updateBackground'])->name('user.update');
+
+// Route::get('/{page?}', function ($page = "newsfeed") {  
+//     return view($page);
+// });
 
 //Route::get('/inbox', [PostController::class, 'index']);
 //Route::resource('index',PostController::class);
 
-
+ 
 
 Route::get('time-line/user-profile/{id}',[UsersController::class,'show']);
 Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']);
@@ -129,3 +144,27 @@ Route::get('edit-profile-basic/{id}',[UsersController::class,'showProfile']);
 
 Route::POST('share',[ShareController::class,'store'])->name('share.store');
 
+Route::put('update-avatar/{id}', [UsersController::class, 'updateAvatar'])->name('user.update');
+// Route Update thông tin cá nhân của user 
+Route::get('editInfo/{id}', [UsersController::class, 'show'])->name('user.update');
+Route::put('update-Info-User/{id}', [UsersController::class,'update'])->name('user-profile');
+Route::get('timeline-photos/user-profile/{id}', [UsersController::class, 'showImagePost']);
+Route::get('timeline-videos/user-profile/{id}', [UsersController::class, 'showVideoPost']);
+ 
+
+
+
+Route::get('edit-post/{id}',[PostsController::class,'showEditForm']);
+Route::put('update-post/{id}', [PostsController::class, 'update'])->name('posts.update');
+// Route đăng bài post trong trang time-line 
+// Route::post('/time-line/user-profile/{id}',[PostsController::class, 'postOfTimeLine']);
+
+// Route comment posts trong file time-line
+Route::post('time-line/user-profile/{id}',[CommentController::class, 'store']); 
+// Route::get('timeline-photos/user-profile/{id}',[UsersController::class,'show']);
+Route::get('edit-comment/{id}', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+// Route tìm kiếm bài post 
+Route::get('search', [PostsController::class, 'search'])->name('posts.search');
+// Route::get('timeline-friends/{id}',[UsersController::class,'show']);

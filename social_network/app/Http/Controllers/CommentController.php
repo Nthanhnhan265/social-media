@@ -101,7 +101,7 @@ class CommentController extends Controller
                 Video::insert([...$newVideos]);
             }
         }
-        return redirect('newsfeed');
+        return redirect()->back();
     }
 
     /**
@@ -125,7 +125,12 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = Comment::with('image', 'video')->find($id);
+        if (!$comment) {
+            return redirect()->back()->withErrors('Comment not found.');
+        }
+
+        return view('edit-comment', compact('comment'));
     }
 
     /**
@@ -137,7 +142,65 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+       
+        $comment = Comment::with('image', 'video')->find($id);
+        if ($comment) {
+           
+            $comment->update([
+                'content' => $request->content ?? ''
+            ]);
+    
+       
+            if ($request->hasFile('imgFileSelected')) {
+             
+                foreach ($comment->image as $image) {
+                    Storage::delete('public/images/' . $image->url);
+                    $image->delete();
+                }
+    
+                // Save new images
+                $newImgs = [];
+                foreach ($request->file('imgFileSelected') as $imgElement) {
+                    $fileName = uniqid('img') . '.' . $imgElement->extension();
+                    $imgElement->storeAs('public/images', $fileName);
+    
+                    $newImgs[] = [
+                        'url' => $fileName,
+                        'ref_id_fk' => $id,
+                        'img_location_fk' => 1 // 1 indicates image in comment
+                    ];
+                }
+                Image::insert($newImgs);
+            }
+    
+          
+            if ($request->hasFile('vdFileSelected')) {
+            
+                foreach ($comment->videos as $video) {
+                    Storage::delete('public/videos/' . $video->url);
+                    $video->delete();
+                }
+    
+            
+                $newVideos = [];
+                foreach ($request->file('vdFileSelected') as $vdElement) {
+                    $fileName = uniqid('vd') . '.' . $vdElement->extension();
+                    $vdElement->storeAs('public/videos', $fileName);
+    
+                    $newVideos[] = [
+                        'url' => $fileName,
+                        'ref_id_fk' => $id,
+                        'video_location_fk' => 1 // 1 indicates video in comment
+                    ];
+                }
+                Video::insert($newVideos);
+            }
+    
+            return redirect('newsfeed')->with('success', 'Comment updated successfully.');
+        }
+    
+        // Handle the case where the comment does not exist
+        return redirect()->back()->withErrors('Comment not found.');
     }
     public function updateCommentStatus(Request $request, $id)
     {
@@ -160,6 +223,21 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
+        $post = Comment::where('comment_id', $id)->with('image', 'video')->get()[0];
+      
+       
+        foreach ($post->image as $imgElement) {   
+            Storage::delete('public/images/' . $imgElement->url);
+            $imgElement->delete();
+        }
+        foreach ($post->video as $vdElement) {   
+            Storage::delete('public/videos/' . $vdElement->url);
+            $vdElement->delete();
+        }
+
+        Comment::find($id)->delete();
+        // return redirect('newsfeed');
+        return redirect('newsfeed');
     }
 
     /**

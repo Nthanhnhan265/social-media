@@ -10,7 +10,7 @@ class Group extends Model
     use HasFactory;
     protected $table = 'groups';
     protected $primaryKey = 'group_id';
-    protected $timestamps = true;
+    public $timestamps = true;
   
     public function group()
     {
@@ -34,5 +34,9 @@ class Group extends Model
     public function usergroups()
     {
         return $this->hasMany(Usergroup::class, 'group_id_fk');
+    }
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'ref_id_fk', 'id');
     }
 }

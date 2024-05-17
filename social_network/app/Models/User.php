@@ -80,4 +80,12 @@ class User extends Authenticatable
     public function share() {
         return $this->belongsToMany(Posts::class, 'share', 'user_id_fk','post_id_fk',)->withPivot('status');
     }
+    public function images()
+    {
+        return $this->hasMany(Image::class,"ref_id_fk");
+    }
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
 }

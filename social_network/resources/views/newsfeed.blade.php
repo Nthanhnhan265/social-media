@@ -201,7 +201,7 @@ use Illuminate\View\Component;
 												<div class="user-post">
 													<div class="friend-info">
 														<figure>
-															<img src="{{ asset('images/resources/' . $post->user->avatar) }}"
+															<img src="{{ asset('storage/images/' . $post->user->avatar) }}"
 																alt="">
 														</figure>
 														<div class="friend-name">
@@ -425,7 +425,7 @@ use Illuminate\View\Component;
 												</div>
 												<div class="content pl-3">
 													<div class="text">
-														<b>{{ ucwords($sharer->last_name . ' ' . $sharer->first_name) }}</b> shared an article <i class="fa-solid fa-earth-americas"></i>
+														<a href="{{url('time-line/user-profile/' .Auth::user()->user_id)}}"><b>{{ ucwords($sharer->last_name . ' ' . $sharer->first_name) }}</b></a> shared an article <i class="fa-solid fa-earth-americas"></i>
 													</div>
 													<div class="publicTime">
 														At: {{ date_format($created_at, 'H:i d/m/Y') }}
@@ -436,7 +436,8 @@ use Illuminate\View\Component;
 													<div class="user-post">
 														<div class="friend-info">
 															<figure>
-																<img src="{{ asset('images/resources/' . $post->user->avatar) }}"
+															
+																<img src="{{ asset('storage/images/' . $post->user->avatar) }}"
 																	alt="">
 															</figure>
 															<div class="friend-name">
@@ -543,6 +544,7 @@ use Illuminate\View\Component;
 									
 																	</ul>
 																</div>
+
 									
 															</div>
 														</div>

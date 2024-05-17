@@ -4,7 +4,7 @@
 
 	<section>
 			<div class="feature-photo">
-				<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
+				<figure><img src="{{asset('storage/images/'.$user->background)}}" alt=""></figure>
 				<div class="add-btn">
 					<span>1205 followers</span>
 					<a href="#" title="" data-ripple="">Add Friend</a>
@@ -20,16 +20,24 @@
 					<div class="row merged">
 						<div class="col-lg-2 col-sm-3">
 							<div class="user-avatar">
-								<figure>
-									<img src="images/resources/user-avatar.jpg" alt="">
-									<form class="edit-phto">
-										<i class="fa fa-camera-retro"></i>
-										<label class="fileContainer">
-											Edit Display Photo
-											<input type="file"/>
-										</label>
-									</form>
-								</figure>
+							<figure>
+									<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="">
+									@if(auth()->check() && $user->user_id == auth()->user()->user_id)
+										<form class="edit-phto" action="{{ url('update-avatar/' . Auth::User()->user_id)}}"
+											method="post" enctype="multipart/form-data">
+											@csrf
+											@method('PUT')
+											<i class="fa fa-camera-retro"></i>
+											<label class="fileContainer">
+												<input type="file" name="avatar" id="avatar" accept="image/*">
+											</label>
+											<button class="btn-edit-avatar" type="submit"><i
+													class="fas fa-cloud-upload-alt"></i></button>
+										</form>
+									@endif
+
+
+					</figure>
 							</div>
 						</div>
 						<div class="col-lg-10 col-sm-9">
@@ -40,12 +48,21 @@
 									  <span>Group Admin</span>
 									</li>
 									<li>
-										<a class="" href="time-line" title="" data-ripple="">time line</a>
-										<a class="" href="timeline-photos" title="" data-ripple="">Photos</a>
-										<a class="active" href="timeline-videos" title="" data-ripple="">Videos</a>
-										<a class="" href="timeline-friends" title="" data-ripple="">Friends</a>
-										<a class="" href="timeline-groups" title="" data-ripple="">Groups</a>
-										<a class="" href="about" title="" data-ripple="">about</a>
+										
+									<a class="{{Request::is('time-line/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('time-line/user-profile/'.$user->user_id) }}" title="" data-ripple="">time line</a>
+									<a class="{{Request::is('timeline-photos/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{url('timeline-photos/user-profile/'.$user->user_id)}}" title="" data-ripple="">Photos</a>
+									<a class="{{Request::is('timeline-videos/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{url('timeline-videos/user-profile/'.$user->user_id)}}" title="" data-ripple="">Videos</a>
+									<a class="{{Request::is('timeline-friends/'.$user->user_id) ? 'active' : ''}}" href="{{url('timeline-friends/'.$user->user_id)}}" title="" data-ripple="">Friends</a>
+									<a class="{{Request::is('timeline-groups/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{url('timeline-groups/user-profile/'.$user->user_id)}}" title="" data-ripple="">Groups</a>
+										
+									@if(auth()->check() && $user->user_id == auth()->user()->user_id)
+									<a class="{{Request::is('about' . '/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('about' . '/user-profile/' . Auth::user()->user_id) }}" title=""
+										data-ripple="">about</a>
+
+
+
+										@endif
+
 										<a class="" href="#" title="" data-ripple="">more</a>
 									</li>
 								</ul>
@@ -66,19 +83,25 @@
 							<div class="col-lg-12">
 								<div class="central-meta">
 									<ul class="photos">
-										<li>
-											<a href="https://www.youtube.com/watch?v=MIbbtEjdYrc" title="" data-strip-group="mygroup" class="strip" data-strip-options="width: 700,height: 450,youtube: { autoplay: 1 }"><img src="images/resources/photo1.jpg" alt="">
-												<i>
-													<svg version="1.1" class="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="40px" width="40px"
-													 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
-												  <path class="stroke-solid" fill="none" stroke=""  d="M49.9,2.5C23.6,2.8,2.1,24.4,2.5,50.4C2.9,76.5,24.7,98,50.3,97.5c26.4-0.6,47.4-21.8,47.2-47.7
-													C97.3,23.7,75.7,2.3,49.9,2.5"/>
-												  <path class="icon" fill="" d="M38,69c-1,0.5-1.8,0-1.8-1.1V32.1c0-1.1,0.8-1.6,1.8-1.1l34,18c1,0.5,1,1.4,0,1.9L38,69z"/>
-													</svg>
-												</i>
-											</a>
-										</li>
-										<li>
+									
+									@foreach($posts as $post)
+					
+									@foreach($post->video as $vid)
+
+									<li>
+										<a href="{{ $vid->url }}" title="" data-strip-group="mygroup" class="strip" data-strip-options="width: 700,height: 450,youtube: { autoplay: 1 }">
+											<img src="images/resources/photo1.jpg" alt="">
+											<i>
+												<svg version="1.1" class="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="40px" width="40px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+													<path class="stroke-solid" fill="none" stroke=""  d="M49.9,2.5C23.6,2.8,2.1,24.4,2.5,50.4C2.9,76.5,24.7,98,50.3,97.5c26.4-0.6,47.4-21.8,47.2-47.7C97.3,23.7,75.7,2.3,49.9,2.5"/>
+													<path class="icon" fill="" d="M38,69c-1,0.5-1.8,0-1.8-1.1V32.1c0-1.1,0.8-1.6,1.8-1.1l34,18c1,0.5,1,1.4,0,1.9L38,69z"/>
+												</svg>
+											</i>
+										</a>
+									</li>
+										@endforeach
+										@endforeach
+										<!-- <li>
 											<a href="https://www.youtube.com/watch?v=MIbbtEjdYrc" title="" data-strip-group="mygroup" class="strip" data-strip-options="width: 700,height: 450,youtube: { autoplay: 1 }"><img src="images/resources/photo2.jpg" alt="">
 												<i>
 													<svg version="1.1" class="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="40px" width="40px"
@@ -209,7 +232,7 @@
 													</svg>
 												</i>
 											</a>
-										</li>
+										</li> -->
 									</ul>
 									<div class="lodmore"><button class="btn-view btn-load-more"></button></div>
 								</div><!-- photos -->

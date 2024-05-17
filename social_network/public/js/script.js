@@ -4,14 +4,14 @@ jQuery(document).ready(function($) {
 	
 //------- Notifications Dropdowns
 
-  $('.top-area > .setting-area > li').on("click",function(){
-	$(this).siblings().children('div').removeClass('active');
-	$(this).children('div').addClass('active');
-        return false; 
+//   $('.top-area > .setting-area > li').on("click",function(){
+// 	$(this).siblings().children('div').removeClass('active');
+// 	$(this).children('div').addClass('active');
+//         return false; 
     
-//   $('.top-area > .setting-area > li > a' ).on("click",function(){
-// 	$('.top-area > .setting-area > li > a' ).toggleClass('active');
-// 	return false;
+  $('.top-area > .setting-area > li > a' ).on("click",function(){
+	$('.top-area > .setting-area > li > a' ).toggleClass('active');
+	return false;
 
   });
 //------- remove class active on body

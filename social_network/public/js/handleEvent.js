@@ -157,7 +157,7 @@ document.querySelectorAll(".post-cmt").forEach((e) => {
             });
 
             // Send data to the server
-            const url = "";
+            const url = "comment";
             const data = {
                 method: 'POST',
                 body: frmD,

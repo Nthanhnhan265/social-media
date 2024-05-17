@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+
 use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 class PostsController extends Controller
@@ -27,6 +29,37 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+//     public function index(Request $request)
+// {
+//     $posts = Posts::orderBy('created_at', 'desc')
+//     ->with([
+//         'user',
+//         'image',
+//         'video',
+//         'comments' => function ($q) {
+//             $q->with([
+//                 'user',
+//                 'image' => function ($qImg) {
+//                     $qImg->where('img_location_fk', 1);
+//                 },
+//                 'video' => function ($qVid) {
+//                     $qVid->where('video_location_fk', 1);
+//                 }
+//             ])->orderBy('created_at', 'desc');
+//         }
+//     ])->paginate(5);
+
+// // Log posts data to check if it is fetching properly
+// Log::info('Fetched posts:', ['posts' => $posts->toArray()]); // Convert posts collection to array for logging
+
+// if ($request->ajax()) {
+//     return view('partials.posts', compact('posts'))->render();
+// }
+
+// return view('newsfeed', compact('posts'));
+// }
+
     public function index()
     {
         $userId = Auth::user()->user_id;
@@ -154,7 +187,6 @@ class PostsController extends Controller
         return  $shuffleArray;
     }
 
-  
 
     public function getAllPosts(Request $request)
     {

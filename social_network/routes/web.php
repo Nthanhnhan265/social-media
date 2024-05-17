@@ -13,6 +13,7 @@ use App\Models\Relationship as ModelsRelationship;
 use App\Models\User;
 use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,10 +115,7 @@ Route::put('/update-post/{id}', [PostsController::class, 'updatePostStatus'])->n
 Route::delete('/delete-comment/{id}', [CommentController::class, 'deleteComment'])->name('delete-comment');
 Route::put('/update-comment/{id}', [CommentController::class, 'updateCommentStatus'])->name('update-comment');
 
-Route::get('/{page?}', function ($page = "newsfeed") {  
-    return view($page);
-});
-
+ 
 //Route::get('/inbox', [PostController::class, 'index']);
 //Route::resource('index',PostController::class);
 
@@ -127,5 +125,8 @@ Route::get('time-line/user-profile/{id}',[UsersController::class,'show']);
 Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']);
 Route::get('edit-profile-basic/{id}',[UsersController::class,'showProfile']);
 
+
+// Trong Routes/web.php
+Route::get('/newsfeed', [PostsController::class, 'index'])->middleware(['auth','verified']);
 Route::POST('share',[ShareController::class,'store'])->name('share.store');
 

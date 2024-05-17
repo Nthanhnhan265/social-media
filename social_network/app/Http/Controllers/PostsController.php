@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Follow;
 use App\Models\Image;
+use App\Models\Notification;
 use App\Models\Posts;
 use App\Models\Relationship;
+use App\Models\Share;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Users;
@@ -13,8 +16,9 @@ use App\Models\Video;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-
+use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 class PostsController extends Controller
 {
@@ -26,42 +30,131 @@ class PostsController extends Controller
     public function index()
     {
         $userId = Auth::user()->user_id;
+        $friend_list = Relationship::getFriendListOfUser();
         $postActivityHistorys = DB::select('select * from posts where user_id_fk = ?', [$userId]);
         $commentsActivityHistorys = DB::select('select comments.*, users.first_name as user_first_name ,users.last_name as user_last_name from comments inner join users on comments.comment_id = users.user_id where user_id_fk != ?', [$userId]);
         $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]);
-
-        // $results = DB::select('select * from users where id = :id', ['id' => 1]);
-        // dd($postActivityHistorys);
-
+        $posts = $this->getNewfeed($userId); 
+        $firstPost = false; 
+        //if session exists (user clicked notification) => return post that is remained in notification box at the top
+        if (Session::get("postFound") && Session::get("type")) {
+            //set session to variable 
+            $type = Session::get("type"); 
+            $postFound = Session::get("postFound"); 
+            //get posts 
+            $posts = Posts::getNewfeedAndNewPostFirst($userId,$postFound,$type); 
+            //remove session
+            Session::forget('postFound'); 
+            Session::forget('type');
+            $firstPost = true; 
+            
+        }
         //hiển thị giao diện trang chính
         //hiển thị mọi bài viết trong db -> chưa hợp lý cho việc hiển thị phù hợp với từng tài khoản
         return view(
             'newsfeed',
             [
-                "posts" => Posts::orderBy('created_at', 'desc')
-                    ->with([
-                        'user',
-                        'image',
-                        'video',
-                        'comments' => function ($q) {
-                            $q->with([
-                                'user',
-                                'image' => function ($qImg) {
-                                    $qImg->where('img_location_fk', 1);
-                                },
-                                'video' => function ($qVid) {
-                                    $qVid->where('video_location_fk', 1);
-                                }
-                            ]);
-                        }
-                    ])->get(),
-                    "friends"=>Relationship::getFriendListOfUser(),
-                    'postActivityHistors' => $postActivityHistorys,
-                    'commentsActivityHistorys' => $commentsActivityHistorys,
-                    'shareActivityHistorys' => $shareActivityHistorys
+                "posts" => $posts,
+                "firstPost" => $firstPost,
+                "friends" => $friend_list,
+                'postActivityHistors' => $postActivityHistorys,
+                'commentsActivityHistorys' => $commentsActivityHistorys,
+                'shareActivityHistorys' => $shareActivityHistorys
             ]
         );
     }
+
+    //get user's newfeed  
+    private function getNewfeed($user_id)
+    {
+        $posts = [];
+        $sharedPost = [];
+        //get user's followed list 
+        $followedList = Follow::getFollowedListRaw($user_id);
+         if (!$followedList->get()->isEmpty()) {
+
+            //  get user's shared posts 
+            //  get friend's shared posts (Check follow table )
+            $followed = $followedList->where('follow_type', 'friend')->pluck('follow_id_fk')->toArray();
+    
+            $sharedPost = Share::where('status', 1)->whereIn('user_id_fk', [$user_id, ...$followed])
+                ->with([
+                    'user',
+                    'post' => function ($q) {
+                        $q->with([
+                            'user',
+                            'image',
+                            'video',
+                            'comments' => function ($q) {
+                                $q->with([
+                                    'user',
+                                    'image' => function ($qImg) {
+                                        $qImg->where('img_location_fk', 1);
+                                    },
+                                    'video' => function ($qVid) {
+                                        $qVid->where('video_location_fk', 1);
+                                    }
+                                ])->orderBy('created_at','desc');
+                            }
+                        ]);
+                    }
+                ])
+                ->get();
+
+            
+            //  get user's posts 
+            //  get friend's posts (check follow table)
+            $posts = Posts::whereIn('user_id_fk', [$user_id, ...$followed])->orderBy('created_at', 'desc')
+                ->with([
+                    'user',
+                    'image',
+                    'video',
+                    'comments' => function ($q) {
+                        $q->with([
+                            'user',
+                            'image' => function ($qImg) {
+                                $qImg->where('img_location_fk', 1);
+                            },
+                            'video' => function ($qVid) {
+                                $qVid->where('video_location_fk', 1);
+                            }
+                        ])->orderBy('created_at','desc');
+                    }
+                ])->get();
+              
+            }
+        //  get post in group that user joined (check follow table )
+
+        //no-one is followed 
+        else {
+           
+            //random any posts in DB 
+            $posts = Posts::inRandomOrder()->limit(10)
+            ->with([
+                'user',
+                'image',
+                'video',
+                'comments' => function ($q) {
+                    $q->with([
+                        'user',
+                        'image' => function ($qImg) {
+                            $qImg->where('img_location_fk', 1);
+                        },
+                        'video' => function ($qVid) {
+                            $qVid->where('video_location_fk', 1);
+                        }
+                    ])->orderBy('created_at', 'desc');
+                }
+            ])->get();
+           
+        }
+       
+        $shuffleArray = [...$posts,...$sharedPost]; 
+        shuffle($shuffleArray);
+        return  $shuffleArray;
+    }
+
+  
 
     public function getAllPosts(Request $request)
     {
@@ -76,8 +169,8 @@ class PostsController extends Controller
     {
         $post = Posts::findOrFail($id);
         $comments = Comment::where('post_id_fk', $id)
-                   ->orderBy('created_at', 'desc')
-                   ->get();
+            ->orderBy('created_at', 'desc')
+            ->get();
         return view('post-detail')->with('comments', $comments)->with('post', $post);
     }
 
@@ -90,7 +183,7 @@ class PostsController extends Controller
                     $qImg->where('img_location_fk', 0);
                 },
                 'video' => function ($qVid) {
-                    $qVid->where('video_location_fk', 0); 
+                    $qVid->where('video_location_fk', 0);
                 },
                 'comments' => function ($q) {
                     $q->with([
@@ -129,18 +222,27 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate( [
+            'vdFileSelected[]' => 'max:20480'
+        ]);
+        $user_id = Auth::user()->user_id; 
+        $arrFollowers = Follow::getFollowersByUserId($user_id);
+
+        if (empty($request->file('imgFileSelected')) && empty($request->file('vdFileSelected')) && empty($request->content)) { 
+            return redirect()->back()->withErrors("Please, Enter your content"); 
+        }
 
         $newPost = [
-            "user_id_fk" => Auth::user()->user_id,
-            "content" => $request->content == "" ? "":  $request->content
+            "user_id_fk" => $user_id,
+            "content" => $request->content == "" ? "" :  $request->content
         ];
 
-        // Lưu bài đăng vào database
+        // store post to db 
         $post = Posts::create(
             $newPost
         );
 
-        // chen anh (neu co)
+        // insert images (if exist)
         if (!empty($request->file('imgFileSelected'))) {
             $newImgs = [];
             foreach ($request->file('imgFileSelected') as $imgElement) {
@@ -154,21 +256,20 @@ class PostsController extends Controller
                         [
                             "url" => $fileName,
                             "ref_id_fk" => $post->id,
-                            "img_location_fk"=> 0 //0 is img in post, 1 is img in comment (later)
+                            "img_location_fk" => 0 //0 is img in post, 1 is img in comment (later)
                         ],
                     );
-
-                } catch(Exception $ex) {
+                } catch (Exception $ex) {
                     dd($ex->getMessage());
                 }
             }
             //them vao db
             Image::insert([...$newImgs]);
         }
-
-        if(!empty($request->file('vdFileSelected'))) {
+        //insert images (if exist)
+        if (!empty($request->file('vdFileSelected'))) {
             $newVideos = [];
-            foreach($request->file('vdFileSelected') as $vdElement) {
+            foreach ($request->file('vdFileSelected') as $vdElement) {
                 try {
                     //luu file vao muc storage
                     $fileName = uniqid("vd") . "." . $vdElement->extension();
@@ -179,17 +280,22 @@ class PostsController extends Controller
                         [
                             "url" => $fileName,
                             "ref_id_fk" => $post->id,
-                            "video_location_fk"=> 0 //0 is video in post, 1 is video in comment (later)
+                            "video_location_fk" => 0 //0 is video in post, 1 is video in comment (later)
                         ],
                     );
-
-                } catch(Exception $ex) {
+                } catch (Exception $ex) {
                     dd($ex->getMessage());
                 }
             }
             //them vao db
             Video::insert([...$newVideos]);
         }
+
+        //notify to all followers 
+        if ($arrFollowers) { 
+            Notification::newNotifyToFollowers($arrFollowers,$post->id,"newpost"); 
+        }
+       
         return redirect("newsfeed");
     }
 
@@ -232,80 +338,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = Posts::where('id',$id)->with('image','video')->get()[0];
-        //delete images of post
-        foreach($post->image as $imgElement)  {
-            //delete images in storage
-            Storage::delete('public/images/'.$imgElement->url);
-            //delete image in image table
-            $imgElement->delete();
-        }
-
-        //delete videos of post
-        foreach($post->video as $vdElement)  {
-            //delete images in storage
-            Storage::delete('public/videos/'.$vdElement->url);
-            //delete image in image table
-            $vdElement->delete();
-        }
-
-        // //delete post by id
-        Posts::find($id)->delete();
-        return redirect('welcome');
-    }
-
-
-    public function deletePost($postID) {
-        //delete comment in this post
-        Comment::where('post_id_fk', $postID)->delete();
-
-        $post = Posts::where('id',$postID)->with('image','video')->get()[0];
-
-        foreach($post->image as $imgElement)  {
-            //delete images in storage
-            Storage::delete('public/images/'.$imgElement->url);
-            //delete image in image table
-            $imgElement->delete();
-        }
-
-        //delete videos of post
-        foreach($post->video as $vdElement)  {
-            //delete images in storage
-            Storage::delete('public/videos/'.$vdElement->url);
-            //delete image in image table
-            $vdElement->delete();
-        }
-
-        Posts::find($postID)->delete();
-        return redirect('/post-management')->with('success', 'Post deleted successfully.');
-    }
-
-    /*
-        remove all images and videos of Post
-    */
-    public function clearAllImgAndVid($post_id) {
-        $post = Posts::where('id',$post_id)->with('image','video')->get()[0];
-        if(!empty($post)) {
-            //delete images of post
-            foreach($post->image as $imgElement)  {
-                //delete images in storage
-                Storage::delete('public/images/'.$imgElement->url);
-                //delete image in image table
-                $imgElement->delete();
-            }
-
-            //delete videos of post
-            foreach($post->video as $vdElement)  {
-                //delete images in storage
-                Storage::delete('public/videos/'.$vdElement->url);
-                //delete image in image table
-                $vdElement->delete();
-
-            }
-
-        } else {
-            return false;
-        $post = Posts::where('id', $post_id)->with('image', 'video')->get()[0];
+        $post = Posts::where('id', $id)->with('image', 'video')->get()[0];
         //delete images of post
         foreach ($post->image as $imgElement) {
             //delete images in storage
@@ -322,14 +355,87 @@ class PostsController extends Controller
             $vdElement->delete();
         }
 
-        //delete comments 
-        CommentController::deleteCommentsPostId($post_id); 
-        
-        // //delete post by id 
-        Posts::find($post_id)->delete();
+        // //delete post by id
+        Posts::find($id)->delete();
         return redirect('welcome');
     }
-}
+
+
+    public function deletePost($postID)
+    {
+        //delete comment in this post
+        Comment::where('post_id_fk', $postID)->delete();
+
+        $post = Posts::where('id', $postID)->with('image', 'video')->get()[0];
+
+        foreach ($post->image as $imgElement) {
+            //delete images in storage
+            Storage::delete('public/images/' . $imgElement->url);
+            //delete image in image table
+            $imgElement->delete();
+        }
+
+        //delete videos of post
+        foreach ($post->video as $vdElement) {
+            //delete images in storage
+            Storage::delete('public/videos/' . $vdElement->url);
+            //delete image in image table
+            $vdElement->delete();
+        }
+
+        Posts::find($postID)->delete();
+        return redirect('/post-management')->with('success', 'Post deleted successfully.');
+    }
+
+    /*
+        remove all images and videos of Post
+    */
+    public function clearAllImgAndVid($post_id)
+    {
+        $post = Posts::where('id', $post_id)->with('image', 'video')->get()[0];
+        if (!empty($post)) {
+            //delete images of post
+            foreach ($post->image as $imgElement) {
+                //delete images in storage
+                Storage::delete('public/images/' . $imgElement->url);
+                //delete image in image table
+                $imgElement->delete();
+            }
+
+            //delete videos of post
+            foreach ($post->video as $vdElement) {
+                //delete images in storage
+                Storage::delete('public/videos/' . $vdElement->url);
+                //delete image in image table
+                $vdElement->delete();
+            }
+        } else {
+            return false;
+            $post = Posts::where('id', $post_id)->with('image', 'video')->get()[0];
+            //delete images of post
+            foreach ($post->image as $imgElement) {
+                //delete images in storage
+                Storage::delete('public/images/' . $imgElement->url);
+                //delete image in image table
+                $imgElement->delete();
+            }
+
+            //delete videos of post
+            foreach ($post->video as $vdElement) {
+                //delete images in storage
+                Storage::delete('public/videos/' . $vdElement->url);
+                //delete image in image table
+                $vdElement->delete();
+            }
+
+            //delete comments 
+            CommentController::deleteCommentsPostId($post_id);
+
+            // //delete post by id 
+            Posts::find($post_id)->delete();
+            return redirect('welcome');
+        }
+    }
 
 
 
@@ -352,13 +458,14 @@ class PostsController extends Controller
     /*
         remove all videos of Post
     */
-    public function clearAllVid($post_id) {
-        $post = Posts::where('id',$post_id)->with('video')->get()[0];
-        if(!empty($post)) {
+    public function clearAllVid($post_id)
+    {
+        $post = Posts::where('id', $post_id)->with('video')->get()[0];
+        if (!empty($post)) {
             //delete videos of post
-            foreach($post->video as $vdElement)  {
+            foreach ($post->video as $vdElement) {
                 //delete images in storage
-                Storage::delete('public/videos/'.$vdElement->url);
+                Storage::delete('public/videos/' . $vdElement->url);
                 //delete image in image table
                 $vdElement->delete();
             }
@@ -375,5 +482,4 @@ class PostsController extends Controller
         $post->save();
         return redirect()->back()->with('success', 'Post updated successfully.');
     }
-
 }

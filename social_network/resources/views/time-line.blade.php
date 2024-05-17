@@ -1,5 +1,6 @@
 @php
 use Illuminate\Support\Facades\Auth;
+use App\Models\Follow; 
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -36,6 +37,9 @@ use Illuminate\Support\Facades\Auth;
 		<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
 		<div class="feature-photo">
 			<figure><img src="{{ asset('images/resources/timeline-1.jpg')}}" alt=""></figure>
+			{{-- Nút kết bạn, hủy kết bạn, unfollow 
+				=> cần chuyển sang component để tái sử dụng cho nhiều trang trong profile 
+			--}}
 			<div class="container-btn">
 				@if (Auth::user()->user_id != $user->user_id)
 				@if ($friend)
@@ -51,7 +55,7 @@ use Illuminate\Support\Facades\Auth;
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<div class="dropdown-item" href="#">
-							<form action="{{url('relationship/'.$user->user_id)}}"  method="post">
+							<form action="{{url('relationship/'.$user->user_id)}}"  method="post" class="m-0">
 								@csrf
 								@method('delete')
 							<button type="submit" class="btn-warning">Unfriend <i class="fa-solid fa-x ml-1"></i></button>
@@ -60,8 +64,25 @@ use Illuminate\Support\Facades\Auth;
 						</div>
 						<div class="dropdown-item" href="#">
 							<div class="notify-btn">
-								Unfollow
-								<a href="#" title="" data-ripple="" title="follow"><i class="fa-solid fa-bell-slash"></i></a>
+				
+								@if(Follow::checkFollow(Auth::user()->user_id, $user->user_id)) 
+									<form action="{{url('follow/'.$user->user_id)}}"  method="post" class="m-0">
+										@csrf
+										@method('delete')
+									<button type="submit" class="btn-warning">Unfollow <i class="fa-solid fa-x ml-1"></i></button>
+									</form>
+									
+								 @else
+									<form action="{{url('follow')}}"  method="post" class="m-0">
+										@csrf
+										@method('post')
+										<input type="hidden" value="{{$user->user_id}}" name="friend_id">
+									<button type="submit" class="btn-primary">Follow <i class="fa-solid fa-bell ml-1"></i></button>
+									</form>
+		
+
+								@endif
+
 							</div>
 						</div>
 					</div>

@@ -46,7 +46,8 @@ class CommentController extends Controller
             $newComment = [
                 "post_id_fk" => $request->post_id,
                 "content" => empty($request->content) ? "" : $request->content,
-                "user_id_fk" => Auth::user()->user_id
+                "user_id_fk" => Auth::user()->user_id,
+                "status" => 1
             ];
 
             $cmt = Comment::create($newComment);

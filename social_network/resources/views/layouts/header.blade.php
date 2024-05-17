@@ -1,9 +1,15 @@
 <?php
 
 use App\Models\Notification;
+use App\Models\Posts;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Share;
 $notifications = Notification::getAllNotification();
+$allUsers = User::get();
+
+ 
 ?>
 <div>
 </div>
@@ -170,21 +176,66 @@ $notifications = Notification::getAllNotification();
 							<ul class="drops-menu">
 								@foreach($notifications as $notification) 
 								<li>
-										<form action="{{ url('read-notification/'.$notification->notification_id)}}" method="post">
+										<form action="{{ url('read-notification/'.$notification->notification_id)}}" method="post" class="">
 											@csrf
 											@method('put') 
 											<input type="hidden" name="type_id" value="{{$notification->type_id}}">
 											<input type="hidden" name="type" value="{{$notification->type}}">
 											<button type="submit" class={{$notification->status == 'read' ? "read-noti" : "unread-noti	"}}>
-												@if($notification->type=="friend_request")
-												<i class="fa-solid fa-paper-plane"></i>
-												@elseif($notification->type=="accept")
-												<i class="fa-solid fa-check"></i>
-												@endif
-												<div class="mesg-meta">
-													{!! $notification->content!!}
-												</div>
-	
+                                                <div class="corner-time">At: {{$notification->created_at}}</div>
+                                                <div style="width: 100%;display: flex; align-items: center">
+                                                 <!-- render sending friend request notification  -->
+                                                    @if($notification->type=="friend_request")
+                                                    @php 
+                                                    $author = $allUsers->where('user_id',$notification->type_id)->first(); 
+                                                   
+                                                    @endphp
+                                                    @if($author) 
+                                                    <div class = "avatar-noti">
+                                                        <img src="{{asset('/storage/images/'.$author->avatar)}}" alt="">
+                                                    </div>
+                                                    @endif
+                                                    
+                                                 <!-- render accept friend request notification  -->
+                                                    @elseif($notification->type=="accept")
+                                                        @php 
+                                                        $author = $allUsers->where('user_id',$notification->type_id)->first(); 
+                                                        @endphp
+                                                        @if($author) 
+                                                        <div class = "avatar-noti">
+                                                            <img src="{{asset('/storage/images/'.$author->avatar)}}" alt="">
+                                                        </div>
+                                                        @endif
+                                                     <!-- render accept friend request notification  -->
+                                                    @elseif($notification->type=="newpost") 
+                                                        @php 
+                                                           $author = Posts::where('id',$notification->type_id)->with('user')->first()->user;
+                                                   
+                                                        @endphp
+                                                         
+                                                        @if($author) 
+                                                        <div class = "avatar-noti">
+                                                            <img src="{{asset('/storage/images/'.$author->avatar)}}" alt="">
+                                                        </div>
+                                                        @endif
+                                                    @elseif($notification->type=="sharepost")
+                                                        @php 
+                                                           $author = Share::where('share_id',$notification->type_id)->with('user')->first()->user;
+                                                   
+                                                        @endphp
+                                                         
+                                                        @if($author) 
+                                                        <div class = "avatar-noti">
+                                                            <img src="{{asset('/storage/images/'.$author->avatar)}}" alt="">
+                                                        </div>
+                                                        @endif
+                                                    @endif
+                                                    <div class="mesg-meta text-left">
+                                                        {!! $notification->content!!}
+                                                    </div>
+
+                                                </div>
+                                                
 											</button>
 										</form>
 								</li>
@@ -272,9 +323,7 @@ $notifications = Notification::getAllNotification();
 					<a href="#" title=""><span class="status f-online"></span>online</a>
 					<a href="#" title=""><span class="status f-away"></span>away</a>
 					<a href="#" title=""><span class="status f-off"></span>offline</a>
-					@php
-
-					@endphp
+					
 					<a href="{{url('time-line/user-profile/'.Auth::user()->user_id)}}" title=""><i class="ti-user"></i> view profile</a>
 					<a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
 					<a href="#" title=""><i class="ti-target"></i>activity log</a>
@@ -295,3 +344,7 @@ $notifications = Notification::getAllNotification();
                 </div>
             </div>
         </div><!-- topbar -->
+        <div id="user-profile" style="display: none">
+            <span id="fullname" data-value = "{{Auth::user()->last_name." ".Auth::user()->first_name}}"></span>
+            
+        </div>

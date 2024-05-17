@@ -78,6 +78,7 @@
 									<div class="tab-content">
 										<div class="tab-pane active fade show " id="frends">
 											<ul class="nearby-contct">
+												{{-- danh sach ban be --}}
 												@foreach ($friends as $f)
 												<li>
 													<div class="nearly-pepls">
@@ -105,6 +106,7 @@
 										</div>
 										<div class="tab-pane fade" id="frends-req">
 											<ul class="nearby-contct">
+												{{-- danh sach yeu cau ket ban  --}}
 												@foreach ($requests as $r)
 												<li>
 													<div class="nearly-pepls">

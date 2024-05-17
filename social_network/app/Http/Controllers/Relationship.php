@@ -131,11 +131,19 @@ class Relationship extends Controller
             })
             ->first();
         if (isset($relationship)) {
-            $relationship->delete();
             //delete relationship 
+            $relationship->delete();
+
             Follow::unfollow($authenticatedUserId, $friend);
         }
         return $this->moveTo($redirect,$friend); 
+    }
+
+    public function unfollowFriend($friend_id) { 
+        //current user 
+        $user_id = Auth::user()->user_id; 
+        Follow::unfollowOne($user_id,$friend_id); 
+        return redirect()->back(); 
     }
 
     public function moveTo($rd,$user_id)

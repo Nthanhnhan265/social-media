@@ -1,6 +1,7 @@
 <?php
 require __DIR__.'/auth.php';
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Follow;
 use App\Http\Controllers\Notification;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
@@ -10,6 +11,19 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\Relationship;
 use App\Models\Relationship as ModelsRelationship;
 use App\Models\User;
+use App\Http\Controllers\ShareController;
+use App\Http\Controllers\GroupController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
 Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']); 
 Route::get('/time-line/:id',[]); 
@@ -25,20 +39,9 @@ Route::get('/timeline-friends/{id}',function($id) {
     ["friends"=>ModelsRelationship::getFriendListOfUser(),
     "requests"=>ModelsRelationship::getRequestListOfUser()]);
 });  
+Route::delete('/follow/{id}',[Follow::class, 'destroy' ]); //unfollow a friend
+Route::post('/follow',[Follow::class, 'store' ]); //follow a friend
 Route::put('/read-notification/{id}',[Notification::class,'update']);  
-use App\Http\Controllers\ShareController;
-use App\Http\Controllers\GroupController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']);
 Route::get('/time-line/:id',[]);
@@ -53,7 +56,7 @@ Route::get('/', function () {
     return redirect ('/newsfeed');
 });
 
-Route::get('/test/{id}', function ($id='') {
+Route::get('/test/{id?}', function ($id='') {
     return view ('/test',["id"=>$id]);   
 });
 

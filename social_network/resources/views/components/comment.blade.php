@@ -1,4 +1,11 @@
-<li>
+<?php
+    $class = "hideComment";
+    if(!$isHidden) { 
+        $class = "showComment";
+    }
+?>
+
+<li class={{$class}}>
     <div class="comet-avatar">
     <div class="comment-avatar" style="width:45px;height:45px;overflow:hidden;border-radius:50%">
         <img src="{{asset('images/resources/'.$commenter->user->avatar)}}" alt="err">
@@ -7,7 +14,7 @@
     <div class="we-comment">
         <div class="coment-head">
             <h5><a href="{{ url('time-line') }}" title="">{{$commenter->user->last_name." ".$commenter->user->first_name}}</a></h5>
-            <span>{{$commenter->created_at}}</span>
+            <span>{{ date_format ($commenter->created_at,"H:i d/m/Y") }}</span>
             <!-- <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a> -->
         </div>
         <p>
@@ -54,20 +61,4 @@
             @endif
         </div>
     </div>
-    <!-- reply comment -->
-    <!-- <ul class="replyComment">
-            <li>
-                <div class="comet-avatar">
-                    <img src="images/resources/comet-2.jpg" alt="">
-                </div>
-                <div class="we-comment">
-                    <div class="coment-head">
-                        <h5><a href="{{ url('time-line') }}" title="">alexendra dadrio</a></h5>
-                        <span>1 month ago</span>
-                        <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-                    </div>
-                    <p>yes, really very awesome car i see the features of this car in the official website of <a href="#" title="">#Mercedes-Benz</a> and really impressed :-)</p>
-                </div>
-            </li>
-        </ul> -->
 </li>

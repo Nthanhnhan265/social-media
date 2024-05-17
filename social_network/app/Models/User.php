@@ -13,8 +13,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, CanResetPassword;
 
-    protected $table ="users"; 
-    protected $primaryKey = "user_id";  
+    protected $table ="users";
+    protected $primaryKey = "user_id";
     public $timestamps = true;
 
     /**
@@ -36,19 +36,19 @@ class User extends Authenticatable
         'role_id_fk',
         'status'
     ];
-    
+
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
     protected $hidden = [
-        'password', 
-        'two_factor_secret', 
-        'two_factor_recovery_codes', 
+        'password',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
         'remember_token',
     ];
-    
+
     /**
      * The attributes that should be cast.
      *
@@ -72,5 +72,12 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class, "user_id_fk");
+    }
+    public function follower() { 
+        return $this->hasMany(Follow::class,"user_id_fk");
+    }    
+
+    public function share() {
+        return $this->belongsToMany(Posts::class, 'share', 'user_id_fk','post_id_fk',)->withPivot('status');
     }
 }

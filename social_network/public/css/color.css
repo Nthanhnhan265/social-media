@@ -84,7 +84,8 @@ blockquote,
 .job-detail > ul li i,
 .company-intro > a
 {
-	color: #088dcd;	
+	/* color: #088dcd;	 */
+	font-size: .79rem;
 }
 svg{
 stroke: #fff;

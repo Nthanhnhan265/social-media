@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Follow;
-use App\Models\Notification;
-use App\Models\Share;
+use App\Models\Follow as ModelsFollow;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use \App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class ShareController extends Controller
+class Follow extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,44 +27,20 @@ class ShareController extends Controller
     {
         //
     }
-
+    
     /**
      * Store a newly created resource in storage.
-     *
+     * Follow someone
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        
-        $userId = Auth::id();
-        $user = User::find($userId);
-
-        $arrFollowers = Follow::getFollowersByUserId($userId);
-
-        $sharingRange = $request->input('shareOption');
-        $postId = $request->input('post_id');
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $currentDateTime = date('Y-m-d H:i:s');
-
-        $share = Share::create([
-            'user_id_fk' => $userId,
-            'post_id_fk' => $postId,
-            'status' => $sharingRange,
-            'created_at' => $currentDateTime,
-            'updated_at' => $currentDateTime,
-        ]);
-        //notify to all followers 
-        if ($sharingRange == 1) { 
-            if ($arrFollowers) { 
-                Notification::newNotifyToFollowers($arrFollowers,$share->share_id,"sharepost"); 
-            }
-            
-        }
-       
-        
-        
-        return redirect()->back();
+        $user_id = Auth::user()->user_id; 
+        $friend_id = $request->friend_id; 
+        ModelsFollow::follow($user_id, $friend_id,"friend"); 
+        return redirect()->back(); 
     }
 
     /**
@@ -84,7 +56,6 @@ class ShareController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -95,24 +66,26 @@ class ShareController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
      * Remove the specified resource from storage.
-     *
+     * Unfollow someone
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $user_id = Auth::user()->user_id; 
+        $friend_id = $id; 
+        ModelsFollow::unfollowOne($user_id, $friend_id); 
+        return redirect()->back(); 
     }
 }

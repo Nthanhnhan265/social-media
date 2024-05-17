@@ -3,15 +3,20 @@ jQuery(document).ready(function($) {
 	"use strict";
 	
 //------- Notifications Dropdowns
+
   $('.top-area > .setting-area > li').on("click",function(){
 	$(this).siblings().children('div').removeClass('active');
 	$(this).children('div').addClass('active');
         return false; 
     
+//   $('.top-area > .setting-area > li > a' ).on("click",function(){
+// 	$('.top-area > .setting-area > li > a' ).toggleClass('active');
+// 	return false;
+
   });
 //------- remove class active on body
-  $("body *").not('.top-area > .setting-area > li').on("click", function() {
-	$(".top-area > .setting-area > li > div").removeClass('active');		
+  $("body *").not('.top-area > .setting-area > li > a').on("click", function() {
+	$(".top-area > .setting-area > li > a").removeClass('active');		
  });
 	
 
@@ -124,6 +129,9 @@ $('.notification-box > ul li > i.del').on("click", function(){
 	$(".we-page-setting").on("click", function() {
 	    $(".wesetting-dropdown").toggleClass("active");
 	  });	
+	// $('.notification-e').on("click",function(){ 
+	// 	$(".notification-e").toggleClass("active");
+	// });
 	  
 /*--- topbar toogle setting dropdown ---*/	
 $('#nightmode').on('change', function() {

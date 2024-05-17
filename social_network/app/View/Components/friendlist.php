@@ -4,20 +4,17 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class comment extends Component
+class friendlist extends Component
 {
-    public $commenter; 
-    public $isHidden;
-
+    protected $friend;  
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($commenter,$isHidden)
+    public function __construct($friend)
     {
-        $this->commenter = $commenter;
-        $this->isHidden = $isHidden; 
+        $this->friend = $friend; 
     }
 
     /**
@@ -27,6 +24,6 @@ class comment extends Component
      */
     public function render()
     {
-        return view('components.comment');
+        return view('components.friendlist',["friend"=>$this->friend]);
     }
 }

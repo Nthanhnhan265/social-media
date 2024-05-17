@@ -974,18 +974,51 @@ header.sticky {
     visibility: hidden;
     transition: all 0.3s linear 0s;
 }
-
-.dropdowns.active {
+.notification-e.active + .dropdowns { 
     opacity: 1;
     visibility: visible;
+
 }
+.avatar-noti{ 
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+}
+.read-noti, .unread-noti { 
+    width: 100%!important;
+    padding-bottom: 10px;
+}
+.read-noti { 
+    background-color: #ffffff;
+    color: #000;
+    font-weight: 400;
+
+}
+.unread-noti { 
+    background-color: #f1f1f1;
+    color: #000;
+    font-weight: 400;
+}
+.corner-time { 
+    font-size: 0.5rem;
+    font-weight: bold;
+    color: #000;
+    text-align: left;
+}
+.read-noti:hover > .corner-time, .unread-noti:hover > .corner-time { 
+    color: #fff;
+}
+  
+
 
 .drops-menu {
     list-style: outside none none;
     padding-left: 0;
 }
 
-.drops-menu > li > a {
+.drops-menu > li > form {
     border-bottom: 1px solid #e1e8ed;
     display: inline-block;
     padding: 10px;
@@ -1052,10 +1085,14 @@ header.sticky {
     font-style: normal;
 }
 
-.drops-menu > li > a:hover {
-    background: #fafafa none repeat scroll 0 0;
+.drops-menu > li > form > button:hover {
+    background: #4ba9fa none repeat scroll 0 0;
+    color: #fff;
 }
-
+.drops-menu > li > form  { 
+    padding: 0;
+    margin: 0;
+}
 .dropdowns > span {
     border-bottom: 1px solid #ccc;
     display: inline-block;
@@ -1110,32 +1147,50 @@ header.sticky {
     background: #f1f1f1 none repeat scroll 0 0;
 }
 
-.add-btn {
+.container-btn {
     bottom: 100px;
     position: absolute;
     right: 43px;
+    display: flex;
 }
 
-.add-btn > span {
-    color: #fff;
-    margin-right: 20px;
-    text-shadow: 0 2px 0 #4a4a4a;
-}
-
-.add-btn > a:hover {
+.btn-filled > button:hover {
     background: transparent none repeat scroll 0 0;
     border: 1px solid;
+    background-color: #0773a5;
+
 }
 
-.add-btn > a {
+.btn-filled > button {
     border-radius: 2px;
     color: #fff;
     display: inline-block;
     font-size: 14px;
     padding: 4px 20px;
     border: 1px solid transparent;
-}
+    background-color: #088dcd;
+    ;
 
+}
+.btn-outline > button:hover { 
+    border: 1px solid;
+    background-color: #bc3c15;
+    color: #fff;
+}
+.btn-outline > button {
+    height: 100%;
+    margin-left: 10px;
+    border-radius: 2px;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 14px;
+    padding: 4px 20px;
+    border: 1px solid #088dcd;
+    background-color: #ef4f1f;
+}
+.btn-outline > button > i { 
+    font-size: 13px;
+}
 
 /*--- sidebar widgets ---*/
 
@@ -1788,6 +1843,11 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
     margin-bottom: 20px;
     width: 100%;
 }
+.we-comet > li.hideComment {
+    display: none;
+    margin-bottom: 20px;
+    width: 100%;
+}
 
 .we-comet > li:last-child {
     margin-bottom: 0;
@@ -1838,9 +1898,15 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
     padding-left: 0;
     list-style: none;
 }
-
+.newcomment { 
+    animation: changebackground 3s .2s;
+}
 .we-comet > li ul li {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+}
+.firstPost { 
+ 
+    animation: changebackgroundpost 2s; 
 }
 
 .we-comet li a.showmore {
@@ -1972,6 +2038,7 @@ li.post-comment .comet-avatar {
     top: 50%;     
     position: absolute;
     right: 0;
+    transform: translateX(-20%);
     background: none;
 }
 
@@ -3637,7 +3704,7 @@ a.add-butn.more-action {
 }
 
 #frends a.add-butn.more-action {
-    right: 89px;
+    right: 0px;
 }
 
 .nav-tabs--vertical {
@@ -10093,4 +10160,81 @@ aside.sidebar.full-style {
 } */
 .list-vid { 
     height: 50vh;
+}
+.countdown { 
+    transform: translateY(-100%);
+    transition: all 1s;
+    animation: showAndRemove 5s; 
+}
+.showComment { 
+    
+}
+.hideComment { 
+    display: none;
+}
+.border-post { 
+    border: 1px solid rgb(0,0,0, .4);
+}
+.border-share { 
+    /* box-shadow: 0px 0px 3px rgb(0,0,0, .2); */
+    border: 1px solid rgb(0,0,0, .3);
+}
+.sharer {
+    padding: 0px 20px;
+    background: #FFF;
+    margin-bottom: 1rem;
+    border: 1px solid rgb(0,0,0, .1);   
+    border-radius: 0.5rem;
+}
+.publicTime{ 
+    font-size: 10px;
+}
+.user-shared { 
+    display: flex; 
+    align-items: center;
+    padding: 15px 0px 10px 0px; 
+}
+.user-shared .avatar { 
+    width: 2.8125rem;
+    height: 2.8125rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+@keyframes showAndRemove {
+    0% { 
+        top: 100%;
+        left: -100%; 
+    }
+    25% { 
+        top: 100%;
+        left: 0%; 
+    }
+    85%  { 
+        top: 100%;
+        left: 0%; 
+    }
+    100% { 
+        top: 100%;
+        left: -100%; 
+    }
+    
+}
+
+@keyframes changebackground {
+    0% { 
+        background-color: #fff;
+    }
+    100% { 
+        background-color: #fbfbfb;
+    }
+}
+@keyframes changebackgroundpost {
+    0% { 
+        background-color: #e6eaec;
+    }
+ 
+    100% { 
+        background-color: #fff;
+    }
 }

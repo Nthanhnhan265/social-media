@@ -64,7 +64,10 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id); 
         $postOfUser = PostsController::getPostById($id); 
-        return view('time-line',["id"=>$id,'user'=>$user,"posts"=>$postOfUser]);
+        $isInFriendList = DB::select("SELECT * FROM relationships WHERE (sender = ? AND receiver = ?)
+        OR (sender = ? AND receiver = ?)",[Auth::user()->user_id,$id,$id,Auth::user()->user_id]);
+        return view('time-line',["id"=>$id,'user'=>$user,"posts"=>$postOfUser,"friend"=>$isInFriendList]);
+         
     }
     public function showAbout($id)
     {

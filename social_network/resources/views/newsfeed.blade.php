@@ -197,7 +197,7 @@ use Illuminate\View\Component;
 										{{-- Kiểm tra trong mảng và render ra cái phù hợp --}}
 										@if (class_basename($post) === 'Posts')
 											{{-- @if (false)  --}}
-											<div class="central-meta item rounded-5">
+											<div class="central-meta item rounded-5 {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
 												<div class="user-post">
 													<div class="friend-info">
 														<figure>
@@ -415,7 +415,7 @@ use Illuminate\View\Component;
 												$post = $post->post;
 												@endphp
 												
-											<div class="sharer">
+											<div class="sharer {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
 												<div class="user-shared"
 												
 												>
@@ -645,6 +645,11 @@ use Illuminate\View\Component;
 											</div>
 											
 										@endif
+										@php 
+											if (isset($firstPost) && $firstPost == true) { 
+												$firstPost = false; 
+											}
+										@endphp
 									@endforeach
 								</div>
                             </div>

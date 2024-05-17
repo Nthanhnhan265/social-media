@@ -166,9 +166,12 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
 <!-- custom fancybox -->
 <script>
-	Fancybox.bind('[data-fancybox]', {
-        //
-      });    
+		Fancybox.bind('[data-fancybox]', {
+			//
+		  });    
+		  console.log(Fancybox)
+		
+		  
 </script>
 </body>
 

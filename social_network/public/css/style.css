@@ -979,6 +979,13 @@ header.sticky {
     visibility: visible;
 
 }
+.avatar-noti{ 
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+}
 .read-noti, .unread-noti { 
     width: 100%!important;
     padding-bottom: 10px;
@@ -1891,9 +1898,15 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
     padding-left: 0;
     list-style: none;
 }
-
+.newcomment { 
+    animation: changebackground 3s .2s;
+}
 .we-comet > li ul li {
     /* margin-bottom: 20px; */
+}
+.firstPost { 
+ 
+    animation: changebackgroundpost 2s; 
 }
 
 .we-comet li a.showmore {
@@ -10206,4 +10219,22 @@ aside.sidebar.full-style {
         left: -100%; 
     }
     
+}
+
+@keyframes changebackground {
+    0% { 
+        background-color: #fff;
+    }
+    100% { 
+        background-color: #fbfbfb;
+    }
+}
+@keyframes changebackgroundpost {
+    0% { 
+        background-color: #e6eaec;
+    }
+ 
+    100% { 
+        background-color: #fff;
+    }
 }

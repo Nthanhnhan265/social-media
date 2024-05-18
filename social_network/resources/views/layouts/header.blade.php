@@ -1,9 +1,16 @@
 <?php
 
 use App\Models\Notification;
+use App\Models\Posts;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Share;
+
 $notifications = Notification::getAllNotification();
+$allUsers = User::get();
+
+
 ?>
 <div>
 </div>
@@ -17,20 +24,20 @@ $notifications = Notification::getAllNotification();
     <meta name="keywords" content="" />
     <title>Winku Social Network Toolkit</title>
     <link rel="icon" href="{{ asset('images/fav.png') }}" type="image/png" sizes="16x16">
-    <link rel="icon" href="{{ asset('images/fav.png') }}" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="{{ asset('css/popupShare.css') }}">
-	<link rel="stylesheet" href="{{asset('css/main.min.css')}}">
-	<link rel="stylesheet" href="{{asset('css/style.css')}}">
-	<link rel="stylesheet" href="{{asset('css/color.css')}}">
-	<link rel="stylesheet" href="{{asset('css/responsive.css')}}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-	<!-- fancybox -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
-
+    <link rel="stylesheet" href="{{asset('css/main.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/color.css')}}">
+    <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- fancybox -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"> -->
 </head>
 
 <body>
-<div id="myModal" class="share_modal" style="display:none">
+    <div id="myModal" class="share_modal" style="display:none">
 
 
         <!-- Modal content -->
@@ -54,28 +61,30 @@ $notifications = Notification::getAllNotification();
         </div>
 
     </div>
-	<div class="theme-layout">
-		<div class="responsive-header">
-			<div class="mh-head first Sticky">
-				<span class="mh-btns-left">
-					<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
-				</span>
-				<span class="mh-text">
-					<a href="{{ url ('newsfeed') }}" title="">
-						<img src="{{asset('images/logo.png')}}" alt="ERR">
-						kkkk
-					</a>
-				</span>
-				<span class="mh-btns-right">
-					<a class="fa fa-sliders" href="#shoppingbag"></a>
-				</span>
-			</div>
-			<div class="mh-head second">
-				<form class="mh-form">
-					<input placeholder="search" />
-					<a href="#/" class="fa fa-search"></a>
-				</form>
-			</div>
+    <div class="theme-layout">
+        <div class="responsive-header">
+            <div class="mh-head first Sticky">
+                <span class="mh-btns-left">
+                    <a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
+                </span>
+                <span class="mh-text">
+                    <a href="{{ url ('newsfeed') }}" title="">
+                        <img src="{{asset('images/logo.png')}}" alt="ERR">
+
+                    </a>
+                </span>
+                <span class="mh-btns-right">
+                    <a class="fa fa-sliders" href="#shoppingbag"></a>
+                </span>
+            </div>
+            <div class="mh-head second">
+                <form class="mh-form" action="#">
+                    <input placeholder="search" />
+                    <button type="submit">
+                        find
+                    </button>
+                </form>
+            </div>
             <nav id="shoppingbag">
                 <div>
                     <div class="">
@@ -145,59 +154,104 @@ $notifications = Notification::getAllNotification();
         </div>
         <div class="topbar stick">
             <div class="logo">
-                <a title="" href="{{ url('newsfeed') }}"><img src="{{ asset('images/logo.png') }}"
-                        alt=""></a>
+                <a title="" href="{{ url('newsfeed') }}"><img src="{{ asset('images/logo.png') }}" alt=""></a>
             </div>
 
-			<div class="top-area">
-				<ul class="setting-area">
-					<li>
-						<a href="#" title="Home" data-ripple=""><i class="ti-search"></i></a>
-						<div class="searched">
-							<form method="post" class="form-search">
-								<input type="text" placeholder="Search Friend">
-								<button data-ripple><i class="ti-search"></i></button>
-							</form>
-						</div>
-					</li>
-					<li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
-					<li>
-						<a href="#" title="Notification" data-ripple="" class="notification-e">
-							<i class="ti-bell"></i><span>{{count($notifications->where('status','unread'))}}</span>
-						</a>
-						<div class="dropdowns">
-							<span>{{count($notifications->where('status','unread'))}} New Notifications</span>
-							<ul class="drops-menu">
-								@foreach($notifications as $notification) 
-								<li>
-										<form action="{{ url('read-notification/'.$notification->notification_id)}}" method="post">
-											@csrf
-											@method('put') 
-											<input type="hidden" name="type_id" value="{{$notification->type_id}}">
-											<input type="hidden" name="type" value="{{$notification->type}}">
-											<button type="submit" class={{$notification->status == 'read' ? "read-noti" : "unread-noti	"}}>
-												@if($notification->type=="friend_request")
-												<i class="fa-solid fa-paper-plane"></i>
-												@elseif($notification->type=="accept")
-												<i class="fa-solid fa-check"></i>
-												@endif
-												<div class="mesg-meta">
-													{!! $notification->content!!}
-												</div>
-	
-											</button>
-										</form>
-								</li>
-								@endforeach
-							</ul>	
-						</div>
-					</li>
-					<li>
-						<a href="#" title="Messages" data-ripple=""><i class="ti-comment"></i><span>12</span></a>
-						<div class="dropdowns">
-							<span>5 New Messages</span>
-							<ul class="drops-menu">
-								<li>
+            <div class="top-area">
+                <div class="position-relative">
+                    <form class="d-flex position-absolute" style="width:30vw; transform:translate(90%,30%)" role="search" action="{{route('posts.search')}}" method="GET">
+                        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+                <ul class="setting-area">
+
+                    <li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
+                    <li>
+                  
+                 
+                        <a href="#" title="Notification" data-ripple="" class="notification-e">
+                            <i class="ti-bell"></i><span><x-format_number :number=count($notifications)/></span>
+                        </a>
+                        <div class="dropdowns">
+                         
+                            <span><x-format_number :number=count($notifications)/> New notifications</span>
+                            <ul class="drops-menu">
+                                @foreach($notifications as $notification)
+                                <li>
+                                    <form action="{{ url('read-notification/'.$notification->notification_id)}}" method="post" class="">
+                                        @csrf
+                                        @method('put')
+                                        <input type="hidden" name="type_id" value="{{$notification->type_id}}">
+                                        <input type="hidden" name="type" value="{{$notification->type}}">
+                                        <button type="submit" class={{$notification->status == 'read' ? "read-noti" : "unread-noti	"}}>
+                                            <div class="corner-time">At: {{$notification->created_at}}</div>
+                                            <div style="width: 100%;display: flex; align-items: center">
+                                                <!-- render sending friend request notification  -->
+                                                @if($notification->type=="friend_request")
+                                                @php
+                                                $author = $allUsers->where('user_id',$notification->type_id)->first();
+
+                                                @endphp
+                                                @if($author)
+                                                <div class="avatar-noti">
+                                                    <img src="{{asset('/storage/images/'.$author->avatar)}}" alt="">
+                                                </div>
+                                                @endif
+
+                                                <!-- render accept friend request notification  -->
+                                                @elseif($notification->type=="accept")
+                                                @php
+                                                $author = $allUsers->where('user_id',$notification->type_id)->first();
+                                                @endphp
+                                                @if($author)
+                                                <div class="avatar-noti">
+                                                    <img src="{{asset('/storage/images/'.$author->avatar)}}" alt="">
+                                                </div>
+                                                @endif
+                                                <!-- render accept friend request notification  -->
+                                                @elseif($notification->type=="newpost")
+                                                @php
+                                                $author = Posts::where('id',$notification->type_id)->with('user')->first()->user;
+
+                                                @endphp
+
+                                                @if($author)
+                                                <div class="avatar-noti">
+                                                    <img src="{{asset('/storage/images/'.$author->avatar)}}" alt="">
+                                                </div>
+                                                @endif
+                                                @elseif($notification->type=="sharepost")
+                                                @php
+                                                $author = Share::where('share_id',$notification->type_id)->with('user')->first()->user;
+
+                                                @endphp
+
+                                                @if($author)
+                                                <div class="avatar-noti">
+                                                    <img src="{{asset('/storage/images/'.$author->avatar)}}" alt="">
+                                                </div>
+                                                @endif
+                                                @endif
+                                                <div class="mesg-meta text-left">
+                                                    {!! $notification->content!!}
+                                                </div>
+
+                                            </div>
+
+                                        </button>
+                                    </form>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" title="Messages" data-ripple=""><i class="ti-comment"></i><span>12</span></a>
+                        <div class="dropdowns">
+                            <span>5 New Messages</span>
+                            <ul class="drops-menu">
+                                <li>
 
                                     <a href="{{ url('notifications') }}" title="">
                                         <img src="images/resources/thumb-1.jpg" alt="">
@@ -262,31 +316,31 @@ $notifications = Notification::getAllNotification();
                         </div>
                     </li>
 
-				</ul>
-				<div class="user-img">
-					<x-user-avt>
-					</x-user-avt>
-					<span class="status f-online"></span>
-				</div>
-				<div class="user-setting">
-					<a href="#" title=""><span class="status f-online"></span>online</a>
-					<a href="#" title=""><span class="status f-away"></span>away</a>
-					<a href="#" title=""><span class="status f-off"></span>offline</a>
-					@php
+                </ul>
+                <div class="user-img">
+                    <x-user-avt>
+                    </x-user-avt>
+                    <span class="status f-online"></span>
+                </div>
+                <div class="user-setting">
+                    <a href="#" title=""><span class="status f-online"></span>online</a>
+                    <a href="#" title=""><span class="status f-away"></span>away</a>
+                    <a href="#" title=""><span class="status f-off"></span>offline</a>
 
-					@endphp
-					<a href="{{url('time-line/user-profile/'.Auth::user()->user_id)}}" title=""><i class="ti-user"></i> view profile</a>
-					<a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
-					<a href="#" title=""><i class="ti-target"></i>activity log</a>
-					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
+                    <a href="{{url('time-line/user-profile/'.Auth::user()->user_id)}}" title=""><i class="ti-user"></i> view profile</a>
+                    <a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
+                    <a href="#" title=""><i class="ti-target"></i>activity log</a>
+                    <a href="#" title=""><i class="ti-settings"></i>account setting</a>
+                    @if (auth()->check() && auth()->user()->role_id_fk == 1)
+                    <a href="{{url('/user-management')}}" title="Admin" data-ripple="">
+                        <i class="fa-solid fa-user fa-bounce"></i> <span>Admin</span>
+                    </a>
+                    @endif
 
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <x-dropdown-link
-                            style="display: inline-block!important;font-size: 13px!important;padding: 10px 15px!important;text-transform: capitalize!important;width: 100%!important;background: #fafafa!important;position: relative!important;color:#4f9ad6!important"
-                            :href="route('logout')"
-                            onclick="event.preventDefault();
+                        <x-dropdown-link style="display: inline-block!important;font-size: 13px!important;padding: 10px 15px!important;text-transform: capitalize!important;width: 100%!important;background: #fafafa!important;position: relative!important;color:#4f9ad6!important" :href="route('logout')" onclick="event.preventDefault();
 											this.closest('form').submit();">
                             <i class="ti-power-off pr-1"></i>
                             {{ __('Log Out') }}
@@ -295,3 +349,7 @@ $notifications = Notification::getAllNotification();
                 </div>
             </div>
         </div><!-- topbar -->
+        <div id="user-profile" style="display: none">
+            <span id="fullname" data-value="{{Auth::user()->last_name." ".Auth::user()->first_name}}"></span>
+
+        </div>

@@ -1,169 +1,15 @@
 @php
-use Illuminate\Support\Facades\Auth;
+	use Illuminate\Support\Facades\Auth;
+	use App\Models\Follow; 
 @endphp
 @extends('layouts.app')
 @section('content')
 
-
-<section>
-	@foreach($posts[0]->posts as $post)
-		<div>
-			{{$post->content}}
-			<!-- {{dump($post->image);}}  -->
-			@foreach($post->image as $img)
-				<img src="{{asset('storage/images/'.$img->url)}}" alt="">
-
-			@endforeach
-			<video alt="err" controls >
-				@foreach($post->video as $video)
-					<source src="{{asset('storage/videos/'.$video->url)}}" alt=""/>
-
-				@endforeach
-
-
-		<video alt="err" controls>
-			@foreach($post->video as $video)
-			<source src="{{asset('storage/videos/'.$video->url)}}" alt="" />
-
-			@endforeach
-		</video>
-	</div>
-
-	@endforeach
-
-
-	<div class="feature-photo">
-		<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
-		<div class="feature-photo">
-			<figure><img src="{{ asset('images/resources/timeline-1.jpg')}}" alt=""></figure>
-			<div class="container-btn">
-				@if (Auth::user()->user_id != $user->user_id)
-				@if ($friend)
-				<?php
-				if (!empty($friend[0])) {
-					$n = $friend[0];
-				}
-				?>
-				@if ($n->status == "accept")
-				<div class="dropdown">
-					<button class="btn dropdown-toggle btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<a href="#" title="" data-ripple="">Friend <i class="fa-solid fa-user-group ml-1"></i></a>
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<div class="dropdown-item" href="#">
-							<form action="{{url('relationship/'.$user->user_id)}}"  method="post">
-								@csrf
-								@method('delete')
-							<button type="submit" class="btn-warning">Unfriend <i class="fa-solid fa-x ml-1"></i></button>
-							</form>
-
-						</div>
-						<div class="dropdown-item" href="#">
-							<div class="notify-btn">
-								Unfollow
-								<a href="#" title="" data-ripple="" title="follow"><i class="fa-solid fa-bell-slash"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				@else
-				@if($n->sender == $user->user_id)
-				<form action="{{url('relationship/'.$user->user_id)}}" method="post">
-					@csrf
-					@method('put')
-					<div class="add-btn btn-filled">
-						<button type="submit">Accept <i class="fa-solid fa-check ml-1"></i></button>
-					</div>
-				</form>
-				<form action="{{url('relationship/'.$user->user_id)}}" method="post">
-					@csrf
-					@method('delete')
-					<div class="reject-btn btn-outline">
-						<button type="submit" class=""><i class="fa-solid fa-trash"></i></button>
-					</div>
-
-				</form>
-				@else
-					<div class="text-white">Pending <i class="fa-solid fa-paper-plane ml-1"></i></div>
-				<form action="{{url('relationship/'.$user->user_id)}}" method="post">
-					@csrf
-					@method('delete')
-					<div class="reject-btn btn-outline">
-						<button type="submit" class="btn-warning">Cancel <i class="fa-solid fa-x ml-1"></i></button>
-					</div>
-				</form>
-				@endif
-				@endif
-				@else
-				<form action="{{url('relationship')}}" method="post">
-					@csrf
-					@method('post')
-					<input type="hidden" name="receiver" value="{{$user->user_id}}">
-					<div class="add-btn btn-filled">
-						<button type="submit">
-							Add friend <i class="fa-solid fa-user-plus"></i>
-						</button>
-					</div>
-				</form>
-				@endif
-				@endif
-
-			</div>
-
-
-			<form class="edit-phto">
-				<i class="fa fa-camera-retro"></i>
-				<label class="fileContainer">
-					Edit Cover Photo
-					<input type="file" />
-				</label>
-			</form>
-			<div class="container-fluid">
-				<div class="row merged">
-					<div class="col-lg-2 col-sm-3">
-						<div class="user-avatar">
-							<figure>
-								<img src="{{ asset('images/resources/' . $user->avatar) }}" alt="">
-
-
-
-								<form class="edit-phto">
-									<i class="fa fa-camera-retro"></i>
-									<label class="fileContainer">
-										Edit Display Photo
-										<input type="file" />
-									</label>
-								</form>
-							</figure>
-						</div>
-					</div>
-					<div class="col-lg-10 col-sm-9">
-						<div class="timeline-info">
-							<ul>
-								<li class="admin-name">
-
-									<h5>{{$user->last_name}} {{$user->first_name}}</h5>
-									<span>Group Admin</span>
-								</li>
-								<li>
-
-									<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
-									<a class="" href="{{ url('timeline-photos').'/user-profile/'.$id }}" title="" data-ripple="">Photos</a>
-									<a class="" href="{{ url('timeline-videos') }}t" title="" data-ripple="">Videos</a>
-									<a class="" href="{{ url('timeline-friends') }}" title="" data-ripple="">Friends</a>
-									<a class="" href="{{ url('groups') }}" title="" data-ripple="">Groups</a>
-									<a class="" href="{{ url('about'.'/user-profile/'.$id) }}" title="" data-ripple="">about</a>
-
-									<a class="active" href="#" title="" data-ripple="">more</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-</section><!-- top area -->
+{{-- top area uses component 'personal_nav' and pass 2 arguments,
+	 (note: don't SPACE after attributes, ex: :user = $friend (error))
+--}}
+<!-- top area -->
+<x-personal_nav :user=$user :friend=$friend></x-personal_nav>
 
 <section>
 	<div class="gap gray-bg">
@@ -177,13 +23,16 @@ use Illuminate\Support\Facades\Auth;
 									<h4 class="widget-title">Socials</h4>
 									<ul class="socials">
 										<li class="facebook">
-											<a title="" href="#"><i class="fa fa-facebook"></i> <span>facebook</span> <ins>45 likes</ins></a>
+											<a title="" href="#"><i class="fa fa-facebook"></i> <span>facebook</span>
+												<ins>45 likes</ins></a>
 										</li>
 										<li class="twitter">
-											<a title="" href="#"><i class="fa fa-twitter"></i> <span>twitter</span><ins>25 likes</ins></a>
+											<a title="" href="#"><i class="fa fa-twitter"></i>
+												<span>twitter</span><ins>25 likes</ins></a>
 										</li>
 										<li class="google">
-											<a title="" href="#"><i class="fa fa-google"></i> <span>google</span><ins>35 likes</ins></a>
+											<a title="" href="#"><i class="fa fa-google"></i> <span>google</span><ins>35
+													likes</ins></a>
 										</li>
 									</ul>
 								</div>
@@ -249,7 +98,8 @@ use Illuminate\Support\Facades\Auth;
 										<li>
 											<div class="activity-meta">
 												<i>30 Days Ago</i>
-												<span><a href="{{ url('newsfeed') }}" title="">Posted your status. “Hello guys, how are you?”</a></span>
+												<span><a href="{{ url('newsfeed') }}" title="">Posted your status.
+														“Hello guys, how are you?”</a></span>
 											</div>
 										</li>
 										<li>
@@ -308,628 +158,651 @@ use Illuminate\Support\Facades\Auth;
 								<div class="central-meta item">
 									<div class="new-postbox">
 										<figure>
-											<img src="{{asset('images/resources/' .$user->avatar)}}" alt="">
+											<img src="{{asset('storage/images/' . $user->avatar)}}" alt="">
 										</figure>
 										<div class="newpst-input">
-											<form method="post">
-												<textarea rows="2" placeholder="write something"></textarea>
-												<div class="attachments">
-													<ul>
-														<li>
-															<i class="fa fa-music"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-image"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-video-camera"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-camera"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<button type="submit">Publish</button>
-														</li>
-													</ul>
-												</div>
-											</form>
+										<form method="post" action="{{ url('post') }}"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                @method('post')
+                                                <textarea rows="2" name="content" placeholder="write something"></textarea>
+                                                <div class="attachments">
+                                                    <ul>
+                                                        <!-- ###Task: viet js cho size input -->
+                                                        <li>
+                                                            <i class="fa fa-image"></i>
+                                                            <label class="fileContainer">
+                                                                <input type="file" name="imgFileSelected[]"
+                                                                    id="imgFileSelected" multiple accept="image/*">
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-video-camera"></i>
+                                                            <label class="fileContainer">
+                                                                <input type="file" name="vdFileSelected[]"
+                                                                    id="vdFileSelected" multiple accept="video/*">
+                                                            </label>
+                                                        </li>
+
+                                                        <li>
+                                                            <button type="submit">Post</button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </form>
+
 										</div>
 									</div>
 								</div><!-- add post new box -->
-								<div class="central-meta item">
-									<div class="user-post">
-										<div class="friend-info">
-											<figure>
-												<img src="{{asset('images/resources/' .$user->avatar)}}" alt="">
-											</figure>
-											<div class="friend-name">
-												<ins><a href="{{ url('#') }}" title="">{{$user->last_name}} {{$user->first_name}}</a></ins>
-												<span>published: june,2 2018 19:PM</span>
-											</div>
-											<div class="description">
-
-												<p>
-													World's most beautiful car in Curabitur <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
-												</p>
-											</div>
-											<div class="post-meta">
-												<div class="linked-image align-left">
-													<a href="#" title=""><img src="{{asset('images/resources/page1.jpg')}}" alt=""></a>	
-												</div>
-												<div class="detail">
-													<span>Love Maid - ChillGroves</span>
-													<p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... </p>
-													<a href="#" title="">www.sample.com</a>
-												</div>
-												<div class="we-video-info">
-													<ul>
-
-														<li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Comments">
-																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
-															</span>
-														</li>
-														<li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li>
-														<li class="social-media">
-															<div class="menu">
-																<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+								@foreach ($posts as $post)
+										{{-- Kiểm tra trong mảng và render ra cái phù hợp --}}
+										@if (class_basename($post) === 'Posts')
+											{{-- @if (false)  --}}
+											<div class="central-meta item rounded-5">
+												<div class="user-post">
+													<div class="friend-info">
+														<figure>
+															<img src="{{ asset('storage/images/' . $post->user->avatar) }}"
+																alt="">
+														</figure>
+														<div class="friend-name">
+															
+														@if(auth()->check() && $user->user_id == auth()->user()->user_id)
+														<div class="dropdown" style="position: absolute; right: 5%;">
+																<button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;">
+																	<i class="fa-solid fa-ellipsis-vertical"></i>
+																</button>
+																<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton-{{$post->id}}">
+																	<a class="dropdown-item" href="{{url('edit-post/'. $post->id)}}" style="display:flex; align-items: center;font-size: 0.8125rem " >	
+																	<i class="far fa-edit" 
+																		style="margin-right:10px; width: 1rem"></i>Update</a>
+																	
+																	<form action="{{ url('comments/'.$post->id) }}" method="POST" style="display: inline;">
+																		@csrf
+																		@method('DELETE')
+																		<button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this comment?');" style="display:flex; align-items: center;;font-size: 0.8125rem"> 	
+																		<i class="fas fa-trash-alt"
+																				style="margin-right: 10px; width: 1rem"></i> Delete</button>
+																	</form>
 																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																	</div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																	</div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																	</div>
-																</div>
-
 															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="central-meta item">
-									<div class="user-post">
-										<div class="friend-info">
-											<figure>
-												<img src="images/resources/friend-avatar10.jpg" alt="">
-											</figure>
-											<div class="friend-name">
-												<ins><a href="{{ url('time-line') }}" title="">Janice Griffith</a></ins>
-												<span>published: june,2 2018 19:PM</span>
-											</div>
-											<div class="post-meta">
-												<img src="{{asset('images/resources/user-post.jpg')}}" alt="">
-												<div class="we-video-info">
-													<ul>
-
-														<li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Comments">
-																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
-															</span>
-														</li>
-														<li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li>
-														<li class="social-media">
-															<div class="menu">
-																<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																	</div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																	</div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																	</div>
-																</div>
-
-															</div>
-														</li>
-													</ul>
-												</div>
-												<div class="description">
-
-													<p>
-														Curabitur world's most beautiful car in <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
-													</p>
-												</div>
-											</div>
-										</div>
-										<div class="coment-area">
-											<ul class="we-comet">
-												<li>
-													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
-													</div>
-													<div class="we-comment">
-														<div class="coment-head">
-															<h5><a href="{{ url('time-line') }}" title="">Jason borne</a></h5>
-															<span>1 year ago</span>
-															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+															@endif
+															<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}"
+																	title="">
+																	{{ ucwords($post->user->last_name . ' ' . $post->user->first_name) }}
+																</a></ins>
+								
+															<span>published:
+																{{ date_format($post->created_at, 'H:i d/m/Y') }}</span>
 														</div>
-														<p>we are working for the dance and sing songs. this car is very awesome for the youngster. please vote this car and like our post</p>
-													</div>
-													<ul>
-														<li>
-															<div class="comet-avatar">
-																<img src="images/resources/comet-2.jpg" alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5><a href="{{ url('time-line') }}" title="">alexendra dadrio</a></h5>
-																	<span>1 month ago</span>
-																	<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+														<div class="post-meta">
+															<!-- <img src="images/resources/user-post.jpg" alt=""> -->
+															<!-- Print content if not null -->
+															<!-- {{ $post->id }} -->
+															@if (!empty($post->content))
+																<div class="description pb-2">
+																	{{ $post->content }}
 																</div>
-																<p>yes, really very awesome car i see the features of this car in the official website of <a href="#" title="">#Mercedes-Benz</a> and really impressed :-)</p>
-															</div>
-														</li>
-														<li>
-															<div class="comet-avatar">
-																<img src="images/resources/comet-3.jpg" alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5><a href="{{ url('time-line') }}" title="">Olivia</a></h5>
-																	<span>16 days ago</span>
-																	<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+															@endif
+								
+								
+															@php
+																$totalMedia = count($post->image) + count($post->video);
+								
+															@endphp
+															<!-- Display imgs  -->
+															@if ($totalMedia != 0)
+																<div class="container-fluied">
+																	<div class="row">
+																		@foreach ($post->image as $img)
+																			<a href="{{ asset('storage/images/' . $img->url) }}"
+																				class="{{ $loop->index < 3 ? 'col-4 p-1' : 'd-none' }} {{ $loop->index == 2 ? 'position-relative' : '' }}"
+																				data-fancybox="gallery{{ $post->id }}"
+																				data-caption="{{ $post->user->last_name . ' ' . $post->user->first_name . '\'s images' }}">
+																				<img src="{{ asset('storage/images/' . $img->url) }}"
+																					alt="failed to display"
+																					class="d-block" />
+																				@if ($loop->index == 2 && $loop->count - 3 != 0)
+																					<div
+																						style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+																						+{{ $totalMedia - 2 }}
+																					</div>
+																				@endif
+																			</a>
+																		@endforeach
+								
+																		@if (!empty($post->video) && count($post->video) != 0)
+																			@foreach ($post->video as $video)
+																				<a href="{{ asset('storage/videos/' . $video->url) }}"
+																					data-fancybox="gallery{{ $post->id }}"
+																					style="max-height:50rem"
+																					class="{{ count($post->image) > 3 || $loop->iteration + count($post->image) > 3 ? 'd-none' : 'col-3 p-1' }}{{ count($post->image) > 3 || $loop->iteration + count($post->image) == 3 ? ' position-relative' : '' }}"
+																					style="display:block;height: 100%">
+																					<video controls
+																						style="height:100%;width:100%"
+																						src="{{ asset('storage/videos/' . $video->url) }}"></video>
+																					@if (count($post->image) > 3 || $loop->iteration + count($post->image) == 3)
+																						<div
+																							style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+																							+{{ $totalMedia - 2 }}
+																						</div>
+																					@endif
+																				</a>
+																			@endforeach
+																		@endif
+																	</div>
+								
 																</div>
-																<p>i like lexus cars, lexus cars are most beautiful with the awesome features, but this car is really outstanding than lexus</p>
+															@endif
+								
+								
+								
+															<!-- views, like,dislike, comment, share -->
+															<div class="we-video-info border-top my-3">
+																<ul>
+																	<li>
+																		<span class="like" data-toggle="tooltip"
+																			title="like">
+																			<i class="ti-heart"></i>
+																			<ins>2.2k</ins>
+																		</span>
+																	</li>
+																	<li>
+																		<span class="dislike" data-toggle="tooltip"
+																			title="dislike">
+																			<i class="ti-heart-broken"></i>
+																			<ins>200</ins>
+																		</span>
+																	</li>
+																	<li>
+																		<span class="comment" data-toggle="tooltip"
+																			title="Comments">
+																			<i class="fa fa-comments-o"></i>
+																			<ins>{{ count($post->comments) }}</ins>
+																		</span>
+																	</li>
+								
+																	@if (Auth::user()->user_id != $post->user_id_fk)
+																		<li class="social-media">
+																			<x-share-btn>{{ $post->id }}</x-share-btn>
+																		</li>
+																	@endif
+								
+																</ul>
 															</div>
-														</li>
-													</ul>
-												</li>
-												<li>
-													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
-													</div>
-													<div class="we-comment">
-														<div class="coment-head">
-															<h5><a href="{{ url('time-line') }}" title="">Donald Trump</a></h5>
-															<span>1 week ago</span>
-															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+								
 														</div>
-														<p>we are working for the dance and sing songs. this video is very awesome for the youngster. please vote this video and like our channel
-															<i class="em em-smiley"></i>
-														</p>
 													</div>
-												</li>
-												<li>
-													<a href="#" title="" class="showmore underline">more comments</a>
-												</li>
-												<li class="post-comment">
-													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
+													<div class="coment-area p-1 post-cmt post-cmt-{{ $post->id }}">
+														<ul class="we-comet comment">
+															<!-- hiện commment cho mỗi bình luận tại đây -->
+															@php
+																$count = 0;
+															@endphp
+															@foreach ($post->comments as $comment)
+																@php
+																	$flag = $count >= 3 ? true : false;
+																@endphp
+																<x-comment :commenter=$comment :isHidden=$flag></x-comment>
+																@php
+																	$count++;
+																@endphp
+															@endforeach
+								
+														</ul> <!-- list of comments-->
+														<ul class="we-comet">
+															<li>
+																@php
+																	$count_of_cmt = count($post->comments);
+																@endphp
+																@if ($count_of_cmt > 3)
+																	<a title=""
+																		class="showmore underline btnshow-{{ $post->id }}">more
+																		comments</a>
+																@endif
+															</li>
+															<li class="post-comment">
+																<div class="comet-avatar">
+																	<x-user-avt>
+																	</x-user-avt>
+																</div>
+																<div class="post-comt-box {{ $post->id }}">
+																	<form method = "post" action="comment"
+																		id="form-{{ $post->id }}"
+																		enctype="multipart/form-data">
+																		@csrf
+																		@method('POST')
+																		<input type="hidden" name="post_id"
+																			value="{{ $post->id }}">
+																		<textarea placeholder="Post your comment" name = "content"></textarea>
+																		<div class="add-smiles">
+																			<span class="em em-expressionless"
+																				title="add icon"></span>
+																		</div>
+																		<div class="attachments">
+																			<ul class="m-0 d-flex align-items-center">
+																				<li>
+																					<i class="fa fa-image"></i>
+																					<label class="fileContainer">
+																						<input type="file"
+																							name="imgFileSelected[]"
+																							id="imgFileSelected" multiple
+																							accept="image/*">
+																					</label>
+																				</li>
+																				<li>
+																					<i class="fa fa-video-camera"></i>
+																					<label class="fileContainer">
+																						<input type="file"
+																							name="vdFileSelected[]"
+																							id="vdFileSelected" multiple
+																							accept="video/*">
+																					</label>
+																				</li>
+								
+																				<li>
+																					<button type="submit"
+																						class="bg-dark btnComment"
+																						value={{ $post->id }}>Post</button>
+																				</li>
+																			</ul>
+																		</div>
+																		{{-- <div class="smiles-bunch">
+																		<i class="em em---1"></i>
+																		<i class="em em-smiley"></i>
+																		<i class="em em-anguished"></i>
+																		<i class="em em-laughing"></i>
+																		<i class="em em-angry"></i>
+																		<i class="em em-astonished"></i>
+																		<i class="em em-blush"></i>
+																		<i class="em em-disappointed"></i>
+																		<i class="em em-worried"></i>
+																		<i class="em em-kissing_heart"></i>
+																		<i class="em em-rage"></i>
+																		<i class="em em-stuck_out_tongue"></i>
+																	</div> --}}
+																	</form>
+																</div>
+								
+															</li>
+														</ul>
 													</div>
-													<div class="post-comt-box">
-														<form method="post">
-															<textarea placeholder="Post your comment"></textarea>
-															<div class="add-smiles">
-																<span class="em em-expressionless" title="add icon"></span>
-															</div>
-															<div class="smiles-bunch">
-																<i class="em em---1"></i>
-																<i class="em em-smiley"></i>
-																<i class="em em-anguished"></i>
-																<i class="em em-laughing"></i>
-																<i class="em em-angry"></i>
-																<i class="em em-astonished"></i>
-																<i class="em em-blush"></i>
-																<i class="em em-disappointed"></i>
-																<i class="em em-worried"></i>
-																<i class="em em-kissing_heart"></i>
-																<i class="em em-rage"></i>
-																<i class="em em-stuck_out_tongue"></i>
-															</div>
-															<button type="submit"></button>
-														</form>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="central-meta item">
-									<div class="user-post">
-										<div class="friend-info">
-											<figure>
-												<img src="images/resources/friend-avatar10.jpg" alt="">
-											</figure>
-											<div class="friend-name">
-												<ins><a href="{{ url('time-line') }}" title="">Janice Griffith</a></ins>
-												<span>published: june,2 2018 19:PM</span>
-											</div>
-											<div class="post-meta">
-												<iframe src="https://player.vimeo.com/video/15232052" height="315" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-												<div class="we-video-info">
-													<ul>
-
-														<li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Comments">
-																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
-															</span>
-														</li>
-														<li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li>
-														<li class="social-media">
-															<div class="menu">
-																<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																	</div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																	</div>
-																</div>
-																<div class="rotater">
-																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																	</div>
-																</div>
-
-															</div>
-														</li>
-													</ul>
 												</div>
-												<div class="description">
+											</div>
+										@elseif (class_basename($post) === 'Share')
+						
+										@php
+												$created_at = $post->created_at;
+												$sharer = $post->user; 
+												$post = $post->post;
+												@endphp
+												
+											<div class="sharer">
+												<div class="user-shared"
+												
+												>
+												<div class="avatar">
+													<img src="{{asset("storage/images/$sharer->avatar")}}" alt="error">
 
-													<p>
-														Lonely Cat Enjoying in Summer Curabitur <a href="#" title="">#mypage</a> ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc,
-													</p>
+												</div>
+												<div class="content pl-3">
+													<div class="text">
+														<b>{{ ucwords($sharer->last_name . ' ' . $sharer->first_name) }}</b> shared an article <i class="fa-solid fa-earth-americas"></i>
+													</div>
+													<div class="publicTime">
+														At: {{ date_format($created_at, 'H:i d/m/Y') }}
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="coment-area">
-											<ul class="we-comet">
-												<li>
-													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
-													</div>
-													<div class="we-comment">
-														<div class="coment-head">
-															<h5><a href="{{ url('time-line') }}" title="">Jason borne</a></h5>
-															<span>1 year ago</span>
-															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-														</div>
-														<p>we are working for the dance and sing songs. this video is very awesome for the youngster. please vote this video and like our channel</p>
-													</div>
+												<div class="central-meta item rounded-5 border-share">
+													<div class="user-post">
+														<div class="friend-info">
+															<figure>
+															
+																<img src="{{ asset('storage/images/' . $post->user->avatar) }}"
+																	alt="">
+															</figure>
+															<div class="friend-name">
+																<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}"
+																		title="">
+																		{{ ucwords($post->user->last_name . ' ' . $post->user->first_name) }}
+																	</a></ins>
+									
+																<span>published:
+																	{{ date_format($post->created_at, 'H:i d/m/Y') }}</span>
+															</div>
+															<div class="post-meta">
+																<!-- <img src="images/resources/user-post.jpg" alt=""> -->
+																<!-- Print content if not null -->
+																<!-- {{ $post->id }} -->
+																@if (!empty($post->content))
+																	<div class="description pb-2">
+																		{{ $post->content }}
+																	</div>
+																@endif
+									
+									
+																@php
+																	$totalMedia = count($post->image) + count($post->video);
+									
+																@endphp
+																<!-- Display imgs  -->
+																@if ($totalMedia != 0)
+																	<div class="container-fluied">
+																		<div class="row">
+																			@foreach ($post->image as $img)
+																				<a href="{{ asset('storage/images/' . $img->url) }}"
+																					class="{{ $loop->index < 3 ? 'col-4 p-1' : 'd-none' }} {{ $loop->index == 2 ? 'position-relative' : '' }}"
+																					data-fancybox="gallery{{ $post->id }}"
+																					data-caption="{{ $post->user->last_name . ' ' . $post->user->first_name . '\'s images' }}">
+																					<img src="{{ asset('storage/images/' . $img->url) }}"
+																						alt="failed to display"
+																						class="d-block" />
+																					@if ($loop->index == 2 && $loop->count - 3 != 0)
+																						<div
+																							style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+																							+{{ $totalMedia - 2 }}
+																						</div>
+																					@endif
+																				</a>
+																			@endforeach
+									
+																			@if (!empty($post->video) && count($post->video) != 0)
+																				@foreach ($post->video as $video)
+																					<a href="{{ asset('storage/videos/' . $video->url) }}"
+																						data-fancybox="gallery{{ $post->id }}"
+																						style="max-height:50rem"
+																						class="{{ count($post->image) > 3 || $loop->iteration + count($post->image) > 3 ? 'd-none' : 'col-3 p-1' }}{{ count($post->image) > 3 || $loop->iteration + count($post->image) == 3 ? ' position-relative' : '' }}"
+																						style="display:block;height: 100%">
+																						<video controls
+																							style="height:100%;width:100%"
+																							src="{{ asset('storage/videos/' . $video->url) }}"></video>
+																						@if (count($post->image) > 3 || $loop->iteration + count($post->image) == 3)
+																							<div
+																								style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+																								+{{ $totalMedia - 2 }}
+																							</div>
+																						@endif
+																					</a>
+																				@endforeach
+																			@endif
+																		</div>
+									
+																	</div>
+																@endif
+									
+									
+									
+																<!-- views, like,dislike, comment, share -->
+																<div class="we-video-info border-top my-3">
+																	<ul>
+																		<li>
+																			<span class="like" data-toggle="tooltip"
+																				title="like">
+																				<i class="ti-heart"></i>
+																				<ins>2.2k</ins>
+																			</span>
+																		</li>
+																		<li>
+																			<span class="dislike" data-toggle="tooltip"
+																				title="dislike">
+																				<i class="ti-heart-broken"></i>
+																				<ins>200</ins>
+																			</span>
+																		</li>
+																		<li>
+																			<span class="comment" data-toggle="tooltip"
+																				title="Comments">
+																				<i class="fa fa-comments-o"></i>
+																				<ins>{{ count($post->comments) }}</ins>
+																			</span>
+																		</li>
+									
+																		@if (Auth::user()->user_id != $post->user_id_fk)
+																			<li class="social-media">
+																				<x-share-btn>{{ $post->id }}</x-share-btn>
+																			</li>
+																		@endif
+									
+																	</ul>
+																</div>
 
-												</li>
-												<li>
-													<div class="comet-avatar">
-														<img src="images/resources/comet-2.jpg" alt="">
-													</div>
-													<div class="we-comment">
-														<div class="coment-head">
-															<h5><a href="{{ url('time-line') }}" title="">Sophia</a></h5>
-															<span>1 week ago</span>
-															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+									
+															</div>
 														</div>
-														<p>we are working for the dance and sing songs. this video is very awesome for the youngster.
-															<i class="em em-smiley"></i>
-														</p>
+														<div class="coment-area p-1 post-cmt post-cmt-{{ $post->id }}">
+															<ul class="we-comet comment">
+																<!-- hiện commment cho mỗi bình luận tại đây -->
+																@php
+																	$count = 0;
+																@endphp
+																@foreach ($post->comments as $comment)
+																	@php
+																		$flag = $count >= 3 ? true : false;
+																	@endphp
+																	<x-comment :commenter=$comment :isHidden=$flag></x-comment>
+																	@php
+																		$count++;
+																	@endphp
+																@endforeach
+									
+															</ul> <!-- list of comments-->
+															<ul class="we-comet">
+																<li>
+																	@php
+																		$count_of_cmt = count($post->comments);
+																	@endphp
+																	@if ($count_of_cmt > 3)
+																		<a title=""
+																			class="showmore underline btnshow-{{ $post->id }}">more
+																			comments</a>
+																	@endif
+																</li>
+																<li class="post-comment">
+																	<div class="comet-avatar">
+																		<x-user-avt>
+																		</x-user-avt>
+																	</div>
+																	<div class="post-comt-box {{ $post->id }}">
+																		<form method = "post" action="comment"
+																			id="form-{{ $post->id }}"
+																			enctype="multipart/form-data">
+																			@csrf
+																			@method('POST')
+																			<input type="hidden" name="post_id"
+																				value="{{ $post->id }}">
+																			<textarea placeholder="Post your comment" name = "content"></textarea>
+																			<div class="add-smiles">
+																				<span class="em em-expressionless"
+																					title="add icon"></span>
+																			</div>
+																			<div class="attachments">
+																				<ul class="m-0 d-flex align-items-center">
+																					<li>
+																						<i class="fa fa-image"></i>
+																						<label class="fileContainer">
+																							<input type="file"
+																								name="imgFileSelected[]"
+																								id="imgFileSelected" multiple
+																								accept="image/*">
+																						</label>
+																					</li>
+																					<li>
+																						<i class="fa fa-video-camera"></i>
+																						<label class="fileContainer">
+																							<input type="file"
+																								name="vdFileSelected[]"
+																								id="vdFileSelected" multiple
+																								accept="video/*">
+																						</label>
+																					</li>
+									
+																					<li>
+																						<button type="submit"
+																							class="bg-dark btnComment"
+																							value={{ $post->id }}>Post</button>
+																					</li>
+																				</ul>
+																			</div>
+																			{{-- <div class="smiles-bunch">
+																			<i class="em em---1"></i>
+																			<i class="em em-smiley"></i>
+																			<i class="em em-anguished"></i>
+																			<i class="em em-laughing"></i>
+																			<i class="em em-angry"></i>
+																			<i class="em em-astonished"></i>
+																			<i class="em em-blush"></i>
+																			<i class="em em-disappointed"></i>
+																			<i class="em em-worried"></i>
+																			<i class="em em-kissing_heart"></i>
+																			<i class="em em-rage"></i>
+																			<i class="em em-stuck_out_tongue"></i>
+																		</div> --}}
+																		</form>
+																	</div>
+									
+																</li>
+															</ul>
+														</div>
 													</div>
-												</li>
-												<li>
-													<a href="#" title="" class="showmore underline">more comments</a>
-												</li>
-												<li class="post-comment">
-													<div class="comet-avatar">
-														<img src="images/resources/comet-2.jpg" alt="">
-													</div>
-													<div class="post-comt-box">
-														<form method="post">
-															<textarea placeholder="Post your comment"></textarea>
-															<div class="add-smiles">
-																<span class="em em-expressionless" title="add icon"></span>
-															</div>
-															<div class="smiles-bunch">
-																<i class="em em---1"></i>
-																<i class="em em-smiley"></i>
-																<i class="em em-anguished"></i>
-																<i class="em em-laughing"></i>
-																<i class="em em-angry"></i>
-																<i class="em em-astonished"></i>
-																<i class="em em-blush"></i>
-																<i class="em em-disappointed"></i>
-																<i class="em em-worried"></i>
-																<i class="em em-kissing_heart"></i>
-																<i class="em em-rage"></i>
-																<i class="em em-stuck_out_tongue"></i>
-															</div>
-															<button type="submit"></button>
-														</form>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
+												</div>
+											</div>
+											
+										@endif
+									@endforeach
+							 
+
 							</div>
 						</div><!-- centerl meta -->
 						<div class="col-lg-3">
 							<aside class="sidebar static">
+								<div class="widget">
 
-								<!-- <div class="widget friend-list stick-widget">
-										<h4 class="widget-title">Friends</h4>
-										<div id="searchDir"></div>
-										<ul id="people-list" class="friendz-list">
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">bucky barnes</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4136282f352433322e2d25243301262c20282d6f222e2c">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a585b48545f497a5d575b535614595557">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar3.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">jason borne</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="127873617d7c7052757f737b7e3c717d7f">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar4.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">Cameron diaz</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="620803110d0c0022050f030b0e4c010d0f">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
+									<h4 class="widget-title">Information Basic</h4>
 
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0963687a66676b496e64686065276a6664">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
+									<div class="your-page">
 
-												<figure>
-													<img src="images/resources/friend-avatar6.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">andrew</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b313a283435391b3c363a323775383436">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
+										<div class="page-meta">
+											<span>DESCRIPTION</span>
+											<a href="#" title="" class="underline" style="word-wrap: break-word;">(
+												{{$user->description}} )</a>
 
-												<figure>
-													<img src="images/resources/friend-avatar7.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">amy watson</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="472d263428292507202a262e2b6924282a">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
+											<span style="display:flex;align-items:center;"><i
+													class="fa-solid fa-cake-candles" style="padding-right:5px;"></i><a
+													href="{{ url('insight') }}" title="">
+													Date of birth : {{ date_format(date_create($user->DOB), 'M d Y') }}</a></span>
+											<span><a href="#" title=""> <i class="fa-solid fa-envelope"></i> 
+														Email: {{$user->email}}</a></span>
+											<span><i class="ti-comment"></i><a href="{{ url('insight') }}"
+													title="">Messages <em>9</em></a></span>
+											<span><i class="ti-bell"></i><a href="{{ url('insight') }}"
+													title="">Notifications <em>2</em></a></span>
+										</div>
 
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a101b091514183a1d171b131654191517">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
+									</div>
+								</div><!-- page like widget -->
+								<div class="widget">
+									<div class="banner medium-opacity bluesh">
+										<div class="bg-image"
+											style="background-image: url(images/resources/baner-widgetbg.jpg)"></div>
+										<div class="baner-top">
+											<span><img alt="" src="images/book-icon.png"></span>
+											<i class="fa fa-ellipsis-h"></i>
+										</div>
+										<div class="banermeta">
+											<p>
+												create your own favourit page.
+											</p>
+											<span>like them all</span>
+											<a data-ripple="" title="" href="#">start now!</a>
+										</div>
+									</div>
+								</div>
+								<div class="widget friend-list stick-widget">
+									<h4 class="widget-title">Friends</h4>
+									<div id="searchDir"></div>
+									<ul id="people-list" class="friendz-list">
 
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c1e1d0e12190f3c1b111d1510521f1311">[email&#160;protected]</a></i>
-												</div>
-											</li>
-										</ul>
-										<div class="chat-box">
-											<div class="chat-head">
-												<span class="status f-online"></span>
-												<h6>Bucky Barnes</h6>
-												<div class="more">
-													<span><i class="ti-more-alt"></i></span>
-													<span class="close-mesage"><i class="ti-close"></i></span>
-												</div>
-											</div>
-											<div class="chat-list">
-												<ul>
-													<li class="me">
-														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="you">
-														<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="me">
-														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-												</ul>
-												<form class="text-box">
-													<textarea placeholder="Post enter to post..."></textarea>
-													<div class="add-smiles">
-														<span title="add icon" class="em em-expressionless"></span>
-													</div>
-													<div class="smiles-bunch">
-														<i class="em em---1"></i>
-														<i class="em em-smiley"></i>
-														<i class="em em-anguished"></i>
-														<i class="em em-laughing"></i>
-														<i class="em em-angry"></i>
-														<i class="em em-astonished"></i>
-														<i class="em em-blush"></i>
-														<i class="em em-disappointed"></i>
-														<i class="em em-worried"></i>
-														<i class="em em-kissing_heart"></i>
-														<i class="em em-rage"></i>
-														<i class="em em-stuck_out_tongue"></i>
-													</div>
-													<button type="submit"></button>
-												</form>
+									</ul>
+									<div class="chat-box">
+										<div class="chat-head">
+											<span class="status f-online"></span>
+											<h6>Bucky Barnes</h6>
+											<div class="more">
+												<span><i class="ti-more-alt"></i></span>
+												<span class="close-mesage"><i class="ti-close"></i></span>
 											</div>
 										</div>
-									</div>friends list sidebar -->
+										<div class="chat-list">
+											<ul>
+												<li class="me">
+													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg"
+															alt=""></div>
+													<div class="notification-event">
+														<span class="chat-message-item">
+															Hi James! Please remember to buy the food for tomorrow! I’m
+															gonna be handling the gifts and Jake’s gonna get the drinks
+														</span>
+														<span class="notification-date"><time
+																datetime="2004-07-24T18:18"
+																class="entry-date updated">Yesterday at
+																8:10pm</time></span>
+													</div>
+												</li>
+												<li class="you">
+													<div class="chat-thumb"><img src="images/resources/chatlist2.jpg"
+															alt=""></div>
+													<div class="notification-event">
+														<span class="chat-message-item">
+															Hi James! Please remember to buy the food for tomorrow! I’m
+															gonna be handling the gifts and Jake’s gonna get the drinks
+														</span>
+														<span class="notification-date"><time
+																datetime="2004-07-24T18:18"
+																class="entry-date updated">Yesterday at
+																8:10pm</time></span>
+													</div>
+												</li>
+												<li class="me">
+													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg"
+															alt=""></div>
+													<div class="notification-event">
+														<span class="chat-message-item">
+															Hi James! Please remember to buy the food for tomorrow! I’m
+															gonna be handling the gifts and Jake’s gonna get the drinks
+														</span>
+														<span class="notification-date"><time
+																datetime="2004-07-24T18:18"
+																class="entry-date updated">Yesterday at
+																8:10pm</time></span>
+													</div>
+												</li>
+											</ul>
+											<form class="text-box">
+												<textarea placeholder="Post enter to post..."></textarea>
+												<div class="add-smiles">
+													<span title="add icon" class="em em-expressionless"></span>
+												</div>
+												<div class="smiles-bunch">
+													<i class="em em---1"></i>
+													<i class="em em-smiley"></i>
+													<i class="em em-anguished"></i>
+													<i class="em em-laughing"></i>
+													<i class="em em-angry"></i>
+													<i class="em em-astonished"></i>
+													<i class="em em-blush"></i>
+													<i class="em em-disappointed"></i>
+													<i class="em em-worried"></i>
+													<i class="em em-kissing_heart"></i>
+													<i class="em em-rage"></i>
+													<i class="em em-stuck_out_tongue"></i>
+												</div>
+												<button type="submit"></button>
+											</form>
+										</div>
+									</div>
+								</div><!-- friends list sidebar -->
+
 							</aside>
 						</div><!-- sidebar -->
 					</div>

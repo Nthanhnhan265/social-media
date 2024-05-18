@@ -30,6 +30,22 @@ class Relationship extends Model
         }
         return User::whereIn('user_id',$friendList)->get();
     }
+    static public function getFriendListArrayOfUser() { 
+        $user_id = Auth::user()->user_id; 
+        $f = Relationship::where(['sender'=>$user_id,"status"=>"accept"])->union(Relationship::where(['receiver'=>$user_id,"status"=>"accept"]))->get(); 
+        $friendList = []; 
+        if (isset($f)) { 
+            foreach ($f as $friend) { 
+                if ($friend->sender != $user_id) { 
+                    array_push($friendList, $friend->sender); 
+                }else { 
+                    array_push($friendList, $friend->receiver); 
+                }
+            }
+        }
+        return $friendList;
+    }
+
     static public function getRequestListOfUser() { 
         $user_id = Auth::user()->user_id; 
         $f = Relationship::where(['sender'=>$user_id,"status"=>"pending"])->union(Relationship::where(['receiver'=>$user_id,"status"=>"pending"]))->get(); 

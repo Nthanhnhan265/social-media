@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
+use App\Models\Notification;
+use App\Models\Share;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use \App\Models\User;
@@ -37,14 +40,34 @@ class ShareController extends Controller
      */
     public function store(Request $request)
     {
+        
         $userId = Auth::id();
         $user = User::find($userId);
+
+        $arrFollowers = Follow::getFollowersByUserId($userId);
+
         $sharingRange = $request->input('shareOption');
         $postId = $request->input('post_id');
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $currentDateTime = date('Y-m-d H:i:s');
 
-        $user->share()->attach($postId, ['status' => $sharingRange, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime]);
+        $share = Share::create([
+            'user_id_fk' => $userId,
+            'post_id_fk' => $postId,
+            'status' => $sharingRange,
+            'created_at' => $currentDateTime,
+            'updated_at' => $currentDateTime,
+        ]);
+        //notify to all followers 
+        if ($sharingRange == 1) { 
+            if ($arrFollowers) { 
+                Notification::newNotifyToFollowers($arrFollowers,$share->share_id,"sharepost"); 
+            }
+            
+        }
+       
+        
+        
         return redirect()->back();
     }
 

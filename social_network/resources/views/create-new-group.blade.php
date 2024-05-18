@@ -1,6 +1,5 @@
-
 @extends('/layouts.app')
-@section('content')		
+@section('content')	
 	<section>
 		<div class="gap gray-bg">
 			<div class="container-fluid">
@@ -42,91 +41,34 @@
 													<a href="{{ url('notifications') }}" title="">Notifications</a>
 												</li>
 											</ul>
-										</div><!-- Shortcuts -->
-									<div class="widget stick-widget">
-										<h4 class="widget-title">Profile intro</h4>
-										<ul class="short-profile">
-											<li>
-												<span>about</span>
-												<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
-											</li>
-											<li>
-												<span>fav tv show</span>
-												<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
-											</li>
-											<li>
-												<span>favourit music</span>
-												<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
-											</li>
-										</ul>
-									</div><!-- profile intro widget -->
+										</div><!-- Shortcuts -->										
 
 								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-6">
 								<div class="central-meta">
-									<div class="groups">
-										<span><i class="fa fa-users"></i>My groups</span>
-									</div>
-									<div class="groups">
-										<span> <a href="{{ asset('create-new-group') }}" title="" ><i class="fa-solid fa-plus"></i> Create new group</a> </span>
-									</div>
-									<ul class="nearby-contct">
-									@foreach ($groups as $group)
-										<li>
-											<div class="nearly-pepls">
-											@if($group->request == 0)
-												<figure>
-													@if($group->group->status == 0)
-													<a href="{{ url('group-deactive') }}"
-													title=""><img src="images/resources/group1.jpg" alt=""></a>
-													@else
-													<a href="{{ url('group-view', $group->group_id_fk) }}"
-													title=""><img src="images/resources/group1.jpg" alt=""></a>													
-													@endif
-												</figure>
-												<div class="pepl-info">
-													@if($group->group->status == 0)
-													<h4><a href="{{ url('group-deactive') }}" title="">{{ $group->group->name_group }} </a></h4>
-													<span>Deactive group</span>
-													@else
-													<h4><a href="{{ url('group-view', $group->group_id_fk) }}" title="">{{ $group->group->name_group }} </a></h4>
-													<span>Active group</span>
-													@endif
-													<a href="#" title="" class="add-butn" data-ripple="">Joined</a>												
-												</div>
-											@elseif($group->request == 1)
-											<figure>
-													@if($group->group->status == 0)
-													<a href="{{ url('group-deactive') }}"
-													title=""><img src="images/resources/group1.jpg" alt=""></a>
-													@else
-													<a href="{{ url('group-view', $group->group_id_fk) }}"
-													title=""><img src="images/resources/group1.jpg" alt=""></a>													
-													@endif
-												</figure>
-												<div class="pepl-info">
-												@if($group->group->status == 0)
-													<h4><a href="{{ url('group-deactive') }}" title="">{{ $group->group->name_group }} </a></h4>
-													<span>Deactive group</span>
-													@else
-													<h4><a href="{{ url('group-view', $group->group_id_fk) }}" title="">{{ $group->group->name_group }} </a></h4>
-													<span>Active group</span>
-													@endif	
-													<form action="{{ route('delete-request-by-user', $group->group_id_fk) }}" method="POST" style="display: inline;" onsubmit="">
-														@csrf
-														@method('DELETE')
-														<button type="submit" title="" data-ripple="" class="request-join">Delete request</button>
-													</form>																									
-												</div>
-											@endif
+									<div class="editing-info">
+										<h5 class="f-title"><i class="ti-info-alt"></i> Create new group</h5>
+										
+										<form method="post" action="{{ url('newgroup') }}">
+											@csrf
+											@method("post")
+											<div class="form-group half">  
+												<input type="text" id="group_name" name="name" required="required" value="">
+												<label class="control-label" for="group_name">Group Name</label><i class="mtrl-select"></i>
+											</div>                                                                                        
+											<div class="form-group">  
+												<textarea rows="4" id="description" name="description" required="required"></textarea>
+												<label class="control-label" for="description">Description</label><i class="mtrl-select"></i>
+											</div>										
+											<div class="submit-btns">                                                
+												<button type="submit" class="mtr-btn"><span>Create</span></button>
 											</div>
-										</li>	
-									@endforeach								
-									</ul>
-								</div><!-- photos -->
+										</form>
+
+									</div>
+								</div>	
 							</div><!-- centerl meta -->
-							
 							<div class="col-lg-3">
 								<aside class="sidebar static">
 									<div class="widget">

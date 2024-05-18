@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
                 'user_id' => 2,
                 'last_name' => 'Smith',
                 'first_name' => 'Jane',
-                'email' => 'jane.smith@gmail.com',
+                'email' => '    ',
                 'DOB' => '1985-05-15',
                 'gender' => 0,
                 'password' => Hash::make('111'),

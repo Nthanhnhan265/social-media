@@ -4,20 +4,17 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class comment extends Component
+class format_number extends Component
 {
-    public $commenter; 
-    public $isHidden;
-
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($commenter,$isHidden)
+    public $number;
+    public function __construct($number)
     {
-        $this->commenter = $commenter;
-        $this->isHidden = $isHidden; 
+        $this->number = $number; 
     }
 
     /**
@@ -27,6 +24,6 @@ class comment extends Component
      */
     public function render()
     {
-        return view('components.comment');
+        return view('components.format_number');
     }
 }

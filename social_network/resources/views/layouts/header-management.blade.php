@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="{{asset('css//css-management/style.css')}}">
 <link rel="stylesheet" href="{{asset('css/color.css')}}">
 <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
 <link rel="stylesheet" href="{{asset('css/styles_admin.css')}}">

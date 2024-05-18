@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Auth;
 
 

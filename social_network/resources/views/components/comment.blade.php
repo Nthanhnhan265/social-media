@@ -11,13 +11,14 @@
         <img src="{{asset('storage/images/'.$commenter->user->avatar)}}" alt="err">
     </div>
     </div>
-    <div class="we-comment" style="border-radius: 10px !important; border: 2px solid #cac4c4">
+    <div class="we-comment" style="border-radius: 10px !important; border: 1px solid #cac4c4">
         <div class="coment-head">
             <h5><a href="{{ url('time-line/user-profile/' .Auth::user()->user_id) }}" title="">{{$commenter->user->last_name." ".$commenter->user->first_name}}</a></h5>
             <span>{{ date_format ($commenter->created_at,"H:i d/m/Y") }}</span>
             <!-- <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a> -->
             @if(auth()->check() && $commenter->user->user_id == auth()->user()->user_id)
               <!-- Toggle Menu -->
+              @if (!Request::is('newsfeed'))  
               <div class="dropdown" style="position: absolute; right: 5%;">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-{{$commenter->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -32,6 +33,7 @@
                     </form>
                 </div>
             </div>
+                @endif
             @endif
         </div>
         <p>

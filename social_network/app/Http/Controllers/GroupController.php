@@ -10,6 +10,9 @@ use \App\Models\Comment;
 use \App\Models\Posts;
 use \App\Models\PostGroup;
 use Illuminate\Support\Facades\DB;
+use App\Models\Relationship;
+use App\Models\Follow;
+use Illuminate\Support\Facades\Session;
 
 class GroupController extends Controller
 {
@@ -219,13 +222,17 @@ class GroupController extends Controller
 
         $group = Group::where('group_id', $group_id)
                 ->first();
-
-        // $comments = Comment::where('post_id_fk', $id)
-        //            ->orderBy('created_at', 'desc')
-        //            ->get();               
-        // return view('post-detail')->with('comments', $comments)->with('post', $post);
-        return view('group-view')->with('posts', $posts)->with('userRole', $userRole)
-        ->with('memberCount', $memberCount)->with('group', $group)->with('members', $members);
+        
+        return view(
+            'group-view',
+            [             
+                'posts' => $posts,
+                'userRole'=> $userRole,
+                'memberCount'=> $memberCount,
+                'group'=> $group,
+                'members'=> $members
+            ]
+        );
     }
 
     public function getAllForGroupMember($group_id)
@@ -306,5 +313,94 @@ class GroupController extends Controller
         return view('edit-group-2')->with('posts', $posts)->with('userRole', $userRole)
         ->with('memberCount', $memberCount)->with('group', $group)->with('members', $members)->with('requestCount', $requestCount)
         ->with('requests', $requests);
+    }
+
+    private function getNewfeed($user_id)
+    {
+        $posts = [];
+        $sharedPost = [];
+        //get user's followed list 
+        $followedList = Follow::getFollowedListRaw($user_id);
+         if (!$followedList->get()->isEmpty()) {
+
+            //  get user's shared posts 
+            //  get friend's shared posts (Check follow table )
+            $followed = $followedList->where('follow_type', 'friend')->pluck('follow_id_fk')->toArray();
+    
+            $sharedPost = Share::where('status', 1)->whereIn('user_id_fk', [$user_id, ...$followed])
+                ->with([
+                    'user',
+                    'post' => function ($q) {
+                        $q->with([
+                            'user',
+                            'image',
+                            'video',
+                            'comments' => function ($q) {
+                                $q->with([
+                                    'user',
+                                    'image' => function ($qImg) {
+                                        $qImg->where('img_location_fk', 1);
+                                    },
+                                    'video' => function ($qVid) {
+                                        $qVid->where('video_location_fk', 1);
+                                    }
+                                ])->orderBy('created_at','desc');
+                            }
+                        ]);
+                    }
+                ])
+                ->get();
+
+            
+            //  get user's posts 
+            //  get friend's posts (check follow table)
+            $posts = Posts::whereIn('user_id_fk', [$user_id, ...$followed])->orderBy('created_at', 'desc')
+                ->with([
+                    'user',
+                    'image',
+                    'video',
+                    'comments' => function ($q) {
+                        $q->with([
+                            'user',
+                            'image' => function ($qImg) {
+                                $qImg->where('img_location_fk', 1);
+                            },
+                            'video' => function ($qVid) {
+                                $qVid->where('video_location_fk', 1);
+                            }
+                        ])->orderBy('created_at','desc');
+                    }
+                ])->get();
+              
+            }
+        //  get post in group that user joined (check follow table )
+
+        //no-one is followed 
+        else {
+           
+            //random any posts in DB 
+            $posts = Posts::inRandomOrder()->limit(10)
+            ->with([
+                'user',
+                'image',
+                'video',
+                'comments' => function ($q) {
+                    $q->with([
+                        'user',
+                        'image' => function ($qImg) {
+                            $qImg->where('img_location_fk', 1);
+                        },
+                        'video' => function ($qVid) {
+                            $qVid->where('video_location_fk', 1);
+                        }
+                    ])->orderBy('created_at', 'desc');
+                }
+            ])->get();
+           
+        }
+       
+        $shuffleArray = [...$posts,...$sharedPost]; 
+        shuffle($shuffleArray);
+        return  $shuffleArray;
     }
 }

@@ -112,7 +112,7 @@
 										</ul>
 
 										<!-- Tab panes -->
-										<div class="tab-content">
+										<div class="tab-content" style="display:block !important;">
 										  <div class="tab-pane active fade show " id="frends" >
 											<ul class="nearby-contct">
 											@foreach($members as $member)

@@ -7,9 +7,12 @@
 
 <li class={{$class}}>
     <div class="comet-avatar">
-    <div class="comment-avatar" style="width:45px;height:45px;overflow:hidden;border-radius:50%">
-        <img src="{{asset('storage/images/'.$commenter->user->avatar)}}" alt="err">
-    </div>
+   <div class="comment-avatar" style="width: 45px; height: 45px; overflow: hidden; border-radius: 50%;">
+    <img src="{{ asset('storage/images/' . $commenter->user->avatar) }}" 
+         alt="err" 
+         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+</div>
+
     </div>
     <div class="we-comment" style="border-radius: 10px !important; border: 2px solid #cac4c4">
         <div class="coment-head">
@@ -28,7 +31,7 @@
                     <form action="{{ url('comments/'.$commenter->comment_id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this comment?');">Delete</button>
+                        <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this comment ?');">Delete</button>
                     </form>
                 </div>
             </div>

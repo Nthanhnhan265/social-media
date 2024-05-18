@@ -164,7 +164,8 @@ Route::post('time-line/user-profile/{id}',[CommentController::class, 'store']);
 // Route::get('timeline-photos/user-profile/{id}',[UsersController::class,'show']);
 Route::get('edit-comment/{id}', [CommentController::class, 'edit'])->name('comments.edit');
 Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
-Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+Route::delete('comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 // Route tìm kiếm bài post 
 Route::get('search', [PostsController::class, 'search'])->name('posts.search');
 // Route::get('timeline-friends/{id}',[UsersController::class,'show']);
+Route::delete('time-line/user-profile/{id}', [PostsController::class,'destroy'])->name('posts.destroy');

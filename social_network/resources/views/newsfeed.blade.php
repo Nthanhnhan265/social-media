@@ -288,7 +288,7 @@ use Illuminate\View\Component;
 												</x-user-avt>
 											</div>
 											<div class="post-comt-box {{ $post->id }}">
-												<form method="post" action="comment" id="form-{{ $post->id }}" enctype="multipart/form-data">
+												<form method="post" action="#" id="form-{{ $post->id }}" enctype="multipart/form-data">
 													@csrf
 													@method('POST')
 													<input type="hidden" name="post_id" value="{{ $post->id }}">
@@ -365,7 +365,7 @@ use Illuminate\View\Component;
 								<div class="user-post">
 									<div class="friend-info">
 										<figure>
-											<img src="{{ asset('images/resources/' . $post->user->avatar) }}" alt="">
+										<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="">
 										</figure>
 										<div class="friend-name">
 											<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}" title="">

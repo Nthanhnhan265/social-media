@@ -217,10 +217,10 @@
 																	<i class="far fa-edit" 
 																		style="margin-right:10px; width: 1rem"></i>Update</a>
 																	
-																	<form action="{{ url('comments/'.$post->id) }}" method="POST" style="display: inline;">
+																	<form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="POST" style="display: inline;">
 																		@csrf
 																		@method('DELETE')
-																		<button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this comment?');" style="display:flex; align-items: center;;font-size: 0.8125rem"> 	
+																		<button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this post?');" style="display:flex; align-items: center;;font-size: 0.8125rem"> 	
 																		<i class="fas fa-trash-alt"
 																				style="margin-right: 10px; width: 1rem"></i> Delete</button>
 																	</form>
@@ -362,7 +362,7 @@
 																@endif
 															</li>
 															<li class="post-comment">
-																<div class="comet-avatar">
+															<div class="comet-avatar" style="width: 45px; height: 45px; overflow: hidden; border-radius: 50%;">
 																	<x-user-avt>
 																	</x-user-avt>
 																</div>
@@ -458,7 +458,6 @@
 													<div class="user-post">
 														<div class="friend-info">
 															<figure>
-															
 																<img src="{{ asset('storage/images/' . $post->user->avatar) }}"
 																	alt="">
 															</figure>
@@ -682,22 +681,29 @@
 
 									<div class="your-page">
 
-										<div class="page-meta">
-											<span>DESCRIPTION</span>
-											<a href="#" title="" class="underline" style="word-wrap: break-word;">(
-												{{$user->description}} )</a>
-
-											<span style="display:flex;align-items:center;"><i
-													class="fa-solid fa-cake-candles" style="padding-right:5px;"></i><a
-													href="{{ url('insight') }}" title="">
-													Date of birth : {{ date_format(date_create($user->DOB), 'M d Y') }}</a></span>
-											<span><a href="#" title=""> <i class="fa-solid fa-envelope"></i> 
-														Email: {{$user->email}}</a></span>
-											<span><i class="ti-comment"></i><a href="{{ url('insight') }}"
-													title="">Messages <em>9</em></a></span>
-											<span><i class="ti-bell"></i><a href="{{ url('insight') }}"
-													title="">Notifications <em>2</em></a></span>
-										</div>
+									<div class="page-meta" style="font-family: Arial, sans-serif; color: #333; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width:100%;">
+									<span style="font-size: 14px; color: #777; display: flex; align-items: center; margin-bottom: 10px;">
+        									<i class="fa-solid fa-info-circle" style="margin-right: 5px; color: #007bff;"></i>
+        									DESCRIPTION
+  											  </span>
+										@if (!empty($user->description))
+										<a href="#" title="" class="underline" style="word-wrap: break-word; display: block; font-size: 16px; color: #007bff; text-decoration: none; margin-bottom: 10px;">
+											({{$user->description}})
+										</a>
+										@endif
+										<span style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
+											<i class="fa-solid fa-cake-candles" style="padding-right: 5px; color: #ff6347;"></i>
+											<a href="{{ url('insight') }}" title="" style="color: inherit; text-decoration: none;">
+												Date of birth: {{ date_format(date_create($user->DOB), 'M d, Y') }}
+											</a>
+										</span>
+										<span style="display: flex; align-items: center; font-size: 14px; color: #555;">
+											<i class="fa-solid fa-envelope" style="padding-right: 5px; color: #1e90ff;"></i>
+											<a href="#" title="" style="color: inherit; text-decoration: none;">
+												Email: {{$user->email}}
+											</a>
+										</span>
+									</div>
 
 									</div>
 								</div><!-- page like widget -->

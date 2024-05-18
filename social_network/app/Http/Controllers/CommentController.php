@@ -104,6 +104,8 @@ class CommentController extends Controller
         return redirect()->back();
     }
 
+    
+
     /**
      * Display the specified resource.
      *
@@ -236,6 +238,7 @@ class CommentController extends Controller
         }
 
         Comment::find($id)->delete();
+        {{dd("callled");}}
         // return redirect('newsfeed');
         return redirect('newsfeed');
     }

@@ -5,6 +5,7 @@ use Illuminate\View\Component;
 ?>
 @extends('layouts.app')
 @section('content')
+
 @if ($errors->any())
 <div class="alert alert-danger position-fixed z-1 countdown">
 	<ul class="p-0 m-0">
@@ -42,6 +43,10 @@ use Illuminate\View\Component;
 											<a href="{{ url('timeline-friends/' . Auth::user()->user_id) }}" title="">friends</a>
 										</li>
 										<li>
+											<i class="fa fa-users"></i>
+											<a href="{{ url('groups') }}" title="">Groups</a>
+										</li>
+										<li>
 											<form method="POST" action="{{ route('logout') }}">
 												@csrf
 												<i class="ti-power-off"></i>
@@ -60,8 +65,7 @@ use Illuminate\View\Component;
 										@foreach ($postActivityHistors as $postActivityHistor)
 										<li>
 											<div class="activity-meta">
-												<i>{{ $postActivityHistor->created_at }}</i>
-
+												<i>{{ $postActivityHistor->created_at }}</i> 
 												<span><a href="#" title="">Posted your status.
 														“{{ $postActivityHistor->content }}”</a></span>
 											</div>
@@ -107,10 +111,10 @@ use Illuminate\View\Component;
 
 								<a href="#" title="" class="underline">Add Friend</a>
 						</div>
-					
-						</div><!-- who's following --> --}}
-						</aside>
-					</div><!-- sidebar -->
+
+					</div><!-- who's following --> --}}
+					</aside>
+				</div><!-- sidebar -->
 				<div class="col-lg-6">
 					<div class="central-meta">
 						<div class="new-postbox">
@@ -224,34 +228,69 @@ use Illuminate\View\Component;
 
 										<!-- views, like,dislike, comment, share -->
 										<div class="we-video-info border-top my-3">
-											<ul>
-												<li>
-													<span class="like" data-toggle="tooltip" title="like">
+											<ul style="display: flex;align-items: center;">
+												<li style="margin-right:15px">
+												<span id="like-count-container-{{ $post->id }}" title="Likes" data-type="{{ $post->isLikedByCurrentUser() }}" data-post="{{ $post->id }}" data-clicked="false" class="mr-2 btn btn-sm d-inline font-weight-bold saveLikeDislike" style="border: 1px solid #c4c4c4;color: #c4c4c4;display:flex!important;align-items: center;">
+												<i class="fa-regular fa-thumbs-up mr-2"></i>
+													<span id="like-count-{{ $post->id }}" >
+														@php
+															$count = $post->sumLikes()
+														@endphp
+														
+														<x-format_number :number=$count	/>
+													</span>
+												</span>
+												</li>
+
+												{{-- @foreach ($post->likePosts as $likePost)
+                                                                @if ($likePost->post_id_fk == $post->id)
+                                                                <form method="post" action="{{ route('like.store') }}"
+												class="like-form">
+												@csrf
+												<input type="hidden" name="likepost-id" value={{ $likePost->likepost_id }} />
+												<button class="like" data-toggle="tooltip" title="like">
+													<i class="ti-heart"></i>
+												</button>
+												</form>
+												@elseif($likePost->user_id_fk == $post->user_id_fk)
+												<form method="post" action="{{ route('like.store') }}" class="like-form">
+													@csrf
+													<input type="hidden" name="like-status" value="{{ $likePost->likepost_id ? 'like' : 'done like' }}">
+													<input type="hidden" name="post-id" value={{ $post->id }} />
+													<input type="hidden" name="likepost-id" value={{ $likePost->likepost_id }} />
+													<button class="like" data-toggle="tooltip" title="like">
 														<i class="ti-heart"></i>
-														<ins>2.2k</ins>
-													</span>
-												</li>
-												<li>
-													<span class="dislike" data-toggle="tooltip" title="dislike">
-														<i class="ti-heart-broken"></i>
-														<ins>200</ins>
-													</span>
-												</li>
+													</button>
+												</form>
+												@endif
+												@endforeach --}}
+												{{-- </li> --}}
+												{{-- <li>
+                                                                    <span class="dislike" data-toggle="tooltip"
+                                                                        title="dislike">
+                                                                        <i class="ti-heart-broken"></i>
+                                                                        <ins>200</ins>
+                                                                    </span>
+                                                                </li> --}}
 												<li>
 													<span class="comment" data-toggle="tooltip" title="Comments">
 														<i class="fa fa-comments-o"></i>
-														<ins>{{ count($post->comments) }}</ins>
+														<ins>
+														@php
+															$count = count($post->comments)
+														@endphp
+														
+														<x-format_number :number=$count	/>
+														</ins>
 													</span>
 												</li>
-
-												@if (Auth::user()->user_id != $post->user_id_fk)
 												<li class="social-media">
 													<x-share-btn>{{ $post->id }}</x-share-btn>
 												</li>
-												@endif
 
 											</ul>
 										</div>
+
 
 									</div>
 								</div>
@@ -288,7 +327,7 @@ use Illuminate\View\Component;
 												</x-user-avt>
 											</div>
 											<div class="post-comt-box {{ $post->id }}">
-												<form method="post" action="comment" id="form-{{ $post->id }}" enctype="multipart/form-data">
+												<form method="post" action="#" id="form-{{ $post->id }}" enctype="multipart/form-data">
 													@csrf
 													@method('POST')
 													<input type="hidden" name="post_id" value="{{ $post->id }}">
@@ -349,7 +388,7 @@ use Illuminate\View\Component;
 						<div class="sharer {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
 							<div class="user-shared">
 								<div class="avatar">
-									<img src="{{asset("storage/images/$sharer->avatar")}}" alt="error">
+									<img src="{{asset('storage/images/$sharer->avatar')}}" alt="error">
 
 								</div>
 								<div class="content pl-3">
@@ -365,7 +404,7 @@ use Illuminate\View\Component;
 								<div class="user-post">
 									<div class="friend-info">
 										<figure>
-											<img src="{{ asset('images/resources/' . $post->user->avatar) }}" alt="">
+										<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="">
 										</figure>
 										<div class="friend-name">
 											<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}" title="">
@@ -550,10 +589,10 @@ use Illuminate\View\Component;
 						@endphp
 						@endforeach
 					</div>
-			 
-						<div id="loading-spinner" style="display: none; text-align: center; margin: 20px;">
-							<img src="{{asset('images/ZKZg.gif')}}" alt="Loading..." />
-						</div>
+
+					<div id="loading-spinner" style="display: none; text-align: center; margin: 20px;">
+						<img src="{{asset('images/ZKZg.gif')}}" alt="Loading..." />
+					</div>
 
 				</div><!-- centerl meta -->
 				<div class="col-lg-3">
@@ -574,15 +613,23 @@ use Illuminate\View\Component;
 										<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">likes</a></li>
 										<li class="nav-item"><a class="" href="#link2" data-toggle="tab">views</a></li>
 									</ul>
-								 
+
 								</div>
 							</div>
 						</div>
+						<div class="widget friend-list stick-widget">
+							<h4 class="widget-title">Friends</h4>
+							<div id="searchDir"></div>
+							<ul id="people-list" class="friendz-list">
+								@foreach ($friends as $friend)
+								<x-friendlist :friend=$friend></x-friendlist>
+								@endforeach
+
+							</ul>
+
+						</div><!-- friends list sidebar -->
 					</aside>
 				</div>
 			</div>
 </section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
 @endsection

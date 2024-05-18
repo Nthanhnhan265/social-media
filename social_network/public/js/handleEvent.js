@@ -48,10 +48,10 @@ document.querySelectorAll(".post-cmt").forEach((e) => {
             // Create and append the comment element
             const liOfComment = document.createElement('li');
             liOfComment.className = "showComment"; 
-            liOfComment.innerHTML = `
-                    <div class="comet-avatar">
+             liOfComment.innerHTML = `
+                    <div class="comet-avatar" >
                         <div class="comment-avatar" style="width:45px;height:45px;overflow:hidden;border-radius:50%">
-                            <img src="${user_avatar.src}" alt="err">
+                            <img src="${user_avatar.src}" style="width:100%;height: 100%" alt="err">
                         </div>
                     </div>
                     <div class="we-comment p-3">
@@ -65,9 +65,9 @@ document.querySelectorAll(".post-cmt").forEach((e) => {
             commentBox.appendChild(liOfComment);
             divWe_comment =liOfComment.querySelector('.we-comment')
             divWe_comment.classList.add('newcomment');
-            divWe_comment.style = "background-color:#fbfbfb"
+            divWe_comment.style = "background-color:#fbfbfb; border-radius: 10px !important; border: 1px solid #cac4c4"
             const imgVidContainer = liOfComment.querySelector('.img-vid');
-
+            frm.reset() ;
             // Load images first
             let imageLoadPromises = [];
             for (const [name, value] of frmD.entries()) {
@@ -169,8 +169,11 @@ document.querySelectorAll(".post-cmt").forEach((e) => {
             fetch(url, data)
                 .then(response => response.json())
                 .then(data => console.log(data))
-                .catch(error => console.error("error: ", error));
+                .catch(error => {
+                    throw new Error("error : "+error)
+                });
         });
+       
     }
 
     if (button) {

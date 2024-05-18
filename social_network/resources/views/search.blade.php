@@ -89,336 +89,228 @@ use Illuminate\View\Component;
 
 
 						<div class="col-lg-6">
-							<div class="central-meta">
-								<div class="new-postbox">
-									<figure>
-										<?php
-$avtUser = Auth::user()->avatar;
-										?>
-										<img src="{{asset('images/resources/' . $avtUser)}}" alt="">
-										<x-user-avt>
-										</x-user-avt>
-
-									</figure>
-
-									<div class="newpst-input">
-										<form method="post" action="{{url('post')}}" enctype="multipart/form-data">
-											@csrf
-											@method("post")
-											<textarea rows="2" name="content" placeholder="write something"></textarea>
-											<div class="attachments">
-												<ul>
-													<!-- ###Task: viet js cho size input -->
-													<li>
-														<i class="fa fa-image"></i>
-														<label class="fileContainer">
-															<input type="file" name="imgFileSelected[]"
-																id="imgFileSelected" multiple accept="image/*">
-														</label>
-													</li>
-													<li>
-														<i class="fa fa-video-camera"></i>
-														<label class="fileContainer">
-															<input type="file" name="vdFileSelected[]"
-																id="vdFileSelected" multiple accept="video/*">
-														</label>
-													</li>
-
-													<li>
-														<button type="submit">Post</button>
-													</li>
-												</ul>
-											</div>
-										</form>
-
-									</div>
-								</div>
-							</div><!-- add post new box #loadpost-->
+						
 
 							<!-- resources/views/search.blade.php -->
 
 							
 							<div class="container">
-                          
-        
-								<!-- Display Groups -->
-				
-								@if($groups->isNotEmpty())
-									<div class="search-results-groups">
-									<h3 style="
-										font-family: 'Arial', sans-serif; 
-										font-size: 2em; 
-										color: #2c3e50; 
-										text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
-										letter-spacing: 1px; 
-										margin: 20px 0; 
-										background: linear-gradient(90deg, #e66465, #9198e5); 
-										-webkit-background-clip: text; 
-										-webkit-text-fill-color: transparent; 
-										padding: 10px 20px; 
-										border-radius: 5px; 
-										box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-										display: inline-block;">
-       									 Groups
-    								</h3>
-										@foreach ($groups as $group)
-											<div class="central-meta">
-												<div class="groups">
-													<span><i class="fa fa-users"></i> {{$group->name}}</span>
-												</div>
-												<ul class="nearby-contct">
-													<li>
-														<div class="nearly-pepls">
-															<figure>
-																<a href="{{ url('groups/' . $group->id) }}" title=""><img
-																		src="{{ asset('storage/images/' . $group->image) }}"
-																		alt=""></a>
-															</figure>
-															<div class="pepl-info">
-																<h4><a href="{{ url('groups/' . $group->id) }}"
-																		title="">{{$group->name_group}}</a></h4>
-																<span>Public Groups</span>
-																<em>{{ $group->members_count }} Members</em>
-																<a href="#" title="" class="add-butn" data-ripple="">leave
-																	group</a>
-															</div>
-														</div>
-													</li>
-												</ul>
-											</div>
-										@endforeach
-									</div>
-								@endif
+   				 <!-- Tabs for Groups, Posts, and Everyone -->
+   				 <div class="tabs">
+					<button class="tab-link active" onclick="openTab(event, 'Groups')">Groups</button>
+					<button class="tab-link" onclick="openTab(event, 'Posts')">Posts</button>
+					<button class="tab-link" onclick="openTab(event, 'Everyone')">Everyone</button>
+				</div>
 
-								<!-- Display Posts -->
-								@if($posts->isNotEmpty())
-									<div class="search-results-posts">
-									<h3 style="
-										font-family: 'Arial', sans-serif; 
-										font-size: 2em; 
-										color: #2c3e50; 
-										text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
-										letter-spacing: 1px; 
-										margin: 20px 0; 
-										background: linear-gradient(90deg, #e66465, #9198e5); 
-										-webkit-background-clip: text; 
-										-webkit-text-fill-color: transparent; 
-										padding: 10px 20px; 
-										border-radius: 5px; 
-										box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-										display: block;">
-       									Posts
-    								</h3>
-										@foreach ($posts as $post)
-											<div class="central-meta item rounded-5">
-												<div class="user-post">
-													<div class="friend-info">
-														<figure>
-															<img src="{{asset('storage/images/' . $post->user->avatar)}}" alt="">
-														</figure>
-														<div class="friend-name">
-															<ins><a href="{{ url('time-line/user-profile/' . $post->user->user_id) }}"
-																	title="">
-																	{{$post->user->last_name . " " . $post->user->first_name}}
-																</a></ins>
-															<span>published: {{$post->created_at}}</span>
-														</div>
-														<div class="post-meta">
-															@if(!empty($post->content))
-																<div class="description pb-2">
-																	{{$post->content}}
-																</div>
-															@endif
-
-															@if(!empty($post->image))
-																<div class="list-img">
-																	@foreach ($post->image as $img)
-																		<img src="{{asset('storage/images/' . $img->url)}}"
-																			alt="failed to display" />
-																	@endforeach
-																</div>
-															@endif
-
-															@if(!empty($post->video) && count($post->video) != 0)
-																<video class="list-vid" controls>
-																	@foreach ($post->video as $video)
-																		<source src="{{asset('storage/videos/' . $video->url)}}">
-																	@endforeach
-																</video>
-															@endif
-
-															<div class="we-video-info border-top my-3">
-																<ul>
-																	<li>
-																		<span class="views" data-toggle="tooltip" title="views">
-																			<i class="fa fa-eye"></i>
-																			<ins>1.2k</ins>
-																		</span>
-																	</li>
-																	<li>
-																		<span class="comment" data-toggle="tooltip"
-																			title="Comments">
-																			<i class="fa fa-comments-o"></i>
-																			<ins>52</ins>
-																		</span>
-																	</li>
-																	<li>
-																		<span class="like" data-toggle="tooltip" title="like">
-																			<i class="ti-heart"></i>
-																			<ins>2.2k</ins>
-																		</span>
-																	</li>
-																	<li>
-																		<span class="dislike" data-toggle="tooltip"
-																			title="dislike">
-																			<i class="ti-heart-broken"></i>
-																			<ins>200</ins>
-																		</span>
-																	</li>
-																	<li class="social-media">
-																		<div class="menu">
-																			<div class="btn trigger"><i
-																					class="fa fa-share-alt"></i></div>
-																			<div class="rotater">
-																				<div class="btn btn-icon"><a href="#"
-																						title=""><i class="fa fa-html5"></i></a>
-																				</div>
-																			</div>
-																			<div class="rotater">
-																				<div class="btn btn-icon"><a href="#"
-																						title=""><i
-																							class="fa fa-facebook"></i></a>
-																				</div>
-																			</div>
-																			<div class="rotater">
-																				<div class="btn btn-icon"><a href="#"
-																						title=""><i
-																							class="fa fa-google-plus"></i></a>
-																				</div>
-																			</div>
-																			<div class="rotater">
-																				<div class="btn btn-icon"><a href="#"
-																						title=""><i
-																							class="fa fa-twitter"></i></a></div>
-																			</div>
-																			<div class="rotater">
-																				<div class="btn btn-icon"><a href="#"
-																						title=""><i class="fa fa-css3"></i></a>
-																				</div>
-																			</div>
-																			<div class="rotater">
-																				<div class="btn btn-icon"><a href="#"
-																						title=""><i
-																							class="fa fa-instagram"></i></a>
-																				</div>
-																			</div>
-																			<div class="rotater">
-																				<div class="btn btn-icon"><a href="#"
-																						title=""><i
-																							class="fa fa-dribbble"></i></a>
-																				</div>
-																			</div>
-																			<div class="rotater">
-																				<div class="btn btn-icon"><a href="#"
-																						title=""><i
-																							class="fa fa-pinterest"></i></a>
-																				</div>
-																			</div>
-																		</div>
-																	</li>
-																</ul>
-															</div>
-														</div>
+   				 <!-- Groups Section -->
+					<div id="Groups" class="tab-content active">
+						@if($groups->isNotEmpty())
+							<div class="search-results-groups">
+								<h3 class="tab-heading">Groups</h3>
+								@foreach ($groups as $group)
+									<div class="central-meta">
+										<div class="groups">
+											<span><i class="fa fa-users"></i> {{$group->name}}</span>
+										</div>
+										<ul class="nearby-contct">
+											<li>
+												<div class="nearly-pepls">
+													<figure>
+														<a href="{{ url('groups/' . $group->id) }}" title=""><img src="{{ asset('storage/images/' . $group->image) }}" alt=""></a>
+													</figure>
+													<div class="pepl-info">
+														<h4><a href="{{ url('groups/' . $group->id) }}" title="">{{$group->name_group}}</a></h4>
+														<span>Public Groups</span>
+														<em>{{ $group->members_count }} Members</em>
+														<a href="#" title="" class="add-butn" data-ripple="">Leave Group</a>
 													</div>
-													<div class="coment-area p-1">
-														<ul class="we-comet">
-														@php
-														$count = 0;
-													@endphp
-															@foreach ($post->comments as $comment)
-															@php
-																$flag = $count >= 3 ? true : false;
-															@endphp
-															<x-comment :commenter=$comment :isHidden=$flag></x-comment>
-															@php
-																$count++;
-															@endphp
+												</div>
+											</li>
+										</ul>
+									</div>
+								@endforeach
+							</div>
+						@else
+							<p>No groups found.</p>
+						@endif
+					</div>
 
+    				<!-- Posts Section -->
+					<div id="Posts" class="tab-content">
+						@if($posts->isNotEmpty())
+							<div class="search-results-posts">
+								<h3 class="tab-heading">Posts</h3>
+								@foreach ($posts as $post)
+									<div class="central-meta item rounded-5">
+										<div class="user-post">
+											<div class="friend-info">
+												<figure>
+													<img src="{{asset('storage/images/' . $post->user->avatar)}}" alt="">
+												</figure>
+												<div class="friend-name">
+													<ins><a href="{{ url('time-line/user-profile/' . $post->user->user_id) }}" title="">
+														{{$post->user->last_name . " " . $post->user->first_name}}</a></ins>
+													<span>published: {{$post->created_at}}</span>
+												</div>
+												<div class="post-meta">
+													@if(!empty($post->content))
+														<div class="description pb-2">{{$post->content}}</div>
+													@endif
+													@if(!empty($post->image))
+														<div class="list-img">
+															@foreach ($post->image as $img)
+																<img src="{{asset('storage/images/' . $img->url)}}" alt="failed to display" />
 															@endforeach
+														</div>
+													@endif
+													@if(!empty($post->video) && count($post->video) != 0)
+														<video class="list-vid" controls>
+															@foreach ($post->video as $video)
+																<source src="{{asset('storage/videos/' . $video->url)}}">
+															@endforeach
+														</video>
+													@endif
+													<div class="we-video-info border-top my-3">
+														<ul>
 															<li>
-																<a href="#" title="" class="showmore underline">more
-																	comments</a>
+																<span class="views" data-toggle="tooltip" title="views">
+																	<i class="fa fa-eye"></i>
+																	<ins>1.2k</ins>
+																</span>
 															</li>
-															<li class="post-comment">
-																<div class="comet-avatar">
-																	<x-user-avt></x-user-avt>
-																</div>
-																<div class="post-comt-box">
-																	<form method="post" action="comment"
-																		enctype="multipart/form-data">
-																		@csrf
-																		@method("POST")
-																		<input type="hidden" name="post_id"
-																			value="{{$post->id}}">
-																		<textarea placeholder="Post your comment"
-																			name="content"></textarea>
-																		<div class="add-smiles">
-																			<span class="em em-expressionless"
-																				title="add icon"></span>
-																		</div>
-																		<div class="attachments">
-																			<ul class="m-0 d-flex">
-																				<li>
-																					<i class="fa fa-image"></i>
-																					<label class="fileContainer">
-																						<input type="file"
-																							name="imgFileSelected[]"
-																							id="imgFileSelected" multiple
-																							accept="image/*">
-																					</label>
-																				</li>
-																				<li>
-																					<i class="fa fa-video-camera"></i>
-																					<label class="fileContainer">
-																						<input type="file"
-																							name="vdFileSelected[]"
-																							id="vdFileSelected" multiple
-																							accept="video/*">
-																					</label>
-																				</li>
-																				<li>
-																					<button type="submit"
-																						class="bg-dark">Post</button>
-																				</li>
-																			</ul>
-																		</div>
-																		<div class="smiles-bunch">
-																			<i class="em em---1"></i>
-																			<i class="em em-smiley"></i>
-																			<i class="em em-anguished"></i>
-																			<i class="em em-laughing"></i>
-																			<i class="em em-angry"></i>
-																			<i class="em em-astonished"></i>
-																			<i class="em em-blush"></i>
-																			<i class="em em-disappointed"></i>
-																			<i class="em em-worried"></i>
-																			<i class="em em-kissing_heart"></i>
-																			<i class="em em-rage"></i>
-																			<i class="em em-stuck_out_tongue"></i>
-																		</div>
-																		<button type="submit"></button>
-																	</form>
+															<li>
+																<span class="comment" data-toggle="tooltip" title="Comments">
+																	<i class="fa fa-comments-o"></i>
+																	<ins>52</ins>
+																</span>
+															</li>
+															<li>
+																<span class="like" data-toggle="tooltip" title="like">
+																	<i class="ti-heart"></i>
+																	<ins>2.2k</ins>
+																</span>
+															</li>
+															<li>
+																<span class="dislike" data-toggle="tooltip" title="dislike">
+																	<i class="ti-heart-broken"></i>
+																	<ins>200</ins>
+																</span>
+															</li>
+															<li class="social-media">
+																<div class="menu">
+																	<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a></div>
+																	</div>
 																</div>
 															</li>
 														</ul>
 													</div>
 												</div>
 											</div>
-										@endforeach
+											<div class="coment-area p-1">
+												<ul class="we-comet">
+													@php $count = 0; @endphp
+													@foreach ($post->comments as $comment)
+														@php $flag = $count >= 3 ? true : false; @endphp
+														<x-comment :commenter="$comment" :isHidden="$flag"></x-comment>
+														@php $count++; @endphp
+													@endforeach
+													<li><a href="#" title="" class="showmore underline">more comments</a></li>
+													<li class="post-comment">
+														<div class="comet-avatar"><x-user-avt></x-user-avt></div>
+														<div class="post-comt-box">
+															<form method="post" action="comment" enctype="multipart/form-data">
+																@csrf
+																@method("POST")
+																<input type="hidden" name="post_id" value="{{$post->id}}">
+																<textarea placeholder="Post your comment" name="content"></textarea>
+																<div class="add-smiles"><span class="em em-expressionless" title="add icon"></span></div>
+																<div class="attachments">
+																	<ul class="m-0 d-flex">
+																		<li><i class="fa fa-image"></i><label class="fileContainer"><input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*"></label></li>
+																		<li><i class="fa fa-video-camera"></i><label class="fileContainer"><input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*"></label></li>
+																		<li><button type="submit" class="bg-dark">Post</button></li>
+																	</ul>
+																</div>
+																<div class="smiles-bunch">
+																	<i class="em em---1"></i><i class="em em-smiley"></i><i class="em em-anguished"></i>
+																	<i class="em em-laughing"></i><i class="em em-angry"></i><i class="em em-astonished"></i>
+																	<i class="em em-blush"></i><i class="em em-disappointed"></i><i class="em em-worried"></i>
+																	<i class="em em-kissing_heart"></i><i class="em em-rage"></i><i class="em em-stuck_out_tongue"></i>
+																</div>
+																<button type="submit"></button>
+															</form>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
 									</div>
-								@endif
+								@endforeach
 							</div>
-							
+						@else
+							<p>No posts found.</p>
+						@endif
+					</div>
+
+						<!-- Everyone Section -->
+						<div id="Everyone" class="tab-content">
+							@if($users->isNotEmpty())
+								<div class="search-results-everyone">
+									<h3 class="tab-heading">Everyone</h3>
+									@foreach ($users as $user)
+										<div class="central-meta">
+											<div class="groups">
+												<span><i class="fa fa-user"></i> {{$user->last_name}}</span>
+											</div>
+											<ul class="nearby-contct">
+												<li>
+													<div class="nearly-pepls">
+														<figure>
+															<a href="{{ url('profile/' . $user->user_id) }}" title=""><img src="{{ asset('storage/images/' . $user->avatar) }}" alt=""></a>
+														</figure>
+														<div class="pepl-info">
+															<h4><a href="{{ url('profile/' . $user->user_id) }}" title="">{{$user->last_name}} {{$user->first_name}}</a></h4>
+															<span>{{$user->description}}</span>
+															<a href="#" title="" class="add-butn" data-ripple="">Follow</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									@endforeach
+								</div>
+							@else
+								<p>No users found.</p>
+							@endif
+						</div>
+				</div>
+
+
+
+
 
 						</div><!-- centerl meta -->
 						<div class="col-lg-3">

@@ -21,4 +21,9 @@ class LikePost extends Model
         return $this->belongsTo(User::class, 'user_id_fk');
     }
 
+    public function post()
+    {
+        return $this->belongsTo(Posts::class);
+    }
+
 }

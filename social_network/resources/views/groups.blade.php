@@ -29,18 +29,19 @@
 													<a href="{{ url('timeline-friends') }}" title="">friends</a>
 												</li>
 												<li>
-													<i class="ti-image"></i>
-													<a href="{{ url('timeline-photos') }}" title="">images</a>
+													<i class="fa fa-users"></i>
+													<a href="{{ url('groups') }}" title="">Groups</a>
 												</li>
 												<li>
-													<i class="ti-video-camera"></i>
-													<a href="{{ url('timeline-videos') }}" title="">videos</a>
-												</li>
-												
-												<li>
-													<i class="ti-bell"></i>
-													<a href="{{ url('notifications') }}" title="">Notifications</a>
-												</li>
+													<form method="POST" action="{{ route('logout') }}">
+														@csrf
+														<i class="ti-power-off"></i>
+														<x-dropdown-link style="padding-left:0px!important;font-size:15px" :href="route('logout')" onclick="event.preventDefault();
+														this.closest('form').submit();">
+															{{ __('Log Out') }}
+														</x-dropdown-link>
+													</form>
+												</li>											
 											</ul>
 										</div><!-- Shortcuts -->
 									<div class="widget stick-widget">

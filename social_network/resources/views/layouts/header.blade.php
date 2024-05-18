@@ -24,15 +24,17 @@ $allUsers = User::get();
     <meta name="keywords" content="" />
     <title>Winku Social Network Toolkit</title>
     <link rel="icon" href="{{ asset('images/fav.png') }}" type="image/png" sizes="16x16">
-    <link rel="icon" href="{{ asset('images/fav.png') }}" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="{{ asset('css/popupShare.css') }}">
-    <link rel="stylesheet" href="{{asset('css/main.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('css/color.css')}}">
-    <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- fancybox -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+	<link rel="stylesheet" href="{{asset('css/main.min.css')}}">
+	<link rel="stylesheet" href="{{asset('css/style.css')}}">
+	<link rel="stylesheet" href="{{asset('css/color.css')}}">
+	<link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	<!-- fancybox -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"> -->
+
 
 </head>
 
@@ -61,28 +63,30 @@ $allUsers = User::get();
         </div>
 
     </div>
-    <div class="theme-layout">
-        <div class="responsive-header">
-            <div class="mh-head first Sticky">
-                <span class="mh-btns-left">
-                    <a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
-                </span>
-                <span class="mh-text">
-                    <a href="{{ url ('newsfeed') }}" title="">
-                        <img src="{{asset('images/logo.png')}}" alt="ERR">
-                        kkkk
-                    </a>
-                </span>
-                <span class="mh-btns-right">
-                    <a class="fa fa-sliders" href="#shoppingbag"></a>
-                </span>
-            </div>
-            <div class="mh-head second">
-                <form class="mh-form">
-                    <input placeholder="search" />
-                    <a href="#/" class="fa fa-search"></a>
-                </form>
-            </div>
+	<div class="theme-layout">
+		<div class="responsive-header">
+			<div class="mh-head first Sticky">
+				<span class="mh-btns-left">
+					<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
+				</span>
+				<span class="mh-text">
+					<a href="{{ url ('newsfeed') }}" title="">
+						<img src="{{asset('images/logo.png')}}" alt="ERR">
+						
+					</a>
+				</span>
+				<span class="mh-btns-right">
+					<a class="fa fa-sliders" href="#shoppingbag"></a>
+				</span>
+			</div>
+			<div class="mh-head second">
+            <form class="mh-form" action="#">
+					<input placeholder="search" />
+					<button type="submit">
+						find
+					</button>
+				</form>
+			</div>
             <nav id="shoppingbag">
                 <div>
                     <div class="">
@@ -156,6 +160,12 @@ $allUsers = User::get();
             </div>
 
             <div class="top-area">
+            <div class="position-relative">
+              <form class="d-flex position-absolute" style="width:30vw; transform:translate(90%,30%)" role="search" action="{{route('posts.search')}}" method="GET">
+                <input class="form-control me-2" type="search"  name ="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+            </div>
                 <ul class="setting-area">
                     <li>
                         <a href="#" title="Home" data-ripple=""><i class="ti-search"></i></a>

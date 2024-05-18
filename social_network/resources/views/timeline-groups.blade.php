@@ -39,12 +39,19 @@
 									  <span>Group Admin</span>
 									</li>
 									<li>
-										<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
-										<a class="" href="timeline-photos" title="" data-ripple="">Photos</a>
-										<a class="" href="timeline-videos" title="" data-ripple="">Videos</a>
-										<a class="" href="timeline-friends" title="" data-ripple="">Friends</a>
-										<a class="active" href="groups" title="" data-ripple="">Groups</a>
-										<a class="" href="about" title="" data-ripple="">about</a>
+										<a class="" href="{{ url('time-line/user-profile/'.$user->user_id) }}" title="" data-ripple="">time line</a>
+										<a class="active" href="{{url('timeline-photos/user-profile/'.$user->user_id)}}" title="" data-ripple="">Photos</a>
+										<a class="" href="{{url('timeline-videos/user-profile/'.$user->user_id)}}" title="" data-ripple="">Videos</a>
+										<a class="" href="{{url('timeline-friends/user-profile/'.$user->user_id)}}" title="" data-ripple="">Friends</a>
+										<a class="" href="{{url('timeline-groups/user-profile/'.$user->user_id)}}" title="" data-ripple="">Groups</a>
+									
+										@if(auth()->check() && $user->user_id == auth()->user()->user_id)
+										<a class="" href="{{ url('about' . '/user-profile/' . $id) }}" title=""
+										data-ripple="">about</a>
+
+
+										@endif
+
 										<a class="" href="#" title="" data-ripple="">more</a>
 									</li>
 								</ul>

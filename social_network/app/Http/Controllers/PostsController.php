@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Follow;
+use App\Models\Group;
 use App\Models\Image;
 use App\Models\Notification;
 use App\Models\Posts;
@@ -95,7 +96,9 @@ class PostsController extends Controller
                 'shareActivityHistorys' => $shareActivityHistorys
             ]
         );
+       
     }
+
 
     //get user's newfeed  
     private function getNewfeed($user_id)
@@ -209,7 +212,7 @@ class PostsController extends Controller
     public static function getPostById($id)
     {
         $postOfUser = User::where('user_id', $id)->with(['posts' => function ($q) {
-            $q->with([
+            $q->orderBy('created_at', 'desc')->with([
                 'user',
                 'image' => function ($qImg) {
                     $qImg->where('img_location_fk', 0);
@@ -228,9 +231,8 @@ class PostsController extends Controller
                         }
                     ]);
                 }
-            ]);
-        }])->get();
-
+            ]) ;
+        }])->first()->posts;
         return $postOfUser;
     }
 
@@ -327,8 +329,8 @@ class PostsController extends Controller
         if ($arrFollowers) { 
             Notification::newNotifyToFollowers($arrFollowers,$post->id,"newpost"); 
         }
-       
-        return redirect("newsfeed");
+        
+        return redirect()->back();
     }
 
     /**
@@ -368,30 +370,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $post = Posts::where('id', $id)->with('image', 'video')->get()[0];
-        //delete images of post
-        foreach ($post->image as $imgElement) {
-            //delete images in storage
-            Storage::delete('public/images/' . $imgElement->url);
-            //delete image in image table
-            $imgElement->delete();
-        }
-
-        //delete videos of post
-        foreach ($post->video as $vdElement) {
-            //delete images in storage
-            Storage::delete('public/videos/' . $vdElement->url);
-            //delete image in image table
-            $vdElement->delete();
-        }
-
-        // //delete post by id
-        Posts::find($id)->delete();
-        return redirect('welcome');
-    }
-
+  
 
     public function deletePost($postID)
     {
@@ -514,4 +493,168 @@ class PostsController extends Controller
         $post->save();
         return redirect()->back()->with('success', 'Post updated successfully.');
     }
+    public function showEditForm($id)
+    {
+    $post = Posts::find($id);
+ 
+    if (!$post) {
+        return redirect()->back()->with('error', 'Post not found!');
+    }
+    // {{dd($post);}}
+    // Lấy dữ liệu content của bài đăng
+    $content = $post->content;
+   
+    // Lấy danh sách hình ảnh của bài đăng
+    $images = $post->image;
+    //  {{dd($post);}}
+    return view('edit-post', compact('content', 'images','post'));
+    }
+    public function update(Request $request, $id)
+    {
+        //find and check if not empty
+        $findPost =  Posts::find($id);
+        // {{dd($findPost);}}
+        if (!empty($findPost)) {
+            $editPost = [
+                "content" => $request->content == "" ? "" :  $request->content
+            ];
+
+            // update content of post
+            $findPost->update(
+                $editPost
+            );
+
+            if (!empty($request->file('imgFileSelected'))) {
+                $this->clearAllImg($id);
+                // insert images
+                if (!empty($request->file('imgFileSelected'))) {
+                    $newImgs = [];
+                    foreach ($request->file('imgFileSelected') as $imgElement) {
+                        try {
+                            //luu file vao muc storage
+                            $fileName = uniqid("img") . "." . $imgElement->extension();
+                            $imgElement->storeAs('public/images', $fileName);
+
+                            //luu thong tin vao mang 
+                            array_push(
+                                $newImgs,
+                                [
+                                    "url" => $fileName,
+                                    "ref_id_fk" => $id,
+                                    "img_location_fk" => 0 //0 is img in post, 1 is img in comment (later)
+                                ],
+                            );
+                        } catch (Exception $ex) {
+                            dd($ex->getMessage());
+                        }
+                    }
+                    //xóa bộ ảnh cũ trong DB và trong storage
+
+                    //them vao db 
+                    Image::insert([...$newImgs]);
+                }
+            }
+            if (!empty($request->file('vdFileSelected'))) {
+                $this->clearAllVid($id);
+                // insert videos
+                if (!empty($request->file('vdFileSelected'))) {
+                    $newVideos = [];
+                    foreach ($request->file('vdFileSelected') as $vdElement) {
+                        try {
+                            //luu file vao muc storage
+                            $fileName = uniqid("vd") . "." . $vdElement->extension();
+                            $vdElement->storeAs('public/videos', $fileName);
+                            //luu thong tin vao mang 
+                            array_push(
+                                $newVideos,
+                                [
+                                    "url" => $fileName,
+                                    "ref_id_fk" => $id,
+                                    "video_location_fk" => 0 //0 is video in post, 1 is video in comment (later)
+                                ],
+                            );
+                        } catch (Exception $ex) {
+                            dd($ex->getMessage());
+                        }
+                    }
+                    //them vao db 
+                    Video::insert([...$newVideos]);
+                }
+          
+            }
+            
+         
+            // {{dd($request->all());}}
+             return redirect('time-line/user-profile/'. $findPost->user_id_fk); 
+           
+        }
+    }
+    public function destroy($id)
+    {
+        $post = Posts::where('id', $id)->with('image', 'video')->get()[0];
+      
+        //delete images of post 
+        foreach ($post->image as $imgElement) {
+            //delete images in storage
+            Storage::delete('public/images/' . $imgElement->url);
+            //delete image in image table
+            $imgElement->delete();
+        }
+
+        //delete videos of post 
+        foreach ($post->video as $vdElement) {
+            //delete images in storage
+            Storage::delete('public/videos/' . $vdElement->url);
+            //delete image in image table
+            $vdElement->delete();
+        }
+
+        // //delete post by id 
+        Posts::find($id)->delete();
+        // return redirect('newsfeed');
+        return redirect()->back()->with('success', 'Post deleted successfully.');
+    }
+    public function postOfTimeLine(Request $request,$id)
+    {
+        dd("called");
+        $this->store($request);
+
+    }
+    public function search(Request $request)
+    {
+    $search = $request->input('search');
+
+    // Search in posts
+    $posts = Posts::where('content', 'like', "%{$search}%")->with([
+        'user',
+        'image',
+        'video',
+        'comments' => function ($q) {
+            $q->with([
+                'user',
+                'image' => function ($qImg) {
+                    $qImg->where('img_location_fk', 1);
+                },
+                'video' => function ($qVid) {
+                    $qVid->where('video_location_fk', 1);
+                }
+            ])->orderBy('created_at','desc');
+        }
+    ])->get();
+
+    // Search in groups
+    $groups = Group::where('name_group', 'like', "%{$search}%")
+                   ->orWhere('description', 'like', "%{$search}%")
+                   ->with('images')
+                   ->get();
+   
+    //  dd($groups);
+    $users = User::where('first_name', 'like', "%{$search}%")
+                   ->orWhere('last_name', 'like', "%{$search}%")
+                   ->orWhere('email', 'like', "%{$search}%")
+                   ->get();
+
+    return view('search', compact('posts', 'groups', 'search','users'));
+}
+
 }

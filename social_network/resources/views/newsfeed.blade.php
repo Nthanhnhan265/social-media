@@ -104,6 +104,7 @@ use Illuminate\View\Component;
                                                 </figure>
                                                 <div class="friend-meta">
                                                     <h4><a href="{{ url('time-line') }}" title="">Kelly Bill</a></h4>
+
 								<a href="#" title="" class="underline">Add Friend</a>
 						</div>
 					

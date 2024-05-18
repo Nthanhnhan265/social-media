@@ -24,6 +24,7 @@ class usergroupSeeder extends Seeder
                 "user_id_fk" => $i,
                 "role_id_fk" => rand(0, 2),
                 "group_id_fk" => $i,
+                "request" => rand(0, 1),
                 "created_at" => now(),
                 "updated_at" => now(),
             ];

@@ -16,6 +16,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Auth;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -129,7 +130,27 @@ Route::put('/update-post/{id}', [PostsController::class, 'updatePostStatus'])->n
 Route::delete('/delete-comment/{id}', [CommentController::class, 'deleteComment'])->name('delete-comment');
 Route::put('/update-comment/{id}', [CommentController::class, 'updateCommentStatus'])->name('update-comment');
 
+//group
+Route::post('/newgroup',[GroupController::class, 'store']); 
+Route::get('/groups', [GroupController::class, 'getGroupByUserID']);
+Route::get('/group-view/{group_id}', [GroupController::class, 'getPostByGroupId']);
+Route::get('/group-member/{group_id}', [GroupController::class, 'getAllForGroupMember']);
+Route::delete('/disband-groups/{group_id}/', [GroupController::class, 'deleteGroupByGroupAdmin'])->name('disband-groups');
+Route::delete('/leave-group/{group_id}', [UseGroupController::class, 'destroy'])->name('leave-group');
+Route::delete('/delete-request-by-user/{group_id}', [UseGroupController::class, 'destroy'])->name('delete-request-by-user');;
+Route::delete('/groups-member/{group_id}', [UseGroupController::class, 'deleteRequest'])->name('delete-request');
+Route::put('/groups-member/{group_id}', [UseGroupController::class, 'update'])->name('update');
+Route::get('/edit-group-2/{group_id}', [GroupController::class, 'getAllInfoForEditGroup']);
+
+
+Route::get('/{page?}', function ($page = "newsfeed") {  
+    return view($page);
+});
+
+
+
 Route::put('update-background/{id}', [UsersController::class, 'updateBackground'])->name('user.update');
+
 //Route::get('/inbox', [PostController::class, 'index']);
 //Route::resource('index',PostController::class);
 

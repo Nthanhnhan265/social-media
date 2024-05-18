@@ -10189,6 +10189,83 @@ aside.sidebar.full-style {
 .list-vid { 
     height: 50vh;
 }
+
+/*Search group */
+.card-search {
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
+    margin: 20px auto; 
+    max-width: 400px; 
+    transition: box-shadow 0.3s ease; 
+}
+
+.card-search:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+.delete-group {
+    background: 1px solid transparent; 
+    border: none; 
+    color: #fff; 
+    padding: 5px 20px; 
+    border-radius: 2px;
+    font-size: 14px !important;
+    font: inherit; 
+    cursor: pointer;
+}
+
+.delete-group:hover {
+    background: none; 
+    border: 1px solid #098dcd; 
+    color: #098dcd;
+    transition: background-color 0.5s ease; 
+}
+
+.request-join {
+    right: 0;
+    position: absolute;
+    background: 1px solid transparent; 
+    border: none; 
+    color: #fff; 
+    padding: 5px 10px; 
+    border-radius: 2px;
+    font-size: 13px !important;
+    font: inherit; 
+}
+
+.request-delete {
+    right: 5rem;
+    position: absolute;
+    background: 1px solid transparent; 
+    border: none; 
+    color: #fff; 
+    padding: 5px 10px; 
+    border-radius: 2px;
+    font-size: 13px !important;
+    font: inherit; 
+}
+
+.kickout-group {
+    right: 0rem;
+    top: 1rem;
+    position: absolute;
+    background: 1px solid transparent; 
+    border: none; 
+    color: #fff; 
+    padding: 5px 10px; 
+    border-radius: 2px;
+    font-size: 13px !important;
+    font: inherit; 
+}
+
+.change-role {
+    background: none; 
+    color: #098dcd;
+    padding: 0;
+}
+
 .countdown { 
     transform: translateY(-100%);
     transition: all 1s;
@@ -10332,3 +10409,4 @@ aside.sidebar.full-style {
         background-color: #fff;
     }
 }
+

@@ -110,12 +110,16 @@ class UsersController extends Controller
     public function showAbout($id)
     {
         $user = User::findOrFail($id); 
-        return view('about',["id"=>$id,'user'=>$user]);
+        $isInFriendList = DB::select("SELECT * FROM relationships WHERE (sender = ? AND receiver = ?)
+        OR (sender = ? AND receiver = ?)",[Auth::user()->user_id,$id,$id,Auth::user()->user_id]);
+        return view('about',["id"=>$id,'user'=>$user,"friend"=>$isInFriendList]);
     }
 
     public function showProfile($id){
         $user = User::findOrFail($id);
-        return view('edit-profile-basic',["id"=>$id,'user'=>$user]);
+        $isInFriendList = DB::select("SELECT * FROM relationships WHERE (sender = ? AND receiver = ?)
+        OR (sender = ? AND receiver = ?)",[Auth::user()->user_id,$id,$id,Auth::user()->user_id]);
+        return view('edit-profile-basic',["id"=>$id,'user'=>$user,"friend"=>$isInFriendList]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -244,8 +248,9 @@ class UsersController extends Controller
          //  $images = $post->image;
           //  {{dd($post);}}
           $user = User::find($id);
- 
-          return view('timeline-photos', compact('posts', 'user'));
+          $friend = DB::select("SELECT * FROM relationships WHERE (sender = ? AND receiver = ?)
+          OR (sender = ? AND receiver = ?)",[Auth::user()->user_id,$id,$id,Auth::user()->user_id]);
+          return view('timeline-photos', compact('posts', 'user','friend'));
      }
      public function showVideoPost($id)
      {
@@ -262,7 +267,8 @@ class UsersController extends Controller
          //  $images = $post->image;
           //  {{dd($post);}}
           $user = User::find($id);
- 
-          return view('timeline-videos', compact('posts', 'user'));
+          $friend = DB::select("SELECT * FROM relationships WHERE (sender = ? AND receiver = ?)
+          OR (sender = ? AND receiver = ?)",[Auth::user()->user_id,$id,$id,Auth::user()->user_id]);
+          return view('timeline-videos', compact('posts', 'user','friend'));
      }
 }

@@ -167,15 +167,7 @@ $allUsers = User::get();
               </form>
             </div>
                 <ul class="setting-area">
-                    <li>
-                        <a href="#" title="Home" data-ripple=""><i class="ti-search"></i></a>
-                        <div class="searched">
-                            <form method="post" class="form-search">
-                                <input type="text" placeholder="Search Friend">
-                                <button data-ripple><i class="ti-search"></i></button>
-                            </form>
-                        </div>
-                    </li>
+
                     <li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
                     <li>
                         <a href="#" title="Notification" data-ripple="" class="notification-e">

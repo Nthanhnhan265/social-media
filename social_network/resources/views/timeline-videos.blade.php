@@ -2,76 +2,11 @@
 
 @section('content')
 
-	<section>
-			<div class="feature-photo">
-				<figure><img src="{{asset('storage/images/'.$user->background)}}" alt=""></figure>
-				<div class="add-btn">
-					<span>1205 followers</span>
-					<a href="#" title="" data-ripple="">Add Friend</a>
-				</div>
-				<form class="edit-phto">
-					<i class="fa fa-camera-retro"></i>
-					<label class="fileContainer">
-						Edit Cover Photo
-					<input type="file"/>
-					</label>
-				</form>
-				<div class="container-fluid">
-					<div class="row merged">
-						<div class="col-lg-2 col-sm-3">
-							<div class="user-avatar">
-							<figure>
-									<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="">
-									@if(auth()->check() && $user->user_id == auth()->user()->user_id)
-										<form class="edit-phto" action="{{ url('update-avatar/' . Auth::User()->user_id)}}"
-											method="post" enctype="multipart/form-data">
-											@csrf
-											@method('PUT')
-											<i class="fa fa-camera-retro"></i>
-											<label class="fileContainer">
-												<input type="file" name="avatar" id="avatar" accept="image/*">
-											</label>
-											<button class="btn-edit-avatar" type="submit"><i
-													class="fas fa-cloud-upload-alt"></i></button>
-										</form>
-									@endif
-
-
-					</figure>
-							</div>
-						</div>
-						<div class="col-lg-10 col-sm-9">
-							<div class="timeline-info">
-								<ul>
-									<li class="admin-name">
-									  <h5>Janice Griffith</h5>
-									  <span>Group Admin</span>
-									</li>
-									<li>
-										
-									<a class="{{Request::is('time-line/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('time-line/user-profile/'.$user->user_id) }}" title="" data-ripple="">time line</a>
-									<a class="{{Request::is('timeline-photos/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{url('timeline-photos/user-profile/'.$user->user_id)}}" title="" data-ripple="">Photos</a>
-									<a class="{{Request::is('timeline-videos/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{url('timeline-videos/user-profile/'.$user->user_id)}}" title="" data-ripple="">Videos</a>
-									<a class="{{Request::is('timeline-friends/'.$user->user_id) ? 'active' : ''}}" href="{{url('timeline-friends/'.$user->user_id)}}" title="" data-ripple="">Friends</a>
-									<a class="{{Request::is('timeline-groups/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{url('timeline-groups/user-profile/'.$user->user_id)}}" title="" data-ripple="">Groups</a>
-										
-									@if(auth()->check() && $user->user_id == auth()->user()->user_id)
-									<a class="{{Request::is('about' . '/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('about' . '/user-profile/' . Auth::user()->user_id) }}" title=""
-										data-ripple="">about</a>
-
-
-
-										@endif
-
-										<a class="" href="#" title="" data-ripple="">more</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section><!-- top area -->
+{{-- top area uses component 'personal_nav' and pass 2 arguments,
+	 (note: don't SPACE after attributes, ex: :user = $friend (error))
+--}}
+<!-- top area -->
+<x-personal_nav :user=$user :friend=$friend></x-personal_nav>
 
 	<section>
 		<div class="gap gray-bg">

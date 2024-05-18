@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\NewsController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,18 +37,18 @@ Route::post('/relationship',[Relationship::class,'store'])->name('relationships.
 Route::put('/relationship/{id}/{redirect?}',[Relationship::class,'update'])->name('relationships.update'); 
 Route::delete('/relationship/{id}/{redirect?}',[Relationship::class,'destroy'])->name('relationships.destroy');
 Route::get('/timeline-friends/{id}',function($id) { 
-    $userId = User::where('user_id',$id)->first(); 
-    if (!empty($userId)) { 
+    $user = Auth::user(); 
+    if ($user->user_id == $id) { 
         return view('timeline-friends',
-        ["friends"=>ModelsRelationship::getFriendListOfUser(),
+        [
+        "user"=>$user,
+        "friend"=>'',
+        "friends"=>ModelsRelationship::getFriendListOfUser(),
         "requests"=>ModelsRelationship::getRequestListOfUser(),
-        "user"=>$userId
-        
-        
         ]
     );
     }else  {
-
+        return redirect()->back(); 
     }
    
 });  

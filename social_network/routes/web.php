@@ -96,8 +96,8 @@ Route::middleware('auth')->group(function () {
 // Route::post('/inbox', [PostController::class, 'show']);
 // Route::resource('/posts', PostController::class);
 // Route::get('/time-line/user-profile/{userId}', [UsersController::class, 'show'])->name('time-line');
-Route::get('/about/{userId}', [UsersController::class, 'show'])->name('about');
-Route::get('/about/{userId}', [UsersController::class, 'about'])->name('about');
+// Route::get('/about/{userId}', [UsersController::class, 'show'])->name('about');
+ 
 // Route::get('/users/{id}', 'UserController@show');
 // Route::get('time-line/{userId}', 'TimelineController@index')->name('timeline');
 //Route::get('time-line',[UsersController::class,'index']);
@@ -136,7 +136,7 @@ Route::put('update-background/{id}', [UsersController::class, 'updateBackground'
  
 
 Route::get('time-line/user-profile/{id}',[UsersController::class,'show']);
-Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']);
+ 
 Route::get('edit-profile-basic/{id}',[UsersController::class,'showProfile']);
 
 

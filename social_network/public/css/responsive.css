@@ -76,7 +76,8 @@
         font-size: 14px;
     }
     .user-avatar {
-        width: 80.2%
+        width: 12.5rem;
+        height: 12.5rem;
     }
     .chat-box {
         right: 230px;

@@ -694,6 +694,7 @@ class PostsController extends Controller
        
     }
 
+
     public function searchInManagement(Request $request)
      {
          $query = $request->input('query');
@@ -703,5 +704,6 @@ class PostsController extends Controller
      
          return view('post-management-search', compact('posts'));
      }
+
 
 }

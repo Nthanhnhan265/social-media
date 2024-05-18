@@ -426,4 +426,5 @@ class GroupController extends Controller
                 ->paginate(5);
         return view('group-management-search', compact('groups'));
     }
+
 }

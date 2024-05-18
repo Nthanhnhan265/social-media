@@ -199,7 +199,6 @@ class PostsController extends Controller
         return view('post-management', compact('posts'));
     }
 
-
     public function getPostAndCommentByPostID($id)
     {
         $post = Posts::findOrFail($id);

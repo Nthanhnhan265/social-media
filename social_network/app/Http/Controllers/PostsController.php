@@ -17,7 +17,10 @@ use App\Models\Video;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+
 use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 class PostsController extends Controller
@@ -27,6 +30,37 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+//     public function index(Request $request)
+// {
+//     $posts = Posts::orderBy('created_at', 'desc')
+//     ->with([
+//         'user',
+//         'image',
+//         'video',
+//         'comments' => function ($q) {
+//             $q->with([
+//                 'user',
+//                 'image' => function ($qImg) {
+//                     $qImg->where('img_location_fk', 1);
+//                 },
+//                 'video' => function ($qVid) {
+//                     $qVid->where('video_location_fk', 1);
+//                 }
+//             ])->orderBy('created_at', 'desc');
+//         }
+//     ])->paginate(5);
+
+// // Log posts data to check if it is fetching properly
+// Log::info('Fetched posts:', ['posts' => $posts->toArray()]); // Convert posts collection to array for logging
+
+// if ($request->ajax()) {
+//     return view('partials.posts', compact('posts'))->render();
+// }
+
+// return view('newsfeed', compact('posts'));
+// }
+
     public function index()
     {
         $userId = Auth::user()->user_id;
@@ -34,16 +68,28 @@ class PostsController extends Controller
         $postActivityHistorys = DB::select('select * from posts where user_id_fk = ?', [$userId]);
         $commentsActivityHistorys = DB::select('select comments.*, users.first_name as user_first_name ,users.last_name as user_last_name from comments inner join users on comments.comment_id = users.user_id where user_id_fk != ?', [$userId]);
         $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]);
-
-        // $results = DB::select('select * from users where id = :id', ['id' => 1]);
-        // dd($postActivityHistorys);
-
+        $posts = $this->getNewfeed($userId); 
+        $firstPost = false; 
+        //if session exists (user clicked notification) => return post that is remained in notification box at the top
+        if (Session::get("postFound") && Session::get("type")) {
+            //set session to variable 
+            $type = Session::get("type"); 
+            $postFound = Session::get("postFound"); 
+            //get posts 
+            $posts = Posts::getNewfeedAndNewPostFirst($userId,$postFound,$type); 
+            //remove session
+            Session::forget('postFound'); 
+            Session::forget('type');
+            $firstPost = true; 
+            
+        }
         //hiển thị giao diện trang chính
         //hiển thị mọi bài viết trong db -> chưa hợp lý cho việc hiển thị phù hợp với từng tài khoản
         return view(
             'newsfeed',
             [
-                "posts" => $this->getNewfeed($userId),
+                "posts" => $posts,
+                "firstPost" => $firstPost,
                 "friends" => $friend_list,
                 'postActivityHistors' => $postActivityHistorys,
                 'commentsActivityHistorys' => $commentsActivityHistorys,
@@ -57,14 +103,16 @@ class PostsController extends Controller
     //get user's newfeed  
     private function getNewfeed($user_id)
     {
-        $posts = 0;
+        $posts = [];
+        $sharedPost = [];
         //get user's followed list 
         $followedList = Follow::getFollowedListRaw($user_id);
-        if ($followedList) {
+         if (!$followedList->get()->isEmpty()) {
 
             //  get user's shared posts 
             //  get friend's shared posts (Check follow table )
             $followed = $followedList->where('follow_type', 'friend')->pluck('follow_id_fk')->toArray();
+    
             $sharedPost = Share::where('status', 1)->whereIn('user_id_fk', [$user_id, ...$followed])
                 ->with([
                     'user',
@@ -109,25 +157,39 @@ class PostsController extends Controller
                         ])->orderBy('created_at','desc');
                     }
                 ])->get();
-      
-      
-      
-      
-      
-      
+              
             }
-
         //  get post in group that user joined (check follow table )
 
         //no-one is followed 
         else {
+           
             //random any posts in DB 
-
+            $posts = Posts::inRandomOrder()->limit(10)
+            ->with([
+                'user',
+                'image',
+                'video',
+                'comments' => function ($q) {
+                    $q->with([
+                        'user',
+                        'image' => function ($qImg) {
+                            $qImg->where('img_location_fk', 1);
+                        },
+                        'video' => function ($qVid) {
+                            $qVid->where('video_location_fk', 1);
+                        }
+                    ])->orderBy('created_at', 'desc');
+                }
+            ])->get();
+           
         }
+       
         $shuffleArray = [...$posts,...$sharedPost]; 
         shuffle($shuffleArray);
         return  $shuffleArray;
     }
+
 
     public function getAllPosts(Request $request)
     {
@@ -194,6 +256,9 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate( [
+            'vdFileSelected[]' => 'max:20480'
+        ]);
         $user_id = Auth::user()->user_id; 
         $arrFollowers = Follow::getFollowersByUserId($user_id);
 

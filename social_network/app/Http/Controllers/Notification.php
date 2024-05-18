@@ -3,7 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification as ModelsNotification;
+use App\Models\Posts;
+use App\Models\Relationship;
+use App\Models\Share;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+use function PHPSTORM_META\type;
 
 class Notification extends Controller
 {
@@ -69,14 +77,38 @@ class Notification extends Controller
      */
     public function update(Request $request, $id)
     {
-        $noti_id = $id; 
-        if(isset($request->type,$request->type_id)) { 
+        $userId = Auth::user()->user_id;
+        $noti_id = $id;
+        
+        
+        if (isset($request->type, $request->type_id)) {
             if (ModelsNotification::markReadNotify($noti_id)) {
-                if($request->type == "friend_request" || $request->type == "accept") { 
-                    return redirect(url("time-line/user-profile/".$request->type_id)); 
+                // friend request
+                if ($request->type == "friend_request" || $request->type == "accept") {
+                    return redirect(url("time-line/user-profile/" . $request->type_id));
                 }
-                
-            }else { 
+
+
+                //  friend posted a new post 
+                else if ($request->type == "newpost") {
+ 
+                    $postFound = Posts::where('id', $request->type_id)->first();
+                    Session::flash('postFound',$postFound);
+                    Session::flash('type',"newpost");
+                    // $associativeArray = array_merge(["posts" => Posts::getNewfeedAndNewPostFirst($user_id, $postFound, $request->type)],$otherInfo); 
+                    // return view('newsfeed', $associativeArray);
+                    return redirect(url('newsfeed')); 
+                }
+                //friend shared a new post
+                else if ($request->type == "sharepost") {
+                    $postFound = Share::where('share_id', $request->type_id)->first();
+                    Session::flash('postFound',$postFound);
+                    Session::flash('type',"sharepost");
+                    // $associativeArray = array_merge(["posts" => Posts::getNewfeedAndNewPostFirst($user_id, $postFound, $request->type)],$otherInfo); 
+                    // return view('newsfeed', $associativeArray);
+                    return redirect(url('newsfeed')); 
+                }
+            } else {
                 dd('marked');
             }
         }

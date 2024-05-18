@@ -148,16 +148,30 @@ class GroupController extends Controller
     }
 
     //xoá group trong group-management
-    public function deleteGroup($groupID) {
-        UserGroup::where('group_id_fk', $groupID)->delete();
-        $group = Group::find($groupID);
+    public function deleteGroup($group_id) {
+        DB::transaction(function () use ($group_id) {
+            // Tìm nhóm theo ID
+            $group = Group::findOrFail($group_id);
     
-        if ($group) {
+            // Xóa tất cả các user trong nhóm từ bảng usergroup
+            UserGroup::where('group_id_fk', $group_id)->delete();
+    
+            // Lấy danh sách post_id từ bảng postgroup liên quan đến group_id
+            $postIds = PostGroup::where('group_id_fk', $group_id)->pluck('post_id_fk');
+    
+            // Xóa tất cả các bài viết liên quan từ bảng postgroup
+            PostGroup::where('group_id_fk', $group_id)->delete();
+    
+            // Xóa các bình luận liên quan từ bảng comments
+            Comment::whereIn('post_id_fk', $postIds)->delete();
+    
+            // Xóa các bài viết từ bảng post
+            Posts::whereIn('id', $postIds)->delete();
+    
+            // Xóa nhóm
             $group->delete();
-            return redirect()->back()->with('success', 'Group deleted successfully.');
-        } else {
-            return redirect()->back()->with('error', 'Group not found.');
-        }
+        });
+            return redirect()->back();
     }  
     /**
      * Remove the specified resource from storage.
@@ -403,4 +417,14 @@ class GroupController extends Controller
         shuffle($shuffleArray);
         return  $shuffleArray;
     }
+
+    //tìm kiếm
+    public function search(Request $request)
+    {
+        $query = $request->input('query');       
+        $groups = Group::where('name_group', 'LIKE', "%{$query}%")
+                ->paginate(5);
+        return view('group-management-search', compact('groups'));
+    }
+
 }

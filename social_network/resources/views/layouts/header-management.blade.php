@@ -32,19 +32,19 @@
 		<div class="position-relative" style="margin-left: 250px; margin-top: 20px;">
 			@php
 				// Lấy tên route hiện tại
-				$currentRoute = Route::currentRouteName();
+				$currentRoute = Route::current()->getName();
 				$searchAction = '';
-				if (Str::contains($currentRoute, 'user')) {
-					$searchAction = route('user.search');
-				} elseif (Str::contains($currentRoute, 'group')) {
-					$searchAction = route('group.search');
+				if (Str::contains($currentRoute, 'user-management')) {
+					$searchAction = route('user-management-search');
+				} elseif (Str::contains($currentRoute, 'group-management')) {
+					$searchAction = route('group-management-search');
 				} else {
-					$searchAction = route('posts.search'); 
+					$searchAction = route('post-management-search'); 
 				}
 			@endphp
-			<form class="d-flex" style="width:30vw; height: 30px;" role="search" action="{{ $searchAction }}" method="GET">
-				<input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success" style="line-height: 15px" type="submit">Search</button>
+			<form class="d-flex" style="width:30vw; height: 30px;" action="{{ $searchAction }}" method="GET">
+				<input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success-2" style="line-height: 15px" type="submit">Search</button>
 			</form>
 		</div>
         <div class="top-area">				

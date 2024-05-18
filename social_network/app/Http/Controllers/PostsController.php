@@ -694,4 +694,16 @@ class PostsController extends Controller
        
     }
 
+
+    public function searchInManagement(Request $request)
+     {
+         $query = $request->input('query');
+         
+         $posts = Posts::where('content', 'LIKE', "%{$query}%")
+                     ->paginate(5); 
+     
+         return view('post-management-search', compact('posts'));
+     }
+
+
 }

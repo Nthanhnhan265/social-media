@@ -351,5 +351,4 @@ $allUsers = User::get();
         </div><!-- topbar -->
         <div id="user-profile" style="display: none">
             <span id="fullname" data-value="{{Auth::user()->last_name." ".Auth::user()->first_name}}"></span>
-
         </div>

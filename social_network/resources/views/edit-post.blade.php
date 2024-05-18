@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,6 +112,8 @@
                 @csrf
                 
                 @method('PUT')
+                <input type="hidden" name="type" value="{{!empty($isInGroup)? $isInGroup->group_id_fk : ''}}">
+
                 <div class="form-group">
                     <label for="post_content">Post Content:</label>
                   

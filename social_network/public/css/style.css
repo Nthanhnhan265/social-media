@@ -2472,6 +2472,10 @@ footer .logo {
     opacity: 1;
     visibility: visible;
 }
+.user-img > img {
+    width: 100%!important;
+    height: 100%!important;
+}
 
 .user-setting > a {
     display: inline-block;

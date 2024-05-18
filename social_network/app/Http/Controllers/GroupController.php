@@ -207,10 +207,9 @@ class GroupController extends Controller
         $userRole = UserGroup::where('user_id_fk', $userId)
                      ->where('group_id_fk', $group_id)
                      ->first();
-
-        $posts = PostGroup::where('group_id_fk', $group_id)
-                ->get();
-
+        //lấy mảng gồm id posts của tất cả bài viết trong nhóm
+        $postIds = PostGroup::where('group_id_fk', $group_id)->pluck('post_id_fk')->toArray();  
+        $posts = Posts::getPostsByIds($postIds); 
         //Đếm số thành viên nhóm
         $memberCount = UserGroup::where('group_id_fk', $group_id)
                     ->where('request', 0)

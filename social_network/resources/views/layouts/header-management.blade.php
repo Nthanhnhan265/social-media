@@ -215,7 +215,7 @@
     <aside id="sidebar">
         <div class="sidebar-title">
             <div class="sidebar-brand">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                <a href="{{ url('newsfeed')}}"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a>
             </div>
             <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
         </div>

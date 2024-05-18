@@ -16,7 +16,6 @@ use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LikePostController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -129,7 +128,7 @@ Route::delete('/delete-group/{groupID}', [GroupController::class, 'deleteGroup']
 Route::get('post-management',[PostsController::class, 'getAllPosts']);
 Route::delete('/delete-post/{id}', [PostsController::class, 'deletePost'])->name('delete-post');
 Route::get('/post-detail/{id}', [PostsController::class, 'getPostAndCommentByPostId']);
-Route::put('/update-post/{id}', [PostsController::class, 'updatePostStatus'])->name('update-post-status');
+Route::put('/update-post-status/{id}', [PostsController::class, 'updatePostStatus'])->name('update-post-status');
 Route::delete('/delete-comment/{id}', [CommentController::class, 'deleteComment'])->name('delete-comment');
 Route::put('/update-comment/{id}', [CommentController::class, 'updateCommentStatus'])->name('update-comment');
 

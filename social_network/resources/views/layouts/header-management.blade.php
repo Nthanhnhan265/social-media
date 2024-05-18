@@ -29,17 +29,26 @@
     <!-- Header -->
     <header class="header">
         <div class="box-space"></div>
+		<div class="position-relative" style="margin-left: 250px; margin-top: 20px;">
+			@php
+				// Lấy tên route hiện tại
+				$currentRoute = Route::currentRouteName();
+				$searchAction = '';
+				if (Str::contains($currentRoute, 'user')) {
+					$searchAction = route('user.search');
+				} elseif (Str::contains($currentRoute, 'group')) {
+					$searchAction = route('group.search');
+				} else {
+					$searchAction = route('posts.search'); 
+				}
+			@endphp
+			<form class="d-flex" style="width:30vw; height: 30px;" role="search" action="{{ $searchAction }}" method="GET">
+				<input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success" style="line-height: 15px" type="submit">Search</button>
+			</form>
+		</div>
         <div class="top-area">				
-				<ul class="setting-area">
-					<li>
-						<a href="#" title="Home" data-ripple=""><i class="ti-search"></i></a>
-						<div class="searched">
-							<form method="post" class="form-search">
-								<input type="text" placeholder="Search Friend">
-								<button data-ripple><i class="ti-search"></i></button>
-							</form>
-						</div>
-					</li>
+				<ul class="setting-area">				
 					<li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
 					<li>
 						<a href="#" title="Notification" data-ripple="">

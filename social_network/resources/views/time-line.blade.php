@@ -362,9 +362,11 @@
 																@endif
 															</li>
 															<li class="post-comment">
-															<div class="comet-avatar" style="width: 45px; height: 45px; overflow: hidden; border-radius: 50%;">
+															<div class="comet-avatar">
+																<div class="parent" style="width: 2rem; height: 2rem; border-radius: 50%;overflow:hidden">
 																	<x-user-avt>
 																	</x-user-avt>
+																</div>
 																</div>
 																<div class="post-comt-box {{ $post->id }}">
 																	<form method = "post" action="comment"
@@ -694,13 +696,13 @@
 										<span style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
 											<i class="fa-solid fa-cake-candles" style="padding-right: 5px; color: #ff6347;"></i>
 											<a href="{{ url('insight') }}" title="" style="color: inherit; text-decoration: none;">
-												Date of birth: {{ date_format(date_create($user->DOB), 'M d, Y') }}
+												{{ date_format(date_create($user->DOB), 'M d, Y') }}
 											</a>
 										</span>
-										<span style="display: flex; align-items: center; font-size: 14px; color: #555;">
+										<span style="display: flex; align-items: center; font-size: 14px; color: #555; text-overflow:clip">
 											<i class="fa-solid fa-envelope" style="padding-right: 5px; color: #1e90ff;"></i>
 											<a href="#" title="" style="color: inherit; text-decoration: none;">
-												Email: {{$user->email}}
+												{{$user->email}}
 											</a>
 										</span>
 									</div>

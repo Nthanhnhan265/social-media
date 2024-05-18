@@ -6,6 +6,7 @@ use App\Http\Controllers\Notification;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Relationship;
@@ -13,8 +14,11 @@ use App\Models\Relationship as ModelsRelationship;
 use App\Models\User;
 use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\LikePostController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -96,8 +100,8 @@ Route::middleware('auth')->group(function () {
 // Route::post('/inbox', [PostController::class, 'show']);
 // Route::resource('/posts', PostController::class);
 // Route::get('/time-line/user-profile/{userId}', [UsersController::class, 'show'])->name('time-line');
-Route::get('/about/{userId}', [UsersController::class, 'show'])->name('about');
-Route::get('/about/{userId}', [UsersController::class, 'about'])->name('about');
+// Route::get('/about/{userId}', [UsersController::class, 'show'])->name('about');
+ 
 // Route::get('/users/{id}', 'UserController@show');
 // Route::get('time-line/{userId}', 'TimelineController@index')->name('timeline');
 //Route::get('time-line',[UsersController::class,'index']);
@@ -107,8 +111,8 @@ Route::get('/about/{userId}', [UsersController::class, 'about'])->name('about');
 
 
 //user-management
-Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
-Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 
+Route::get('time-line/user-profile/{id}',[UsersController::class,'show']);
+Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']);
 Route::get('user-management',[UsersController::class, 'getAllUsers']);
 Route::get('/edit-user/{user_id}', [UsersController::class, 'getUserByID']);
 //Route::get('/edit-user/{id}', 'UsersController@getUserByID')->name('users.edit');
@@ -129,20 +133,46 @@ Route::put('/update-post/{id}', [PostsController::class, 'updatePostStatus'])->n
 Route::delete('/delete-comment/{id}', [CommentController::class, 'deleteComment'])->name('delete-comment');
 Route::put('/update-comment/{id}', [CommentController::class, 'updateCommentStatus'])->name('update-comment');
 
+//group
+Route::post('/newgroup',[GroupController::class, 'store']); 
+Route::get('/groups', [GroupController::class, 'getGroupByUserID']);
+Route::get('/group-view/{group_id}', [GroupController::class, 'getPostByGroupId']);
+Route::get('/group-member/{group_id}', [GroupController::class, 'getAllForGroupMember']);
+Route::delete('/disband-groups/{group_id}/', [GroupController::class, 'deleteGroupByGroupAdmin'])->name('disband-groups');
+Route::delete('/leave-group/{group_id}', [UseGroupController::class, 'destroy'])->name('leave-group');
+Route::delete('/delete-request-by-user/{group_id}', [UseGroupController::class, 'destroy'])->name('delete-request-by-user');;
+Route::delete('/groups-member/{group_id}', [UseGroupController::class, 'deleteRequest'])->name('delete-request');
+Route::put('/groups-member/{group_id}', [UseGroupController::class, 'update'])->name('update');
+Route::get('/edit-group-2/{group_id}', [GroupController::class, 'getAllInfoForEditGroup']);
+
+
+Route::get('/{page?}', function ($page = "newsfeed") {  
+    return view($page);
+});
+
+
+
 Route::put('update-background/{id}', [UsersController::class, 'updateBackground'])->name('user.update');
+
 //Route::get('/inbox', [PostController::class, 'index']);
 //Route::resource('index',PostController::class);
 
  
 
 Route::get('time-line/user-profile/{id}',[UsersController::class,'show']);
-Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']);
+ 
 Route::get('edit-profile-basic/{id}',[UsersController::class,'showProfile']);
 
 
 // Trong Routes/web.php
 Route::get('/newsfeed', [PostsController::class, 'index'])->middleware(['auth','verified']);
 Route::POST('share',[ShareController::class,'store'])->name('share.store');
+
+Route::group([], function(){
+    Route::get('like', [LikePostController::class, 'index']);
+
+    Route::post('like', [LikePostController::class, 'store'])->name('like.store');
+});
 
 Route::put('update-avatar/{id}', [UsersController::class, 'updateAvatar'])->name('user.update');
 // Route Update thông tin cá nhân của user 

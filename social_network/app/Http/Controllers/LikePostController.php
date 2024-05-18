@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LikePost;
+use App\Models\Posts;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class LikePostController extends Controller
@@ -35,7 +39,26 @@ class LikePostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = Auth::id();
+        $type = $request->type;
+        $postId = $request->post;
+        // Tìm like dựa trên post_id và user_id
+        if ($type == true) {
+            $like = LikePost::where('post_id_fk', $postId)->where('user_id_fk', $userId)->first();
+            $like->delete();
+        } else{
+            $data = new LikePost();
+            $data->user_id_fk = $userId;
+            $data->post_id_fk = $postId;
+            $data->save();
+        }
+        $likes = Posts::find($request->post)->sumLikes();
+
+        return response()->json([
+            'bool' => true,
+            'likes' => $likes
+        ]);
+
     }
 
     /**

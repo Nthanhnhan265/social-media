@@ -1,20 +1,6 @@
 
 @extends('/layouts.app')
-@section('content')
-
-		
-	<section>
-		<div class="page-header">
-			<div class="header-inner">
-				<h2>your Searched Groups</h2>
-				<nav class="breadcrumb">
-				  <a href="{{ url('index-2') }}" class="breadcrumb-item"><i class="fa fa-home"></i></a>
-				  <span class="breadcrumb-item active">Groups</span>
-				</nav>
-			</div>
-		</div>
-	</section>
-		
+@section('content')		
 	<section>
 		<div class="gap gray-bg">
 			<div class="container-fluid">
@@ -43,18 +29,19 @@
 													<a href="{{ url('timeline-friends') }}" title="">friends</a>
 												</li>
 												<li>
-													<i class="ti-image"></i>
-													<a href="{{ url('timeline-photos') }}" title="">images</a>
+													<i class="fa fa-users"></i>
+													<a href="{{ url('groups') }}" title="">Groups</a>
 												</li>
 												<li>
-													<i class="ti-video-camera"></i>
-													<a href="{{ url('timeline-videos') }}" title="">videos</a>
-												</li>
-												
-												<li>
-													<i class="ti-bell"></i>
-													<a href="{{ url('notifications') }}" title="">Notifications</a>
-												</li>
+													<form method="POST" action="{{ route('logout') }}">
+														@csrf
+														<i class="ti-power-off"></i>
+														<x-dropdown-link style="padding-left:0px!important;font-size:15px" :href="route('logout')" onclick="event.preventDefault();
+														this.closest('form').submit();">
+															{{ __('Log Out') }}
+														</x-dropdown-link>
+													</form>
+												</li>											
 											</ul>
 										</div><!-- Shortcuts -->
 									<div class="widget stick-widget">
@@ -80,129 +67,67 @@
 							<div class="col-lg-6">
 								<div class="central-meta">
 									<div class="groups">
-										<span><i class="fa fa-users"></i> Groups</span>
+										<span><i class="fa fa-users"></i>My groups</span>
+									</div>
+									<div class="groups">
+										<span> <a href="{{ asset('create-new-group') }}" title="" ><i class="fa-solid fa-plus"></i> Create new group</a> </span>
 									</div>
 									<ul class="nearby-contct">
+									@foreach ($groups as $group)
 										<li>
 											<div class="nearly-pepls">
+											@if($group->request == 0)
 												<figure>
-													<a href="{{ url('time-line') }}" title=""><img src="images/resources/group1.jpg" alt=""></a>
+													@if($group->group->status == 0)
+													<a href="{{ url('group-deactive') }}"
+													title=""><img src="images/resources/group1.jpg" alt=""></a>
+													@else
+													<a href="{{ url('group-view', $group->group_id_fk) }}"
+													title=""><img src="images/resources/group1.jpg" alt=""></a>													
+													@endif
 												</figure>
 												<div class="pepl-info">
-													<h4><a href="{{ url('time-line') }}" title="">funparty</a></h4>
-													<span>public group</span>
-													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
+													@if($group->group->status == 0)
+													<h4><a href="{{ url('group-deactive') }}" title="">{{ $group->group->name_group }} </a></h4>
+													<span>Deactive group</span>
+													@else
+													<h4><a href="{{ url('group-view', $group->group_id_fk) }}" title="">{{ $group->group->name_group }} </a></h4>
+													<span>Active group</span>
+													@endif
+													<a href="#" title="" class="add-butn" data-ripple="">Joined</a>												
 												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a href="{{ url('time-line') }}" title=""><img src="images/resources/group2.jpg" alt=""></a>
+											@elseif($group->request == 1)
+											<figure>
+													@if($group->group->status == 0)
+													<a href="{{ url('group-deactive') }}"
+													title=""><img src="images/resources/group1.jpg" alt=""></a>
+													@else
+													<a href="{{ url('group-view', $group->group_id_fk) }}"
+													title=""><img src="images/resources/group1.jpg" alt=""></a>													
+													@endif
 												</figure>
 												<div class="pepl-info">
-													<h4><a href="{{ url('time-line') }}" title="">ABC News</a></h4>
-													<span>Private group</span>
-													<em>5M Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
+												@if($group->group->status == 0)
+													<h4><a href="{{ url('group-deactive') }}" title="">{{ $group->group->name_group }} </a></h4>
+													<span>Deactive group</span>
+													@else
+													<h4><a href="{{ url('group-view', $group->group_id_fk) }}" title="">{{ $group->group->name_group }} </a></h4>
+													<span>Active group</span>
+													@endif	
+													<form action="{{ route('delete-request-by-user', $group->group_id_fk) }}" method="POST" style="display: inline;" onsubmit="">
+														@csrf
+														@method('DELETE')
+														<button type="submit" title="" data-ripple="" class="request-join">Delete request</button>
+													</form>																									
 												</div>
+											@endif
 											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a href="{{ url('time-line') }}" title=""><img src="images/resources/group3.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a href="{{ url('time-line') }}" title="">SEO Zone</a></h4>
-													<span>Public group</span>
-													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a href="{{ url('time-line') }}" title=""><img src="images/resources/group4.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a href="{{ url('time-line') }}" title="">Max Us</a></h4>
-													<span>Public group</span>
-													<em> 756 Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a href="{{ url('time-line') }}" title=""><img src="images/resources/group5.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a href="{{ url('time-line') }}" title="">Banana Group</a></h4>
-													<span>Friends Group</span>
-													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a href="{{ url('time-line') }}" title=""><img src="images/resources/group6.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a href="{{ url('time-line') }}" title="">Bad boys n Girls</a></h4>
-													<span>Public group</span>
-													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a href="{{ url('time-line') }}" title=""><img src="images/resources/group7.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a href="{{ url('time-line') }}" title="">bachelor's fun</a></h4>
-													<span>Public Group</span>
-													<em>500 Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a href="{{ url('time-line') }}" title=""><img src="images/resources/group4.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a href="{{ url('time-line') }}" title="">Max Us</a></h4>
-													<span>Public group</span>
-													<em> 756 Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a href="{{ url('time-line') }}" title=""><img src="images/resources/group3.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a href="{{ url('time-line') }}" title="">SEO Zone</a></h4>
-													<span>Public group</span>
-													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
+										</li>	
+									@endforeach								
 									</ul>
 								</div><!-- photos -->
 							</div><!-- centerl meta -->
+							
 							<div class="col-lg-3">
 								<aside class="sidebar static">
 									<div class="widget">

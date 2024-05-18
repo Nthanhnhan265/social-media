@@ -164,6 +164,7 @@
 <script src="{{ asset('js/map-init.js') }}"></script>
 <script src="{{ asset('js/handleEvent.js') }}"></script>
 <script src="{{asset('js/setting.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
 <!-- custom fancybox -->
 <script>
@@ -178,6 +179,53 @@
 	const btns = document.querySelectorAll(".dropdown-toggle")
 	console.log(btns)
 	btns.forEach(e=>{ e.classList.remove('dropdown-toggle') } )
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.saveLikeDislike').each(function() {
+            var dataType = $(this).data('type');
+            if (dataType == '1') {
+                $(this).addClass('bg-primary');
+            }
+        });
+    });
+
+    $(document).on('click', '.saveLikeDislike', function(e) {
+        var _post = $(this).data('post');
+        var _type = $(this).data('type');
+        var vm = $(this);
+
+        $.ajax({
+            url: "{{ route('like.store') }}",
+            type: "post",
+            dataType: 'json',
+            data: {
+                post: _post,
+                type: _type,
+                _token: "{{ csrf_token() }}"
+            },
+            beforeSend: function() {},
+            success: function(res) {
+                _type = (_type == '1') ? '0' : '1';
+                vm.data('type', _type);
+                if (res.bool == true) {
+                    // vm.removeAttr('id');
+                    $('#like-count-' + _post).text(res.likes);
+
+                    if (_type == true) {
+                        $('#like-count-container-' + _post).addClass('bg-primary');
+
+                    } else {
+                        $('#like-count-container-' + _post).removeClass('bg-primary');
+                    }
+                } else {
+
+                }
+            }
+        });
+    });
 </script>
 </body>
 

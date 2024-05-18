@@ -66,6 +66,5 @@
         </div>
     </main>
     <!-- End Main -->
-
 </div>
 @endsection

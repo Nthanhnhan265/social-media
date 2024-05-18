@@ -2,17 +2,21 @@
 @section('content')		
 	<section>
 		<div class="feature-photo">
-			<figure><img src="images/resources/timeline-4.jpg" alt=""></figure>
+			<figure><img src="{{ asset('images/resources/timeline-4.jpg')}}" alt=""></figure>
 			<div class="add-btn">		
 				<a href="#" title="" data-ripple="">Joined</a>
-				<a href="#" title="" data-ripple="">Leave</a>
+				@if($userRole->role_id_fk == 2) 
+					<a href="#" title="" data-ripple="">Leave</a>
+				@else
+					<a href="#" title="" data-ripple="">Delete group</a>
+				@endif
 			</div>
-			<form class="edit-phto" style="display: none;">
+			<form class="edit-phto" @if($userRole->role_id_fk == 2) style="display: none;" @endif >
 				<i class="fa fa-camera-retro"></i>
 				<label class="fileContainer">
 					Edit Cover Photo
-				<input type="file"/>
-			</label>
+					<input type="file"/>
+				</label>
 			</form>
 			<div class="container-fluid">
 				<div class="row merged">
@@ -34,16 +38,15 @@
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-								  <h5>Nhóm số 1</h5>	
-								  <span>50 members</span>							  
+									<h5>{{ $group->name_group }}</h5>	
+								  	<span>{{ $memberCount }} members</span>							  
 								</li>
 								<li>
-									<a class="" href="{{ url('group-view') }}" title="" data-ripple="">Posts</a>
-									<a class="active" href="{{ url('group-member') }}" title="" data-ripple="">Members</a>
-									<a class="" href="{{ url('inbox') }}" title="" data-ripple="">File</a>
-									<!-- <a class="" href="{{ url('insights') }}" title="" data-ripple="">insights</a>
-									<a class="" href="{{ url('fav-page') }}" title="" data-ripple="">posts</a>
-									<a class="" href="{{ url('page-likers') }}" title="" data-ripple="">likers</a> -->
+									<a class="" href="{{ url('group-view', $group->group_id) }}" title="" data-ripple="">Posts</a>
+									<a class="active" href="#" title="" data-ripple="">Members</a>									
+									@if($userRole->role_id_fk != 2)
+									<a class="" href="{{ url('edit-group-2', $group->group_id) }}" title="" data-ripple="">Edit group</a>	
+									@endif	
 								</li>
 							</ul>
 						</div>
@@ -81,276 +84,125 @@
 												<a href="{{ url('timeline-friends') }}" title="">friends</a>
 											</li>
 											<li>
-												<i class="ti-image"></i>
-												<a href="{{ url('timeline-photos') }}" title="">images</a>
+												<i class="fa fa-users"></i>
+												<a href="{{ url('groups') }}" title="">Groups</a>
 											</li>
 											<li>
-												<i class="ti-video-camera"></i>
-												<a href="{{ url('timeline-videos') }}" title="">videos</a>
-											</li>
-											<li>
-												<i class="ti-bell"></i>
-												<a href="{{ url('notifications') }}" title="">Notifications</a>
-											</li>
+												<form method="POST" action="{{ route('logout') }}">
+													@csrf
+													<i class="ti-power-off"></i>
+													<x-dropdown-link style="padding-left:0px!important;font-size:15px" :href="route('logout')" onclick="event.preventDefault();
+													this.closest('form').submit();">
+														{{ __('Log Out') }}
+													</x-dropdown-link>
+												</form>
+											</li>											
 										</ul>
-									</div><!-- Shortcuts -->
-									<div class="widget">
-										<h4 class="widget-title">Recent Activity</h4>
-										<ul class="activitiez">
-											<li>
-												<div class="activity-meta">
-													<i>10 hours Ago</i>
-													<span><a href="#" title="">Commented on Video posted </a></span>
-													<h6>by <a href="{{ url('time-line') }}">black demon.</a></h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>30 Days Ago</i>
-													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-										</ul>
-									</div><!-- recent activites -->					
+									</div><!-- Shortcuts -->											
 								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-6">
 							<div class="central-meta">
 									<div class="frnds">
 										<ul class="nav nav-tabs">
-											 <li class="nav-item"><a class="active" href="#frends" data-toggle="tab">Members</a> <span>55</span></li>
-											 <li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Join requests</a><span>60</span></li>
+											<li class="nav-item"><a class="active" href="#frends" data-toggle="tab">Members</a> <span>{{ $memberCount }}</span></li>
+											@if($userRole->role_id_fk != 2)
+											<li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Join requests</a><span>{{ $requestCount }}</span></li>																		
+											@endif			 
 										</ul>
 
 										<!-- Tab panes -->
 										<div class="tab-content">
 										  <div class="tab-pane active fade show " id="frends" >
 											<ul class="nearby-contct">
+											@foreach($members as $member)
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img style="width: 60px; height: 60px; overflow: hidden" src="{{ asset('images/resources/' . $member->user->avatar) }}" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>	
-														<span><a href="#" title="" data-ripple="">demoted to member</a></span>																									
-														<a href="#" title="" class="add-butn more-action" data-ripple="">admin</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>	
-														<span><a href="#" title="" data-ripple="">Promoted to administrator</a></span>												
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>5 posts</span>													
-														<a href="#" title="" class="add-butn more-action" data-ripple="">member</a>
-														<a href="#" title="" class="add-butn" data-ripple="">kick out</a>
-													</div>
-												</div>
-											</li>
-										</ul>
-											<div class="lodmore"><button class="btn-view btn-load-more"></button></div>
-										  </div>
-										  <div class="tab-pane fade" id="frends-req" >
-											<ul class="nearby-contct">
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly5.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Amy watson</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+														<h4><a href="{{ url('time-line') }}" title="">{{$member->user->first_name.' '.$member->user->last_name }}</a></h4>
+														<span>
+															@if($member->role_id_fk == 0) Super admin
+															@elseif($member->role_id_fk == 1) Admin
+															@else Member
+															@endif
+														<span>
+														<br>
+														<span><a href="#" title="" data-ripple="">
+															@if($userRole->role_id_fk == 0 && $member->role_id_fk == 1) 
+															<form action="{{ route('update', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+																@csrf
+																@method('PUT')
+																<input type="text" name="user_id" value="{{ $member->user->user_id }}" style="display: none;"/>
+																<input type="text" name="role" value="2" style="display: none;"/>
+																<input type="text" name="request" value='0' style="display: none;"/>
+																<button type="submit" title="" data-ripple="" class="change-role">Demote to Member</button>
+															</form>	
+															@elseif($userRole->role_id_fk == 0 && $member->role_id_fk == 2) 
+															<form action="{{ route('update', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+																@csrf
+																@method('PUT')
+																<input type="text" name="user_id" value="{{ $member->user->user_id }}" style="display: none;"/>
+																<input type="text" name="role" value="1" style="display: none;"/>
+																<input type="text" name="request" value='0' style="display: none;"/>
+																<button type="submit" title="" data-ripple="" class="change-role">Promote to Admin</button>
+															</form>																
+															@endif
+														</a><span>	
+														@if($userRole->role_id_fk == 0 && ($member->role_id_fk == 1 || $member->role_id_fk == 2)) 
+														<form action="{{ route('delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to kick out this member?')">
+															@csrf
+															@method('DELETE')
+															<input type="text" name="user_id" value="{{ $member->user->user_id }}" style="display: none;"/>
+															<button type="submit" title="" data-ripple="" class="kickout-group">Kick out</button>
+														</form>
+														@elseif($userRole->role_id_fk == 1 && $member->role_id_fk == 2)
+														<form action="{{ route('delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to kick out this member?')">
+															@csrf
+															@method('DELETE')
+															<input type="text" name="user_id" value="{{ $member->user->user_id }}" style="display: none;"/>
+															<button type="submit" title="" data-ripple="" class="kickout-group">Kick out</button>
+														</form>			
+														@endif																																															@if($member->role_id_fk != 0) 
+														@endif									
 													</div>
 												</div>
 											</li>	
-
+											@endforeach										
+										</ul>											
+										  </div>
+										  <div class="tab-pane fade" id="frends-req" >
+											<ul class="nearby-contct">
+											@foreach($requests as $request)
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly1.jpg" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img style="width: 60px; height: 60px; overflow: hidden" src="{{ asset('images/resources/' . $request->user->avatar) }}" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">sophia Gate</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+														<h4><a href="{{ url('time-line') }}" title="">{{$request->user->first_name.' '.$request->user->last_name }}</a></h4>
+														<form action="{{ route('delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+															@csrf
+															@method('DELETE')
+															<input type="text" name="user_id" value="{{ $request->user->user_id }}" style="display: none;"/>
+															<button type="submit" title="" data-ripple="" class="request-delete">Delete request</button>
+														</form>
+														<form action="{{ route('update', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+															@csrf
+															@method('PUT')				
+															<input type="text" name="user_id" value="{{ $request->user->user_id }}" style="display: none;"/> 
+															<input type="text" name="role" value="2" style="display: none;"/>						
+															<input type="text" name="request" value='0' style="display: none;"/>															
+															<button type="submit" title="" data-ripple="" class="request-join">Confirm</button>
+														</form>
 													</div>
 												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly6.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">caty lasbo</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">sara grey</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly4.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Sara grey</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly3.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Sexy cat</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
+											</li>	
+											@endforeach											
 										</ul>	
-											  <button class="btn-view btn-load-more"></button>
+											  <!-- <button class="btn-view btn-load-more"></button> -->
 										  </div>
 										</div>
 									</div>
@@ -362,58 +214,30 @@
 								<div class="widget">
 										<h4 class="widget-title">Description</h4>
 										<div class="group-description">
-											<h6 class="">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et excepturi quasi cum, corporis quae atque in nemo nam dolorem. Minima natus repudiandae eum dicta, ratione cumque autem illum rerum similique.</h6>
+											<h6 class="">{{ $group->description }}</h6>
 										</div>
 									</div>								
 									<div class="widget">
 										<h4 class="widget-title">Members</h4>
 										<ul class="invition">
+											@foreach($members as $member)								
 											<li>
-												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
+												<figure>
+													<img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('images/resources/' . $member->user->avatar) }}" alt="">
+												</figure>
 												<div class="friend-meta">
-													<h4><a href="{{ url('group-members') }}" class="underline" title="">Sophia hayat</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Admin</a>
+													<h4><a href="{{ url('group-members') }}" class="underline" title="">{{$member->user->first_name.' '.$member->user->last_name }}</a></h4>
+													<a href="#" title="" class="invite" data-ripple="">
+														@if($member->role_id_fk == 0) Super admin
+														@elseif($member->role_id_fk == 1) Admin
+														@else Member
+														@endif
+													</a>
 												</div>
 											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" class="underline" title="">Issabel kaif</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Member</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" class="underline" title="">Kelly Bill</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Member</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" class="underline" title="">Allen jhon</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Member</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" class="underline" title="">tom Andrew</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Member</a>
-												</div>
-											</li>
-
-											<li>
-												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="" class="underline">Allen doe</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">Member</a>
-												</div>
-											</li>
+											@endforeach									
 										</ul>
-									</div>
-								
+									</div>								
 								</aside>
 							</div><!-- sidebar -->
 						</div>	

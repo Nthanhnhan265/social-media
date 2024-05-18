@@ -5,38 +5,41 @@ use Illuminate\View\Component;
 ?>
 @extends('layouts.app')
 @section('content')
-<section>
-	<div class="gap gray-bg pt-2">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="row" id="page-contents">
-						<div class="col-lg-3">
-							<aside class="sidebar static">
-								<div class="widget">
-									<h4 class="widget-title">Shortcuts</h4>
-									<ul class="naves">
-										<li>
-											<i class="ti-clipboard"></i>
-											<a href="{{ url('newsfeed') }}" title="">News feed</a>
-										</li>
-										<li>
-											<i class="ti-mouse-alt"></i>
-											<a href="{{ url('inbox') }}" title="">Inbox</a>
-										</li>
-										<li>
-											<i class="ti-files"></i>
-											<a href="{{ url('fav-page') }}" title="">My pages</a>
-										</li>
-										<li>
-											<i class="ti-user"></i>
-											<a href="{{ url('timeline-friends/'.Auth::user()->user_id) }}" title="">friends</a>
-										</li>
-										<li>
-											<form method="POST" action="{{ route('logout') }}">
-												@csrf
-												<i class="ti-power-off"></i>
-												<x-dropdown-link style="padding-left:0px!important;font-size:15px" :href="route('logout')" onclick="event.preventDefault();
+    <section>
+        <div class="gap gray-bg pt-2">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row" id="page-contents">
+                            <div class="col-lg-3">
+                                <aside class="sidebar static">
+                                    <div class="widget">
+                                        <h4 class="widget-title">Shortcuts</h4>
+                                        <ul class="naves">
+                                            <li>
+                                                <i class="ti-clipboard"></i>
+                                                <a href="{{ url('newsfeed') }}" title="">News feed</a>
+                                            </li>
+                                            <li>
+                                                <i class="ti-mouse-alt"></i>
+                                                <a href="{{ url('inbox') }}" title="">Inbox</a>
+                                            </li>
+                                            <li>
+                                                <i class="ti-files"></i>
+                                                <a href="{{ url('fav-page') }}" title="">My pages</a>
+                                            </li>
+                                            <li>
+                                                <i class="ti-user"></i>
+                                                <a href="{{ url('timeline-friends/' . Auth::user()->user_id) }}"
+                                                    title="">friends</a>
+                                            </li>
+                                            <li>
+                                                <form method="POST" action="{{ route('logout') }}">
+                                                    @csrf
+                                                    <i class="ti-power-off"></i>
+                                                    <x-dropdown-link style="padding-left:0px!important;font-size:15px"
+                                                        :href="route('logout')"
+                                                        onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                                         {{ __('Log Out') }}
                                                     </x-dropdown-link>
@@ -46,7 +49,7 @@ use Illuminate\View\Component;
                                     </div><!-- Shortcuts -->
                                     <div class="widget">
                                         <h4 class="widget-title">Recent Activity</h4>
-                                        <ul class="activitiez"  style="height: 400px; overflow: scroll">
+                                        <ul class="activitiez" style="height: 400px; overflow: scroll">
                                             {{-- $activityHistorys --}}
                                             @foreach ($postActivityHistors as $postActivityHistor)
                                                 <li>
@@ -210,74 +213,119 @@ use Illuminate\View\Component;
                                                         @endif
 
 
-												@php
-													$totalMedia = count($post->image) + count($post->video);
+                                                        @php
+                                                            $totalMedia = count($post->image) + count($post->video);
 
-												@endphp
-												<!-- Display imgs  -->
-												@if ($totalMedia != 0)
-													<div class="container-fluied">
-														<div class="row">
-																@foreach ($post->image as $img)
-																<a href="{{asset('storage/images/'.$img->url)}}" class="{{$loop->index<3? 'col-4 p-1': 'd-none'}} {{$loop->index == 2 ? 'position-relative': ''}}"  data-fancybox="gallery{{$post->id}}" data-caption="{{$post->user->last_name.' '.$post->user->first_name.'\'s images' }}">
-																	<img src="{{asset('storage/images/'.$img->url)}}" alt="failed to display" class="d-block" />
-																	@if($loop->index == 2 && $loop->count - 3!=0)
-																	 <div style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
-																		 +{{$totalMedia - 2}}
-																	</div>
-																	@endif
-																</a>
-																@endforeach
+                                                        @endphp
+                                                        <!-- Display imgs  -->
+                                                        @if ($totalMedia != 0)
+                                                            <div class="container-fluied">
+                                                                <div class="row">
+                                                                    @foreach ($post->image as $img)
+                                                                        <a href="{{ asset('storage/images/' . $img->url) }}"
+                                                                            class="{{ $loop->index < 3 ? 'col-4 p-1' : 'd-none' }} {{ $loop->index == 2 ? 'position-relative' : '' }}"
+                                                                            data-fancybox="gallery{{ $post->id }}"
+                                                                            data-caption="{{ $post->user->last_name . ' ' . $post->user->first_name . '\'s images' }}">
+                                                                            <img src="{{ asset('storage/images/' . $img->url) }}"
+                                                                                alt="failed to display" class="d-block" />
+                                                                            @if ($loop->index == 2 && $loop->count - 3 != 0)
+                                                                                <div
+                                                                                    style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+                                                                                    +{{ $totalMedia - 2 }}
+                                                                                </div>
+                                                                            @endif
+                                                                        </a>
+                                                                    @endforeach
 
-																@if(!empty($post->video) && count($post->video) !=0 )
-																	@foreach ($post->video as $video)
-																	<a href="{{asset('storage/videos/'.$video->url)}}" data-fancybox="gallery{{$post->id}}" style="max-height:50rem" class="{{
-																		count($post->image)>3 || $loop->iteration + count($post->image) > 3?'d-none':'col-3 p-1'}}{{
-																		count($post->image)>3 || $loop->iteration + count($post->image) == 3?' position-relative':''}}" style="display:block;height: 100%">
-																		<video controls style="height:100%;width:100%" src="{{asset('storage/videos/'.$video->url)}}" ></video>
-																		@if(count($post->image)>3 || $loop->iteration + count($post->image) == 3)
-																		 <div style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
-																			 +{{$totalMedia - 2}}
-																		</div>
-																		@endif
-																	</a>
-																	@endforeach
-																@endif
-														</div>
+                                                                    @if (!empty($post->video) && count($post->video) != 0)
+                                                                        @foreach ($post->video as $video)
+                                                                            <a href="{{ asset('storage/videos/' . $video->url) }}"
+                                                                                data-fancybox="gallery{{ $post->id }}"
+                                                                                style="max-height:50rem"
+                                                                                class="{{ count($post->image) > 3 || $loop->iteration + count($post->image) > 3 ? 'd-none' : 'col-3 p-1' }}{{ count($post->image) > 3 || $loop->iteration + count($post->image) == 3 ? ' position-relative' : '' }}"
+                                                                                style="display:block;height: 100%">
+                                                                                <video controls
+                                                                                    style="height:100%;width:100%"
+                                                                                    src="{{ asset('storage/videos/' . $video->url) }}"></video>
+                                                                                @if (count($post->image) > 3 || $loop->iteration + count($post->image) == 3)
+                                                                                    <div
+                                                                                        style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+                                                                                        +{{ $totalMedia - 2 }}
+                                                                                    </div>
+                                                                                @endif
+                                                                            </a>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </div>
 
-													</div>
-
-												@endif
-
+                                                            </div>
+                                                        @endif
 
 
-												<!-- views, like,dislike, comment, share -->
-												<div class="we-video-info border-top my-3">
-													<ul>
-														<li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li>
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Comments">
-																<i class="fa fa-comments-o"></i>
-																<ins>{{count($post->comments)}}</ins>
-															</span>
-														</li>
-														<li class="social-media">
-															<x-share-btn>{{ $post->id }}</x-share-btn>
-														</li>
 
-													</ul>
-												</div>
+                                                        <!-- views, like,dislike, comment, share -->
+                                                        <div class="we-video-info border-top my-3">
+                                                            <ul>
+                                                                <span id="like-count-container-{{ $post->id }}"
+                                                                    title="Likes"
+                                                                    data-type="{{ $post->isLikedByCurrentUser() }}"
+                                                                    data-post="{{ $post->id }}" data-clicked="false"
+                                                                    class="mr-2 btn btn-sm d-inline font-weight-bold saveLikeDislike">
+                                                                    Like
+                                                                    <span
+                                                                        id="like-count-{{ $post->id }}">{{ $post->sumLikes() }}</span>
+                                                                </span>
+
+                                                                {{-- @foreach ($post->likePosts as $likePost)
+                                                                @if ($likePost->post_id_fk == $post->id)
+                                                                <form method="post" action="{{ route('like.store') }}"
+                                                                    class="like-form">
+                                                                    @csrf
+                                                                        <input type="hidden" name="likepost-id"
+                                                                        value={{ $likePost->likepost_id }} />
+                                                                    <button class="like" data-toggle="tooltip"
+                                                                        title="like">
+                                                                        <i class="ti-heart"></i>
+                                                                    </button>
+                                                                </form>
+                                                                @elseif($likePost->user_id_fk == $post->user_id_fk)
+                                                                <form method="post" action="{{ route('like.store') }}"
+                                                                class="like-form">
+                                                                @csrf
+                                                                <input type="hidden" name="like-status"
+                                                                    value="{{ $likePost->likepost_id ? 'like' : 'done like' }}">
+                                                                <input type="hidden" name="post-id"
+                                                                    value={{ $post->id }} />
+                                                                    <input type="hidden" name="likepost-id"
+                                                                    value={{ $likePost->likepost_id }} />
+                                                                <button class="like" data-toggle="tooltip"
+                                                                    title="like">
+                                                                    <i class="ti-heart"></i>
+                                                                </button>
+                                                            </form>
+                                                                @endif
+                                                                @endforeach --}}
+                                                                {{-- </li> --}}
+                                                                {{-- <li>
+                                                                    <span class="dislike" data-toggle="tooltip"
+                                                                        title="dislike">
+                                                                        <i class="ti-heart-broken"></i>
+                                                                        <ins>200</ins>
+                                                                    </span>
+                                                                </li> --}}
+                                                                <li>
+                                                                    <span class="comment" data-toggle="tooltip"
+                                                                        title="Comments">
+                                                                        <i class="fa fa-comments-o"></i>
+                                                                        <ins>{{ count($post->comments) }}</ins>
+                                                                    </span>
+                                                                </li>
+                                                                <li class="social-media">
+                                                                    <x-share-btn>{{ $post->id }}</x-share-btn>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -350,185 +398,257 @@ use Illuminate\View\Component;
                                                                         <i class="em em-stuck_out_tongue"></i>
                                                                     </div>
 
-															<button type="submit"></button>
-														</form>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								@endforeach
-							</div>
-						</div><!-- centerl meta -->
-						<div class="col-lg-3">
-							<aside class="sidebar static">
-								<div class="widget">
-									<h4 class="widget-title">Your page</h4>
-									<div class="your-page">
-										<figure>
-											<a href="#" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-										</figure>
-										<div class="page-meta">
-											<a href="#" title="" class="underline">My page</a>
-											<span><i class="ti-comment"></i><a href="{{ url('insight') }}" title="">Messages <em>9</em></a></span>
-											<span><i class="ti-bell"></i><a href="{{ url('insight') }}" title="">Notifications <em>2</em></a></span>
-										</div>
-										<div class="page-likes">
-											<ul class="nav nav-tabs likes-btn">
-												<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">likes</a></li>
-												<li class="nav-item"><a class="" href="#link2" data-toggle="tab">views</a></li>
-											</ul>
-											<!-- Tab panes -->
-											<div class="tab-content">
-												<div class="tab-pane active fade show " id="link1">
-													<span><i class="ti-heart"></i>884</span>
-													<a href="#" title="weekly-likes">35 new likes this week</a>
-													<div class="users-thumb-list">
-														<a href="#" title="Anderw" data-toggle="tooltip">
-															<img src="images/resources/userlist-1.jpg" alt="">
-														</a>
-														<a href="#" title="frank" data-toggle="tooltip">
-															<img src="images/resources/userlist-2.jpg" alt="">
-														</a>
-														<a href="#" title="Sara" data-toggle="tooltip">
-															<img src="images/resources/userlist-3.jpg" alt="">
-														</a>
-														<a href="#" title="Amy" data-toggle="tooltip">
-															<img src="images/resources/userlist-4.jpg" alt="">
-														</a>
-														<a href="#" title="Ema" data-toggle="tooltip">
-															<img src="images/resources/userlist-5.jpg" alt="">
-														</a>
-														<a href="#" title="Sophie" data-toggle="tooltip">
-															<img src="images/resources/userlist-6.jpg" alt="">
-														</a>
-														<a href="#" title="Maria" data-toggle="tooltip">
-															<img src="images/resources/userlist-7.jpg" alt="">
-														</a>
-													</div>
-												</div>
-												<div class="tab-pane fade" id="link2">
-													<span><i class="ti-eye"></i>440</span>
-													<a href="#" title="weekly-likes">440 new views this week</a>
-													<div class="users-thumb-list">
-														<a href="#" title="Anderw" data-toggle="tooltip">
-															<img src="images/resources/userlist-1.jpg" alt="">
-														</a>
-														<a href="#" title="frank" data-toggle="tooltip">
-															<img src="images/resources/userlist-2.jpg" alt="">
-														</a>
-														<a href="#" title="Sara" data-toggle="tooltip">
-															<img src="images/resources/userlist-3.jpg" alt="">
-														</a>
-														<a href="#" title="Amy" data-toggle="tooltip">
-															<img src="images/resources/userlist-4.jpg" alt="">
-														</a>
-														<a href="#" title="Ema" data-toggle="tooltip">
-															<img src="images/resources/userlist-5.jpg" alt="">
-														</a>
-														<a href="#" title="Sophie" data-toggle="tooltip">
-															<img src="images/resources/userlist-6.jpg" alt="">
-														</a>
-														<a href="#" title="Maria" data-toggle="tooltip">
-															<img src="images/resources/userlist-7.jpg" alt="">
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div><!-- page like widget -->
+                                                                    <button type="submit"></button>
+                                                                </form>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div><!-- centerl meta -->
+                            <div class="col-lg-3">
+                                <aside class="sidebar static">
+                                    <div class="widget">
+                                        <h4 class="widget-title">Your page</h4>
+                                        <div class="your-page">
+                                            <figure>
+                                                <a href="#" title=""><img
+                                                        src="images/resources/friend-avatar9.jpg" alt=""></a>
+                                            </figure>
+                                            <div class="page-meta">
+                                                <a href="#" title="" class="underline">My page</a>
+                                                <span><i class="ti-comment"></i><a href="{{ url('insight') }}"
+                                                        title="">Messages <em>9</em></a></span>
+                                                <span><i class="ti-bell"></i><a href="{{ url('insight') }}"
+                                                        title="">Notifications <em>2</em></a></span>
+                                            </div>
+                                            <div class="page-likes">
+                                                <ul class="nav nav-tabs likes-btn">
+                                                    <li class="nav-item"><a class="active" href="#link1"
+                                                            data-toggle="tab">likes</a></li>
+                                                    <li class="nav-item"><a class="" href="#link2"
+                                                            data-toggle="tab">views</a></li>
+                                                </ul>
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active fade show " id="link1">
+                                                        <span><i class="ti-heart"></i>884</span>
+                                                        <a href="#" title="weekly-likes">35 new likes this week</a>
+                                                        <div class="users-thumb-list">
+                                                            <a href="#" title="Anderw" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-1.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="frank" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-2.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="Sara" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-3.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="Amy" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-4.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="Ema" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-5.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="Sophie" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-6.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="Maria" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-7.jpg" alt="">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="link2">
+                                                        <span><i class="ti-eye"></i>440</span>
+                                                        <a href="#" title="weekly-likes">440 new views this week</a>
+                                                        <div class="users-thumb-list">
+                                                            <a href="#" title="Anderw" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-1.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="frank" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-2.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="Sara" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-3.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="Amy" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-4.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="Ema" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-5.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="Sophie" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-6.jpg" alt="">
+                                                            </a>
+                                                            <a href="#" title="Maria" data-toggle="tooltip">
+                                                                <img src="images/resources/userlist-7.jpg" alt="">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- page like widget -->
 
-								<div class="widget friend-list stick-widget">
-									<h4 class="widget-title">Friends</h4>
-									<div id="searchDir"></div>
-									<ul id="people-list" class="friendz-list">
-										@foreach($friends as $friend)
-										<x-friendlist :friend=$friend></x-friendlist>
+                                    <div class="widget friend-list stick-widget">
+                                        <h4 class="widget-title">Friends</h4>
+                                        <div id="searchDir"></div>
+                                        <ul id="people-list" class="friendz-list">
+                                            @foreach ($friends as $friend)
+                                                <x-friendlist :friend=$friend></x-friendlist>
+                                            @endforeach
 
-										@endforeach
-
-									</ul>
-									<div class="chat-box">
-										<div class="chat-head">
-											<span class="status f-online"></span>
-											<h6>Bucky Barnes</h6>
-											<div class="more">
-												<span><i class="ti-more-alt"></i></span>
-												<span class="close-mesage"><i class="ti-close"></i></span>
-											</div>
-										</div>
-										<div class="chat-list">
-											<ul>
-												<li class="me">
-													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
-													<div class="notification-event">
-														<span class="chat-message-item">
-															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-														</span>
-														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-													</div>
-												</li>
-												<li class="you">
-													<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
-													<div class="notification-event">
-														<span class="chat-message-item">
-															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-														</span>
-														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-													</div>
-												</li>
-												<li class="me">
-													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
-													<div class="notification-event">
-														<span class="chat-message-item">
-															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-														</span>
-														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-													</div>
-												</li>
-												<li class="me">
-													<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
-													<div class="notification-event">
-														<span class="chat-message-item">
-															Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-														</span>
-														<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-													</div>
-												</li>
-											</ul>
-											<form class="text-box">
-												<textarea placeholder="Post enter to post..."></textarea>
-												<div class="add-smiles">
-													<span title="add icon" class="em em-expressionless"></span>
-												</div>
-												<div class="smiles-bunch">
-													<i class="em em---1"></i>
-													<i class="em em-smiley"></i>
-													<i class="em em-anguished"></i>
-													<i class="em em-laughing"></i>
-													<i class="em em-angry"></i>
-													<i class="em em-astonished"></i>
-													<i class="em em-blush"></i>
-													<i class="em em-disappointed"></i>
-													<i class="em em-worried"></i>
-													<i class="em em-kissing_heart"></i>
-													<i class="em em-rage"></i>
-													<i class="em em-stuck_out_tongue"></i>
-												</div>
-												<button ty
+                                        </ul>
+                                        <div class="chat-box">
+                                            <div class="chat-head">
+                                                <span class="status f-online"></span>
+                                                <h6>Bucky Barnes</h6>
+                                                <div class="more">
+                                                    <span><i class="ti-more-alt"></i></span>
+                                                    <span class="close-mesage"><i class="ti-close"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="chat-list">
+                                                <ul>
+                                                    <li class="me">
+                                                        <div class="chat-thumb"><img src="images/resources/chatlist1.jpg"
+                                                                alt=""></div>
+                                                        <div class="notification-event">
+                                                            <span class="chat-message-item">
+                                                                Hi James! Please remember to buy the food for tomorrow! I’m
+                                                                gonna be handling the gifts and Jake’s gonna get the drinks
+                                                            </span>
+                                                            <span class="notification-date"><time
+                                                                    datetime="2004-07-24T18:18"
+                                                                    class="entry-date updated">Yesterday at
+                                                                    8:10pm</time></span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="you">
+                                                        <div class="chat-thumb"><img src="images/resources/chatlist2.jpg"
+                                                                alt=""></div>
+                                                        <div class="notification-event">
+                                                            <span class="chat-message-item">
+                                                                Hi James! Please remember to buy the food for tomorrow! I’m
+                                                                gonna be handling the gifts and Jake’s gonna get the drinks
+                                                            </span>
+                                                            <span class="notification-date"><time
+                                                                    datetime="2004-07-24T18:18"
+                                                                    class="entry-date updated">Yesterday at
+                                                                    8:10pm</time></span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="me">
+                                                        <div class="chat-thumb"><img src="images/resources/chatlist1.jpg"
+                                                                alt=""></div>
+                                                        <div class="notification-event">
+                                                            <span class="chat-message-item">
+                                                                Hi James! Please remember to buy the food for tomorrow! I’m
+                                                                gonna be handling the gifts and Jake’s gonna get the drinks
+                                                            </span>
+                                                            <span class="notification-date"><time
+                                                                    datetime="2004-07-24T18:18"
+                                                                    class="entry-date updated">Yesterday at
+                                                                    8:10pm</time></span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="me">
+                                                        <div class="chat-thumb"><img src="images/resources/chatlist1.jpg"
+                                                                alt=""></div>
+                                                        <div class="notification-event">
+                                                            <span class="chat-message-item">
+                                                                Hi James! Please remember to buy the food for tomorrow! I’m
+                                                                gonna be handling the gifts and Jake’s gonna get the drinks
+                                                            </span>
+                                                            <span class="notification-date"><time
+                                                                    datetime="2004-07-24T18:18"
+                                                                    class="entry-date updated">Yesterday at
+                                                                    8:10pm</time></span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <form class="text-box">
+                                                    <textarea placeholder="Post enter to post..."></textarea>
+                                                    <div class="add-smiles">
+                                                        <span title="add icon" class="em em-expressionless"></span>
+                                                    </div>
+                                                    <div class="smiles-bunch">
+                                                        <i class="em em---1"></i>
+                                                        <i class="em em-smiley"></i>
+                                                        <i class="em em-anguished"></i>
+                                                        <i class="em em-laughing"></i>
+                                                        <i class="em em-angry"></i>
+                                                        <i class="em em-astonished"></i>
+                                                        <i class="em em-blush"></i>
+                                                        <i class="em em-disappointed"></i>
+                                                        <i class="em em-worried"></i>
+                                                        <i class="em em-kissing_heart"></i>
+                                                        <i class="em em-rage"></i>
+                                                        <i class="em em-stuck_out_tongue"></i>
+                                                    </div>
+                                                    <button ty
 												="submit"></button>
-											</form>
-										</div>
-									</div>
-								</div><!-- friends list sidebar -->
-							</aside>
-						</div><!-- sidebar -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div><!-- friends list sidebar -->
+                                </aside>
+                            </div><!-- sidebar -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.saveLikeDislike').each(function() {
+            var dataType = $(this).data('type');
+            if (dataType == '1') {
+                $(this).addClass('bg-primary');
+            }
+        });
+    });
+
+    $(document).on('click', '.saveLikeDislike', function(e) {
+        var _post = $(this).data('post');
+        var _type = $(this).data('type');
+        var vm = $(this);
+
+        $.ajax({
+            url: "{{ route('like.store') }}",
+            type: "post",
+            dataType: 'json',
+            data: {
+                post: _post,
+                type: _type,
+                _token: "{{ csrf_token() }}"
+            },
+            beforeSend: function() {},
+            success: function(res) {
+                _type = (_type == '1') ? '0' : '1';
+                vm.data('type', _type);
+                if (res.bool == true) {
+                    // vm.removeAttr('id');
+                    $('#like-count-' + _post).text(res.likes);
+
+                    if (_type == true) {
+                        $('#like-count-container-' + _post).addClass('bg-primary');
+
+                    } else {
+                        $('#like-count-container-' + _post).removeClass('bg-primary');
+                    }
+                } else {
+
+                }
+            }
+        });
+    });
+</script>

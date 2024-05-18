@@ -11,23 +11,24 @@ use App\Http\Controllers\Relationship;
 use App\Models\Relationship as ModelsRelationship;
 use App\Models\User;
 
-Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']); 
-Route::get('/time-line/:id',[]); 
-Route::post('/post',[PostsController::class, 'store']); 
-Route::post('/comment',[CommentController::class, 'store']); 
-Route::delete('/post/{id}',[PostsController::class, 'destroy'])->name('posts.destroy'); 
-Route::put('/post/{id}',[PostsController::class, 'update'])->name('posts.update'); 
-Route::post('/relationship',[Relationship::class,'store'])->name('relationships.store'); 
-Route::put('/relationship/{id}/{redirect?}',[Relationship::class,'update'])->name('relationships.update'); 
+Route::get('/newsfeed',[PostsController::class, 'index'])->middleware(['auth','verified']);
+Route::get('/time-line/:id',[]);
+Route::post('/post',[PostsController::class, 'store']);
+Route::post('/comment',[CommentController::class, 'store']);
+Route::delete('/post/{id}',[PostsController::class, 'destroy'])->name('posts.destroy');
+Route::put('/post/{id}',[PostsController::class, 'update'])->name('posts.update');
+Route::post('/relationship',[Relationship::class,'store'])->name('relationships.store');
+Route::put('/relationship/{id}/{redirect?}',[Relationship::class,'update'])->name('relationships.update');
 Route::delete('/relationship/{id}/{redirect?}',[Relationship::class,'destroy'])->name('relationships.destroy');
-Route::get('/timeline-friends/{id}',function($id) { 
+Route::get('/timeline-friends/{id}',function($id) {
     return view('timeline-friends',
     ["friends"=>ModelsRelationship::getFriendListOfUser(),
     "requests"=>ModelsRelationship::getRequestListOfUser()]);
-});  
-Route::put('/read-notification/{id}',[Notification::class,'update']);  
+});
+Route::put('/read-notification/{id}',[Notification::class,'update']);
 use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\LikePostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +55,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test/{id}', function ($id='') {
-    return view ('/test',["id"=>$id]);   
+    return view ('/test',["id"=>$id]);
 });
 
 
@@ -89,8 +90,8 @@ Route::get('/about/{userId}', [UsersController::class, 'about'])->name('about');
 
 
 //user-management
-Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
-Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 
+Route::get('time-line/user-profile/{id}',[UsersController::class,'show']);
+Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']);
 Route::get('user-management',[UsersController::class, 'getAllUsers']);
 Route::get('/edit-user/{user_id}', [UsersController::class, 'getUserByID']);
 //Route::get('/edit-user/{id}', 'UsersController@getUserByID')->name('users.edit');
@@ -111,7 +112,7 @@ Route::put('/update-post/{id}', [PostsController::class, 'updatePostStatus'])->n
 Route::delete('/delete-comment/{id}', [CommentController::class, 'deleteComment'])->name('delete-comment');
 Route::put('/update-comment/{id}', [CommentController::class, 'updateCommentStatus'])->name('update-comment');
 
-Route::get('/{page?}', function ($page = "newsfeed") {  
+Route::get('/{page?}', function ($page = "newsfeed") {
     return view($page);
 });
 
@@ -125,4 +126,10 @@ Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']);
 Route::get('edit-profile-basic/{id}',[UsersController::class,'showProfile']);
 
 Route::POST('share',[ShareController::class,'store'])->name('share.store');
+
+Route::group([], function(){
+    Route::get('like', [LikePostController::class, 'index']);
+
+    Route::post('like', [LikePostController::class, 'store'])->name('like.store');
+});
 

@@ -9,7 +9,7 @@ Last change:  4/september/18
 ====INDEX=====
 
 01- general styling
-02- sticky header 
+02- sticky header
 03- login/landing page
 04- home page topbar
 05- timeline area
@@ -17,23 +17,23 @@ Last change:  4/september/18
 07- sidebar widgets
 08- post sharing area
 09- social icons
-10- comment area 
+10- comment area
 11- search area
 12- footer
 13- widgets
 14- side panel
 15- short profile widget
 16- svg button styling
-17- 404 error page 
+17- 404 error page
 18- contact page
-19- knowledge base page 
+19- knowledge base page
 20- faq's page
 21- photos page
-22- favourit page 
+22- favourit page
 23- edit basic info page
 24- notification page
 25- message page
-26- loadmore 
+26- loadmore
 27- responsive header
 28- main menu
 39- blog pages
@@ -53,7 +53,7 @@ Last change:  4/september/18
 
 
 /*===============
-***General Styling 
+***General Styling
 ===============*/
 html,body{
 	font-family: "Muli", "Segoe Ui";
@@ -438,7 +438,7 @@ iframe {
 
 
 /*======================/
-***** Home page 1 
+***** Home page 1
 ======================*/
 
 
@@ -780,7 +780,7 @@ header.sticky {
 .feature-photo > figure img {
     display: inline-block;
     width: 100%;
-    
+
 }
 
 .user-avatar {
@@ -974,17 +974,17 @@ header.sticky {
     visibility: hidden;
     transition: all 0.3s linear 0s;
 }
-.notification-e.active + .dropdowns { 
+.notification-e.active + .dropdowns {
     opacity: 1;
     visibility: visible;
 
 }
-.read-noti { 
+.read-noti {
     background-color: #ffffff;
     color: #000;
     font-weight: 400;
 }
-.unread-noti { 
+.unread-noti {
     background-color: #f1f1f1;
     color: #000;
     font-weight: 400;
@@ -1067,7 +1067,7 @@ header.sticky {
     background: #4ba9fa none repeat scroll 0 0;
     color: #fff;
 }
-.drops-menu > li > form  { 
+.drops-menu > li > form  {
     padding: 0;
     margin: 0;
 }
@@ -1150,7 +1150,7 @@ header.sticky {
     ;
 
 }
-.btn-outline > button:hover { 
+.btn-outline > button:hover {
     border: 1px solid;
     background-color: #bc3c15;
     color: #fff;
@@ -1165,7 +1165,7 @@ header.sticky {
     border: 1px solid #088dcd;
     background-color: #ef4f1f;
 }
-.btn-outline > button > i { 
+.btn-outline > button > i {
     font-size: 13px;
 }
 
@@ -1803,7 +1803,7 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
 .coment-area {
     display: inline-block;
     margin-top: 10px;
-    padding: 20px; 
+    padding: 20px;
     width: 100%;
     background-color: rgba(241, 241, 241,.11);
 }
@@ -2001,7 +2001,7 @@ li.post-comment .comet-avatar {
 }
 
 .post-comt-box form button {
-    top: 50%;     
+    top: 50%;
     position: absolute;
     right: 0;
     background: none;
@@ -10120,9 +10120,15 @@ aside.sidebar.full-style {
     margin-left: 20px;
 }
 
-/* 
-.list-img > img { 
+/*
+.list-img > img {
 } */
-.list-vid { 
+.list-vid {
     height: 50vh;
+}
+
+.bg-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
 }

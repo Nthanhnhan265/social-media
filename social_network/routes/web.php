@@ -14,7 +14,9 @@ use App\Models\Relationship as ModelsRelationship;
 use App\Models\User;
 use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\LikePostController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -109,8 +111,8 @@ Route::middleware('auth')->group(function () {
 
 
 //user-management
-Route::get('time-line/user-profile/{id}',[UsersController::class,'show']); 
-Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']); 
+Route::get('time-line/user-profile/{id}',[UsersController::class,'show']);
+Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']);
 Route::get('user-management',[UsersController::class, 'getAllUsers']);
 Route::get('/edit-user/{user_id}', [UsersController::class, 'getUserByID']);
 //Route::get('/edit-user/{id}', 'UsersController@getUserByID')->name('users.edit');
@@ -165,6 +167,12 @@ Route::get('edit-profile-basic/{id}',[UsersController::class,'showProfile']);
 // Trong Routes/web.php
 Route::get('/newsfeed', [PostsController::class, 'index'])->middleware(['auth','verified']);
 Route::POST('share',[ShareController::class,'store'])->name('share.store');
+
+Route::group([], function(){
+    Route::get('like', [LikePostController::class, 'index']);
+
+    Route::post('like', [LikePostController::class, 'store'])->name('like.store');
+});
 
 Route::put('update-avatar/{id}', [UsersController::class, 'updateAvatar'])->name('user.update');
 // Route Update thông tin cá nhân của user 

@@ -1,582 +1,114 @@
+
 @extends('/layouts.app')
-	@section('content')
+@section('content')
 
-	<section>
-			<div class="feature-photo">
-				<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
-				<div class="add-btn">
-					<span>1205 followers</span>
-					<a href="#" title="" data-ripple="">Add Friend</a>
-				</div>
-				<form class="edit-phto">
-					<i class="fa fa-camera-retro"></i>
-					<label class="fileContainer">
-						Edit Cover Photo
-					<input type="file"/>
-					</label>
-				</form>
-				<div class="container-fluid">
-					<div class="row merged">
-						<div class="col-lg-2 col-sm-3">
-							<div class="user-avatar">
-								<figure>
-									<img src="images/resources/user-avatar.jpg" alt="">
-									<form class="edit-phto">
-										<i class="fa fa-camera-retro"></i>
-										<label class="fileContainer">
-											Edit Display Photo
-											<input type="file"/>
-										</label>
-									</form>
-								</figure>
-							</div>
-						</div>
-						<div class="col-lg-10 col-sm-9">
-							<div class="timeline-info">
-								<ul>
-									<li class="admin-name">
-									  <h5>Janice Griffith</h5>
-									  <span>Group Admin</span>
-									</li>
-									<li>
-										<a class="" href="{{ url('time-line') }}" title="" data-ripple="">time line</a>
-										<a class="" href="timeline-photos" title="" data-ripple="">Photos</a>
-										<a class="" href="timeline-videos" title="" data-ripple="">Videos</a>
-										<a class="active" href="timeline-friends" title="" data-ripple="">Friends</a>
-										<a class="" href="timeline-groups" title="" data-ripple="">Groups</a>
-										<a class="" href="about" title="" data-ripple="">about</a>
-										<a class="" href="#" title="" data-ripple="">more</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-	</section><!-- top area -->
+<{{-- top area uses component 'personal_nav' and pass 2 arguments,
+	 (note: don't SPACE after attributes, ex: :user = $friend (error))
+--}}
+<!-- top area -->
+<x-personal_nav :user=$user :friend=$friend></x-personal_nav>
 
-	<section>
-		<div class="gap gray-bg">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="row" id="page-contents">
-							<div class="col-lg-3">
-								<aside class="sidebar static">
-									<!-- <div class="widget">
-											<h4 class="widget-title">Shortcuts</h4>
-											<ul class="naves">
+<section>
+	<div class="gap gray-bg">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="row" id="page-contents">
+						<div class="col-lg-3">
+							<aside class="sidebar static">
+
+							</aside>
+						</div><!-- sidebar -->
+						<div class="col-lg-6">
+							<div class="central-meta">
+								<div class="frnds">
+									<ul class="nav nav-tabs">
+										<li class="nav-item"><a class="active" href="#frends" data-toggle="tab">My Friends</a> <span>{{count($friends)}}</span></li>
+										<li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Friend Requests</a><span>{{count($requests)}}</span></li>
+									</ul>
+
+									<!-- Tab panes -->
+									<div class="tab-content">
+										<div class="tab-pane active fade show " id="frends">
+											<ul class="nearby-contct">
+												{{-- danh sach ban be --}}
+												@foreach ($friends as $f)
 												<li>
-													<i class="ti-clipboard"></i>
-													<a href="newsfeed" title="">News feed</a>
+													<div class="nearly-pepls">
+														<figure>
+															<a href="{{ url('time-line/user-profile/'.$f->user_id) }}" title=""><img src="{{asset('images/resources/'.$f->avatar)}}" alt="err"></a>
+														</figure>
+														<div class="pepl-info">
+															<h4><a href="{{ url('time-line/user-profile/'.$f->user_id) }}" title="">{{$f->last_name." ".$f->first_name}}</a></h4>
+															<form action="{{url('relationship/'.$f->user_id.'/1')}}" method="post">
+																	@csrf
+																	@method('delete')
+																	<div class="position-absolute"  style="top:50%;right:0;transform: translateY(-50%)">
+																		<button type="submit" class="btn-secondary"><i class="fa-solid fa-trash"></i></button>
+																	</div>
+	
+																</form>
+														</div>
+													</div>
 												</li>
-												<li>
-													<i class="ti-mouse-alt"></i>
-													<a href="inbox" title="">Inbox</a>
-												</li>
-												<li>
-													<i class="ti-files"></i>
-													<a href="fav-page" title="">My pages</a>
-												</li>
-												<li>
-													<i class="ti-user"></i>
-													<a href="timeline-friends" title="">friends</a>
-												</li>
-												<li>
-													<i class="ti-image"></i>
-													<a href="timeline-photos" title="">images</a>
-												</li>
-												<li>
-													<i class="ti-video-camera"></i>
-													<a href="timeline-videos" title="">videos</a>
-												</li>
-												<li>
-													<i class="ti-comments-smiley"></i>
-													<a href="messages" title="">Messages</a>
-												</li>
-												<li>
-													<i class="ti-bell"></i>
-													<a href="notifications" title="">Notifications</a>
-												</li>
-												<li>
-													<i class="ti-share"></i>
-													<a href="people-nearby" title="">People Nearby</a>
-												</li>
-												<li>
-													<i class="fa fa-bar-chart-o"></i>
-													<a href="insights" title="">insights</a>
-												</li>
-												<li>
-													<i class="ti-power-off"></i>
-													<a href="landing" title="">Logout</a>
-												</li>
+
+												@endforeach
+
 											</ul>
-										</div>Shortcuts -->
-									<!-- <div class="widget stick-widget">
-										<h4 class="widget-title">Profile intro</h4>
-										<ul class="short-profile">
-											<li>
-												<span>about</span>
-												<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
-											</li>
-											<li>
-												<span>fav tv show</span>
-												<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
-											</li>
-											<li>
-												<span>favourit music</span>
-												<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
-											</li>
-										</ul>
-								</div> profile intro widget -->
-
-								</aside>
-							</div><!-- sidebar -->
-							<div class="col-lg-6">
-								<div class="central-meta">
-									<div class="frnds">
-										<ul class="nav nav-tabs">
-											 <li class="nav-item"><a class="active" href="#frends" data-toggle="tab">My Friends</a> <span>55</span></li>
-											 <li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Friend Requests</a><span>60</span></li>
-										</ul>
-
-										<!-- Tab panes -->
-										<div class="tab-content">
-										  <div class="tab-pane active fade show " id="frends" >
-											<ul class="nearby-contct">
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly1.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">sophia Gate</a></h4>
-														<span>tv actresses</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">sara grey</a></h4>
-														<span>work at IBM</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly3.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Sexy cat</a></h4>
-														<span>Student</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly4.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Sara grey</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly5.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Amy watson</a></h4>
-														<span>Study in university</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly6.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">caty lasbo</a></h4>
-														<span>work as dancers</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Ema watson</a></h4>
-														<span>personal business</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
-													</div>
-												</div>
-											</li>
-										</ul>
 											<div class="lodmore"><button class="btn-view btn-load-more"></button></div>
-										  </div>
-										  <div class="tab-pane fade" id="frends-req" >
+										</div>
+										<div class="tab-pane fade" id="frends-req">
 											<ul class="nearby-contct">
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly5.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Amy watson</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>	
+												{{-- danh sach yeu cau ket ban  --}}
+												@foreach ($requests as $r)
+												<li>
+													<div class="nearly-pepls">
+														<figure>
+															<a href="{{ url('time-line/user-profile/'.$r->user_id) }}" title=""><img src="{{asset('images/resources/'.$r->avatar)}}" alt="err"></a>
+														</figure>
+														<div class="pepl-info">
+															<h4><a href="{{ url('time-line/user-profile/'.$r->user_id) }}" title="">{{$r->last_name." ".$r->first_name}}</a></h4>
+															<div class="position-absolute d-flex" style="top:50%;right:0;transform: translateY(-50%)">
+																<form action="{{url('relationship/'.$r->user_id.'/1')}}" method="post" class="d-inline mr-1">
+																	@csrf
+																	@method('put')
+																	<div class="">
+																		<button type="submit">Accept <i class="fa-solid fa-check ml-1"></i></button>
+																	</div>
+																</form>
+																<form action="{{url('relationship/'.$r->user_id.'/1')}}" method="post">
+																	@csrf
+																	@method('delete')
+																	<div class="">
+																		<button type="submit" class="btn-secondary"><i class="fa-solid fa-trash"></i></button>
+																	</div>
+	
+																</form>
 
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly1.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">sophia Gate</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+															</div>
+														</div>
 													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly6.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">caty lasbo</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">sara grey</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly4.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Sara grey</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/nearly3.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">Sexy cat</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="nearly-pepls">
-													<figure>
-														<a href="{{ url('time-line') }}" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-													</figure>
-													<div class="pepl-info">
-														<h4><a href="{{ url('time-line') }}" title="">jhon kates</a></h4>
-														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
-													</div>
-												</div>
-											</li>
-										</ul>	
-											  <button class="btn-view btn-load-more"></button>
-										  </div>
+												</li>
+
+												@endforeach
+
+
+											</ul>
+											<button class="btn-view btn-load-more"></button>
 										</div>
 									</div>
-								</div>	
-							</div><!-- centerl meta -->
-							<div class="col-lg-3">
-								<aside class="sidebar static">
-									<!-- <div class="widget">
-										<h4 class="widget-title">Who's follownig</h4>
-										<ul class="followers">
-											<li>
-												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Kelly Bill</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Issabel</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Andrew</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Sophia</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="{{ url('time-line') }}" title="">Allen</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-										</ul>
-									</div>who's following -->
-									<!-- <div class="widget friend-list stick-widget">
-										<h4 class="widget-title">Friends</h4>
-										<div id="searchDir"></div>
-										<ul id="people-list" class="friendz-list">
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">bucky barnes</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6b1afa8b2a3b4b5a9aaa2a3b486a1aba7afaae8a5a9ab">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82e0e3f0ece7f1c2e5efe3ebeeace1edef">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar3.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">jason borne</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f050e1c00010d2f08020e0603410c0002">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar4.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">Cameron diaz</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147e75677b7a76547379757d783a777b79">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="640e05170b0a06240309050d084a070b09">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar6.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">andrew</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3b9b2a0bcbdb193b4beb2babffdb0bcbe">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar7.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">amy watson</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="deb4bfadb1b0bc9eb9b3bfb7b2f0bdb1b3">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bbd1dac8d4d5d9fbdcd6dad2d795d8d4d6">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="{{ url('time-line') }}">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff9d9e8d919a8cbf98929e9693d19c9092">[email&#160;protected]</a></i>
-												</div>
-											</li>
-										</ul>
-										<div class="chat-box">
-											<div class="chat-head">
-												<span class="status f-online"></span>
-												<h6>Bucky Barnes</h6>
-												<div class="more">
-													<span><i class="ti-more-alt"></i></span>
-													<span class="close-mesage"><i class="ti-close"></i></span>
-												</div>
-											</div>
-											<div class="chat-list">
-												<ul>
-													<li class="me">
-														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="you">
-														<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="me">
-														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-												</ul>
-												<form class="text-box">
-													<textarea placeholder="Post enter to post..."></textarea>
-													<div class="add-smiles">
-														<span title="add icon" class="em em-expressionless"></span>
-													</div>
-													<div class="smiles-bunch">
-														<i class="em em---1"></i>
-														<i class="em em-smiley"></i>
-														<i class="em em-anguished"></i>
-														<i class="em em-laughing"></i>
-														<i class="em em-angry"></i>
-														<i class="em em-astonished"></i>
-														<i class="em em-blush"></i>
-														<i class="em em-disappointed"></i>
-														<i class="em em-worried"></i>
-														<i class="em em-kissing_heart"></i>
-														<i class="em em-rage"></i>
-														<i class="em em-stuck_out_tongue"></i>
-													</div>
-													<button type="submit"></button>
-												</form>
-											</div>
-										</div>
-									</div>friends list sidebar -->
-									
-								</aside>
-							</div><!-- sidebar -->
-						</div>	
+								</div>
+							</div>
+						</div><!-- centerl meta -->
+						<div class="col-lg-3">
+							<aside class="sidebar static">
+
+							</aside>
+						</div><!-- sidebar -->
 					</div>
 				</div>
 			</div>
-		</div>	
-	</section>
-	@endsection
+		</div>
+	</div>
+</section>
+@endsection

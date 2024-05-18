@@ -4,20 +4,19 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class comment extends Component
+class personal_nav extends Component
 {
-    public $commenter; 
-    public $isHidden;
-
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($commenter,$isHidden)
+    public $user; 
+    public $friend; 
+    public function __construct($user,$friend)
     {
-        $this->commenter = $commenter;
-        $this->isHidden = $isHidden; 
+        $this->user = $user; 
+        $this->friend = $friend; 
     }
 
     /**
@@ -27,6 +26,6 @@ class comment extends Component
      */
     public function render()
     {
-        return view('components.comment');
+        return view('components.personal_nav');
     }
 }

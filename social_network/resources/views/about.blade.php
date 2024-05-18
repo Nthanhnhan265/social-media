@@ -2,7 +2,7 @@
 @section('content')
 		<section>
 			<div class="feature-photo">
-				<figure><img src="{{asset('images/resources/'.$user->background)}}" alt=""></figure>
+				<figure><img src="{{asset('storage/images/'.$user->background)}}" alt=""></figure>
 				<div class="add-btn">
 					<span>1205 followers</span>
 					<a href="#" title="" data-ripple="">Add Friend</a>
@@ -18,37 +18,45 @@
 					<div class="row merged">
 						<div class="col-lg-2 col-sm-3">
 							<div class="user-avatar">
-								<figure>
-									<img src="{{asset('images/resources/'.$user->avatar) }}" alt="">
-									<form class="edit-phto">
+							<figure>
+									<img src="{{asset('storage/images/'.$user->avatar) }}" alt="">
+									<form class="edit-phto" action="{{ url('update-avatar/'. Auth::User()->user_id)}}" method="post" enctype="multipart/form-data">
+										@csrf
+										@method('PUT')
 										<i class="fa fa-camera-retro"></i>
 										<label class="fileContainer">
-											Edit Display Photo
-											<input type="file" />
+											<input type="file" name="avatar" id="avatar" accept="image/*">
 										</label>
-									</form>
+										<button  class="btn-edit-avatar" type="submit"><i class="fas fa-cloud-upload-alt"></i></button>
+								</form>
 								</figure>
 							</div>
 						</div>
 						<div class="col-lg-10 col-sm-9">
 							<div class="timeline-info">
-								<ul>
+							<ul>
 									<li class="admin-name">
-										
+									<h5>{{$user->last_name}} {{$user->first_name}}</h5>
 										<span>Group Admin</span>
 									</li>
 									<li>
-										<a class="" href="{{ url('time-line') }}" title="" data-ripple="">Time Line</a>
-										<a class="" href="{{ url('timeline-photos') }}" title=""
-											data-ripple="">Photos</a>
-										<a class="" href="{{ url('timeline-videos') }}" title=""
-											data-ripple="">Videos</a>
-										<a class="" href="{{ url('timeline-friends') }}" title=""
-											data-ripple="">Friends</a>
-										<a class="" href="{{ url('timeline-groups') }}" title=""
-											data-ripple="">Groups</a>
-										<a class="active" href="{{ url('about') }}" title="" data-ripple="">About</a>
+										<a class="{{Request::is('time-line/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('time-line').'/user-profile/'.$user->user_id }}" title="" data-ripple="">Time Line</a>
+										<a class="{{Request::is('timeline-photos' . '/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('timeline-photos' . '/user-profile/' . $user->user_id) }}" title=""
+								data-ripple="">Photos</a>
 
+									<a class="{{Request::is('timeline-videos' . '/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('timeline-videos' . '/user-profile/' . $user->user_id) }}" title=""
+								data-ripple="">Videos</a>
+										<a class="{{Request::is('time-line/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('timeline-friends') }}" title=""
+											data-ripple="">Friends</a>
+										<a class="{{Request::is('time-line/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('timeline-groups') }}" title=""
+											data-ripple="">Groups</a>
+											@if(auth()->check() && $user->user_id == auth()->user()->user_id)
+									<a class="{{Request::is('about' . '/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('about' . '/user-profile/' . auth()->user()->user_id) }}" title=""
+									data-ripple="">about</a>
+
+
+										@endif
+							<a class="=" href="#" title="" data-ripple="">more</a>
 									</li>
 								</ul>
 							</div>
@@ -146,13 +154,13 @@
 												<div class="tab-content">
 													<div class="tab-pane fade show active" id="basic">
 														<ul class="basics">
-															<li><i class="ti-user"></i>sarah grey</li>
-															<li><i class="ti-map-alt"></i>live in Dubai</li>
-															<li><i class="ti-mobile"></i>+1-234-345675</li>
+															<li><i class="ti-user"></i>{{$user->last_name}} {{$user->first_name}}</li>
+															<li><i class="ti-map-alt"></i>{{$user->description}}</li>
+															<li><i class="ti-mobile"></i>{{$user->DOB}}</li>
 															<li><i class="ti-email"></i><a
 																	href="https://wpkixx.com/cdn-cgi/l/email-protection"
 																	class="__cf_email__"
-																	data-cfemail="3c4553494e515d55507c59515d5550125f5351">[email&#160;protected]</a>
+																	data-cfemail="3c4553494e515d55507c59515d5550125f5351">{{$user->email}}</a>
 															</li>
 															<li><i class="ti-world"></i>www.yoursite.com</li>
 														</ul>

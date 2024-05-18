@@ -2,59 +2,11 @@
 
     @section('content')
 
-	<section>
-		<div class="feature-photo">
-			<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
-			<div class="add-btn">
-				<span>1205 followers</span>
-				<a href="#" title="" data-ripple="">Add Friend</a>
-			</div>
-			<form class="edit-phto">
-				<i class="fa fa-camera-retro"></i>
-				<label class="fileContainer">
-					Edit Cover Photo
-				<input type="file"/>
-				</label>
-			</form>
-			<div class="container-fluid">
-				<div class="row merged">
-					<div class="col-lg-2 col-sm-3">
-						<div class="user-avatar">
-							<figure>
-								<img src="images/resources/user-avatar.jpg" alt="">
-								<form class="edit-phto">
-									<i class="fa fa-camera-retro"></i>
-									<label class="fileContainer">
-										Edit Display Photo
-										<input type="file"/>
-									</label>
-								</form>
-							</figure>
-						</div>
-					</div>
-					<div class="col-lg-10 col-sm-9">
-						<div class="timeline-info">
-							<ul>
-								<li class="admin-name">
-								  <h5>Janice Griffith</h5>
-								  <span>Group Admin</span>
-								</li>
-								<li>
-									<a class="" href="time-line" title="" data-ripple="">time line</a>
-									<a class="active" href="timeline-photos" title="" data-ripple="">Photos</a>
-									<a class="" href="timeline-videos" title="" data-ripple="">Videos</a>
-									<a class="" href="timeline-friends" title="" data-ripple="">Friends</a>
-									<a class="" href="timeline-groups" title="" data-ripple="">Groups</a>
-									<a class="" href="about" title="" data-ripple="">about</a>
-									<a class="" href="#" title="" data-ripple="">more</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section><!-- top area -->
+	{{-- top area uses component 'personal_nav' and pass 2 arguments,
+	 (note: don't SPACE after attributes, ex: :user = $friend (error))
+--}}
+<!-- top area -->
+<x-personal_nav :user=$user :friend=$friend></x-personal_nav>
 
 	<section>
 		<div class="gap gray-bg">
@@ -64,14 +16,22 @@
 						<div class="row" id="page-contents">
 
 							<div class="col-lg-12">
-								<div class="central-meta">
-									<ul class="photos">
 
-										<li>
-											<a class="strip" href="images/resources/photo-22.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="images/resources/photo2.jpg" alt=""></a>
-										</li>
-										<li>
+								<div class="contain d-flex justify-content-center">
+									
+								<div class="central-meta photo-tl">
+								<div class="photos" style=" display: flex; flex-wrap: wrap; justify-content: center">
+									@foreach($posts as $post)
+									@foreach($post->image as $img)
+										<div style="width: calc(100vw / 4 - 10px)!important;border-radius:10px; border: 1px solid #c4c4c4; height:calc(100vw / 4 - 10px) !important;overflow: hidden; display: block; margin: 10px 5px">
+				
+											<a href="{{asset('storage/images/'.$img->url)}}" data-fancybox="gallery" data-caption="Caption #1">
+												<img src="{{ asset('storage/images/'.$img->url) }}" style="width:100%;height:100%;" />
+											</a>
+										</div>
+										@endforeach
+								@endforeach
+										<!-- <li>
 											<a class="strip" href="images/resources/photo-33.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
 												<img src="images/resources/photo3.jpg" alt=""></a>
 										</li>
@@ -128,10 +88,13 @@
 										<li>
 											<a class="strip" href="images/resources/photo-66.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
 												<img src="images/resources/photo13.jpg" alt=""></a>
-										</li>
-									</ul>
+										</li> -->
+									</div>
 									<div class="lodmore"><button class="btn-view btn-load-more"></button></div>
 								</div><!-- photos -->
+								
+								</div>
+
 							</div><!-- centerl meta -->
 
 						</div>

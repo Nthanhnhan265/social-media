@@ -42,6 +42,10 @@ use Illuminate\View\Component;
 											<a href="{{ url('timeline-friends/' . Auth::user()->user_id) }}" title="">friends</a>
 										</li>
 										<li>
+											<i class="fa fa-users"></i>
+											<a href="{{ url('groups') }}" title="">Groups</a>
+										</li>
+										<li>
 											<form method="POST" action="{{ route('logout') }}">
 												@csrf
 												<i class="ti-power-off"></i>

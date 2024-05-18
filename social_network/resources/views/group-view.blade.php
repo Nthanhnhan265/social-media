@@ -52,7 +52,6 @@
 								<li>
 									<a class="active" href="{{ url('group-view') }}" title="" data-ripple="">Posts</a>
 									<a class="" href="{{ url('group-member', $group->group_id) }}" title="" data-ripple="">Members</a>
-									<a class="" href="{{ url('inbox') }}" title="" data-ripple="">File</a>	
 									@if($userRole->role_id_fk != 2)
 									<a class="" href="{{ url('edit-group-2', $group->group_id) }}" title="" data-ripple="">Edit group</a>	
 									@endif							
@@ -76,35 +75,37 @@
 									<div class="widget">
 										<h4 class="widget-title">Shortcuts</h4>
 										<ul class="naves">
-											<li>
-												<i class="ti-clipboard"></i>
-												<a href="{{ url('newsfeed') }}" title="">News feed</a>
-											</li>
-											<li>
-												<i class="ti-mouse-alt"></i>
-												<a href="{{ url('inbox') }}" title="">Inbox</a>
-											</li>
-											<li>
-												<i class="ti-files"></i>
-												<a href="{{ url('fav-page') }}" title="">My pages</a>
-											</li>
-											<li>
-												<i class="ti-user"></i>
-												<a href="{{ url('timeline-friends') }}" title="">friends</a>
-											</li>
-											<li>
-												<i class="ti-image"></i>
-												<a href="{{ url('timeline-photos') }}" title="">images</a>
-											</li>
-											<li>
-												<i class="ti-video-camera"></i>
-												<a href="{{ url('timeline-videos') }}" title="">videos</a>
-											</li>
-											<li>
-												<i class="ti-bell"></i>
-												<a href="{{ url('notifications') }}" title="">Notifications</a>
-											</li>
-										</ul>
+												<li>
+													<i class="ti-clipboard"></i>
+													<a href="{{ url('newsfeed') }}" title="">News feed</a>
+												</li>
+												<li>
+													<i class="ti-mouse-alt"></i>
+													<a href="{{ url('inbox') }}" title="">Inbox</a>
+												</li>
+												<li>
+													<i class="ti-files"></i>
+													<a href="{{ url('fav-page') }}" title="">My pages</a>
+												</li>
+												<li>
+													<i class="ti-user"></i>
+													<a href="{{ url('timeline-friends') }}" title="">friends</a>
+												</li>
+												<li>
+													<i class="fa fa-users"></i>
+													<a href="{{ url('groups') }}" title="">Groups</a>
+												</li>
+												<li>
+													<form method="POST" action="{{ route('logout') }}">
+														@csrf
+														<i class="ti-power-off"></i>
+														<x-dropdown-link style="padding-left:0px!important;font-size:15px" :href="route('logout')" onclick="event.preventDefault();
+														this.closest('form').submit();">
+															{{ __('Log Out') }}
+														</x-dropdown-link>
+													</form>
+												</li>											
+											</ul>
 									</div><!-- Shortcuts -->
 									<div class="widget">
 										<h4 class="widget-title">Recent Activity</h4>

@@ -1,10 +1,11 @@
 <?php 
-use App\Models\Follow;
-?> 
+    use Illuminate\Support\Facades\Auth;
+	use App\Models\Follow; 
+?>
 <section>
 
 
-
+	
     <div class="feature-photo">
         <figure>
         <div class="image-wrapper">

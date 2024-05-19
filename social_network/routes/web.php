@@ -15,7 +15,7 @@ use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LikePostController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\UseGroupController;
+// use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ChangePasswordController;
 
@@ -153,6 +153,9 @@ Route::get('/user-management-search', [UsersController::class, 'search'])->name(
 Route::get('/group-management-search', [GroupController::class, 'search'])->name('group-management-search')->middleware(['auth','verified']);
 Route::get('/post-management-search', [PostsController::class, 'searchInManagement'])->name('post-management-search')->middleware(['auth','verified']);
 
+// Route::get('/{page?}', function ($page = "newsfeed") {  
+//     return view($page);
+// });
 Route::put('update-background/{id}', [UsersController::class, 'updateBackground'])->name('user.update')->middleware(['auth','verified']);
 
 //Route::get('/inbox', [PostController::class, 'index'])->middleware(['auth','verified']);

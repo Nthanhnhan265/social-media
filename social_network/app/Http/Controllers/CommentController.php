@@ -238,7 +238,7 @@ class CommentController extends Controller
         }
 
         Comment::find($id)->delete();
-        {{dd("callled");}}
+        // {{dd("callled");}}
         // return redirect('newsfeed');
         return redirect('newsfeed');
     }

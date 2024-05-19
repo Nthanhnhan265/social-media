@@ -16,7 +16,7 @@ use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LikePostController;
 use App\Http\Controllers\NewsController;
-// use App\Http\Controllers\UseGroupController;
+use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -113,7 +113,7 @@ Route::middleware('auth')->group(function () {
 //user-management
 Route::get('time-line/user-profile/{id}',[UsersController::class,'show']);
 Route::get('about/user-profile/{id}',[UsersController::class,'showAbout']);
-Route::get('user-management',[UsersController::class, 'getAllUsers']);
+Route::get('user-management',[UsersController::class, 'getAllUsers'])->name('user-management');
 Route::get('/edit-user/{user_id}', [UsersController::class, 'getUserByID']);
 //Route::get('/edit-user/{id}', 'UsersController@getUserByID')->name('users.edit');
 Route::delete('/delete-user/{userId}', [UsersController::class, 'deleteUser'])->name('delete-user');
@@ -121,15 +121,15 @@ Route::put('/update-user/{userId}', [UsersController::class, 'updateUser'])->nam
 
 //group-management
 Route::get('/edit-group/{group_id}', [GroupController::class, 'getGroupByID']);
-Route::get('group-management',[GroupController::class, 'getAllGroups']);
+Route::get('group-management',[GroupController::class, 'getAllGroups'])->name('group-management');
 Route::put('/update-group/{group_id}', [GroupController::class, 'update'])->name('update-group');
 Route::delete('/delete-group/{groupID}', [GroupController::class, 'deleteGroup'])->name('delete-group');
 
 //post-management
-Route::get('post-management',[PostsController::class, 'getAllPosts']);
+Route::get('post-management',[PostsController::class, 'getAllPosts'])->name('post-management');
 Route::delete('/delete-post/{id}', [PostsController::class, 'deletePost'])->name('delete-post');
 Route::get('/post-detail/{id}', [PostsController::class, 'getPostAndCommentByPostId']);
-Route::put('/update-post/{id}', [PostsController::class, 'updatePostStatus'])->name('update-post-status');
+Route::put('/update-post-status/{id}', [PostsController::class, 'updatePostStatus'])->name('update-post-status');
 Route::delete('/delete-comment/{id}', [CommentController::class, 'deleteComment'])->name('delete-comment');
 Route::put('/update-comment/{id}', [CommentController::class, 'updateCommentStatus'])->name('update-comment');
 
@@ -146,9 +146,15 @@ Route::put('/groups-member/{group_id}', [UseGroupController::class, 'update'])->
 Route::get('/edit-group-2/{group_id}', [GroupController::class, 'getAllInfoForEditGroup']);
 
 
-// Route::get('/{page?}', function ($page = "newsfeed") {  
-//     return view($page);
-// });
+//tìm kiếm ở phần quản trị
+// routes/web.php
+Route::get('/user-management-search', [UsersController::class, 'search'])->name('user-management-search');
+Route::get('/group-management-search', [GroupController::class, 'search'])->name('group-management-search');
+Route::get('/post-management-search', [PostsController::class, 'searchInManagement'])->name('post-management-search');
+
+Route::get('/{page?}', function ($page = "newsfeed") {  
+    return view($page);
+});
 
 
 
@@ -199,3 +205,10 @@ Route::delete('comments/{id}', [CommentController::class, 'destroy'])->name('com
 Route::get('search', [PostsController::class, 'search'])->name('posts.search');
 // Route::get('timeline-friends/{id}',[UsersController::class,'show']);
 Route::delete('time-line/user-profile/{id}', [PostsController::class,'destroy'])->name('posts.destroy');
+
+
+
+Route::get('/{page?}', function ($page = "newsfeed") {  
+    return view($page);
+});
+

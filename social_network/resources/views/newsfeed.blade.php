@@ -321,11 +321,15 @@ use Illuminate\View\Component;
 												comments</a>
 											@endif
 										</li>
+										
 										<li class="post-comment">
 											<div class="comet-avatar">
+												<div class="parent" style="width: 2rem; height: 2rem; border-radius: 50%;overflow:hidden">
 												<x-user-avt>
 												</x-user-avt>
 											</div>
+											</div>
+											
 											<div class="post-comt-box {{ $post->id }}">
 												<form method="post" action="#" id="form-{{ $post->id }}" enctype="multipart/form-data">
 													@csrf
@@ -523,10 +527,14 @@ use Illuminate\View\Component;
 													comments</a>
 												@endif
 											</li>
-											<li class="post-comment">
+											<li class="post-comment">  
 												<div class="comet-avatar">
+												<div class="comet-avatar">
+												<div class="parent" style="width: 2rem; height: 2rem; border-radius: 50%;overflow:hidden">
 													<x-user-avt>
 													</x-user-avt>
+												</div>
+													
 												</div>
 												<div class="post-comt-box {{ $post->id }}">
 													<form method="post" action="comment" id="form-{{ $post->id }}" enctype="multipart/form-data">

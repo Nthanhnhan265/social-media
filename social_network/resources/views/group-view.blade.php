@@ -135,183 +135,481 @@
 								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-6">
-								<div class="central-meta">
-									<div class="new-postbox">
-										<figure>
-											<img src="{{ asset('images/resources/' . $userRole->user->avatar) }}" alt="">
-										</figure>
-										<div class="newpst-input">
-											<form method="post">
-												<textarea rows="3" placeholder="write something"></textarea>
-												<div class="attachments">
-													<ul>
-														<li>
-															<i class="fa fa-music"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-image"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-video-camera"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-camera"></i>
-															<label class="fileContainer">
-																<input type="file">
-															</label>
-														</li>
-														<li>
-															<button type="submit">Publish</button>
-														</li>
-													</ul>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div><!-- add post new box -->
-								<div class="loadMore">
-								@foreach($posts as $post)
-								<div class="central-meta item">
-									
-									<div class="user-post">
-										<div class="friend-info">
-											<figure>
-												<img src="{{ asset('images/resources/' . $post->post->user->avatar) }}" alt="">
-											</figure>
-											<div class="friend-name">
-												<ins><a href="{{ url('time-line') }}" title="">{{$post->post->user->last_name." ".$post->post->user->first_name}}</a></ins>
-												<span>{{$post->created_at}}</span>
-											</div>
-											<div class="post-meta">
-												<img src="images/resources/user-post6.jpg" alt="">
-												<div class="we-video-info">
-													<ul>
-														<li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Comments">
-																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
-															</span>
-														</li>
-														<li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li>
-														<li class="social-media">
-															<div class="menu">
-															  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																</div>
-															  </div>
-																<div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																</div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																</div>
-															  </div>
+					<div class="central-meta">
+						<div class="new-postbox">
+							<figure>
+								<?php
+								$avtUser = Auth::user()->avatar;
+								?>
+								<!-- <img src="{{ asset('images/resources/' . $avtUser) }}" alt=""> -->
+								<x-user-avt>
+								</x-user-avt>
 
-															</div>
-														</li>
-													</ul>
-												</div>
-												<div class="description">
-													{{$post->post->content }}
-												</div>
-											</div>
+							</figure>
+							<div class="newpst-input">
+								<form method="post" action="{{ url('post') }}" enctype="multipart/form-data">
+									@csrf
+									@method('post')
+									<textarea rows="2" name="content" placeholder="write something"></textarea>
+									<div class="attachments">
+										<ul>
+											<!-- ###Task: viet js cho size input -->
+											<li>
+												<i class="fa fa-image"></i>
+												<label class="fileContainer">
+													<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*">
+												</label>
+											</li>
+											<li>
+												<i class="fa fa-video-camera"></i>
+												<label class="fileContainer">
+													<input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*">
+												</label>
+											</li>
+
+											<li>
+												<button type="submit">Post</button>
+											</li>
+										</ul>
+									</div>
+								</form>
+
+							</div>
+						</div>
+					</div><!-- add post new box #loadpost-->
+					<div class="loadMore">
+						@foreach ($posts as $post)
+						{{-- Kiểm tra trong mảng và render ra cái phù hợp --}}
+						@if (class_basename($post) === 'Posts')
+						{{-- @if (false)  --}}
+						<div class="central-meta item rounded-5 {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
+							<div class="user-post">
+								<div class="friend-info">
+									<figure>
+										<img src="{{ asset('images/resources/' . $post->user->avatar) }}" alt="">
+									</figure>
+									<div class="friend-name">
+										<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}" title="">
+												{{ ucwords($post->user->last_name . ' ' . $post->user->first_name) }}
+											</a></ins>
+
+										<span>published:
+											{{ date_format($post->created_at, 'H:i d/m/Y') }}</span>
+									</div>
+									<div class="post-meta">
+										<!-- <img src="images/resources/user-post.jpg" alt=""> -->
+										<!-- Print content if not null -->
+										<!-- {{ $post->id }} -->
+										@if (!empty($post->content))
+										<div class="description pb-2">
+											{{ $post->content }}
 										</div>
-										<div class="coment-area">
-											<ul class="we-comet">
-												<li>
-													<div class="comet-avatar">
-														<img src="{{ asset('images/resources/comet-1.jpg') }}" alt="">
+										@endif
+
+
+										@php
+										$totalMedia = count($post->image) + count($post->video);
+
+										@endphp
+										<!-- Display imgs  -->
+										@if ($totalMedia != 0)
+										<div class="container-fluied">
+											<div class="row">
+												@foreach ($post->image as $img)
+												<a href="{{ asset('storage/images/' . $img->url) }}" class="{{ $loop->index < 3 ? 'col-4 p-1' : 'd-none' }} {{ $loop->index == 2 ? 'position-relative' : '' }}" data-fancybox="gallery{{ $post->id }}" data-caption="{{ $post->user->last_name . ' ' . $post->user->first_name . '\'s images' }}">
+													<img src="{{ asset('storage/images/' . $img->url) }}" alt="failed to display" class="d-block" />
+													@if ($loop->index == 2 && $loop->count - 3 != 0)
+													<div style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+														+{{ $totalMedia - 2 }}
 													</div>
-													<div class="we-comment">
-														<div class="coment-head">
-															<h5><a href="{{ url('time-line') }}" title="">Donald Trump</a></h5>
-															<span>1 week ago</span>
-															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-														</div>
-														<p>we are working for the dance and sing songs. this video is very awesome for the youngster. please vote this video and like our channel
-															<i class="em em-smiley"></i>
-														</p>
+													@endif
+												</a>
+												@endforeach
+
+												@if (!empty($post->video) && count($post->video) != 0)
+												@foreach ($post->video as $video)
+												<a href="{{ asset('storage/videos/' . $video->url) }}" data-fancybox="gallery{{ $post->id }}" style="max-height:50rem" class="{{ count($post->image) > 3 || $loop->iteration + count($post->image) > 3 ? 'd-none' : 'col-3 p-1' }}{{ count($post->image) > 3 || $loop->iteration + count($post->image) == 3 ? ' position-relative' : '' }}" style="display:block;height: 100%">
+													<video controls style="height:100%;width:100%" src="{{ asset('storage/videos/' . $video->url) }}"></video>
+													@if (count($post->image) > 3 || $loop->iteration + count($post->image) == 3)
+													<div style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+														+{{ $totalMedia - 2 }}
 													</div>
-												</li>																			
-												<li class="post-comment">
-													<div class="comet-avatar">
-														<img src="images/resources/comet-4.jpg" alt="">
-													</div>
-													<div class="post-comt-box">
-														<form method="post">
-															<textarea placeholder="Post your comment"></textarea>
-															<div class="add-smiles">
-																<span class="em em-expressionless" title="add icon"></span>
-															</div>
-															<div class="smiles-bunch">
-																<i class="em em---1"></i>
-																<i class="em em-smiley"></i>
-																<i class="em em-anguished"></i>
-																<i class="em em-laughing"></i>
-																<i class="em em-angry"></i>
-																<i class="em em-astonished"></i>
-																<i class="em em-blush"></i>
-																<i class="em em-disappointed"></i>
-																<i class="em em-worried"></i>
-																<i class="em em-kissing_heart"></i>
-																<i class="em em-rage"></i>
-																<i class="em em-stuck_out_tongue"></i>
-															</div>
-															<button type="submit"></button>
-														</form>	
-													</div>
+													@endif
+												</a>
+												@endforeach
+												@endif
+											</div>
+
+										</div>
+										@endif
+
+
+
+										<!-- views, like,dislike, comment, share -->
+										<div class="we-video-info border-top my-3">
+											<ul style="display: flex;align-items: center;">
+												<li style="margin-right:15px">
+												<span id="like-count-container-{{ $post->id }}" title="Likes" data-type="{{ $post->isLikedByCurrentUser() }}" data-post="{{ $post->id }}" data-clicked="false" class="mr-2 btn btn-sm d-inline font-weight-bold saveLikeDislike" style="border: 1px solid #c4c4c4;color: #c4c4c4;display:flex!important;align-items: center;">
+												<i class="fa-regular fa-thumbs-up mr-2"></i>
+													<span id="like-count-{{ $post->id }}" >
+														@php
+															$count = $post->sumLikes()
+														@endphp
+														
+														<x-format_number :number=$count	/>
+													</span>
+												</span>
 												</li>
+
+												{{-- @foreach ($post->likePosts as $likePost)
+                                                                @if ($likePost->post_id_fk == $post->id)
+                                                                <form method="post" action="{{ route('like.store') }}"
+												class="like-form">
+												@csrf
+												<input type="hidden" name="likepost-id" value={{ $likePost->likepost_id }} />
+												<button class="like" data-toggle="tooltip" title="like">
+													<i class="ti-heart"></i>
+												</button>
+												</form>
+												@elseif($likePost->user_id_fk == $post->user_id_fk)
+												<form method="post" action="{{ route('like.store') }}" class="like-form">
+													@csrf
+													<input type="hidden" name="like-status" value="{{ $likePost->likepost_id ? 'like' : 'done like' }}">
+													<input type="hidden" name="post-id" value={{ $post->id }} />
+													<input type="hidden" name="likepost-id" value={{ $likePost->likepost_id }} />
+													<button class="like" data-toggle="tooltip" title="like">
+														<i class="ti-heart"></i>
+													</button>
+												</form>
+												@endif
+												@endforeach --}}
+												{{-- </li> --}}
+												{{-- <li>
+                                                                    <span class="dislike" data-toggle="tooltip"
+                                                                        title="dislike">
+                                                                        <i class="ti-heart-broken"></i>
+                                                                        <ins>200</ins>
+                                                                    </span>
+                                                                </li> --}}
+												<li>
+													<span class="comment" data-toggle="tooltip" title="Comments">
+														<i class="fa fa-comments-o"></i>
+														<ins>
+														@php
+															$count = count($post->comments)
+														@endphp
+														
+														<x-format_number :number=$count	/>
+														</ins>
+													</span>
+												</li>
+												<li class="social-media">
+													<x-share-btn>{{ $post->id }}</x-share-btn>
+												</li>
+
 											</ul>
 										</div>
+
+
 									</div>
-									
-								</div>								
-								@endforeach
 								</div>
-							</div><!-- centerl meta -->
+								<div class="coment-area p-1 post-cmt post-cmt-{{ $post->id }}">
+									<ul class="we-comet comment">
+										<!-- hiện commment cho mỗi bình luận tại đây -->
+										@php
+										$count = 0;
+										@endphp
+										@foreach ($post->comments as $comment)
+										@php
+										$flag = $count >= 3 ? true : false;
+										@endphp
+										<x-comment :commenter=$comment :isHidden=$flag></x-comment>
+										@php
+										$count++;
+										@endphp
+										@endforeach
+
+									</ul> <!-- list of comments-->
+									<ul class="we-comet">
+										<li>
+											@php
+											$count_of_cmt = count($post->comments);
+											@endphp
+											@if ($count_of_cmt > 3)
+											<a title="" class="showmore underline btnshow-{{ $post->id }}">more
+												comments</a>
+											@endif
+										</li>
+										<li class="post-comment">
+											<div class="comet-avatar">
+												<x-user-avt>
+												</x-user-avt>
+											</div>
+											<div class="post-comt-box {{ $post->id }}">
+												<form method="post" action="#" id="form-{{ $post->id }}" enctype="multipart/form-data">
+													@csrf
+													@method('POST')
+													<input type="hidden" name="post_id" value="{{ $post->id }}">
+													<textarea placeholder="Post your comment" name="content"></textarea>
+													<div class="add-smiles">
+														<span class="em em-expressionless" title="add icon"></span>
+													</div>
+													<div class="attachments">
+														<ul class="m-0 d-flex align-items-center">
+															<li>
+																<i class="fa fa-image"></i>
+																<label class="fileContainer">
+																	<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*">
+																</label>
+															</li>
+															<li>
+																<i class="fa fa-video-camera"></i>
+																<label class="fileContainer">
+																	<input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*">
+																</label>
+															</li>
+
+															<li>
+																<button type="submit" class="bg-dark btnComment" value={{ $post->id }}>Post</button>
+															</li>
+														</ul>
+													</div>
+													{{-- <div class="smiles-bunch">
+																		<i class="em em---1"></i>
+																		<i class="em em-smiley"></i>
+																		<i class="em em-anguished"></i>
+																		<i class="em em-laughing"></i>
+																		<i class="em em-angry"></i>
+																		<i class="em em-astonished"></i>
+																		<i class="em em-blush"></i>
+																		<i class="em em-disappointed"></i>
+																		<i class="em em-worried"></i>
+																		<i class="em em-kissing_heart"></i>
+																		<i class="em em-rage"></i>
+																		<i class="em em-stuck_out_tongue"></i>
+																	</div> --}}
+												</form>
+											</div>
+
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						@elseif (class_basename($post) === 'Share')
+
+						@php
+						$created_at = $post->created_at;
+						$sharer = $post->user;
+						$post = $post->post;
+						@endphp
+
+						<div class="sharer {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
+							<div class="user-shared">
+								<div class="avatar">
+									<img src="{{asset('storage/images/$sharer->avatar')}}" alt="error">
+
+								</div>
+								<div class="content pl-3">
+									<div class="text">
+										<b>{{ ucwords($sharer->last_name . ' ' . $sharer->first_name) }}</b> shared an article <i class="fa-solid fa-earth-americas"></i>
+									</div>
+									<div class="publicTime">
+										At: {{ date_format($created_at, 'H:i d/m/Y') }}
+									</div>
+								</div>
+							</div>
+							<div class="central-meta item rounded-5 border-share">
+								<div class="user-post">
+									<div class="friend-info">
+										<figure>
+										<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="">
+										</figure>
+										<div class="friend-name">
+											<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}" title="">
+													{{ ucwords($post->user->last_name . ' ' . $post->user->first_name) }}
+												</a></ins>
+
+											<span>published:
+												{{ date_format($post->created_at, 'H:i d/m/Y') }}</span>
+										</div>
+										<div class="post-meta">
+											<!-- <img src="images/resources/user-post.jpg" alt=""> -->
+											<!-- Print content if not null -->
+											<!-- {{ $post->id }} -->
+											@if (!empty($post->content))
+											<div class="description pb-2">
+												{{ $post->content }}
+											</div>
+											@endif
+
+
+											@php
+											$totalMedia = count($post->image) + count($post->video);
+
+											@endphp
+											<!-- Display imgs  -->
+											@if ($totalMedia != 0)
+											<div class="container-fluied">
+												<div class="row">
+													@foreach ($post->image as $img)
+													<a href="{{ asset('storage/images/' . $img->url) }}" class="{{ $loop->index < 3 ? 'col-4 p-1' : 'd-none' }} {{ $loop->index == 2 ? 'position-relative' : '' }}" data-fancybox="gallery{{ $post->id }}" data-caption="{{ $post->user->last_name . ' ' . $post->user->first_name . '\'s images' }}">
+														<img src="{{ asset('storage/images/' . $img->url) }}" alt="failed to display" class="d-block" />
+														@if ($loop->index == 2 && $loop->count - 3 != 0)
+														<div style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+															+{{ $totalMedia - 2 }}
+														</div>
+														@endif
+													</a>
+													@endforeach
+
+													@if (!empty($post->video) && count($post->video) != 0)
+													@foreach ($post->video as $video)
+													<a href="{{ asset('storage/videos/' . $video->url) }}" data-fancybox="gallery{{ $post->id }}" style="max-height:50rem" class="{{ count($post->image) > 3 || $loop->iteration + count($post->image) > 3 ? 'd-none' : 'col-3 p-1' }}{{ count($post->image) > 3 || $loop->iteration + count($post->image) == 3 ? ' position-relative' : '' }}" style="display:block;height: 100%">
+														<video controls style="height:100%;width:100%" src="{{ asset('storage/videos/' . $video->url) }}"></video>
+														@if (count($post->image) > 3 || $loop->iteration + count($post->image) == 3)
+														<div style='position:absolute;inset:0;background:rgba(0,0,0,.35);color:#fff;display:flex;justify-content: center;align-items: center;font-size:2rem'>
+															+{{ $totalMedia - 2 }}
+														</div>
+														@endif
+													</a>
+													@endforeach
+													@endif
+												</div>
+
+											</div>
+											@endif
+
+
+
+											<!-- views, like,dislike, comment, share -->
+											<div class="we-video-info border-top my-3">
+												<ul>
+													<li>
+														<span class="like" data-toggle="tooltip" title="like">
+															<i class="ti-heart"></i>
+															<ins>2.2k</ins>
+														</span>
+													</li>
+													<li>
+														<span class="dislike" data-toggle="tooltip" title="dislike">
+															<i class="ti-heart-broken"></i>
+															<ins>200</ins>
+														</span>
+													</li>
+													<li>
+														<span class="comment" data-toggle="tooltip" title="Comments">
+															<i class="fa fa-comments-o"></i>
+															<ins>{{ count($post->comments) }}</ins>
+														</span>
+													</li>
+
+													@if (Auth::user()->user_id != $post->user_id_fk)
+													<li class="social-media">
+														<x-share-btn>{{ $post->id }}</x-share-btn>
+													</li>
+													@endif
+
+												</ul>
+											</div>
+
+										</div>
+									</div>
+									<div class="coment-area p-1 post-cmt post-cmt-{{ $post->id }}">
+										<ul class="we-comet comment">
+											<!-- hiện commment cho mỗi bình luận tại đây -->
+											@php
+											$count = 0;
+											@endphp
+											@foreach ($post->comments as $comment)
+											@php
+											$flag = $count >= 3 ? true : false;
+											@endphp
+											<x-comment :commenter=$comment :isHidden=$flag></x-comment>
+											@php
+											$count++;
+											@endphp
+											@endforeach
+
+										</ul> <!-- list of comments-->
+										<ul class="we-comet">
+											<li>
+												@php
+												$count_of_cmt = count($post->comments);
+												@endphp
+												@if ($count_of_cmt > 3)
+												<a title="" class="showmore underline btnshow-{{ $post->id }}">more
+													comments</a>
+												@endif
+											</li>
+											<li class="post-comment">
+												<div class="comet-avatar">
+													<x-user-avt>
+													</x-user-avt>
+												</div>
+												<div class="post-comt-box {{ $post->id }}">
+													<form method="post" action="comment" id="form-{{ $post->id }}" enctype="multipart/form-data">
+														@csrf
+														@method('POST')
+														<input type="hidden" name="post_id" value="{{ $post->id }}">
+														<textarea placeholder="Post your comment" name="content"></textarea>
+														<div class="add-smiles">
+															<span class="em em-expressionless" title="add icon"></span>
+														</div>
+														<div class="attachments">
+															<ul class="m-0 d-flex align-items-center">
+																<li>
+																	<i class="fa fa-image"></i>
+																	<label class="fileContainer">
+																		<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*">
+																	</label>
+																</li>
+																<li>
+																	<i class="fa fa-video-camera"></i>
+																	<label class="fileContainer">
+																		<input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*">
+																	</label>
+																</li>
+
+																<li>
+																	<button type="submit" class="bg-dark btnComment" value={{ $post->id }}>Post</button>
+																</li>
+															</ul>
+														</div>
+														{{-- <div class="smiles-bunch">
+																			<i class="em em---1"></i>
+																			<i class="em em-smiley"></i>
+																			<i class="em em-anguished"></i>
+																			<i class="em em-laughing"></i>
+																			<i class="em em-angry"></i>
+																			<i class="em em-astonished"></i>
+																			<i class="em em-blush"></i>
+																			<i class="em em-disappointed"></i>
+																			<i class="em em-worried"></i>
+																			<i class="em em-kissing_heart"></i>
+																			<i class="em em-rage"></i>
+																			<i class="em em-stuck_out_tongue"></i>
+																		</div> --}}
+													</form>
+												</div>
+
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						@endif
+						@php
+						if (isset($firstPost) && $firstPost == true) {
+						$firstPost = false;
+						}
+						@endphp
+						@endforeach
+					</div>					
+
+				</div><!-- centerl meta -->
 							<div class="col-lg-3">
 								<aside class="sidebar static">	
 								<div class="widget">

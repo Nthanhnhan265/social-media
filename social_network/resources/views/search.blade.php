@@ -110,7 +110,7 @@ use Illuminate\View\Component;
 								@foreach ($groups as $group)
 									<div class="central-meta">
 										<div class="groups">
-											<span><i class="fa fa-users"></i> {{$group->name}}</span>
+											<span style="font-size:1rem"><i class="fa fa-users"></i><x-format_number :number=1100/></span>
 										</div>
 										<ul class="nearby-contct">
 											<li>
@@ -120,9 +120,8 @@ use Illuminate\View\Component;
 													</figure>
 													<div class="pepl-info">
 														<h4><a href="{{ url('groups/' . $group->id) }}" title="">{{$group->name_group}}</a></h4>
-														<span>Public Groups</span>
-														<em>{{ $group->members_count }} Members</em>
-														<a href="#" title="" class="add-butn" data-ripple="">Leave Group</a>
+														<span>Private Groups</span>
+															<a href="#" title="" class="add-butn" data-ripple="">Leave Group</a>
 													</div>
 												</div>
 											</li>
@@ -289,12 +288,11 @@ use Illuminate\View\Component;
 												<li>
 													<div class="nearly-pepls">
 														<figure>
-															<a href="{{ url('profile/' . $user->user_id) }}" title=""><img src="{{ asset('storage/images/' . $user->avatar) }}" alt=""></a>
+															<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="">
 														</figure>
 														<div class="pepl-info">
 															<h4><a href="{{ url('profile/' . $user->user_id) }}" title="">{{$user->last_name}} {{$user->first_name}}</a></h4>
-															<span>{{$user->description}}</span>
-															<a href="#" title="" class="add-butn" data-ripple="">Follow</a>
+																<a href="#" title="" class="add-butn" data-ripple="">Follow</a>
 														</div>
 													</div>
 												</li>

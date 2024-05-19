@@ -353,3 +353,10 @@ body {
     display: none;
   }
 }
+
+.btn-outline-success-2 {
+  color: #28a745;
+  background-color: transparent;
+  background-image: none;
+  border-color: #28a745;
+}

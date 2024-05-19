@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Users;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -172,13 +173,12 @@ class UsersController extends Controller
 
     public function deleteUser($userId) {
         $user = User::find($userId);
+
+        Posts::where('user_id_fk', $userId)->delete();
+        Comment::where('user_id_fk', $userId)->delete();
     
-        if ($user) {
-            $user->delete();
-            return redirect()->back()->with('success', 'User deleted successfully.');
-        } else {
-            return redirect()->back()->with('error', 'User not found.');
-        }
+        $user->delete();
+        return redirect()->back();
     }   
     
     public function updateUser(Request $request, $userId) {
@@ -271,4 +271,17 @@ class UsersController extends Controller
           OR (sender = ? AND receiver = ?)",[Auth::user()->user_id,$id,$id,Auth::user()->user_id]);
           return view('timeline-videos', compact('posts', 'user','friend'));
      }
+
+     //tìm kiếm người dùng
+     public function search(Request $request)
+     {
+         $query = $request->input('query');
+         
+         $users = User::where('first_name', 'LIKE', "%{$query}%")
+                     ->orWhere('last_name', 'LIKE', "%{$query}%")
+                     ->paginate(5); 
+     
+         return view('user-management-search', compact('users'));
+     }
+     
 }

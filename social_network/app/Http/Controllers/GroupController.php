@@ -10,6 +10,9 @@ use \App\Models\Comment;
 use \App\Models\Posts;
 use \App\Models\PostGroup;
 use Illuminate\Support\Facades\DB;
+use App\Models\Relationship;
+use App\Models\Follow;
+use Illuminate\Support\Facades\Session;
 
 class GroupController extends Controller
 {
@@ -145,16 +148,30 @@ class GroupController extends Controller
     }
 
     //xoá group trong group-management
-    public function deleteGroup($groupID) {
-        UserGroup::where('group_id_fk', $groupID)->delete();
-        $group = Group::find($groupID);
+    public function deleteGroup($group_id) {
+        DB::transaction(function () use ($group_id) {
+            // Tìm nhóm theo ID
+            $group = Group::findOrFail($group_id);
     
-        if ($group) {
+            // Xóa tất cả các user trong nhóm từ bảng usergroup
+            UserGroup::where('group_id_fk', $group_id)->delete();
+    
+            // Lấy danh sách post_id từ bảng postgroup liên quan đến group_id
+            $postIds = PostGroup::where('group_id_fk', $group_id)->pluck('post_id_fk');
+    
+            // Xóa tất cả các bài viết liên quan từ bảng postgroup
+            PostGroup::where('group_id_fk', $group_id)->delete();
+    
+            // Xóa các bình luận liên quan từ bảng comments
+            Comment::whereIn('post_id_fk', $postIds)->delete();
+    
+            // Xóa các bài viết từ bảng post
+            Posts::whereIn('id', $postIds)->delete();
+    
+            // Xóa nhóm
             $group->delete();
-            return redirect()->back()->with('success', 'Group deleted successfully.');
-        } else {
-            return redirect()->back()->with('error', 'Group not found.');
-        }
+        });
+            return redirect()->back();
     }  
     /**
      * Remove the specified resource from storage.
@@ -219,13 +236,17 @@ class GroupController extends Controller
 
         $group = Group::where('group_id', $group_id)
                 ->first();
-
-        // $comments = Comment::where('post_id_fk', $id)
-        //            ->orderBy('created_at', 'desc')
-        //            ->get();               
-        // return view('post-detail')->with('comments', $comments)->with('post', $post);
-        return view('group-view')->with('posts', $posts)->with('userRole', $userRole)
-        ->with('memberCount', $memberCount)->with('group', $group)->with('members', $members);
+        
+        return view(
+            'group-view',
+            [             
+                'posts' => $posts,
+                'userRole'=> $userRole,
+                'memberCount'=> $memberCount,
+                'group'=> $group,
+                'members'=> $members
+            ]
+        );
     }
 
     public function getAllForGroupMember($group_id)
@@ -307,4 +328,103 @@ class GroupController extends Controller
         ->with('memberCount', $memberCount)->with('group', $group)->with('members', $members)->with('requestCount', $requestCount)
         ->with('requests', $requests);
     }
+
+    private function getNewfeed($user_id)
+    {
+        $posts = [];
+        $sharedPost = [];
+        //get user's followed list 
+        $followedList = Follow::getFollowedListRaw($user_id);
+         if (!$followedList->get()->isEmpty()) {
+
+            //  get user's shared posts 
+            //  get friend's shared posts (Check follow table )
+            $followed = $followedList->where('follow_type', 'friend')->pluck('follow_id_fk')->toArray();
+    
+            $sharedPost = Share::where('status', 1)->whereIn('user_id_fk', [$user_id, ...$followed])
+                ->with([
+                    'user',
+                    'post' => function ($q) {
+                        $q->with([
+                            'user',
+                            'image',
+                            'video',
+                            'comments' => function ($q) {
+                                $q->with([
+                                    'user',
+                                    'image' => function ($qImg) {
+                                        $qImg->where('img_location_fk', 1);
+                                    },
+                                    'video' => function ($qVid) {
+                                        $qVid->where('video_location_fk', 1);
+                                    }
+                                ])->orderBy('created_at','desc');
+                            }
+                        ]);
+                    }
+                ])
+                ->get();
+
+            
+            //  get user's posts 
+            //  get friend's posts (check follow table)
+            $posts = Posts::whereIn('user_id_fk', [$user_id, ...$followed])->orderBy('created_at', 'desc')
+                ->with([
+                    'user',
+                    'image',
+                    'video',
+                    'comments' => function ($q) {
+                        $q->with([
+                            'user',
+                            'image' => function ($qImg) {
+                                $qImg->where('img_location_fk', 1);
+                            },
+                            'video' => function ($qVid) {
+                                $qVid->where('video_location_fk', 1);
+                            }
+                        ])->orderBy('created_at','desc');
+                    }
+                ])->get();
+              
+            }
+        //  get post in group that user joined (check follow table )
+
+        //no-one is followed 
+        else {
+           
+            //random any posts in DB 
+            $posts = Posts::inRandomOrder()->limit(10)
+            ->with([
+                'user',
+                'image',
+                'video',
+                'comments' => function ($q) {
+                    $q->with([
+                        'user',
+                        'image' => function ($qImg) {
+                            $qImg->where('img_location_fk', 1);
+                        },
+                        'video' => function ($qVid) {
+                            $qVid->where('video_location_fk', 1);
+                        }
+                    ])->orderBy('created_at', 'desc');
+                }
+            ])->get();
+           
+        }
+       
+        $shuffleArray = [...$posts,...$sharedPost]; 
+        shuffle($shuffleArray);
+        return  $shuffleArray;
+    }
+
+    //tìm kiếm
+    public function search(Request $request)
+    {
+        $query = $request->input('query');       
+        $groups = Group::where('name_group', 'LIKE', "%{$query}%")
+                ->paginate(5);
+        return view('group-management-search', compact('groups'));
+    }
+
 }

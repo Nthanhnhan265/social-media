@@ -654,6 +654,56 @@ class PostsController extends Controller
                    ->get();
 
     return view('search', compact('posts', 'groups', 'search','users'));
-}
+    }
+
+    public function index2()
+    {
+        $userId = Auth::user()->user_id;
+        $friend_list = Relationship::getFriendListOfUser();
+        $postActivityHistorys = DB::select('select * from posts where user_id_fk = ?', [$userId]);
+        $commentsActivityHistorys = DB::select('select comments.*, users.first_name as user_first_name ,users.last_name as user_last_name from comments inner join users on comments.comment_id = users.user_id where user_id_fk != ?', [$userId]);
+        $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]);
+        $posts = $this->getNewfeed($userId); 
+        $firstPost = false; 
+        //if session exists (user clicked notification) => return post that is remained in notification box at the top
+        if (Session::get("postFound") && Session::get("type")) {
+            //set session to variable 
+            $type = Session::get("type"); 
+            $postFound = Session::get("postFound"); 
+            //get posts 
+            $posts = Posts::getNewfeedAndNewPostFirst($userId,$postFound,$type); 
+            //remove session
+            Session::forget('postFound'); 
+            Session::forget('type');
+            $firstPost = true; 
+            
+        }
+        //hiển thị giao diện trang chính
+        //hiển thị mọi bài viết trong db -> chưa hợp lý cho việc hiển thị phù hợp với từng tài khoản
+        return view(
+            'group-view',
+            [
+                "posts" => $posts,
+                "firstPost" => $firstPost,
+                "friends" => $friend_list,
+                'postActivityHistors' => $postActivityHistorys,
+                'commentsActivityHistorys' => $commentsActivityHistorys,
+                'shareActivityHistorys' => $shareActivityHistorys
+            ]
+        );
+       
+    }
+
+
+    public function searchInManagement(Request $request)
+     {
+         $query = $request->input('query');
+         
+         $posts = Posts::where('content', 'LIKE', "%{$query}%")
+                     ->paginate(5); 
+     
+         return view('post-management-search', compact('posts'));
+     }
+
 
 }

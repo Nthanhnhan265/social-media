@@ -29,17 +29,26 @@
     <!-- Header -->
     <header class="header">
         <div class="box-space"></div>
+		<div class="position-relative" style="margin-left: 250px; margin-top: 20px;">
+			@php
+				// Lấy tên route hiện tại
+				$currentRoute = Route::current()->getName();
+				$searchAction = '';
+				if (Str::contains($currentRoute, 'user-management')) {
+					$searchAction = route('user-management-search');
+				} elseif (Str::contains($currentRoute, 'group-management')) {
+					$searchAction = route('group-management-search');
+				} else {
+					$searchAction = route('post-management-search'); 
+				}
+			@endphp
+			<form class="d-flex" style="width:30vw; height: 30px;" action="{{ $searchAction }}" method="GET">
+				<input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success-2" style="line-height: 15px" type="submit">Search</button>
+			</form>
+		</div>
         <div class="top-area">				
-				<ul class="setting-area">
-					<li>
-						<a href="#" title="Home" data-ripple=""><i class="ti-search"></i></a>
-						<div class="searched">
-							<form method="post" class="form-search">
-								<input type="text" placeholder="Search Friend">
-								<button data-ripple><i class="ti-search"></i></button>
-							</form>
-						</div>
-					</li>
+				<ul class="setting-area">				
 					<li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
 					<li>
 						<a href="#" title="Notification" data-ripple="">
@@ -215,7 +224,7 @@
     <aside id="sidebar">
         <div class="sidebar-title">
             <div class="sidebar-brand">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                <a href="{{ url('newsfeed')}}"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a>
             </div>
             <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
         </div>

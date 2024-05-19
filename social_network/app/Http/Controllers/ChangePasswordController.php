@@ -27,6 +27,6 @@ class ChangePasswordController extends Controller
             'password' => Hash::make($request->new_password),
         ]);
 
-        return redirect()->route('dashboard')->with('status', 'Đổi mật khẩu thành công!');
+        return redirect()->back();
     }
 }

@@ -100,7 +100,7 @@ class UseGroupController extends Controller
                         ->delete();
         });
     
-        return redirect()->back();
+        return redirect('groups');
     }
 
     //Xoá yêu cầu vào nhóm

@@ -676,7 +676,7 @@ class PostsController extends Controller
     // Search in groups
     $groups = Group::where('name_group', 'like', "%{$search}%")
                    ->orWhere('description', 'like', "%{$search}%")
-                   ->with('images')
+                   ->with('images')                   
                    ->get(); 
                    
     foreach ($groups as $group) {
@@ -692,6 +692,13 @@ class PostsController extends Controller
         else{
             $group->status = 'Joined';
         }
+    }
+
+    foreach ($groups as $group) {
+        $memberCount = UserGroup::where('group_id_fk', $group->group_id)
+                        ->where('request', 0)
+                        ->count();
+        $group->memberCount = $memberCount;
     }
 
     //  dd($groups);

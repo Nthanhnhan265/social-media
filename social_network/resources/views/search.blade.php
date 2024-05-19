@@ -110,7 +110,8 @@ use Illuminate\View\Component;
 								@foreach ($groups as $group)
 									<div class="central-meta">
 										<div class="groups">
-											<span style="font-size:1rem"><i class="fa fa-users"></i><x-format_number :number=1100/></span>
+										<span style="font-size: 1rem">
+ 									   <i class="fa fa-users"></i>{{ $group->memberCount }}</span>
 										</div>
 										<ul class="nearby-contct">
 											<li>

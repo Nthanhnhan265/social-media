@@ -438,31 +438,31 @@ function confirmDeleteUser(userId) {
 		return false;
 	}
 }
-//Load post
-$(document).ready(function() {
-	const allPosts = $('.newpost')
-	let indexPosts = 0; 
-	const MAX_POST = 5; 
-	$(window).scroll(function() {
-		if ($(window).scrollTop() + 400 >= $(document).height()) {
-			if ($('#loading-spinner').is(':hidden')) {
-				$('#loading-spinner').show();
-				const nextPosts = allPosts.slice(indexPosts, indexPosts + MAX_POST)
-				if (nextPosts && indexPosts < allPosts.length ) { 
+// //Load post
+// $(document).ready(function() {
+// 	const allPosts = $('.newpost')
+// 	let indexPosts = 0; 
+// 	const MAX_POST = 5; 
+// 	$(window).scroll(function() {
+// 		if (true) {
+// 			if ($('#loading-spinner').is(':hidden')) {
+// 				$('#loading-spinner').show();
+// 				const nextPosts = allPosts.slice(indexPosts, indexPosts + MAX_POST)
+// 				if (nextPosts && indexPosts < allPosts.length ) { 
 				
-					nextPosts.removeClass('d-none');
+// 					nextPosts.removeClass('d-none');
 					 
-				}
-				indexPosts += MAX_POST 
-				// loadMorePosts(nextPage);
-			}else  { 
-				$('#loading-spinner').hide();
-			}
-		}
-		console.log(`${indexPosts}: ${indexPosts +  MAX_POST} : ${$(window).scrollTop() + 900} : ${$(window).height()}`); 
-	});
-}
-)
+// 				}
+// 				indexPosts += MAX_POST 
+// 				// loadMorePosts(nextPage);
+// 			}else  { 
+// 				$('#loading-spinner').hide();
+// 			}
+// 		}
+// 		console.log(`${indexPosts}: ${indexPosts +  MAX_POST} : ${$(window).scrollTop() + 900} : ${$(window).height()}`); 
+// 	});
+// }
+// )
 
  
 

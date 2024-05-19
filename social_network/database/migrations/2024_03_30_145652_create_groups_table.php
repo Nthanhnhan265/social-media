@@ -17,6 +17,8 @@ return new class extends Migration
             $table->increments('group_id');
             $table->string('name_group',length:100); 
             $table->string('description',length:500);
+            $table->string('avatar')->default('default.jpg');
+            $table->string('background')->nullable(true);
             $table->boolean('status'); 
             $table->timestamps();
         });

@@ -1258,8 +1258,19 @@ header.sticky {
     border: 1px solid #ede9e9;
     border-radius: 3px;
 }
+::-webkit-scrollbar { 
+    width: .4rem !important;
+}
+::-webkit-scrollbar-thumb { 
+    background: #088dcd;
+    border-radius: 15px;
+
+}
+ 
 
 .sidebar .widget:last-child {
+    height: 20rem;
+    overflow: scroll;
     margin-bottom: 0;
 }
 
@@ -8081,7 +8092,8 @@ a.main-btn {
     width: 49%;
 }
 
-.help-description {
+.help-
+ {
     border-top: 1px solid #eaeaea;
     display: inline-block;
     margin-top: 40px;
@@ -10531,6 +10543,10 @@ aside.sidebar.full-style {
     display: none;
     font-weight: unset !important;
 
+}
+.readless-btn { 
+    cursor: pointer;
+    color: blue!important;
 }
 
 

@@ -6,7 +6,6 @@ use App\Http\Controllers\Notification;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Relationship;

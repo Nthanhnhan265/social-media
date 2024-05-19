@@ -778,11 +778,18 @@ header.sticky {
     margin-bottom: 0;
 }
 
-.feature-photo > figure img {
-    display: inline-block;
-    width: 100%;
-
+.feature-photo > figure .image-wrapper {
+    height: 500px;
+    overflow: hidden;
+    position: relative;
 }
+
+.feature-photo > figure .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 
 .user-avatar {
     width: 250px;
@@ -799,7 +806,7 @@ header.sticky {
     margin-top: -168px;
     overflow: hidden;
     position: relative;
- 
+    left: 20px;
     border-radius: 50%;
 }
 

@@ -19,7 +19,7 @@
 					<div class="row" id="page-contents">
 						<div class="col-lg-3">
 							<aside class="sidebar static">
-								<div class="widget">
+								<!-- <div class="widget">
 									<h4 class="widget-title">Socials</h4>
 									<ul class="socials">
 										<li class="facebook">
@@ -35,7 +35,7 @@
 													likes</ins></a>
 										</li>
 									</ul>
-								</div>
+								</div> -->
 								<!-- <div class="widget">
 										<h4 class="widget-title">Shortcuts</h4>
 										<ul class="naves">
@@ -209,7 +209,7 @@
 															
 														@if(auth()->check() && $user->user_id == auth()->user()->user_id)
 														<div class="dropdown" style="position: absolute; right: 5%;">
-																<button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;">
+																<button class="btn  dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;background:##f4f2f2">
 																	<i class="fa-solid fa-ellipsis-vertical"></i>
 																</button>
 																<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton-{{$post->id}}">
@@ -707,7 +707,7 @@
 
 									</div>
 								</div><!-- page like widget -->
-								<div class="widget">
+								<!-- <div class="widget">
 									<div class="banner medium-opacity bluesh">
 										<div class="bg-image"
 											style="background-image: url(images/resources/baner-widgetbg.jpg)"></div>
@@ -723,7 +723,7 @@
 											<a data-ripple="" title="" href="#">start now!</a>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<div class="widget friend-list stick-widget">
 									<h4 class="widget-title">Friends</h4>
 									<div id="searchDir"></div>
@@ -807,7 +807,8 @@
 											</form>
 										</div>
 									</div>
-								</div><!-- friends list sidebar -->
+								</div>
+								<!-- friends list sidebar -->
 
 							</aside>
 						</div><!-- sidebar -->

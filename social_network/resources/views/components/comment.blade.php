@@ -23,7 +23,7 @@
               <!-- Toggle Menu -->
               @if (!Request::is('newsfeed'))  
               <div class="dropdown" style="position: absolute; right: 5%;">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-{{$commenter->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton-{{$commenter->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;background:#f4f2f2;">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton-{{$commenter->id}}">

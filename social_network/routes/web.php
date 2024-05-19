@@ -16,7 +16,7 @@ use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LikePostController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\UseGroupController;
+// use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -146,9 +146,9 @@ Route::put('/groups-member/{group_id}', [UseGroupController::class, 'update'])->
 Route::get('/edit-group-2/{group_id}', [GroupController::class, 'getAllInfoForEditGroup']);
 
 
-Route::get('/{page?}', function ($page = "newsfeed") {  
-    return view($page);
-});
+// Route::get('/{page?}', function ($page = "newsfeed") {  
+//     return view($page);
+// });
 
 
 

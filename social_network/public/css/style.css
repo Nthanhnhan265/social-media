@@ -3563,6 +3563,8 @@ nav.breadcrumb {
     vertical-align: middle;
     width: 2.5rem;
     height: 2.5rem;
+    border-radius: 50%;
+    overflow: hidden;
 
 }
 .nearly-pepls > figure > img { 
@@ -3576,6 +3578,7 @@ nav.breadcrumb {
     position: relative;
     vertical-align: middle;
     max-width: 88%;
+    width: 100%;
 }
 
 .pepl-info > h4 {
@@ -10514,7 +10517,7 @@ aside.sidebar.full-style {
 }
 
 .tab-content {
-    display: none;
+    /* display: none; */
 }
 
 .tab-content.active {

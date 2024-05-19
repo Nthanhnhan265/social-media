@@ -86,7 +86,7 @@
         width: 62%;
     }
     .pepl-info {
-        width: 87%;
+        max-width: 87%;
     }
     .liked-pages > li {
         min-width: 32.4%;

@@ -208,7 +208,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit-password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
     Route::post('/edit-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 });
-\
+
 
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);

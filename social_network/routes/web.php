@@ -17,6 +17,8 @@ use App\Http\Controllers\LikePostController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ChangePasswordController;
+
 
 
 /*
@@ -198,7 +200,11 @@ Route::delete('comments/{id}', [CommentController::class, 'destroy'])->name('com
 Route::get('search', [PostsController::class, 'search'])->name('posts.search');
 // Route::get('timeline-friends/{id}',[UsersController::class,'show']);
 Route::delete('time-line/user-profile/{id}', [PostsController::class,'destroy'])->name('posts.destroy');
-
+//Route Change password
+Route::middleware(['auth'])->group(function () {
+    Route::get('/edit-password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('/edit-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
+});
 
 
 Route::get('/{page?}', function ($page = "newsfeed") {  

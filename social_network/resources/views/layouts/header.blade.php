@@ -171,11 +171,16 @@ $allUsers = User::get();
                   
                  
                         <a href="#" title="Notification" data-ripple="" class="notification-e">
-                            <i class="ti-bell"></i><span><x-format_number :number=count($notifications)/></span>
+                            <?php 
+                                $count = count($notifications->where('status','unread')); 
+                            ?>
+                            <i class="ti-bell"></i><span><x-format_number :number=$count/></span>
                         </a>
                         <div class="dropdowns">
-                         
-                            <span><x-format_number :number=count($notifications)/> New notifications</span>
+                            <?php 
+                                $count = count($notifications->where('status','unread')); 
+                            ?>
+                            <span><x-format_number :number=$count/> New notifications</span>
                             <ul class="drops-menu">
                                 @foreach($notifications as $notification)
                                 <li>
@@ -212,8 +217,10 @@ $allUsers = User::get();
                                                 <!-- render accept friend request notification  -->
                                                 @elseif($notification->type=="newpost")
                                                 @php
-                                                $author = Posts::where('id',$notification->type_id)->with('user')->first()->user;
-
+                                                $author = Posts::where('id',$notification->type_id)->with('user')->first();
+                                                 if(!empty($author)) { 
+                                                    $author = $author->user; 
+                                                 }
                                                 @endphp
 
                                                 @if($author)
@@ -223,8 +230,10 @@ $allUsers = User::get();
                                                 @endif
                                                 @elseif($notification->type=="sharepost")
                                                 @php
-                                                $author = Share::where('share_id',$notification->type_id)->with('user')->first()->user;
-
+                                                $author = Share::where('share_id',$notification->type_id)->with('user')->first();
+                                                 if(!empty($author)) { 
+                                                    $author = $author->user; 
+                                                 }
                                                 @endphp
 
                                                 @if($author)

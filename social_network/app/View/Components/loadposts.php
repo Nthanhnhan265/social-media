@@ -3,16 +3,18 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-class useravt extends Component
+
+class loadposts extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public $posts; 
+    public function __construct($posts )
     {
-        //
+        $this->posts = $posts;
     }
 
     /**
@@ -22,6 +24,6 @@ class useravt extends Component
      */
     public function render()
     {
-        return view('components.user-avt');
+        return view('components.loadposts');
     }
 }

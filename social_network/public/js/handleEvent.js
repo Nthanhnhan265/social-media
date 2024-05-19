@@ -209,3 +209,22 @@ window.addEventListener('beforeunload', (e)=>{
         
     }
 })
+    const showmoreBtns = document.querySelectorAll('.long-text'); 
+    console.log(showmoreBtns)
+    showmoreBtns.forEach((element)=>{ 
+        const btnshowmore = element.querySelector('.readmore-btn').addEventListener('click',(e)=> { 
+            console.log('print');
+            e.target.style.display = 'none'; 
+            element.querySelector('.readless-btn').style = 'inline'; 
+            element.querySelector('.full').style.display = 'inline'
+            element.querySelector('.short').style.display = 'none'
+        }) 
+        element.querySelector('.readless-btn').addEventListener('click',(e)=> { 
+            e.target.style.display = 'none'; 
+            element.querySelector('.readmore-btn').style = 'none'; 
+            element.querySelector('.full').style.display = 'none'
+            element.querySelector('.short').style.display = 'inline'
+        }) 
+    }) 
+
+   

@@ -1,5 +1,21 @@
+<?php
+	use App\Models\Follow;
+	use Illuminate\Support\Facades\Session;
+
+	Session::put("url",url()->current());
+	
+?>
 @extends('/layouts.app')
 @section('content')		
+@if ($errors->any())
+<div class="alert alert-danger position-fixed z-1 countdown">
+	<ul class="p-0 m-0">
+		@foreach ($errors->all() as $error)
+		<li style="list-style: none"><i class="fa-solid fa-circle-exclamation pe-2"></i> {{ $error }}</li>
+		@endforeach
+	</ul>
+</div>
+@endif
 	<section>
 		<div class="feature-photo">
 			<figure><img src="{{ asset('images/resources/timeline-4.jpg')}}" alt=""></figure>
@@ -63,7 +79,7 @@
 			</div>
 		</div>
 	</section>
-		
+ 
 	<section>
 		<div class="gap gray-bg">
 			<div class="container-fluid">
@@ -139,6 +155,9 @@
 						<div class="new-postbox">
 							<figure>
 								<?php
+
+								use Illuminate\Support\Facades\Auth;
+
 								$avtUser = Auth::user()->avatar;
 								?>
 								<!-- <img src="{{ asset('images/resources/' . $avtUser) }}" alt=""> -->
@@ -150,6 +169,7 @@
 								<form method="post" action="{{ url('post') }}" enctype="multipart/form-data">
 									@csrf
 									@method('post')
+									<input type="hidden" name=group_id value="{{$group->group_id}}">
 									<textarea rows="2" name="content" placeholder="write something"></textarea>
 									<div class="attachments">
 										<ul>
@@ -186,9 +206,30 @@
 							<div class="user-post">
 								<div class="friend-info">
 									<figure>
-										<img src="{{ asset('images/resources/' . $post->user->avatar) }}" alt="">
-									</figure>
+ 											<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="" style="width:100%;height:100%">
+
+ 									</figure>
 									<div class="friend-name">
+									@if(auth()->check() && $post->user_id_fk== auth()->user()->user_id)
+														<div class="dropdown" style="position: absolute; right: 5%;">
+																<button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;">
+																	<i class="fa-solid fa-ellipsis-vertical"></i>
+																</button>
+																<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton-{{$post->id}}">
+																	<a class="dropdown-item" href="{{url('edit-post/'. $post->id)}}" style="display:flex; align-items: center;font-size: 0.8125rem " >	
+																	<i class="far fa-edit" 
+																		style="margin-right:10px; width: 1rem"></i>Update</a>
+																	
+																	<form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="POST" style="display: inline;">
+																		@csrf
+																		@method('DELETE')
+																		<button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this post?');" style="display:flex; align-items: center;;font-size: 0.8125rem"> 	
+																		<i class="fas fa-trash-alt"
+																				style="margin-right: 10px; width: 1rem"></i> Delete</button>
+																	</form>
+																</div>
+															</div>
+															@endif
 										<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}" title="">
 												{{ ucwords($post->user->last_name . ' ' . $post->user->first_name) }}
 											</a></ins>
@@ -342,8 +383,11 @@
 										</li>
 										<li class="post-comment">
 											<div class="comet-avatar">
+											<div class="parent" style="width: 2rem; height: 2rem; border-radius: 50%;overflow:hidden">
 												<x-user-avt>
 												</x-user-avt>
+											</div>
+												
 											</div>
 											<div class="post-comt-box {{ $post->id }}">
 												<form method="post" action="#" id="form-{{ $post->id }}" enctype="multipart/form-data">
@@ -624,7 +668,7 @@
 											@foreach($members as $member)								
 											<li>
 												<figure>
-													<img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('images/resources/' . $member->user->avatar) }}" alt="">
+													<img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('storage/images/' . $member->user->avatar) }}" alt="">
 												</figure>
 												<div class="friend-meta">
 													<h4><a href="{{ url('group-members') }}" class="underline" title="">{{$member->user->first_name.' '.$member->user->last_name }}</a></h4>

@@ -438,34 +438,83 @@ function confirmDeleteUser(userId) {
 		return false;
 	}
 }
-//Load post
-$(window).scroll(function() {
-    if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-        if ($('#loading-spinner').is(':hidden')) {
-            $('#loading-spinner').show();
-            var nextPage = parseInt($('#news-container').data('page')) + 1;
-            loadMorePosts(nextPage);
-        }
-    }
-});
+			}
+				indexPosts += MAX_POST 
+				// loadMorePosts(nextPage);
+			}else  { 
+				$('#loading-spinner').hide();
+			}
+		}
+		console.log(`${indexPosts}: ${indexPosts +  MAX_POST} : ${$(window).scrollTop() + 900} : ${$(window).height()}`); 
+	});
+}
+)
+//Scrip change password
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('changePasswordForm');
+    const newPassword = document.getElementById('new_password');
+    const confirmPassword = document.getElementById('new_password_confirmation');
+    const currentPassword = document.getElementById('current_password');
 
-function loadMorePosts(page) {
-    $.ajax({
-        url: '/newsfeed?page=' + page,
-        type: 'get',
-        success: function(data) {
-            if (data.trim().length == 0) {
-                $('#loading-spinner').text('Không còn bài viết nào');
-                return;
+    form.addEventListener('submit', function(event) {
+        let isValid = true;
+
+        // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+        if (newPassword.value !== confirmPassword.value) {
+            document.getElementById('newPasswordError').innerText = 'Mật khẩu mới và xác nhận mật khẩu không trùng khớp.';
+            isValid = false;
+        } else {
+            document.getElementById('newPasswordError').innerText = '';
+        }
+
+        // Kiểm tra độ dài mật khẩu mới
+        if (newPassword.value.length < 8) {
+            document.getElementById('newPasswordError').innerText = 'Mật khẩu mới phải có ít nhất 8 ký tự.';
+            isValid = false;
+        } else {
+            if (newPassword.value === confirmPassword.value) {
+                document.getElementById('newPasswordError').innerText = '';
             }
-            $('#news-container').append(data);
-            $('#news-container').data('page', page);
-            $('#loading-spinner').hide();
-        },
-        error: function() {
-            $('#loading-spinner').text('Lỗi khi tải bài viết');
+        }
+
+        // Kiểm tra xem mật khẩu hiện tại đã được cung cấp hay không
+        if (currentPassword.value === '') {
+            document.getElementById('currentPasswordError').innerText = 'Vui lòng nhập mật khẩu hiện tại.';
+            isValid = false;
+        } else {
+            document.getElementById('currentPasswordError').innerText = '';
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+			document.getElementById('currentPasswordError').innerText = 'Mật khẩu hiện tại không đúng.';
         }
     });
-}
+});
+// //Load post
+// $(document).ready(function() {
+// 	const allPosts = $('.newpost')
+// 	let indexPosts = 0; 
+// 	const MAX_POST = 5; 
+// 	$(window).scroll(function() {
+// 		if (true) {
+// 			if ($('#loading-spinner').is(':hidden')) {
+// 				$('#loading-spinner').show();
+// 				const nextPosts = allPosts.slice(indexPosts, indexPosts + MAX_POST)
+// 				if (nextPosts && indexPosts < allPosts.length ) { 
+				
+// 					nextPosts.removeClass('d-none');
+					 
+// 				}
+// 				indexPosts += MAX_POST 
+// 				// loadMorePosts(nextPage);
+// 			}else  { 
+// 				$('#loading-spinner').hide();
+// 			}
+// 		}
+// 		console.log(`${indexPosts}: ${indexPosts +  MAX_POST} : ${$(window).scrollTop() + 900} : ${$(window).height()}`); 
+// 	});
+// }
+// )
 
 

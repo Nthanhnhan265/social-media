@@ -186,4 +186,26 @@ class Posts extends Model
             return  $shuffleArray;
 
     }
+    //get all posts in array of ids
+    public static function getPostsByIds($arrIds) { 
+        $posts = Posts::whereIn('id', [...$arrIds])->orderBy('created_at', 'desc')    //remove post to move to top
+        ->with([
+            'user',
+            'image',
+            'video',
+            'comments' => function ($q) {
+                $q->with([
+                    'user',
+                    'image' => function ($qImg) {
+                        $qImg->where('img_location_fk', 1);
+                    },
+                    'video' => function ($qVid) {
+                        $qVid->where('video_location_fk', 1);
+                    }
+                ])->orderBy('created_at','desc');
+            }
+        ])->get();
+        
+        return $posts; 
+    }
 }

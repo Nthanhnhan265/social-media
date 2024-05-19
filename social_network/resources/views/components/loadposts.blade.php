@@ -1,8 +1,9 @@
-@foreach ($posts as $post)
+<div class="loadMore" id="news-container">
+						@foreach ($posts as $post)
 						{{-- Kiểm tra trong mảng và render ra cái phù hợp --}}
 						@if (class_basename($post) === 'Posts')
 						{{-- @if (false)  --}}
-						<div class="central-meta item rounded-5 {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
+						<div class="central-meta newpost item rounded-5 {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
 							<div class="user-post">
 								<div class="friend-info">
 									<figure>
@@ -21,9 +22,10 @@
 										<!-- Print content if not null -->
 										<!-- {{ $post->id }} -->
 										@if (!empty($post->content))
-										<div class="description pb-2">
-											{{ $post->content }}
-										</div>
+										@php
+										$content = $post->content;
+										@endphp
+										<x-format_string :content="$content"></x-format_string>
 										@endif
 
 
@@ -69,16 +71,16 @@
 										<div class="we-video-info border-top my-3">
 											<ul style="display: flex;align-items: center;">
 												<li style="margin-right:15px">
-												<span id="like-count-container-{{ $post->id }}" title="Likes" data-type="{{ $post->isLikedByCurrentUser() }}" data-post="{{ $post->id }}" data-clicked="false" class="mr-2 btn btn-sm d-inline font-weight-bold saveLikeDislike" style="border: 1px solid #c4c4c4;color: #c4c4c4;display:flex!important;align-items: center;">
-												<i class="fa-regular fa-thumbs-up mr-2"></i>
-													<span id="like-count-{{ $post->id }}" >
-														@php
+													<span id="like-count-container-{{ $post->id }}" title="Likes" data-type="{{ $post->isLikedByCurrentUser() }}" data-post="{{ $post->id }}" data-clicked="false" class="mr-2 btn btn-sm d-inline font-weight-bold saveLikeDislike" style="border: 1px solid #c4c4c4;color: #c4c4c4;display:flex!important;align-items: center;">
+														<i class="fa-regular fa-thumbs-up mr-2"></i>
+														<span id="like-count-{{ $post->id }}">
+															@php
 															$count = $post->sumLikes()
-														@endphp
-														
-														<x-format_number :number=$count	/>
+															@endphp
+
+															<x-format_number :number=$count />
+														</span>
 													</span>
-												</span>
 												</li>
 
 												{{-- @foreach ($post->likePosts as $likePost)
@@ -115,11 +117,11 @@
 													<span class="comment" data-toggle="tooltip" title="Comments">
 														<i class="fa fa-comments-o"></i>
 														<ins>
-														@php
+															@php
 															$count = count($post->comments)
-														@endphp
-														
-														<x-format_number :number=$count	/>
+															@endphp
+
+															<x-format_number :number=$count />
 														</ins>
 													</span>
 												</li>
@@ -160,15 +162,15 @@
 												comments</a>
 											@endif
 										</li>
-										
+
 										<li class="post-comment">
 											<div class="comet-avatar">
 												<div class="parent" style="width: 2rem; height: 2rem; border-radius: 50%;overflow:hidden">
-												<x-user-avt>
-												</x-user-avt>
+													<x-user-avt>
+													</x-user-avt>
+												</div>
 											</div>
-											</div>
-											
+
 											<div class="post-comt-box {{ $post->id }}">
 												<form method="post" action="#" id="form-{{ $post->id }}" enctype="multipart/form-data">
 													@csrf
@@ -227,8 +229,7 @@
 						$sharer = $post->user;
 						$post = $post->post;
 						@endphp
-
-						<div class="sharer {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
+						<div class="sharer newpost {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
 							<div class="user-shared">
 								<div class="avatar">
 									<img src="{{asset('storage/images/$sharer->avatar')}}" alt="error">
@@ -247,7 +248,7 @@
 								<div class="user-post">
 									<div class="friend-info">
 										<figure>
-										<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="">
+											<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="">
 										</figure>
 										<div class="friend-name">
 											<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}" title="">
@@ -262,9 +263,10 @@
 											<!-- Print content if not null -->
 											<!-- {{ $post->id }} -->
 											@if (!empty($post->content))
-											<div class="description pb-2">
-												{{ $post->content }}
-											</div>
+											@php
+											$content = $post->content;
+											@endphp
+											<x-format_string :content="$content"></x-format_string>
 											@endif
 
 
@@ -366,45 +368,45 @@
 													comments</a>
 												@endif
 											</li>
-											<li class="post-comment">  
+											<li class="post-comment">
 												<div class="comet-avatar">
-												<div class="comet-avatar">
-												<div class="parent" style="width: 2rem; height: 2rem; border-radius: 50%;overflow:hidden">
-													<x-user-avt>
-													</x-user-avt>
-												</div>
-													
-												</div>
-												<div class="post-comt-box {{ $post->id }}">
-													<form method="post" action="comment" id="form-{{ $post->id }}" enctype="multipart/form-data">
-														@csrf
-														@method('POST')
-														<input type="hidden" name="post_id" value="{{ $post->id }}">
-														<textarea placeholder="Post your comment" name="content"></textarea>
-														<div class="add-smiles">
-															<span class="em em-expressionless" title="add icon"></span>
+													<div class="comet-avatar">
+														<div class="parent" style="width: 2rem; height: 2rem; border-radius: 50%;overflow:hidden">
+															<x-user-avt>
+															</x-user-avt>
 														</div>
-														<div class="attachments">
-															<ul class="m-0 d-flex align-items-center">
-																<li>
-																	<i class="fa fa-image"></i>
-																	<label class="fileContainer">
-																		<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*">
-																	</label>
-																</li>
-																<li>
-																	<i class="fa fa-video-camera"></i>
-																	<label class="fileContainer">
-																		<input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*">
-																	</label>
-																</li>
 
-																<li>
-																	<button type="submit" class="bg-dark btnComment" value={{ $post->id }}>Post</button>
-																</li>
-															</ul>
-														</div>
-														{{-- <div class="smiles-bunch">
+													</div>
+													<div class="post-comt-box {{ $post->id }}">
+														<form method="post" action="comment" id="form-{{ $post->id }}" enctype="multipart/form-data">
+															@csrf
+															@method('POST')
+															<input type="hidden" name="post_id" value="{{ $post->id }}">
+															<textarea placeholder="Post your comment" name="content"></textarea>
+															<div class="add-smiles">
+																<span class="em em-expressionless" title="add icon"></span>
+															</div>
+															<div class="attachments">
+																<ul class="m-0 d-flex align-items-center">
+																	<li>
+																		<i class="fa fa-image"></i>
+																		<label class="fileContainer">
+																			<input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*">
+																		</label>
+																	</li>
+																	<li>
+																		<i class="fa fa-video-camera"></i>
+																		<label class="fileContainer">
+																			<input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*">
+																		</label>
+																	</li>
+
+																	<li>
+																		<button type="submit" class="bg-dark btnComment" value={{ $post->id }}>Post</button>
+																	</li>
+																</ul>
+															</div>
+															{{-- <div class="smiles-bunch">
 																			<i class="em em---1"></i>
 																			<i class="em em-smiley"></i>
 																			<i class="em em-anguished"></i>
@@ -418,8 +420,8 @@
 																			<i class="em em-rage"></i>
 																			<i class="em em-stuck_out_tongue"></i>
 																		</div> --}}
-													</form>
-												</div>
+														</form>
+													</div>
 
 											</li>
 										</ul>
@@ -433,5 +435,7 @@
 						if (isset($firstPost) && $firstPost == true) {
 						$firstPost = false;
 						}
+
 						@endphp
 						@endforeach
+					</div>

@@ -7,10 +7,12 @@ use App\Models\Follow;
 use App\Models\Group;
 use App\Models\Image;
 use App\Models\Notification;
+use App\Models\PostGroup;
 use App\Models\Posts;
 use App\Models\Relationship;
 use App\Models\Share;
 use App\Models\User;
+use App\Models\UserGroup;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\Video;
@@ -61,7 +63,7 @@ class PostsController extends Controller
 // return view('newsfeed', compact('posts'));
 // }
 
-    public function index()
+    public function index(Request $request)
     {
         $userId = Auth::user()->user_id;
         $friend_list = Relationship::getFriendListOfUser();
@@ -70,6 +72,10 @@ class PostsController extends Controller
         $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]);
         $posts = $this->getNewfeed($userId); 
         $firstPost = false; 
+
+
+
+
         //if session exists (user clicked notification) => return post that is remained in notification box at the top
         if (Session::get("postFound") && Session::get("type")) {
             //set session to variable 
@@ -83,6 +89,11 @@ class PostsController extends Controller
             $firstPost = true; 
             
         }
+
+        if($request->ajax()) { 
+            return view('partials.posts',["posts"=>$posts]);
+        }
+
         //hiển thị giao diện trang chính
         //hiển thị mọi bài viết trong db -> chưa hợp lý cho việc hiển thị phù hợp với từng tài khoản
         return view(
@@ -328,7 +339,18 @@ class PostsController extends Controller
         if ($arrFollowers) { 
             Notification::newNotifyToFollowers($arrFollowers,$post->id,"newpost"); 
         }
-        
+        //insert to postgroup (a post in a group)
+        //check if user belongs to the group
+        //###send notification 
+        if (!empty($request->group_id) && UserGroup::checkUserInGroup($user_id,$request->group_id)) { 
+            PostGroup::create([
+                "post_id_fk" => $post->id, 
+                "group_id_fk" => $request->group_id, 
+            ]);
+            
+            
+
+        }
         return redirect()->back();
     }
 
@@ -508,6 +530,7 @@ class PostsController extends Controller
     //  {{dd($post);}}
     return view('edit-post', compact('content', 'images','post'));
     }
+
     public function update(Request $request, $id)
     {
         //find and check if not empty
@@ -584,6 +607,12 @@ class PostsController extends Controller
             
          
             // {{dd($request->all());}}
+            //  return redirect('time-line/user-profile/'. $findPost->user_id_fk); 
+            $url = Session::get('url');
+             if ($url) { 
+                Session::forget("url");
+                return redirect($url); 
+             }
              return redirect('time-line/user-profile/'. $findPost->user_id_fk); 
            
         }
@@ -610,6 +639,9 @@ class PostsController extends Controller
 
         // //delete post by id 
         Posts::find($id)->delete();
+
+        
+
         // return redirect('newsfeed');
         return redirect()->back()->with('success', 'Post deleted successfully.');
     }

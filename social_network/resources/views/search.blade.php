@@ -114,12 +114,13 @@ use Illuminate\View\Component;
 										</div>
 										<ul class="nearby-contct">
 											<li>
+												<!-- Kiểm tra xem user đã tham gia vào group hay chưa? -->
 												<div class="nearly-pepls">
 													<figure>
-														<a href="{{ url('groups/' . $group->id) }}" title=""><img src="{{ asset('storage/images/' . $group->image) }}" alt=""></a>
+														<a href="{{ url('group-view/' . $group->group_id) }}" title=""><img src="{{ asset('storage/images/' . $group->image) }}" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="{{ url('groups/' . $group->id) }}" title="">{{$group->name_group}}</a></h4>
+														<h4><a href="{{ url('group-view/' . $group->group_id) }}" title="">{{$group->name_group}}</a></h4>
 														<span>Private Groups</span>
 															<a href="#" title="" class="add-butn" data-ripple="">Leave Group</a>
 													</div>
@@ -291,7 +292,7 @@ use Illuminate\View\Component;
 															<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="">
 														</figure>
 														<div class="pepl-info">
-															<h4><a href="{{ url('profile/' . $user->user_id) }}" title="">{{$user->last_name}} {{$user->first_name}}</a></h4>
+															<h4><a href="{{ url('time-line/user-profile/' . $user->user_id) }}" title="">{{$user->last_name}} {{$user->first_name}}</a></h4>
 																<a href="#" title="" class="add-butn" data-ripple="">Follow</a>
 														</div>
 													</div>

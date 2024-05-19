@@ -32,7 +32,7 @@
 										</li>
 										<li>
 											<i class="ti-lock"></i>
-											<a title="" href="{{ url('edit-password') }}">Change password</a>
+											<a title="" href="{{ route('password.change') }}">Change password</a>
 										</li>
 
 									</ul>

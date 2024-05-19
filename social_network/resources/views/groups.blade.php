@@ -94,7 +94,7 @@
 													<h4><a href="{{ url('group-view', $group->group_id_fk) }}" title="">{{ $group->group->name_group }} </a></h4>
 													<span>Active group</span>
 													@endif
-													<a href="#" title="" class="add-butn" data-ripple="">Joined</a>												
+													<a href="#" title="" class="add-butn" style="left: 30rem; width: 60px;"data-ripple="">Joined</a>												
 												</div>
 											@elseif($group->request == 1)
 											<figure>
@@ -117,7 +117,7 @@
 													<form action="{{ route('delete-request-by-user', $group->group_id_fk) }}" method="POST" style="display: inline;" onsubmit="">
 														@csrf
 														@method('DELETE')
-														<button type="submit" title="" data-ripple="" class="request-join">Delete request</button>
+														<button type="submit" title="" data-ripple="" class="request-join" style="width: 140px;">Delete request</button>
 													</form>																									
 												</div>
 											@endif

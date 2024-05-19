@@ -117,12 +117,30 @@ use Illuminate\View\Component;
 												<!-- Kiểm tra xem user đã tham gia vào group hay chưa? -->
 												<div class="nearly-pepls">
 													<figure>
-														<a href="{{ url('group-view/' . $group->group_id) }}" title=""><img src="{{ asset('storage/images/' . $group->image) }}" alt=""></a>
+														<a href="{{ url('group-view/' . $group->group_id) }}" title=""><img src="images/resources/group1.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
 														<h4><a href="{{ url('group-view/' . $group->group_id) }}" title="">{{$group->name_group}}</a></h4>
-														<span>Private Groups</span>
-															<a href="#" title="" class="add-butn" data-ripple="">Leave Group</a>
+														@if($group->status == 1)
+														<span>Active groups</span>
+														@else
+														<span>Deactive groups</span>
+														@endif																																
+														@if($group->status === 'Join')
+														<form action="{{ route('join-request', $group->group_id )}}" method="POST" style="display: inline;" onsubmit="">
+															@csrf
+															@method("POST")
+															<button type="submit" title="" data-ripple="" class="request-join">Join</button>
+														</form>
+														@elseif($group->status === 'Delete request')						
+															<form action="{{ route('search-delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+															@csrf
+															@method('DELETE')
+															<button type="submit" title="" data-ripple="" class="request-join" style="width: 140px;">Delete request</button>
+													</form>									
+														@else
+															<button type="" title="" data-ripple="" class="request-join" style="background-color: #088dcd">Joined</button>
+														@endif													
 													</div>
 												</div>
 											</li>

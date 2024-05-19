@@ -71,8 +71,9 @@ use Illuminate\View\Component;
 											</div>
 										</li>
 										@endforeach
+										 
 
-										@foreach ($commentsActivityHistorys as $commentsActivityHistory)
+ 										@foreach ($commentsActivityHistorys as $commentsActivityHistory)
 										<li>
 											<div class="activity-meta">
 												<i>{{ $commentsActivityHistory->created_at }}</i>
@@ -81,7 +82,6 @@ use Illuminate\View\Component;
 												<h6>by <a href="{{ url('time-line') }}">
 														{{ $commentsActivityHistory->user_first_name }}
 														{{ $commentsActivityHistory->user_last_name }} </a></h6>
-														
 														<div class="dropdown" style="position: absolute; right: 5%;">
 														<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton-{{$commentsActivityHistory->comment_id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;background:#f4f2f2;">
 															<i class="fa-solid fa-ellipsis-vertical"></i>

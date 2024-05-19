@@ -68,7 +68,7 @@ class PostsController extends Controller
         $userId = Auth::user()->user_id;
         $friend_list = Relationship::getFriendListOfUser();
         $postActivityHistorys = DB::select('select * from posts where user_id_fk = ?', [$userId]);
-        $commentsActivityHistorys = DB::select('select comments.*, users.first_name as user_first_name ,users.last_name as user_last_name from comments inner join users on comments.comment_id = users.user_id where user_id_fk != ?', [$userId]);
+        $commentsActivityHistorys = Comment::where('user_id_fk',$userId)->get();
         $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]);
         $posts = $this->getNewfeed($userId); 
         $firstPost = false; 

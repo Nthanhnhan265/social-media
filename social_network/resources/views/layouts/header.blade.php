@@ -166,7 +166,7 @@ $allUsers = User::get();
                 </div>
                 <ul class="setting-area">
 
-                    <li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
+                    <!-- <li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li> -->
                     <li>
                   
                  
@@ -255,7 +255,7 @@ $allUsers = User::get();
                             </ul>
                         </div>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="#" title="Messages" data-ripple=""><i class="ti-comment"></i><span>12</span></a>
                         <div class="dropdowns">
                             <span>5 New Messages</span>
@@ -323,7 +323,7 @@ $allUsers = User::get();
                             </ul>
                             <a href="{{ url('messages') }}" title="" class="more-mesg">view more</a>
                         </div>
-                    </li>
+                    </li> -->
 
                 </ul>
                 <div class="user-img" style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%;">

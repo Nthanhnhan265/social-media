@@ -438,6 +438,51 @@ function confirmDeleteUser(userId) {
 		return false;
 	}
 }
+			
+//Scrip change password
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('changePasswordForm');
+    const newPassword = document.getElementById('new_password');
+    const confirmPassword = document.getElementById('new_password_confirmation');
+    const currentPassword = document.getElementById('current_password');
+	if(form) { 
+		form.addEventListener('submit', function(event) {
+			let isValid = true;
+	
+			// Kiểm tra mật khẩu mới và xác nhận mật khẩu
+			if (newPassword.value !== confirmPassword.value) {
+				document.getElementById('newPasswordError').innerText = 'Mật khẩu mới và xác nhận mật khẩu không trùng khớp.';
+				isValid = false;
+			} else {
+				document.getElementById('newPasswordError').innerText = '';
+			}
+	
+			// Kiểm tra độ dài mật khẩu mới
+			if (newPassword.value.length < 8) {
+				document.getElementById('newPasswordError').innerText = 'Mật khẩu mới phải có ít nhất 8 ký tự.';
+				isValid = false;
+			} else {
+				if (newPassword.value === confirmPassword.value) {
+					document.getElementById('newPasswordError').innerText = '';
+				}
+			}
+	
+			// Kiểm tra xem mật khẩu hiện tại đã được cung cấp hay không
+			if (currentPassword.value === '') {
+				document.getElementById('currentPasswordError').innerText = 'Vui lòng nhập mật khẩu hiện tại.';
+				isValid = false;
+			} else {
+				document.getElementById('currentPasswordError').innerText = '';
+			}
+	
+			if (!isValid) {
+				event.preventDefault();
+				document.getElementById('currentPasswordError').innerText = 'Mật khẩu hiện tại không đúng.';
+			}
+		});
+
+	}
+});
 // //Load post
 // $(document).ready(function() {
 // 	const allPosts = $('.newpost')
@@ -464,5 +509,4 @@ function confirmDeleteUser(userId) {
 // }
 // )
 
- 
 

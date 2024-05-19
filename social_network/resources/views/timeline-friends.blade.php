@@ -32,19 +32,20 @@
 										<div class="tab-pane active fade show " id="frends">
 											<ul class="nearby-contct">
 												{{-- danh sach ban be --}}
+												 
 												@foreach ($friends as $f)
 												<li>
 													<div class="nearly-pepls">
-														<figure>
-															<a href="{{ url('time-line/user-profile/'.$f->user_id) }}" title=""><img src="{{asset('images/resources/'.$f->avatar)}}" alt="err"></a>
+														<figure class="border-avt">
+															<a href="{{ url('time-line/user-profile/'.$f->user_id) }}" title=""><img src="{{asset('storage/images/'.$f->avatar)}}" alt="err" style="width:100%; height: auto"></a>
 														</figure>
-														<div class="pepl-info">
+														<div class="pepl-info" style="width:100%; padding: 0px">
 															<h4><a href="{{ url('time-line/user-profile/'.$f->user_id) }}" title="">{{$f->last_name." ".$f->first_name}}</a></h4>
 															<form action="{{url('relationship/'.$f->user_id.'/1')}}" method="post">
 																	@csrf
 																	@method('delete')
 																	<div class="position-absolute"  style="top:50%;right:0;transform: translateY(-50%)">
-																		<button type="submit" class="btn-secondary"><i class="fa-solid fa-trash"></i></button>
+																		<button type="submit" class="btn-danger">Delete</button>
 																	</div>
 	
 																</form>
@@ -55,7 +56,6 @@
 												@endforeach
 
 											</ul>
-											<div class="lodmore"><button class="btn-view btn-load-more"></button></div>
 										</div>
 										<div class="tab-pane fade" id="frends-req">
 											<ul class="nearby-contct">
@@ -94,7 +94,7 @@
 
 
 											</ul>
-											<button class="btn-view btn-load-more"></button>
+											 
 										</div>
 									</div>
 								</div>

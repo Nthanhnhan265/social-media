@@ -1024,6 +1024,8 @@ header.sticky {
     border-radius: 50%;
     overflow: hidden;
     display: inline-block;
+    border: 1px solid rgb(218, 207, 207); 
+    
 }
 .read-noti, .unread-noti { 
     width: 100%!important;
@@ -1262,7 +1264,7 @@ header.sticky {
     width: .4rem !important;
 }
 ::-webkit-scrollbar-thumb { 
-    background: #088dcd;
+    background: #68bde4;
     border-radius: 15px;
 
 }
@@ -3561,6 +3563,8 @@ nav.breadcrumb {
     vertical-align: middle;
     width: 2.5rem;
     height: 2.5rem;
+    border-radius: 50%;
+    overflow: hidden;
 
 }
 .nearly-pepls > figure > img { 
@@ -3574,6 +3578,7 @@ nav.breadcrumb {
     position: relative;
     vertical-align: middle;
     max-width: 88%;
+    width: 100%;
 }
 
 .pepl-info > h4 {
@@ -10519,7 +10524,7 @@ aside.sidebar.full-style {
 }
 
 .tab-content {
-    display: none;
+    /* display: none; */
 }
 
 .tab-content.active {
@@ -10567,5 +10572,9 @@ aside.sidebar.full-style {
     display: block;
     color: blue;
     cursor: pointer;
+}
+.error-message {
+    color: red;
+    font-size: 0.8em;
 }
 

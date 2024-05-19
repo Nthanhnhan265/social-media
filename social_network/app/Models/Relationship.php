@@ -21,7 +21,7 @@ class Relationship extends Model
         $friendList = []; 
         if (isset($f)) { 
             foreach ($f as $friend) { 
-                if ($friend->sender != $user_id) { 
+                 if ($friend->sender != $user_id) { 
                     array_push($friendList, $friend->sender); 
                 }else { 
                     array_push($friendList, $friend->receiver); 

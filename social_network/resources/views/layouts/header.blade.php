@@ -166,7 +166,7 @@ $allUsers = User::get();
                 </div>
                 <ul class="setting-area">
 
-                    <li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
+                    <!-- <li><a href="{{ url('newsfeed') }}" title="Home" data-ripple=""><i class="ti-home"></i></a></li> -->
                     <li>
                   
                  
@@ -255,7 +255,7 @@ $allUsers = User::get();
                             </ul>
                         </div>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="#" title="Messages" data-ripple=""><i class="ti-comment"></i><span>12</span></a>
                         <div class="dropdowns">
                             <span>5 New Messages</span>
@@ -323,7 +323,7 @@ $allUsers = User::get();
                             </ul>
                             <a href="{{ url('messages') }}" title="" class="more-mesg">view more</a>
                         </div>
-                    </li>
+                    </li> -->
 
                 </ul>
                 <div class="user-img" style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%;">
@@ -332,9 +332,9 @@ $allUsers = User::get();
                     <span class="status f-online"></span>
                 </div>
                 <div class="user-setting">
-                    <a href="#" title=""><span class="status f-online"></span>online</a>
+                    <!-- <a href="#" title=""><span class="status f-online"></span>online</a>
                     <a href="#" title=""><span class="status f-away"></span>away</a>
-                    <a href="#" title=""><span class="status f-off"></span>offline</a>
+                    <a href="#" title=""><span class="status f-off"></span>offline</a> -->
 
                     <a href="{{url('time-line/user-profile/'.Auth::user()->user_id)}}" title=""><i class="ti-user"></i> view profile</a>
                     <a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>

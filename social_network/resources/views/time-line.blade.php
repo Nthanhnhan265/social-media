@@ -1,7 +1,4 @@
-@php
-	use Illuminate\Support\Facades\Auth;
-	use App\Models\Follow; 
-@endphp
+
 @extends('layouts.app')
 @section('content')
 
@@ -155,6 +152,7 @@
 						</div><!-- sidebar -->
 						<div class="col-lg-6">
 							<div class="loadMore">
+							@if(auth()->check() && $user->user_id == auth()->user()->user_id)
 								<div class="central-meta item">
 									<div class="new-postbox">
 										<figure>
@@ -194,10 +192,12 @@
 										</div>
 									</div>
 								</div><!-- add post new box -->
+							@endif
+							
 								@foreach ($posts as $post)
 										{{-- Kiểm tra trong mảng và render ra cái phù hợp --}}
 										@if (class_basename($post) === 'Posts')
-											{{-- @if (false)  --}}
+												{{-- @if (false)  --}}
 											<div class="central-meta item rounded-5">
 												<div class="user-post">
 													<div class="friend-info">

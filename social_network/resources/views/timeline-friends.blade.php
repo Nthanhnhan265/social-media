@@ -32,13 +32,16 @@
 										<div class="tab-pane active fade show " id="frends">
 											<ul class="nearby-contct">
 												{{-- danh sach ban be --}}
+												 
 												@foreach ($friends as $f)
 												<li>
 													<div class="nearly-pepls">
 														<figure>
-															<a href="{{ url('time-line/user-profile/'.$f->user_id) }}" title=""><img src="{{asset('images/resources/'.$f->avatar)}}" alt="err"></a>
+															<a href="{{ url('time-line/user-profile/'.$f->user_id) }}" title="" style="display: inline-flex;width:2rem;height:2rem">
+															<img src="{{asset('storage/images/'.$f->avatar)}}" alt="err" style="width:100%;height:100%">
+														</a>
 														</figure>
-														<div class="pepl-info">
+														<div class="pepl-info" style="width:100%; padding: 0px">
 															<h4><a href="{{ url('time-line/user-profile/'.$f->user_id) }}" title="">{{$f->last_name." ".$f->first_name}}</a></h4>
 															<form action="{{url('relationship/'.$f->user_id.'/1')}}" method="post">
 																	@csrf

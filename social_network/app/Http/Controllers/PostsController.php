@@ -649,9 +649,10 @@ class PostsController extends Controller
    
     //  dd($groups);
     $users = User::where('first_name', 'like', "%{$search}%")
-                   ->orWhere('last_name', 'like', "%{$search}%")
+                   ->Where('last_name', 'like', "%{$search}%")
                    ->orWhere('email', 'like', "%{$search}%")
                    ->get();
+                   
 
     return view('search', compact('posts', 'groups', 'search','users'));
     }

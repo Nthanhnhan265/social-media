@@ -104,7 +104,7 @@
 												<select name="month">
 													<option value="month">Month</option>
 													@for ($m = 1; $m <= 12; $m++) <option {{ date('m', strtotime($user->DOB)) == $m ? 'selected' : '' }}>{{ $m }}</option>
-														@endfor
+													@endfor
 												</select>
 
 											</div>
@@ -114,7 +114,7 @@
 													@php
 													$currentYear = date('Y');
 													@endphp
-													@for ($y = $currentYear; $y >= 1900; $y--)
+													@for ($y = $currentYear; $y >= 1900; $y++)
 													<option {{ date('Y', strtotime($user->DOB)) == $y ? 'selected' : '' }}>{{ $y }}</option>
 													@endfor
 												</select>

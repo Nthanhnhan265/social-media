@@ -16,7 +16,7 @@ use App\Http\Controllers\ShareController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LikePostController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\UseGroupController;
+// use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -152,9 +152,9 @@ Route::get('/user-management-search', [UsersController::class, 'search'])->name(
 Route::get('/group-management-search', [GroupController::class, 'search'])->name('group-management-search');
 Route::get('/post-management-search', [PostsController::class, 'searchInManagement'])->name('post-management-search');
 
-Route::get('/{page?}', function ($page = "newsfeed") {  
-    return view($page);
-});
+// Route::get('/{page?}', function ($page = "newsfeed") {  
+//     return view($page);
+// });
 
 
 
@@ -208,7 +208,7 @@ Route::delete('time-line/user-profile/{id}', [PostsController::class,'destroy'])
 
 
 
-Route::get('/{page?}', function ($page = "newsfeed") {  
-    return view($page);
-});
+// Route::get('/{page?}', function ($page = "newsfeed") {  
+//     return view($page);
+// });
 

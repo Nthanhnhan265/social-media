@@ -1,3 +1,4 @@
+
 <?php
 	use Illuminate\Support\Facades\Auth;
 	use App\Models\Follow; 
@@ -158,6 +159,7 @@
 						</div><!-- sidebar -->
 						<div class="col-lg-6">
 							<div class="loadMore">
+							@if(auth()->check() && $user->user_id == auth()->user()->user_id)
 								<div class="central-meta item">
 									<div class="new-postbox">
 										<figure>
@@ -197,7 +199,7 @@
 										</div>
 									</div>
 								</div><!-- add post new box -->
-								<x-loadposts :posts=$posts></x-loadposts>
+                <x-loadposts :posts=$posts></x-loadposts>
 
 							</div>
 						</div><!-- centerl meta -->

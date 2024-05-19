@@ -1,10 +1,12 @@
 @if (!empty($content))
 <div class="description pb-2">
     @if (strlen($content) > 300)
-    <span id="short-content">{{ Str::limit($content, 300) }}</span>
-    <span id="full-content" style="display:none;">{{ $content }}</span>
-    <a href="javascript:void(0);" id="read-more">Show more</a>
-    <a href="javascript:void(0);" id="read-less" style="display:none;">Show less</a>
+    <div class="long-text">
+        <span id="short-content" class="short">{{ Str::limit($content, 300) }}</span>
+        <span id="full-content" class="full" style="display:none;">{{ $content }}</span>
+        <div id="read-more" class = "readmore-btn">Show more</div>
+        <div id="read-less" class = "readless-btn" style="display:none;">Show less</div>
+    </div>
     @else
     {{ $content }}
     @endif

@@ -212,7 +212,7 @@
 															
 														@if(auth()->check() && $user->user_id == auth()->user()->user_id)
 														<div class="dropdown" style="position: absolute; right: 5%;">
-																<button class="btn  dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;background:##f4f2f2">
+																<button class="btn  dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;background:#f4f2f2">
 																	<i class="fa-solid fa-ellipsis-vertical"></i>
 																</button>
 																<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton-{{$post->id}}">
@@ -686,29 +686,29 @@
 									<div class="your-page">
 
 									<div class="page-meta" style="font-family: Arial, sans-serif; color: #333; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width:100%;">
-									<span style="font-size: 14px; color: #777; display: flex; align-items: center; margin-bottom: 10px;">
+									<span style="font-size: 14px; color: #777; display: flex; align-items: center; margin-bottom: 5px;">
         									<i class="fa-solid fa-info-circle" style="margin-right: 5px; color: #007bff;"></i>
         									DESCRIPTION
   											  </span>
 										@if (!empty($user->description))
-										<a href="#" title="" class="underline" style="word-wrap: break-word; display: block; font-size: 16px; color: #007bff; text-decoration: none; margin-bottom: 10px;">
-											({{$user->description}})
+										<a href="#" title="" class="underline" style="word-wrap: break-word; display: block; font-size: 16px; color: #007bff; text-decoration: none; margin-bottom: 10px; margin-left:1.2rem">
+											{{$user->description}}
 										</a>
 										@endif
+										
 										<span style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
 											<i class="fa-solid fa-cake-candles" style="padding-right: 5px; color: #ff6347;"></i>
 											<a href="{{ url('insight') }}" title="" style="color: inherit; text-decoration: none;">
-												{{ date_format(date_create($user->DOB), 'M d, Y') }}
+											{{ date_format(date_create($user->DOB), 'M d, Y') }}
 											</a>
 										</span>
+
 										<span style="display: flex; align-items: center; font-size: 14px; color: #555; text-overflow:clip">
 											<i class="fa-solid fa-envelope" style="padding-right: 5px; color: #1e90ff;"></i>
 											<a href="#" title="" style="color: inherit; text-decoration: none;">
 												{{$user->email}}
 											</a>
 										</span>
-									</div>
-
 									</div>
 								</div><!-- page like widget -->
 								<!-- <div class="widget">

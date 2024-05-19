@@ -292,7 +292,7 @@ use Illuminate\View\Component;
 															<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="">
 														</figure>
 														<div class="pepl-info">
-															<h4><a href="{{ url('profile/' . $user->user_id) }}" title="">{{$user->last_name}} {{$user->first_name}}</a></h4>
+															<h4><a href="{{ url('time-line/user-profile/' . $user->user_id) }}" title="">{{$user->last_name}} {{$user->first_name}}</a></h4>
 																<a href="#" title="" class="add-butn" data-ripple="">Follow</a>
 														</div>
 													</div>

@@ -16,7 +16,7 @@
     </div>
     <div class="we-comment" style="border-radius: 10px !important; border: 1px solid #cac4c4">
         <div class="coment-head">
-            <h5><a href="{{ url('time-line/user-profile/' .Auth::user()->user_id) }}" title="">{{$commenter->user->last_name." ".$commenter->user->first_name}}</a></h5>
+            <h5><a href="{{ url('time-line/user-profile/' .$commenter->user->user_id) }}" title="">{{$commenter->user->last_name." ".$commenter->user->first_name}}</a></h5>
             <span>{{ date_format ($commenter->created_at,"H:i d/m/Y") }}</span>
             <!-- <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a> -->
             @if(auth()->check() && $commenter->user->user_id == auth()->user()->user_id)

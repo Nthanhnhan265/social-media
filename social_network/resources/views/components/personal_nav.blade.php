@@ -3,8 +3,14 @@ use App\Models\Follow;
 ?> 
 <section>
 
+
+
     <div class="feature-photo">
-        <figure><img src="{{asset('storage/images/' . $user->background)}}" alt=""></figure>
+        <figure>
+        <div class="image-wrapper">
+            <img src="{{ asset('storage/images/' . $user->background) }}" alt="">
+        </div>
+    </figure>
 
         <div class="container-btn">
 

@@ -2,7 +2,7 @@
 @extends('/layouts.app')
 @section('content')
 
-<{{-- top area uses component 'personal_nav' and pass 2 arguments,
+{{-- top area uses component 'personal_nav' and pass 2 arguments,
 	 (note: don't SPACE after attributes, ex: :user = $friend (error))
 --}}
 <!-- top area -->

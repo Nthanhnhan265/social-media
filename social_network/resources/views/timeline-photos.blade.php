@@ -20,11 +20,10 @@
 								<div class="contain d-flex justify-content-center">
 									
 								<div class="central-meta photo-tl">
-								<div class="photos" style=" display: flex; flex:flex-wrap;justify-content: center;">
+								<div class="photos" style=" display: flex; flex-wrap:wrap;justify-content: center;">
 									@foreach($posts as $post)
 									@foreach($post->image as $img)
 										<div style="width: calc(100vw / 4 - 10px)!important;border-radius:10px; border: 1px solid #c4c4c4; height:calc(100vw / 4 - 10px) !important;overflow: hidden; display: block; margin: 10px 5px">
-				
 											<a href="{{asset('storage/images/'.$img->url)}}" data-fancybox="gallery" data-caption="Caption #1">
 												<img src="{{ asset('storage/images/'.$img->url) }}" style="width:100%;height:100%;" />
 											</a>

@@ -438,17 +438,7 @@ function confirmDeleteUser(userId) {
 		return false;
 	}
 }
-			}
-				indexPosts += MAX_POST 
-				// loadMorePosts(nextPage);
-			}else  { 
-				$('#loading-spinner').hide();
-			}
-		}
-		console.log(`${indexPosts}: ${indexPosts +  MAX_POST} : ${$(window).scrollTop() + 900} : ${$(window).height()}`); 
-	});
-}
-)
+			
 //Scrip change password
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('changePasswordForm');

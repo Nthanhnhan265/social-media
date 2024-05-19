@@ -167,7 +167,7 @@ use Illuminate\View\Component;
 							<div class="user-post">
 								<div class="friend-info">
 									<figure>
-										<img src="{{ asset('images/resources/' . $post->user->avatar) }}" alt="">
+										<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="">
 									</figure>
 									<div class="friend-name">
 										<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}" title="">

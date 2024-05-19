@@ -1,7 +1,11 @@
-@php
+<?php
 	use Illuminate\Support\Facades\Auth;
-	use App\Models\Follow; 
-@endphp
+	use App\Models\Follow;
+	use Illuminate\Support\Facades\Session;
+
+	Session::put("url",url()->current());
+	 
+?>
 @extends('layouts.app')
 @section('content')
 

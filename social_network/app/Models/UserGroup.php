@@ -32,4 +32,12 @@ class UserGroup extends Model
     {
         return $this->belongsTo(Role::class, 'role_id_fk');
     }
+
+    public static function checkUserInGroup($user_id,$group_id ) { 
+        $userGroup = UserGroup::where('user_id_fk',$user_id)->where('group_id_fk',$group_id)->first(); 
+        if(empty($userGroup)) { 
+            return false; 
+        }
+        return true; 
+    }
 }

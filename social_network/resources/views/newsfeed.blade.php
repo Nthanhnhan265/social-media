@@ -158,16 +158,20 @@ use Illuminate\View\Component;
 							</div>
 						</div>
 					</div><!-- add post new box #loadpost-->
-					<div class="loadMore">
+					<?php 
+						$countPost = 0; 
+						$MAX_POST = 3; 
+					?> 
+					<div class="loadMore" id="news-container">
 						@foreach ($posts as $post)
 						{{-- Kiểm tra trong mảng và render ra cái phù hợp --}}
 						@if (class_basename($post) === 'Posts')
 						{{-- @if (false)  --}}
-						<div class="central-meta item rounded-5 {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
+						<div class="central-meta newpost item {{$countPost >$MAX_POST? 'd-none': ''}} rounded-5 {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
 							<div class="user-post">
 								<div class="friend-info">
 									<figure>
-										<img src="{{ asset('images/resources/' . $post->user->avatar) }}" alt="">
+										<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="" class="border-avt">
 									</figure>
 									<div class="friend-name">
 										<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}" title="">
@@ -388,8 +392,7 @@ use Illuminate\View\Component;
 						$sharer = $post->user;
 						$post = $post->post;
 						@endphp
-
-						<div class="sharer {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
+						<div class="sharer newpost {{$countPost >$MAX_POST? 'd-none': ''}} {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
 							<div class="user-shared">
 								<div class="avatar">
 									<img src="{{asset('storage/images/$sharer->avatar')}}" alt="error">
@@ -594,12 +597,16 @@ use Illuminate\View\Component;
 						if (isset($firstPost) && $firstPost == true) {
 						$firstPost = false;
 						}
+						$countPost++; 
+					 
 						@endphp
 						@endforeach
 					</div>
+					<div style="height:1rem">
+						<div id="loading-spinner" >
+							<img src="{{asset('images/ZKZg.gif')}}" alt="Loading..." />
+						</div>
 
-					<div id="loading-spinner" style="display: none; text-align: center; margin: 20px;">
-						<img src="{{asset('images/ZKZg.gif')}}" alt="Loading..." />
 					</div>
 
 				</div><!-- centerl meta -->

@@ -209,3 +209,18 @@ window.addEventListener('beforeunload', (e)=>{
         
     }
 })
+
+    document.getElementById('read-more').addEventListener('click', function() {
+        document.getElementById('short-content').style.display = 'none';
+        document.getElementById('full-content').style.display = 'block';
+        this.style.display = 'none';
+        document.getElementById('read-less').style.display = 'inline';
+    });
+
+    document.getElementById('read-less').addEventListener('click', function() {
+        document.getElementById('short-content').style.display = 'inline';
+        document.getElementById('full-content').style.display = 'none';
+        this.style.display = 'none';
+        document.getElementById('read-more').style.display = 'inline';
+    });
+

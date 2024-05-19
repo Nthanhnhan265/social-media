@@ -1,6 +1,7 @@
 @php
 	use Illuminate\Support\Facades\Auth;
 	use App\Models\Follow; 
+	use Illuminate\Support\Str;
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -239,12 +240,11 @@
 															<!-- <img src="images/resources/user-post.jpg" alt=""> -->
 															<!-- Print content if not null -->
 															<!-- {{ $post->id }} -->
-															@if (!empty($post->content))
-																<div class="description pb-2">
-																	{{ $post->content }}
-																</div>
-															@endif
-								
+															@php  
+															$content = $post->content;
+															@endphp
+															<x-format_string :content="$content"></x-format_string>
+
 								
 															@php
 																$totalMedia = count($post->image) + count($post->video);

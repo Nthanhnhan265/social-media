@@ -10,7 +10,7 @@
    <div class="comment-avatar" style="width: 45px; height: 45px; overflow: hidden; border-radius: 50%;">
     <img src="{{ asset('storage/images/' . $commenter->user->avatar) }}" 
          alt="err" 
-         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+         style="width: 100%; height: 100%; object-fit: cover; display: block;" class="border-avt">
 </div>
 
     </div>
@@ -22,7 +22,7 @@
             @if(auth()->check() && $commenter->user->user_id == auth()->user()->user_id)
               <!-- Toggle Menu -->
               @if (!Request::is('newsfeed'))  
-              <div class="dropdown" style="position: absolute; right: 5%;">
+              <div class="dropdown" style="position: absolute;top:5%; right: 5%;">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-{{$commenter->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -40,7 +40,13 @@
             @endif
         </div>
         <p>
-            {{$commenter->content}}
+            @php 
+                $content = $commenter->content;
+            @endphp
+            <x-format_string :content="$content">
+
+            </x-format_string>
+            
         </p>
         <div class="img-vid mt-3">
             @php

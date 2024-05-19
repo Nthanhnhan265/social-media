@@ -3,16 +3,18 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-class useravt extends Component
+
+class format_string extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public $content;
+    public function __construct($content)
     {
-        //
+        $this->content = $content;
     }
 
     /**
@@ -22,6 +24,6 @@ class useravt extends Component
      */
     public function render()
     {
-        return view('components.user-avt');
+        return view('components.format_string');
     }
 }

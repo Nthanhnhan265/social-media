@@ -151,11 +151,6 @@ Route::get('/user-management-search', [UsersController::class, 'search'])->name(
 Route::get('/group-management-search', [GroupController::class, 'search'])->name('group-management-search');
 Route::get('/post-management-search', [PostsController::class, 'searchInManagement'])->name('post-management-search');
 
-Route::get('/{page?}', function ($page = "newsfeed") {  
-    return view($page);
-});
-
-
 Route::put('update-background/{id}', [UsersController::class, 'updateBackground'])->name('user.update');
 
 //Route::get('/inbox', [PostController::class, 'index']);

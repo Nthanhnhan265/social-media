@@ -61,7 +61,7 @@ class PostsController extends Controller
 // return view('newsfeed', compact('posts'));
 // }
 
-    public function index()
+    public function index(Request $request)
     {
         $userId = Auth::user()->user_id;
         $friend_list = Relationship::getFriendListOfUser();
@@ -70,6 +70,10 @@ class PostsController extends Controller
         $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]);
         $posts = $this->getNewfeed($userId); 
         $firstPost = false; 
+
+
+
+
         //if session exists (user clicked notification) => return post that is remained in notification box at the top
         if (Session::get("postFound") && Session::get("type")) {
             //set session to variable 
@@ -83,6 +87,11 @@ class PostsController extends Controller
             $firstPost = true; 
             
         }
+
+        if($request->ajax()) { 
+            return view('partials.posts',["posts"=>$posts]);
+        }
+
         //hiển thị giao diện trang chính
         //hiển thị mọi bài viết trong db -> chưa hợp lý cho việc hiển thị phù hợp với từng tài khoản
         return view(

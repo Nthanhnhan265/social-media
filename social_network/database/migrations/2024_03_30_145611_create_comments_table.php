@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('comment_id');
             $table->integer('post_id_fk');
-            $table->string('content');
+            $table->longText('content');
             $table->integer('user_id_fk'); 
             $table->integer('status');     
             $table->timestamps();

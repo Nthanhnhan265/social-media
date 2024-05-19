@@ -439,33 +439,30 @@ function confirmDeleteUser(userId) {
 	}
 }
 //Load post
-$(window).scroll(function() {
-    if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-        if ($('#loading-spinner').is(':hidden')) {
-            $('#loading-spinner').show();
-            var nextPage = parseInt($('#news-container').data('page')) + 1;
-            loadMorePosts(nextPage);
-        }
-    }
-});
-
-function loadMorePosts(page) {
-    $.ajax({
-        url: '/newsfeed?page=' + page,
-        type: 'get',
-        success: function(data) {
-            if (data.trim().length == 0) {
-                $('#loading-spinner').text('Không còn bài viết nào');
-                return;
-            }
-            $('#news-container').append(data);
-            $('#news-container').data('page', page);
-            $('#loading-spinner').hide();
-        },
-        error: function() {
-            $('#loading-spinner').text('Lỗi khi tải bài viết');
-        }
-    });
+$(document).ready(function() {
+	const allPosts = $('.newpost')
+	let indexPosts = 0; 
+	const MAX_POST = 5; 
+	$(window).scroll(function() {
+		if ($(window).scrollTop() + 400 >= $(document).height()) {
+			if ($('#loading-spinner').is(':hidden')) {
+				$('#loading-spinner').show();
+				const nextPosts = allPosts.slice(indexPosts, indexPosts + MAX_POST)
+				if (nextPosts && indexPosts < allPosts.length ) { 
+				
+					nextPosts.removeClass('d-none');
+					 
+				}
+				indexPosts += MAX_POST 
+				// loadMorePosts(nextPage);
+			}else  { 
+				$('#loading-spinner').hide();
+			}
+		}
+		console.log(`${indexPosts}: ${indexPosts +  MAX_POST} : ${$(window).scrollTop() + 900} : ${$(window).height()}`); 
+	});
 }
+)
 
+ 
 

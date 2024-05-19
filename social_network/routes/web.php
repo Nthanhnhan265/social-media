@@ -141,7 +141,7 @@ Route::get('/group-view/{group_id}', [GroupController::class, 'getPostByGroupId'
 Route::get('/group-member/{group_id}', [GroupController::class, 'getAllForGroupMember'])->middleware(['auth','verified']);
 Route::delete('/disband-groups/{group_id}/', [GroupController::class, 'deleteGroupByGroupAdmin'])->name('disband-groups')->middleware(['auth','verified']);
 Route::delete('/leave-group/{group_id}', [UseGroupController::class, 'destroy'])->name('leave-group')->middleware(['auth','verified']);
-Route::delete('/delete-request-by-user/{group_id}', [UseGroupController::class, 'destroy'])->name('delete-request-by-user')->middleware(['auth','verified']);;
+Route::delete('/delete-request-by-user/{group_id}', [UseGroupController::class, 'destroy'])->name('delete-request-by-user')->middleware(['auth','verified']);
 Route::delete('/groups-member/{group_id}', [UseGroupController::class, 'deleteRequest'])->name('delete-request')->middleware(['auth','verified']);
 Route::put('/groups-member/{group_id}', [UseGroupController::class, 'update'])->name('update')->middleware(['auth','verified']);
 Route::get('/edit-group-2/{group_id}', [GroupController::class, 'getAllInfoForEditGroup'])->middleware(['auth','verified']);
@@ -203,12 +203,14 @@ Route::delete('comments/{id}', [CommentController::class, 'destroy'])->name('com
 Route::get('search', [PostsController::class, 'search'])->name('posts.search')->middleware(['auth','verified']);
 // Route::get('timeline-friends/{id}',[UsersController::class,'show'])->middleware(['auth','verified']);
 Route::delete('time-line/user-profile/{id}', [PostsController::class,'destroy'])->name('posts.destroy')->middleware(['auth','verified']);
+//Yêu cầu tham gia group
+Route::post('/join-request/{group_id}', [GroupController::class, 'joinGroup'])->name('join-request');
+Route::delete('/search-delete-request/{group_id}', [UseGroupController::class, 'deleteRequestForSearch'])->name('search-delete-request');
 //Route Change password
 Route::middleware(['auth'])->group(function () {
     Route::get('/edit-password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
     Route::post('/edit-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 });
-
 
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);

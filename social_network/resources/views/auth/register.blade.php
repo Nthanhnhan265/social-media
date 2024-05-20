@@ -7,13 +7,12 @@
     <meta name="keywords" content="" />
     <title>Winku Social Network Toolkit</title>
     <link rel="icon" href="{{ asset('images/fav.png') }}" type="image/png" sizes="16x16"> 
-    
+
     <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/color.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-
-</head>
+	</head>
 <body>
 <div class="theme-layout">
     <div class="container-fluid pdng0">
@@ -73,11 +72,9 @@
                 </div>
             </div>
         </div>
-    </div>
+		</div>
 </div>
-
 <script src="{{ asset('js/main.min.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
-
 </body> 
 </html>

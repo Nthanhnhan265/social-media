@@ -3,8 +3,6 @@
 	use App\Models\Follow; 
 ?>
 <section>
-
-
 	
     <div class="feature-photo">
         <figure>

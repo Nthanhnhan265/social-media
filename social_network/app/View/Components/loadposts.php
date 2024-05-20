@@ -12,9 +12,11 @@ class loadposts extends Component
      * @return void
      */
     public $posts; 
-    public function __construct($posts )
+    public $user;
+    public function __construct($posts,$user )
     {
         $this->posts = $posts;
+        $this->user = $user;
     }
 
     /**

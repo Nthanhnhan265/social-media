@@ -76,16 +76,17 @@
 										@csrf
 										@method('PUT')
 										<div class="form-group half">
-											<input type="text" id="first_name" name="first_name" required="required" value="{{ $user->first_name}}" />
+											<input type="text" id="first_name" name="first_name" required="required" value="{{ $user->first_name}}" maxlength="10"/>
 											<label class="control-label" for="first_name">First Name</label><i class="mtrl-select"></i>
 										</div>
 										<div class="form-group half">
-											<input type="text" id="last_name" name="last_name" required="required" value="{{ $user->last_name}} " />
+											<input type="text" id="last_name" name="last_name" required="required" value="{{ $user->last_name}} " maxlength="10"/>
 											<label class="control-label" for="last_name">Last Name</label><i class="mtrl-select"></i>
 										</div>
 										<div class="form-group">
-											<input type="text" required="required" value="{{$user->email}}" name="email" id="email" />
-											<label class="control-label" for="input"><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b0e262a22270b">[email&#160;protected]</a></label><i class="mtrl-select"></i>
+											<input type="text" required="required" value="{{$user->email}}" name="email" id="email" maxlength="20"/>
+											<label class="control-label" for="input">Email</label>
+												<i class="mtrl-select"></i>
 										</div>
 										<!-- <div class="form-group">	
 											  <input type="text" required="required"/>
@@ -94,31 +95,30 @@
 										<div class="dob">
 											<div class="form-group">
 												<select name="day">
-													<option value="Day">Day</option>
-													@for ($i = 1; $i <= 31; $i++) <option {{ date('d', strtotime($user->DOB)) == $i ? 'selected' : '' }}>{{ $i }}</option>
-														@endfor
+													<option value="" selected disabled>Day</option> <!-- Removed the text "Day" -->
+													@for ($i = 1; $i <= 31; $i++)
+														<option {{ date('d', strtotime($user->DOB)) == $i ? 'selected' : '' }}>{{ $i }}</option>
+													@endfor
 												</select>
-
 											</div>
 											<div class="form-group">
 												<select name="month">
-													<option value="month">Month</option>
-													@for ($m = 1; $m <= 12; $m++) <option {{ date('m', strtotime($user->DOB)) == $m ? 'selected' : '' }}>{{ $m }}</option>
+													<option value="" selected disabled>Month</option> <!-- Removed the text "Month" -->
+													@for ($m = 1; $m <= 12; $m++)
+														<option {{ date('m', strtotime($user->DOB)) == $m ? 'selected' : '' }}>{{ $m }}</option>
 													@endfor
 												</select>
-
 											</div>
 											<div class="form-group">
 												<select name="year">
-													<option value="year">Year</option>
+													<option value="" selected disabled>Year</option> <!-- Removed the text "Year" -->
 													@php
 													$currentYear = date('Y');
 													@endphp
-													@for ($y = $currentYear; $y >= 1900; $y++)
-													<option {{ date('Y', strtotime($user->DOB)) == $y ? 'selected' : '' }}>{{ $y }}</option>
+													@for ($y = $currentYear; $y >= 1900; $y--)
+														<option {{ date('Y', strtotime($user->DOB)) == $y ? 'selected' : '' }}>{{ $y }}</option>
 													@endfor
 												</select>
-
 											</div>
 										</div>
 										<div class="form-radio">
@@ -135,142 +135,21 @@
 												</label>
 											</div>
 										</div>
-
-
-
 										<div class="form-group">
-											<textarea rows="4" id="description" name="description" required="required" maxlength="250">{{ $user->description }}</textarea>
+											<textarea rows="4" id="description" name="description" required="required" maxlength="20">{{ $user->description }}</textarea> <!-- Updated maxlength to 20 -->
 											<label class="control-label" for="description">About Me (maximum 20 characters)</label><i class="mtrl-select"></i>
 											<span id="char-count">20 characters remaining</span>
 										</div>
-
 										<div class="submit-btns">
 											<button type="button" class="mtr-btn"><span> <a href="{{ url('time-line/user-profile/' .$user->user_id) }}" class="mtr-btn"><span>Cancel</span></a></span></button>
-											<button type="submit" class="mtr-btn"><span>Update</span></button>
+											<button type="submit" class="mtr-btn" onclick="return validateEmail()"><span>Update</span></button>
 										</div>
 									</form>
 								</div>
 							</div>
 						</div><!-- centerl meta -->
 						<div class="col-lg-3">
-							<aside class="sidebar static">
-								<div class="widget">
-									<h4 class="widget-title">Your page</h4>
-									<div class="your-page">
-										<figure>
-											<a title="" href="#"><img alt="" src="images/resources/friend-avatar9.jpg"></a>
-										</figure>
-										<div class="page-meta">
-											<a class="underline" title="" href="#">My page</a>
-											<span><i class="ti-comment"></i>Messages <em>9</em></span>
-											<span><i class="ti-bell"></i>Notifications <em>2</em></span>
-										</div>
-										<div class="page-likes">
-											<ul class="nav nav-tabs likes-btn">
-												<li class="nav-item"><a data-toggle="tab" href="#link1" class="active">likes</a></li>
-												<li class="nav-item"><a data-toggle="tab" href="#link2" class="">views</a></li>
-											</ul>
-											<!-- Tab panes -->
-											<div class="tab-content">
-												<div id="link1" class="tab-pane active fade show">
-													<span><i class="ti-heart"></i>884</span>
-													<a title="weekly-likes" href="#">35 new likes this week</a>
-													<div class="users-thumb-list">
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Anderw">
-															<img alt="" src="images/resources/userlist-1.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="frank">
-															<img alt="" src="images/resources/userlist-2.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Sara">
-															<img alt="" src="images/resources/userlist-3.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Amy">
-															<img alt="" src="images/resources/userlist-4.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Ema">
-															<img alt="" src="images/resources/userlist-5.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Sophie">
-															<img alt="" src="images/resources/userlist-6.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Maria">
-															<img alt="" src="images/resources/userlist-7.jpg">
-														</a>
-													</div>
-												</div>
-												<div id="link2" class="tab-pane fade">
-													<span><i class="ti-eye"></i>445</span>
-													<a title="weekly-likes" href="#">440 new views this week</a>
-													<div class="users-thumb-list">
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Anderw">
-															<img alt="" src="images/resources/userlist-1.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="frank">
-															<img alt="" src="images/resources/userlist-2.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Sara">
-															<img alt="" src="images/resources/userlist-3.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Amy">
-															<img alt="" src="images/resources/userlist-4.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Ema">
-															<img alt="" src="images/resources/userlist-5.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Sophie">
-															<img alt="" src="images/resources/userlist-6.jpg">
-														</a>
-														<a data-toggle="tooltip" title="" href="#" data-original-title="Maria">
-															<img alt="" src="images/resources/userlist-7.jpg">
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="widget stick-widget">
-									<h4 class="widget-title">Who's follownig</h4>
-									<ul class="followers">
-										<li>
-											<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
-											<div class="friend-meta">
-												<h4><a href="{{ url('time-line') }}" title="">Kelly Bill</a></h4>
-												<a href="#" title="" class="underline">Add Friend</a>
-											</div>
-										</li>
-										<li>
-											<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
-											<div class="friend-meta">
-												<h4><a href="{{ url('time-line') }}" title="">Issabel</a></h4>
-												<a href="#" title="" class="underline">Add Friend</a>
-											</div>
-										</li>
-										<li>
-											<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
-											<div class="friend-meta">
-												<h4><a href="{{ url('time-line') }}" title="">Andrew</a></h4>
-												<a href="#" title="" class="underline">Add Friend</a>
-											</div>
-										</li>
-										<li>
-											<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
-											<div class="friend-meta">
-												<h4><a href="{{ url('time-line') }}" title="">Sophia</a></h4>
-												<a href="#" title="" class="underline">Add Friend</a>
-											</div>
-										</li>
-										<li>
-											<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
-											<div class="friend-meta">
-												<h4><a href="{{ url('time-line') }}" title="">Allen</a></h4>
-												<a href="#" title="" class="underline">Add Friend</a>
-											</div>
-										</li>
-									</ul>
-								</div><!-- who's following -->
-							</aside>
+						
 						</div><!-- sidebar -->
 					</div>
 				</div>
@@ -279,3 +158,13 @@
 	</div>
 </section>
 @endsection
+<script>
+	function validateEmail() {
+		var email = document.getElementById('email').value;
+		if (!email.includes('@') || !email.includes('.')) {
+			alert("Please enter a valid email address.");
+			return false;
+		}
+		return true;
+	}
+</script>

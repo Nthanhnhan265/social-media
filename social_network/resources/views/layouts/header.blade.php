@@ -160,7 +160,7 @@ $allUsers = User::get();
             <div class="top-area">
                 <div class="position-relative">
                     <form class="d-flex position-absolute" style="width:30vw; transform:translate(90%,30%)" role="search" action="{{route('posts.search')}}" method="GET">
-                        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search"  value="{{ request()->get('search') }}">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>

@@ -89,72 +89,13 @@
 											</li>
 										</ul>
 									</div>Shortcuts -->
-								<div class="widget">
-									<h4 class="widget-title">Recent Activity</h4>
-									<ul class="activitiez">
-										<li>
-											<div class="activity-meta">
-												<i>10 hours Ago</i>
-												<span><a href="#" title="">Commented on Video posted </a></span>
-												<h6>by <a href="{{ url('newsfeed') }}">black demon.</a></h6>
-											</div>
-										</li>
-										<li>
-											<div class="activity-meta">
-												<i>30 Days Ago</i>
-												<span><a href="{{ url('newsfeed') }}" title="">Posted your status.
-														“Hello guys, how are you?”</a></span>
-											</div>
-										</li>
-										<li>
-											<div class="activity-meta">
-												<i>2 Years Ago</i>
-												<span><a href="#" title="">Share a video on her timeline.</a></span>
-												<h6>"<a href="{{ url('newsfeed') }}">you are so funny mr.been.</a>"</h6>
-											</div>
-										</li>
-									</ul>
-								</div><!-- recent activites -->
-								<div class="widget stick-widget">
-									<h4 class="widget-title">Who's follownig</h4>
-									<ul class="followers">
-										<li>
-											<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
-											<div class="friend-meta">
-												<h4><a href="{{ url('time-line') }}" title="">Kelly Bill</a></h4>
-												<a href="#" title="" class="underline">Add Friend</a>
-											</div>
-										</li>
-										<li>
-											<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
-											<div class="friend-meta">
-												<h4><a href="{{ url('time-line') }}" title="">Issabel</a></h4>
-												<a href="#" title="" class="underline">Add Friend</a>
-											</div>
-										</li>
-										<li>
-											<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
-											<div class="friend-meta">
-												<h4><a href="{{ url('time-line') }}" title="">Andrew</a></h4>
-												<a href="#" title="" class="underline">Add Friend</a>
-											</div>
-										</li>
-										<li>
-											<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
-											<div class="friend-meta">
-												<h4><a href="{{ url('time-line') }}" title="">Sophia</a></h4>
-												<a href="#" title="" class="underline">Add Friend</a>
-											</div>
-										</li>
-										<li>
-											<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
-											<div class="friend-meta">
-												<h4><a href="{{ url('time-line') }}" title="">Allen</a></h4>
-												<a href="#" title="" class="underline">Add Friend</a>
-											</div>
-										</li>
-									</ul>
-								</div><!-- who's following -->
+									<x-recent_acivity 
+										:postActivityHistors="$postActivityHistors" 
+										:commentsActivityHistorys="$commentsActivityHistorys" 
+										:shareActivityHistorys="$shareActivityHistorys" 
+									/>
+								<!-- recent activites -->
+							
 							</aside>
 						</div><!-- sidebar -->
 						<div class="col-lg-6">
@@ -198,8 +139,9 @@
 
 										</div>
 									</div>
+									@endif
 								</div><!-- add post new box -->
-                <x-loadposts :posts=$posts></x-loadposts>
+              					  <x-loadposts :posts=$posts :user=$user></x-loadposts>
 
 							</div>
 						</div><!-- centerl meta -->

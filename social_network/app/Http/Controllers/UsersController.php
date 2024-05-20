@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Relationship;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -99,13 +100,22 @@ class UsersController extends Controller
      */
     public function show($id)
     {
+
         $user = User::findOrFail($id); 
         $postOfUser = Posts::getPostAndShare($id); 
         // dump($postOfUser);
+        $userId = Auth::user()->user_id;
+        $friend_list = Relationship::getFriendListOfUser();
+        $postActivityHistorys = DB::select('select * from posts where user_id_fk = ?', [$userId]);
+        $commentsActivityHistorys = Comment::where('user_id_fk',$userId)->get();
+        $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]); 
          $isInFriendList = DB::select("SELECT * FROM relationships WHERE (sender = ? AND receiver = ?)
         OR (sender = ? AND receiver = ?)",[Auth::user()->user_id,$id,$id,Auth::user()->user_id]);
         
-        return view('time-line',["id"=>$id,'user'=>$user,"posts"=>$postOfUser,"friend"=>$isInFriendList]);
+        
+        return view('time-line',["id"=>$id,'user'=>$user,"posts"=>$postOfUser,"friend"=>$isInFriendList,'postActivityHistors' => $postActivityHistorys,
+        'commentsActivityHistorys' => $commentsActivityHistorys,
+        'shareActivityHistorys' => $shareActivityHistorys]);
     }
    
     public function showAbout($id)

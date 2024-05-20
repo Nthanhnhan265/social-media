@@ -242,6 +242,23 @@ class CommentController extends Controller
         // return redirect('newsfeed');
         return redirect('newsfeed');
     }
+    public function deleteImage($id)
+{
+    $image = Image::findOrFail($id);
+    Storage::delete('public/images/' . $image->url);
+    $image->delete();
+
+    return response()->json(['success' => 'Image deleted successfully.']);
+}
+
+public function deleteVideo($id)
+{
+    $video = Video::findOrFail($id);
+    Storage::delete('public/videos/' . $video->url);
+    $video->delete();
+
+    return response()->json(['success' => 'Video deleted successfully.']);
+}
 
     /**
      * Remove all comments of a post

@@ -12,9 +12,11 @@ class loadposts extends Component
      * @return void
      */
     public $posts; 
-    public function __construct($posts )
+    public $firstPost; 
+    public function __construct($posts,$firstPost = false )
     {
         $this->posts = $posts;
+        $this->firstPost = $firstPost; 
     }
 
     /**

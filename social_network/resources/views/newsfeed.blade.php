@@ -30,14 +30,7 @@ use Illuminate\View\Component;
 											<i class="ti-clipboard"></i>
 											<a href="{{ url('newsfeed') }}" title="">News feed</a>
 										</li>
-										<li>
-											<i class="ti-mouse-alt"></i>
-											<a href="{{ url('inbox') }}" title="">Inbox</a>
-										</li>
-										<li>
-											<i class="ti-files"></i>
-											<a href="{{ url('fav-page') }}" title="">My pages</a>
-										</li>
+					
 										<li>
 											<i class="ti-user"></i>
 											<a href="{{ url('timeline-friends/' . Auth::user()->user_id) }}" title="">friends</a>
@@ -133,11 +126,11 @@ use Illuminate\View\Component;
 				<div class="col-lg-6">
 					<div class="central-meta">
 						<div class="new-postbox">
-							<figure>
+							<figure >
 								<?php
 								$avtUser = Auth::user()->avatar;
 								?>
-								<!-- <img src="{{ asset('images/resources/' . $avtUser) }}" alt=""> -->
+							 
 								<x-user-avt>
 								</x-user-avt>
 
@@ -173,7 +166,7 @@ use Illuminate\View\Component;
 							</div>
 						</div>
 					</div><!-- add post new box #loadpost-->
-					<x-loadposts :posts=$posts></x-loadposts>
+					<x-loadposts :posts=$posts :firstPost=$firstPost></x-loadposts>
 
 					<div style="height:1rem">
 						<div id="loading-spinner">
@@ -185,26 +178,7 @@ use Illuminate\View\Component;
 				</div><!-- centerl meta -->
 				<div class="col-lg-3">
 					<aside class="sidebar static">
-						<div class="widget">
-							<h4 class="widget-title">Your page</h4>
-							<div class="your-page">
-								<figure>
-									<a href="#" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-								</figure>
-								<div class="page-meta">
-									<a href="#" title="" class="underline">My page</a>
-									<span><i class="ti-comment"></i><a href="{{ url('insight') }}" title="">Messages <em>9</em></a></span>
-									<span><i class="ti-bell"></i><a href="{{ url('insight') }}" title="">Notifications <em>2</em></a></span>
-								</div>
-								<div class="page-likes">
-									<ul class="nav nav-tabs likes-btn">
-										<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">likes</a></li>
-										<li class="nav-item"><a class="" href="#link2" data-toggle="tab">views</a></li>
-									</ul>
-
-								</div>
-							</div>
-						</div>
+					 
 						<div class="widget friend-list stick-widget">
 							<h4 class="widget-title">Friends</h4>
 							<div id="searchDir"></div>

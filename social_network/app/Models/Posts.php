@@ -18,7 +18,6 @@ class Posts extends Model
 
     public static function getPostAndShare($user_id)
      {
- 
              //  get user's shared posts 
              $sharedPost = Share::where('user_id_fk', $user_id)
                  ->with([

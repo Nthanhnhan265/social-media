@@ -93,8 +93,7 @@ class Notification extends Model
             $c = self::getContentFriendComment($t_id); 
          }
         else if ($t=="likepost")  {
-            $c = self::getContentFriendLikePost($t_id); 
-            dd($c);
+            $c = self::getContentFriendLikePost($t_id);       
         }
          
          return $c;

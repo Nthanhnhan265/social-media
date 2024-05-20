@@ -51,63 +51,13 @@ use Illuminate\View\Component;
 										</li>
 									</ul>
 								</div><!-- Shortcuts -->
-								<div class="widget">
-									<h4 class="widget-title">Recent Activity</h4>
-									<ul class="activitiez">
-										{{-- $activityHistorys --}}
-										@foreach ($postActivityHistors as $postActivityHistor)
-										<li>
-											<div class="activity-meta">
-												<i>{{ $postActivityHistor->created_at }}</i>
-												<span><a href="#" title="">Posted your status.
-														“{{ $postActivityHistor->content }}”</a></span>
-											</div>
-										</li>
-										@endforeach
-
-										@foreach ($commentsActivityHistorys as $commentsActivityHistory)
-										<li>
-											<div class="activity-meta">
-												<i>{{ $commentsActivityHistory->created_at }}</i>
-												<span><a href="#" title="">Commented on Video posted
-													</a></span>
-												<h6>by <a href="{{ url('time-line') }}">
-														{{ $commentsActivityHistory->user_first_name }}
-														{{ $commentsActivityHistory->user_last_name }} </a></h6>
-														
-														<div class="dropdown" style="position: absolute; right: 5%;">
-														<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton-{{$commentsActivityHistory->comment_id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;background:#f4f2f2;">
-															<i class="fa-solid fa-ellipsis-vertical"></i>
-														</button>
-														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton-{{$commentsActivityHistory->comment_id}}">
-															<a class="dropdown-item" href="{{url('edit-comment/'. $commentsActivityHistory->comment_id)}}">Update</a>
-															
-															<form action="{{ url('comments/'.$commentsActivityHistory->comment_id) }}" method="POST" style="display: inline;">
-																@csrf
-																@method('DELETE')
-																<button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this comment ?');">Delete</button>
-															</form>
-														</div>
-													</div>
-											</div>
-										</li>
-										@endforeach
-
-										@foreach ($shareActivityHistorys as $shareActivityHistory)
-										<li>
-											<div class="activity-meta">
-												<i>{{ $shareActivityHistory->created_at }}</i>
-												<span><a href="#" title="">Share a @if ($shareActivityHistory->status === 0)
-														privary
-														@else
-														public
-														@endif
-														video on your timeline.</a></span>
-											</div>
-										</li>
-										@endforeach
-									</ul>
-								</div><!-- recent activites -->
+								<x-recent_acivity 
+										:postActivityHistors="$postActivityHistors" 
+										:commentsActivityHistorys="$commentsActivityHistorys" 
+										:shareActivityHistorys="$shareActivityHistorys" 
+								/>
+								
+								<!-- recent activites -->
 								{{-- <div class="widget stick-widget">
                                         <h4 class="widget-title">Who's follownig</h4>
                                         <ul class="followers">
@@ -166,7 +116,8 @@ use Illuminate\View\Component;
 							</div>
 						</div>
 					</div><!-- add post new box #loadpost-->
-					<x-loadposts :posts=$posts :firstPost=$firstPost></x-loadposts>
+					<x-loadposts :posts=$posts :user=$user :firstPost=$firstPost></x-loadposts>
+					{{-- <x-loadposts :posts=$posts :firstPost=$firstPost></x-loadposts> --}}
 
 					<div style="height:1rem">
 						<div id="loading-spinner">

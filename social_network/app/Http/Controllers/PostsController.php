@@ -19,7 +19,7 @@ use App\Models\Video;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-    use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
@@ -68,10 +68,11 @@ class PostsController extends Controller
         $userId = Auth::user()->user_id;
         $friend_list = Relationship::getFriendListOfUser();
         $postActivityHistorys = DB::select('select * from posts where user_id_fk = ?', [$userId]);
-        $commentsActivityHistorys = DB::select('select comments.*, users.first_name as user_first_name ,users.last_name as user_last_name from comments inner join users on comments.comment_id = users.user_id where user_id_fk != ?', [$userId]);
+        $commentsActivityHistorys = Comment::where('user_id_fk',$userId)->get();
         $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]);
         $posts = $this->getNewfeed($userId); 
         $firstPost = false; 
+        $user = DB::select('select * from users');
 
 
         //if session exists (user clicked notification) => return post that is remained in notification box at the top
@@ -97,6 +98,7 @@ class PostsController extends Controller
         return view(
             'newsfeed',
             [
+                "user" => $user,
                 "posts" => $posts,
                 "firstPost" => $firstPost,
                 "friends" => $friend_list,
@@ -107,6 +109,7 @@ class PostsController extends Controller
         );
        
     }
+  
 
 
     //get user's newfeed  
@@ -519,14 +522,15 @@ class PostsController extends Controller
     if (!$post) {
         return redirect()->back()->with('error', 'Post not found!');
     }
-    // {{dd($post);}}
+  
     // Lấy dữ liệu content của bài đăng
     $content = $post->content;
    
     // Lấy danh sách hình ảnh của bài đăng
     $images = $post->image;
-    //  {{dd($post);}}
-    return view('edit-post', compact('content', 'images','post'));
+    $videos = $post->video;
+  
+    return view('edit-post', compact('content', 'images','post','videos'));
     }
 
     public function update(Request $request, $id)
@@ -704,9 +708,9 @@ class PostsController extends Controller
                    ->Where('last_name', 'like', "%{$search}%")
                    ->orWhere('email', 'like', "%{$search}%")
                    ->get();
-                   
+        $user = User::findOrFail(Auth::user()->user_id);         
 
-    return view('search', compact('posts', 'groups', 'search','users'));
+    return view('search', compact('posts', 'groups', 'search','users','user'));
     }
 
     public function index2()
@@ -770,7 +774,7 @@ class PostsController extends Controller
          
          $posts = Posts::where('content', 'LIKE', "%{$query}%")
                      ->paginate(5); 
-     
+        
          return view('post-management-search', compact('posts'));
      }
 

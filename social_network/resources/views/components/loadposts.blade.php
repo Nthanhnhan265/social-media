@@ -16,6 +16,27 @@
 
 										<span>published:
 											{{ date_format($post->created_at, 'H:i d/m/Y') }}</span>
+
+												@if(!Request::is('newsfeed') && auth()->check() && $user->user_id == auth()->user()->user_id)
+														<div class="dropdown" style="position: absolute; right: 5%;">
+																<button class="btn  dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;background:##f4f2f2">
+																	<i class="fa-solid fa-ellipsis-vertical"></i>
+																</button>
+																<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton-{{$post->id}}">
+																	<a class="dropdown-item" href="{{url('edit-post/'. $post->id)}}" style="display:flex; align-items: center;font-size: 0.8125rem " >	
+																	<i class="far fa-edit" 
+																		style="margin-right:10px; width: 1rem"></i>Update</a>
+																	
+																	<form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="POST" style="display: inline;">
+																		@csrf
+																		@method('DELETE')
+																		<button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this post?');" style="display:flex; align-items: center;;font-size: 0.8125rem"> 	
+																		<i class="fas fa-trash-alt"
+																				style="margin-right: 10px; width: 1rem"></i> Delete</button>
+																	</form>
+																</div>
+															</div>
+															@endif
 									</div>
 									<div class="post-meta">
 										<!-- <img src="images/resources/user-post.jpg" alt=""> -->
@@ -300,7 +321,7 @@
 											<x-format_string :content="$content"></x-format_string>
 											@endif
 
-
+											
 											@php
 											$totalMedia = count($post->image) + count($post->video);
 
@@ -377,6 +398,7 @@
 
 										</div>
 									</div>
+									
 									<div class="coment-area p-1 post-cmt post-cmt-{{ $post->id }}">
 										<ul class="we-comet comment">
 											<!-- hiện commment cho mỗi bình luận tại đây -->

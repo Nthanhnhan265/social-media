@@ -84,6 +84,7 @@ if(successMessage) {
             charCount.style.color = 'black';
         }
     });
+    
 
     }
     // tab search post , groups , user 

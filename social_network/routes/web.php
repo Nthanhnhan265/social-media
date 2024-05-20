@@ -222,3 +222,4 @@ Route::get('/{page?}', function ($page = "newsfeed") {
     return view($page);
 })->middleware(['auth','verified']);
 
+

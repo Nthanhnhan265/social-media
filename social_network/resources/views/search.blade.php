@@ -159,7 +159,7 @@ use Illuminate\View\Component;
 						@if($posts->isNotEmpty())
 							<div class="search-results-posts">
 								<h3 class="tab-heading">Posts</h3>
-								<x-loadposts :posts=$posts></x-loadposts>
+								<x-loadposts :posts=$posts :user=$user></x-loadposts>
 							</div>
 						@else
 							<p>No posts found.</p>

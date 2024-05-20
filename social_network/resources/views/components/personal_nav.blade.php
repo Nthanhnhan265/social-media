@@ -6,8 +6,6 @@
 	Session::put("url",url()->current());
 ?>
 <section>
-
-
 	
     <div class="feature-photo">
         <figure>

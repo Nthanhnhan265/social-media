@@ -978,7 +978,7 @@ header.sticky {
 .user-avatar .edit-phto {
     border-radius: 0;
     bottom: -40px;
-    left: -20px;
+    left: -10px;
     opacity: 0;
     visibility: hidden;
     width: 100%;
@@ -10574,4 +10574,3 @@ aside.sidebar.full-style {
     color: red;
     font-size: 0.8em;
 }
-

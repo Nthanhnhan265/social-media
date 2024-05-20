@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +26,6 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                
             }
 
             to {
@@ -77,7 +75,15 @@
             border-radius: 5px;
         }
 
-        .image-container input[type="file"] {
+        .video-container video {
+            width: 49%;
+            margin-bottom: 10px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+        }
+
+        .image-container input[type="file"],
+        .video-container input[type="file"] {
             display: none;
         }
 
@@ -97,9 +103,9 @@
             color: #fff;
         }
 
-        .image {
-           border: none;
-
+        .image,
+        .video {
+            border: none;
         }
     </style>
 </head>
@@ -110,26 +116,36 @@
             <h2 class="form-title">Edit Post</h2>
             <form action="{{ url('update-post/'.$post->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
-                
                 @method('PUT')
                 <input type="hidden" name="type" value="{{!empty($isInGroup)? $isInGroup->group_id_fk : ''}}">
 
                 <div class="form-group">
                     <label for="post_content">Post Content:</label>
-                  
                     <textarea class="form-control" id="post_content" name="content" rows="4"
                         placeholder="Write something...">{{$post->content }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="image">Image:</label>
-                    <div class="image-container">
+                    <div class="image-container" id="image-container">
                         @foreach($images as $image)
-                            
                             <img src="{{ asset('storage/images/'.$image->url) }}" alt="Selected Image">
                         @endforeach
                     </div>
                     <label for="imgFileSelected" class="custom-file-upload">Choose Image</label>
                     <input type="file" name="imgFileSelected[]" id="imgFileSelected" multiple accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="video">Video:</label>
+                    <div class="video-container" id="video-container">
+                        @foreach($videos as $video)
+                            <video controls>
+                                <source src="{{ asset('storage/videos/'.$video->url) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        @endforeach
+                    </div>
+                    <label for="vdFileSelected" class="custom-file-upload">Choose Video</label>
+                    <input type="file" name="vdFileSelected[]" id="vdFileSelected" multiple accept="video/*">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -138,6 +154,62 @@
             </form>
         </div>
     </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('imgFileSelected').addEventListener('change', function(event) {
+            var files = event.target.files;
+            var imageContainer = document.getElementById('image-container');
+            
+            // Clear existing images
+            imageContainer.innerHTML = '';
+
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.width = '49%';
+                    img.style.marginBottom = '10px';
+                    img.style.border = '2px solid #007bff';
+                    img.style.borderRadius = '5px';
+                    imageContainer.appendChild(img);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('vdFileSelected').addEventListener('change', function(event) {
+            var files = event.target.files;
+            var videoContainer = document.getElementById('video-container');
+            
+         
+            videoContainer.innerHTML = '';
+
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    var video = document.createElement('video');
+                    video.controls = true;
+                    video.src = e.target.result;
+                    video.style.width = '50%';
+                    video.style.marginBottom = '10px';
+                    video.style.border = '2px solid #007bff';
+                    video.style.borderRadius = '5px';
+                    videoContainer.appendChild(video);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>

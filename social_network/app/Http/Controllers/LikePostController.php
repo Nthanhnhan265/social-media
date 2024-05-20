@@ -54,17 +54,16 @@ class LikePostController extends Controller
             $data->user_id_fk = $userId;
             $data->post_id_fk = $postId;
             $data->save();
-            // $like_id = $data->getKey(); 
+            $like_id = $data->getKey(); 
         }
         $likes = Posts::find($request->post)->sumLikes();
 
         $user_id = Auth::user()->user_id; 
         $friend = Posts::where('id',$postId)->with('user')->first();
-
-        if($friend->user->user_id ) { 
+          if($friend->user->user_id ) { 
             //list people that a friend followed 
             $arrFollowers = Follow::getFollowersByUserId($friend->user->user_id);
-                    
+         
             //check if friend is following us
             if (in_array($user_id,$arrFollowers)) {   
                 Notification::newNotify($friend->user->user_id,$like_id,"likepost"); 

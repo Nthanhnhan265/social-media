@@ -978,7 +978,7 @@ header.sticky {
 .user-avatar .edit-phto {
     border-radius: 0;
     bottom: -40px;
-    left: -20px;
+    left: -10px;
     opacity: 0;
     visibility: hidden;
     width: 100%;
@@ -2121,7 +2121,7 @@ li.post-comment .comet-avatar {
     top: 50%;
     position: absolute;
     right: 0;
-    transform: translateX(-20%);
+    transform: translateX(-50%);
     background: none;
 }
 
@@ -10380,10 +10380,7 @@ aside.sidebar.full-style {
     padding: 15px 0px 10px 0px; 
 }
 .user-shared .avatar { 
-    width: 2.8125rem;
-    height: 2.8125rem;
-    border-radius: 50%;
-    overflow: hidden;
+ 
 }
 /* SETTING MENU */
 .friend-name .setting {

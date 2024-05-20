@@ -196,8 +196,8 @@ $allUsers = User::get();
                                             <input type="hidden" name="type_id"
                                                 value="{{ $notification->type_id }}">
                                             <input type="hidden" name="type" value="{{ $notification->type }}">
-                                            <!-- ## -->
-                                            <button type="submit" disabled
+                                    
+                                            <button type="submit" 
                                                 class={{ $notification->status == 'read' ? 'read-noti' : 'unread-noti	' }}>
                                                 <div class="corner-time">At: {{ $notification->created_at }}</div>
                                                 <div style="width: 100%;display: flex; align-items: center">
@@ -390,7 +390,7 @@ $allUsers = User::get();
                     </li> -->
 
             </ul>
-            <div class="user-img" style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%;">
+            <div class="user-img border" style="width: 3rem; height: 3rem; overflow: hidden; border-radius: 50%;transform: translateY(10%);">
                 <x-user-avt>
                 </x-user-avt>
                 <span class="status f-online"></span>

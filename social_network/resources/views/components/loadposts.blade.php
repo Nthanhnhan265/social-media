@@ -6,7 +6,7 @@
 						<div class="central-meta newpost item rounded-5 {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
 							<div class="user-post">
 								<div class="friend-info">
-									<figure style="width:3rem;height:3rem">
+									<figure style="width:3rem;height:3rem" class="border-avt">
 										<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="" style="height: auto;width:100%">
 									</figure>
 									<div class="friend-name">
@@ -16,6 +16,27 @@
 
 										<span>published:
 											{{ date_format($post->created_at, 'H:i d/m/Y') }}</span>
+
+												@if(!Request::is('newsfeed') && auth()->check() && $user->user_id == auth()->user()->user_id)
+														<div class="dropdown" style="position: absolute; right: 5%;">
+																<button class="btn  dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;background:##f4f2f2">
+																	<i class="fa-solid fa-ellipsis-vertical"></i>
+																</button>
+																<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton-{{$post->id}}">
+																	<a class="dropdown-item" href="{{url('edit-post/'. $post->id)}}" style="display:flex; align-items: center;font-size: 0.8125rem " >	
+																	<i class="far fa-edit" 
+																		style="margin-right:10px; width: 1rem"></i>Update</a>
+																	
+																	<form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="POST" style="display: inline;">
+																		@csrf
+																		@method('DELETE')
+																		<button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this post?');" style="display:flex; align-items: center;;font-size: 0.8125rem"> 	
+																		<i class="fas fa-trash-alt"
+																				style="margin-right: 10px; width: 1rem"></i> Delete</button>
+																	</form>
+																</div>
+															</div>
+															@endif
 									</div>
 									<div class="post-meta">
 										<!-- <img src="images/resources/user-post.jpg" alt=""> -->
@@ -126,8 +147,11 @@
 													</span>
 												</li>
 												<li class="social-media">
+													@if(Auth::user()->user_id != $post->user_id_fk) 
 													<x-share-btn>{{ $post->id }}</x-share-btn>
+													@endif
 												</li>
+
 
 											</ul>
 										</div>
@@ -177,9 +201,7 @@
 													@method('POST')
 													<input type="hidden" name="post_id" value="{{ $post->id }}">
 													<textarea placeholder="Post your comment" name="content"></textarea>
-													<div class="add-smiles">
-														<span class="em em-expressionless" title="add icon"></span>
-													</div>
+													 
 													<div class="attachments">
 														<ul class="m-0 d-flex align-items-center">
 															<li>
@@ -227,22 +249,52 @@
 						@php
 						$created_at = $post->created_at;
 						$sharer = $post->user;
+						$sharePost = $post; 
 						$post = $post->post;
+						
 						@endphp
-						<div class="sharer newpost {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
-							<div class="user-shared">
-								<div class="avatar">
-									<img src="{{asset('storage/images/$sharer->avatar')}}" alt="error">
+						@if (Request::is('newsfeed') )
+							@if ($sharePost->status == 0)
+								@continue
+							@endif
+						@else 
+							@if (!Request::is('time-line/user-profile/' . Auth::user()->user_id) || $sharePost->status == 0)
+								@continue
+							@endif
 
-								</div>
+						@endif
+						<div class="sharer newpost {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
+							<div class="user-shared" style="position: relative">
+								<figure style="width:3rem;height:3rem;border-radius:50%;overflow:hidden" class="border-avt">
+									<img src="{{ asset('storage/images/' . $sharer->avatar) }}" alt="" style="height: auto;width:100%">
+								</figure>
 								<div class="content pl-3">
 									<div class="text">
-										<b>{{ ucwords($sharer->last_name . ' ' . $sharer->first_name) }}</b> shared an article <i class="fa-solid fa-earth-americas"></i>
+										<b>{{ ucwords($sharer->last_name . ' ' . $sharer->first_name) }}</b> shared an article
+										{{-- 0 is private --}}
+								 
+										@if ($sharePost->status == 0) 
+										<i class="fa-solid fa-lock"></i>
+										@else
+										<i class="fa-solid fa-earth-americas"></i>
+										@endif
 									</div>
 									<div class="publicTime">
 										At: {{ date_format($created_at, 'H:i d/m/Y') }}
 									</div>
 								</div>
+								@if (Request::is('time-line/user-profile/'.Auth::user()->user_id)) 
+								<form action="{{route('share.destroy',$sharePost->share_id)}}" method="post">
+									@csrf 
+									@method('delete')
+									<button type="submit" style="background-color:#fff;color:#000 ; position:absolute;top:50%;transform:translateY(-50%);right: 0">
+										<i class="fa fa-trash" aria-hidden="true"></i>
+										<div class="deleteshare" style="position:absolute;top:50%;transform:translateY(-50%);right: 0">
+										</div> 
+										
+									</button>
+								</form>
+								@endif
 							</div>
 							<div class="central-meta item rounded-5 border-share">
 								<div class="user-post">
@@ -269,7 +321,7 @@
 											<x-format_string :content="$content"></x-format_string>
 											@endif
 
-
+											
 											@php
 											$totalMedia = count($post->image) + count($post->video);
 
@@ -310,37 +362,43 @@
 
 											<!-- views, like,dislike, comment, share -->
 											<div class="we-video-info border-top my-3">
-												<ul>
-													<li>
-														<span class="like" data-toggle="tooltip" title="like">
-															<i class="ti-heart"></i>
-															<ins>2.2k</ins>
-														</span>
-													</li>
-													<li>
-														<span class="dislike" data-toggle="tooltip" title="dislike">
-															<i class="ti-heart-broken"></i>
-															<ins>200</ins>
+												<ul style="display: flex;align-items: center;">
+													<li style="margin-right:15px">
+														<span id="like-count-container-{{ $post->id }}" title="Likes" data-type="{{ $post->isLikedByCurrentUser() }}" data-post="{{ $post->id }}" data-clicked="false" class="mr-2 btn btn-sm d-inline font-weight-bold saveLikeDislike" style="border: 1px solid #c4c4c4;color: #c4c4c4;display:flex!important;align-items: center;">
+															<i class="fa-regular fa-thumbs-up mr-2"></i>
+															<span id="like-count-{{ $post->id }}">
+																@php
+																$count = $post->sumLikes()
+																@endphp
+	
+																<x-format_number :number=$count />
+															</span>
 														</span>
 													</li>
 													<li>
 														<span class="comment" data-toggle="tooltip" title="Comments">
 															<i class="fa fa-comments-o"></i>
-															<ins>{{ count($post->comments) }}</ins>
+															<ins>
+																@php
+																$count = count($post->comments)
+																@endphp
+	
+																<x-format_number :number=$count />
+															</ins>
 														</span>
 													</li>
-
-													@if (Auth::user()->user_id != $post->user_id_fk)
 													<li class="social-media">
+														@if(Auth::user()->user_id != $post->user_id_fk) 
 														<x-share-btn>{{ $post->id }}</x-share-btn>
+														@endif
 													</li>
-													@endif
-
+	
 												</ul>
 											</div>
 
 										</div>
 									</div>
+									
 									<div class="coment-area p-1 post-cmt post-cmt-{{ $post->id }}">
 										<ul class="we-comet comment">
 											<!-- hiện commment cho mỗi bình luận tại đây -->
@@ -369,23 +427,20 @@
 												@endif
 											</li>
 											<li class="post-comment">
-												<div class="comet-avatar">
-													<div class="comet-avatar">
+												<div class="d-flex">
+													<div class="col-1">
 														<div class="parent" style="width: 2rem; height: 2rem; border-radius: 50%;overflow:hidden">
 															<x-user-avt>
 															</x-user-avt>
 														</div>
-
 													</div>
-													<div class="post-comt-box {{ $post->id }}">
+													<div class="post-comt-box {{ $post->id }} col-11">
 														<form method="post" action="comment" id="form-{{ $post->id }}" enctype="multipart/form-data">
 															@csrf
 															@method('POST')
 															<input type="hidden" name="post_id" value="{{ $post->id }}">
 															<textarea placeholder="Post your comment" name="content"></textarea>
-															<div class="add-smiles">
-																<span class="em em-expressionless" title="add icon"></span>
-															</div>
+														 
 															<div class="attachments">
 																<ul class="m-0 d-flex align-items-center">
 																	<li>

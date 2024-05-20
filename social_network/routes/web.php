@@ -176,6 +176,7 @@ Route::get('edit-profile-basic/{id}',[UsersController::class,'showProfile'])->mi
 // Trong Routes/web.php
 Route::get('/newsfeed', [PostsController::class, 'index'])->middleware(['auth','verified'])->middleware(['auth','verified']);
 Route::POST('share',[ShareController::class,'store'])->name('share.store')->middleware(['auth','verified']);
+Route::delete('share/{id}',[ShareController::class,'destroy'])->name('share.destroy')->middleware(['auth','verified']);
 
 Route::group([], function(){
     Route::get('like', [LikePostController::class, 'index'])->middleware(['auth','verified']);
@@ -220,4 +221,5 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/{page?}', function ($page = "newsfeed") {  
     return view($page);
 })->middleware(['auth','verified']);
+
 

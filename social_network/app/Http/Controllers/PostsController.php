@@ -674,9 +674,31 @@ class PostsController extends Controller
     // Search in groups
     $groups = Group::where('name_group', 'like', "%{$search}%")
                    ->orWhere('description', 'like', "%{$search}%")
-                   ->with('images')
-                   ->get();
-   
+                   ->with('images')                   
+                   ->get(); 
+                   
+    foreach ($groups as $group) {
+        $check = Usergroup::where('group_id_fk', $group->group_id)
+                                ->where('user_id_fk', Auth::user()->user_id)
+                                ->first();
+        if($check === null){
+            $group->status = 'Join';
+        }
+        elseif($check->request === 1){
+            $group->status = 'Delete request';
+        }
+        else{
+            $group->status = 'Joined';
+        }
+    }
+
+    foreach ($groups as $group) {
+        $memberCount = UserGroup::where('group_id_fk', $group->group_id)
+                        ->where('request', 0)
+                        ->count();
+        $group->memberCount = $memberCount;
+    }
+
     //  dd($groups);
     $users = User::where('first_name', 'like', "%{$search}%")
                    ->Where('last_name', 'like', "%{$search}%")
@@ -723,6 +745,22 @@ class PostsController extends Controller
             ]
         );
        
+    }
+
+    public function checkGroupStatus($group_id){
+        $userId = Auth::user()->user_id;
+        $check = Usergroup::where('group_id_fk',$group_id)
+                        ->where('user_id_fk',$userId)
+                        ->first();
+        if($check === null){
+            return 'Join';
+        }
+        elseif($check->request == 1){
+            return 'Sent request';
+        }
+        else{
+            return 'Joined';
+        }
     }
 
 

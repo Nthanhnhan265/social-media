@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Users;
+use App\Models\UserGroup;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -195,7 +196,8 @@ class UsersController extends Controller
 
         Posts::where('user_id_fk', $userId)->delete();
         Comment::where('user_id_fk', $userId)->delete();
-    
+        UserGroup::where('user_id_fk', $userId)->delete();
+        
         $user->delete();
         return redirect()->back();
     }   

@@ -19,7 +19,7 @@ use App\Models\Video;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-    use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
@@ -71,7 +71,9 @@ class PostsController extends Controller
         $commentsActivityHistorys = Comment::where('user_id_fk',$userId)->get();
         $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]);
         $posts = $this->getNewfeed($userId); 
-        $firstPost = false;  
+        $firstPost = false; 
+        $user = DB::select('select * from users');
+
 
         //if session exists (user clicked notification) => return post that is remained in notification box at the top
         if (Session::get("postFound") && Session::get("type")) {

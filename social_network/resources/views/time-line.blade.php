@@ -199,8 +199,9 @@
 										</div>
 									</div>
 								</div><!-- add post new box -->
-                <x-loadposts :posts=$posts></x-loadposts>
-
+							@endif
+                				<x-loadposts :posts=$posts></x-loadposts>
+							
 							</div>
 						</div><!-- centerl meta -->
 						<div class="col-lg-3">

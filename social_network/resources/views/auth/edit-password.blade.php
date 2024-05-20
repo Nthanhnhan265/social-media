@@ -4,7 +4,15 @@
 	 (note: don't SPACE after attributes, ex: :user = $friend (error))
 --}}
 <!-- top area -->
- 
+@if ($errors->any())
+<div class="alert alert-danger position-fixed z-1 countdown">
+	<ul class="p-0 m-0">
+		@foreach ($errors->all() as $error)
+		<li style="list-style: none"><i class="fa-solid fa-circle-exclamation pe-2"></i> {{ $error }}</li>
+		@endforeach
+	</ul>
+</div>
+@endif
 <x-personal_nav :user=$user></x-personal_nav>
 
 <section>
@@ -15,51 +23,16 @@
 					<div class="row" id="page-contents">
 						<div class="col-lg-3">
 							<aside class="sidebar static">
-								<div class="widget">
-									<h4 class="widget-title">Recent Activity</h4>
-									<ul class="activitiez">
-										<li>
-											<div class="activity-meta">
-												<i>10 hours Ago</i>
-												<span><a title="" href="#">Commented on Video posted </a></span>
-												<h6>by <a href="{{ url('time-line') }}">black demon.</a></h6>
-											</div>
-										</li>
-										<li>
-											<div class="activity-meta">
-												<i>30 Days Ago</i>
-												<span><a title="" href="#">Posted your status. “Hello guys, how are you?”</a></span>
-											</div>
-										</li>
-										<li>
-											<div class="activity-meta">
-												<i>2 Years Ago</i>
-												<span><a title="" href="#">Share a video on her timeline.</a></span>
-												<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-											</div>
-										</li>
-									</ul>
-								</div>
-								<div class="widget stick-widget">
+					
+								<div class="widget stick-widget" style="height:unset">
 									<h4 class="widget-title">Edit info</h4>
 									<ul class="naves">
 
 										<li>
 											<i class="ti-info-alt"></i>
-											<a href="{{ url('edit-profile-basic') }}" title="">Basic info</a>
+											<a href="{{ url('edit-profile-basic/'.Auth::user()->user_id) }}" title="">Basic info</a>
 										</li>
-										<li>
-											<i class="ti-heart"></i>
-											<a href="{{ url('edit-interest') }}" title="">My interests</a>
-										</li>
-										<li>
-											<i class="ti-settings"></i>
-											<a href="{{ url('edit-account-setting') }}" title="">account setting</a>
-										</li>
-										<li>
-											<i class="ti-lock"></i>
-											<a href="{{ url('edit-password') }}" title="">change password</a>
-										</li>
+									 
 									</ul>
 								</div><!-- settings widget -->
 							</aside>

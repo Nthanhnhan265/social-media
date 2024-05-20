@@ -179,8 +179,8 @@ use Illuminate\View\Component;
 											<ul class="nearby-contct">
 												<li>
 													<div class="nearly-pepls">
-														<figure>
-															<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="">
+														<figure class='border-avt'>
+															<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="" style="width:100%; height:auto;">
 														</figure>
 														<div class="pepl-info">
 															<h4><a href="{{ url('time-line/user-profile/' . $user->user_id) }}" title="">{{$user->last_name}} {{$user->first_name}}</a></h4>

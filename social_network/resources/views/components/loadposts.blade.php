@@ -6,8 +6,8 @@
 						<div class="central-meta newpost item rounded-5 {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
 							<div class="user-post">
 								<div class="friend-info">
-									<figure>
-										<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="" class="border-avt">
+									<figure style="width:3rem;height:3rem">
+										<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="" style="height: auto;width:100%">
 									</figure>
 									<div class="friend-name">
 										<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}" title="">
@@ -172,7 +172,7 @@
 											</div>
 
 											<div class="post-comt-box {{ $post->id }}">
-												<form method="post" action="#" id="form-{{ $post->id }}" enctype="multipart/form-data">
+												<form method="post" action="comment" id="form-{{ $post->id }}" enctype="multipart/form-data">
 													@csrf
 													@method('POST')
 													<input type="hidden" name="post_id" value="{{ $post->id }}">
@@ -247,8 +247,8 @@
 							<div class="central-meta item rounded-5 border-share">
 								<div class="user-post">
 									<div class="friend-info">
-										<figure>
-											<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="">
+										<figure style="width:3rem;height:3rem">
+											<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="" style="height: auto;width:100%">
 										</figure>
 										<div class="friend-name">
 											<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}" title="">

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use App\Models\LikePost;
+use App\Models\Notification;
 use App\Models\Posts;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -42,6 +44,7 @@ class LikePostController extends Controller
         $userId = Auth::id();
         $type = $request->type;
         $postId = $request->post;
+        $like_id = 0; 
         // Tìm like dựa trên post_id và user_id
         if ($type == true) {
             $like = LikePost::where('post_id_fk', $postId)->where('user_id_fk', $userId)->first();
@@ -51,9 +54,23 @@ class LikePostController extends Controller
             $data->user_id_fk = $userId;
             $data->post_id_fk = $postId;
             $data->save();
+            // $like_id = $data->getKey(); 
         }
         $likes = Posts::find($request->post)->sumLikes();
 
+        $user_id = Auth::user()->user_id; 
+        $friend = Posts::where('id',$postId)->with('user')->first();
+
+        if($friend->user->user_id ) { 
+            //list people that a friend followed 
+            $arrFollowers = Follow::getFollowersByUserId($friend->user->user_id);
+                    
+            //check if friend is following us
+            if (in_array($user_id,$arrFollowers)) {   
+                Notification::newNotify($friend->user->user_id,$like_id,"likepost"); 
+            }
+        }
+     
         return response()->json([
             'bool' => true,
             'likes' => $likes

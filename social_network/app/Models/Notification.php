@@ -35,6 +35,8 @@ class Notification extends Model
         }
     }
 
+  
+
     //get content of notification when friend posted a post 
     public static function getContentNewPost($t_id) { 
         $newPost = Posts::where('id',$t_id)->with('user')->first(); 
@@ -52,25 +54,57 @@ class Notification extends Model
             return "<b>$user_shared_post</b> shared an article"; 
         }
     }
+
+    //get content when friend comment on your article: (comment_id) -> string
+    public static function getContentFriendComment($t_id) { 
+        $newCmt = Comment::where("comment_id",$t_id)->with('user')->first(); 
+        if(!empty($newCmt)) {
+            $lname = $newCmt->user->last_name; 
+            $fname =$newCmt->user->first_name; 
+            return "<b> $lname $fname </b> commented on your post"; 
+        }
+    }
+
+    //get content when friend comment on your article: (comment_id) -> string
+    public static function getContentFriendLikePost($t_id) { 
+        $likepost = LikePost::where("likepost_id",$t_id)->with('user')->first();
+        if(!empty($likepost)) {  
+            $lname = $likepost->user->last_name; 
+            $fname =$likepost->user->first_name; 
+            return "<b> $lname $fname </b> liked your post"; 
+        }
+    }
     
+    static public function getContentByType($t,$t_id) { 
+        $c = "";
+
+        if($t == "friend_request"){ 
+            $c = self::getContentFriendReq($t_id); 
+        }
+        else if($t == "accept"){ 
+            $c = self::getContentAcceptFriendReq($t_id); 
+        } else if ($t == "newpost") { 
+            $c = self::getContentNewPost($t_id); 
+        }
+        else if ($t=="sharepost")  {
+            $c = self::getContentSharePost($t_id); 
+         }
+        else if ($t=="commentpost")  {
+            $c = self::getContentFriendComment($t_id); 
+         }
+        else if ($t=="likepost")  {
+            $c = self::getContentFriendLikePost($t_id); 
+            dd($c);
+        }
+         
+         return $c;
+    }
+
     // create new notification for user
     static public function newNotify($r,$t_id, $t){ 
-
         if(!empty($r) && !empty($t_id)  && !empty($t)) { 
-            $c = "";
 
-            if($t == "friend_request"){ 
-                $c = self::getContentFriendReq($t_id); 
-            }
-            else if($t == "accept"){ 
-                $c = self::getContentAcceptFriendReq($t_id); 
-            } else if ($t == "newpost") { 
-                $c = self::getContentNewPost($t_id); 
-            }
-            else if ($t=="sharepost")  {
-                $c = self::getContentSharePost($t_id); 
-             }
-            
+           $c = self::getContentByType($t,$t_id); 
            return Notification::create([
                 "receiver"=>$r, 
                 "content"=>$c, 
@@ -88,19 +122,7 @@ class Notification extends Model
     static public function newNotifyToFollowers($arrReceivers,$t_id,$t ){ 
         if(!empty($arrReceivers) && count($arrReceivers) > 0 && !empty($t_id)  && !empty($t)) { 
             //get content
-            $c = "";
-            if($t == "friend_request"){ 
-                $c = self::getContentFriendReq($t_id); 
-            }
-            else if($t == "accept"){ 
-                $c = self::getContentAcceptFriendReq($t_id); 
-            } else if ($t == "newpost") { 
-                $c = self::getContentNewPost($t_id); 
-            }
-            else if ($t=="sharepost")  {
-                $c = self::getContentSharePost($t_id); 
-               
-            }
+             $c = Notification::getContentByType($t,$t_id); 
              //notify to all followers (receivers)
              $notifications = []; 
             foreach ($arrReceivers as $r) { 

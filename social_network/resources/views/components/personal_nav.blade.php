@@ -1,6 +1,9 @@
 <?php 
     use Illuminate\Support\Facades\Auth;
 	use App\Models\Follow; 
+	use Illuminate\Support\Str;
+	use Illuminate\Support\Facades\Session;
+	Session::put("url",url()->current());
 ?>
 <section>
 
@@ -170,8 +173,7 @@
                             @if(auth()->check() && $user->user_id == auth()->user()->user_id)
                             <a class="{{Request::is('about' . '/user-profile/'.$user->user_id) ? 'active' : ''}}" href="{{ url('about' . '/user-profile/' . $user->user_id) }}" title="" data-ripple="">about</a>
                             @endif
-
-                            <a class="" href="#" title="" data-ripple="">more</a>
+ 
                         </li>
                     </ul>
                 </div>

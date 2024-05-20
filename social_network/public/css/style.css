@@ -985,7 +985,7 @@ header.sticky {
     transition: all 0.3s linear 0s;
     padding: 5px;
     text-align: center;
-    z-index: 100;
+    z-index: 1;
 }
 
 .user-avatar .edit-phto {

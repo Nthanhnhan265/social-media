@@ -35,6 +35,8 @@ class RegisteredUserController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'DOB' => ['required', 'date'],
+            'gender' => ['required', 'integer', 'in:0,1'],
         ]);
 
         $user = User::create([
@@ -42,18 +44,16 @@ class RegisteredUserController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'DOB' => $request->DOB ?? null, 
-            'gender' => $request->gender ?? null,
+            'DOB' => $request->DOB, 
+            'gender' => $request->gender,
             'description' => $request->description ?? null,
             'avatar' => $request->avatar ?? "default.jpg",
             'background' => $request->background ?? null,
             'role_id_fk' => $request->role_id_fk ?? random_int(1, 10),
-            'status'=>1
+            'status' => 2,
         ]);
 
         event(new Registered($user));
-
-        Auth::login($user);
 
         return redirect('/');
     }

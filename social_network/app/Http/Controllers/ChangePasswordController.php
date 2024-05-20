@@ -10,7 +10,6 @@ class ChangePasswordController extends Controller
 {
     public function showChangePasswordForm()
     {
-        
         $user = Auth::user();
         return view('auth.edit-password', compact('user'));
     }
@@ -30,6 +29,9 @@ class ChangePasswordController extends Controller
             'password' => Hash::make($request->new_password),
         ]);
 
-        return redirect()->back();
+        // Thêm thông báo thành công vào Session
+        return back()->withErrors(['success' => 'Đổi mật khẩu thành công.']);
+
     }
 }
+

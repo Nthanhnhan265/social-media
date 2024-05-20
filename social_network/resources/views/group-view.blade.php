@@ -18,9 +18,9 @@
 @endif
 	<section>
 		<div class="feature-photo">
-			<figure><img src="{{ asset('images/resources/timeline-4.jpg')}}" alt=""></figure>
+			<figure><img style="width: 100%;" src="{{ asset('images/resources/timeline-4.jpg')}}" alt=""></figure>
 			<div class="add-btn">
-				<a href="#" title="" data-ripple="">Joined</a>
+				<button type="submit" title="" data-ripple="" class="delete-group" style="right: 180; background: #098DD1">Joined</button>
 				@if($userRole->role_id_fk == !0)
 					<form action="{{ route('leave-group', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to leave this group?');">
 						@csrf
@@ -63,7 +63,7 @@
 							<ul>
 								<li class="admin-name">
 								  <h5>{{ $group->name_group }}</h5>	
-								  <span>{{ $memberCount }} members</span>							  
+								  <span style="bottom: -15px">{{ $memberCount }} members</span>							  
 								</li>
 								<li>
 									<a class="active" href="{{ url('group-view') }}" title="" data-ripple="">Posts</a>

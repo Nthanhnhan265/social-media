@@ -228,3 +228,31 @@ window.addEventListener('beforeunload', (e)=>{
     }) 
 
    
+    document.addEventListener('DOMContentLoaded', function() {
+        const commentButtons = document.querySelectorAll('.btnComment');
+        
+        if (commentButtons.length > 0) {
+            commentButtons.forEach(function(button) {
+                button.addEventListener('click', function(event) {
+                    // Lấy ID của post
+                    const postId = this.value;
+                    // Lấy form tương ứng
+                    const form = document.getElementById(`form-${postId}`);
+                    
+                    if (form) {
+                        // Lấy giá trị của textarea
+                        const content = form.querySelector('textarea[name="content"]').value.trim();
+                        // Lấy các file được chọn
+                        const imgFiles = form.querySelector('input[name="imgFileSelected[]"]').files;
+                        const vdFiles = form.querySelector('input[name="vdFileSelected[]"]').files;
+    
+                        // Kiểm tra nếu không có nội dung và không có file nào được chọn
+                        if (!content && imgFiles.length === 0 && vdFiles.length === 0) {
+                            event.preventDefault(); // Ngăn form submit
+                            alert('Please enter content, select an image or a video before submitting.');
+                        }
+                    }
+                });
+            });
+        }
+    });

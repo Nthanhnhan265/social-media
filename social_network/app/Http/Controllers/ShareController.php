@@ -113,6 +113,10 @@ class ShareController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sh = Share::where('share_id',$id)->first(); 
+        if ($sh && $sh->user_id_fk == Auth::user()->user_id) { 
+            $sh->delete();
+            return redirect()->back();
+        }
     }
 }

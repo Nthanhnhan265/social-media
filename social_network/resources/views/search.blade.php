@@ -110,19 +110,38 @@ use Illuminate\View\Component;
 								@foreach ($groups as $group)
 									<div class="central-meta">
 										<div class="groups">
-											<span style="font-size:1rem"><i class="fa fa-users"></i><x-format_number :number=1100/></span>
+										<span style="font-size: 1rem">
+ 									   <i class="fa fa-users"></i>{{ $group->memberCount }}</span>
 										</div>
 										<ul class="nearby-contct">
 											<li>
 												<!-- Kiểm tra xem user đã tham gia vào group hay chưa? -->
 												<div class="nearly-pepls">
 													<figure>
-														<a href="{{ url('group-view/' . $group->group_id) }}" title=""><img src="{{ asset('storage/images/' . $group->image) }}" alt=""></a>
+														<a href="{{ url('group-view/' . $group->group_id) }}" title=""><img src="images/resources/group1.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
 														<h4><a href="{{ url('group-view/' . $group->group_id) }}" title="">{{$group->name_group}}</a></h4>
-														<span>Private Groups</span>
-															<a href="#" title="" class="add-butn" data-ripple="">Leave Group</a>
+														@if($group->status == 1)
+														<span>Active groups</span>
+														@else
+														<span>Deactive groups</span>
+														@endif																																
+														@if($group->status === 'Join')
+														<form action="{{ route('join-request', $group->group_id )}}" method="POST" style="display: inline;" onsubmit="">
+															@csrf
+															@method("POST")
+															<button type="submit" title="" data-ripple="" class="request-join">Join</button>
+														</form>
+														@elseif($group->status === 'Delete request')						
+															<form action="{{ route('search-delete-request', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
+															@csrf
+															@method('DELETE')
+															<button type="submit" title="" data-ripple="" class="request-join" style="width: 140px;">Delete request</button>
+													</form>									
+														@else
+															<button type="" title="" data-ripple="" class="request-join" style="background-color: #088dcd">Joined</button>
+														@endif													
 													</div>
 												</div>
 											</li>
@@ -160,8 +179,8 @@ use Illuminate\View\Component;
 											<ul class="nearby-contct">
 												<li>
 													<div class="nearly-pepls">
-														<figure>
-															<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="">
+														<figure class='border-avt'>
+															<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="" style="width:100%; height:auto;">
 														</figure>
 														<div class="pepl-info">
 															<h4><a href="{{ url('time-line/user-profile/' . $user->user_id) }}" title="">{{$user->last_name}} {{$user->first_name}}</a></h4>

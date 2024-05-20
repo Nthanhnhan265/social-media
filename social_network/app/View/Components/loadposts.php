@@ -13,10 +13,12 @@ class loadposts extends Component
      */
     public $posts; 
     public $user;
-    public function __construct($posts,$user )
+    public $firstPost; 
+    public function __construct($posts,$user, $firstPost = false )
     {
         $this->posts = $posts;
         $this->user = $user;
+        $this->firstPost = $firstPost; 
     }
 
     /**

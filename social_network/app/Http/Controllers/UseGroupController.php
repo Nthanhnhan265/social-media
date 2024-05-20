@@ -110,6 +110,16 @@ class UseGroupController extends Controller
                       ->where('user_id_fk', $request->input('user_id'))
                       ->first();       
         $usergroup->delete();
+        return redirect('groups');   
+    }
+
+    public function deleteRequestForSearch(Request $request, $group_id)
+    {       
+        $userId = Auth::user()->user_id;
+        // Xóa user ở bảng usergroup
+        UserGroup::where('group_id_fk', $group_id)
+                    ->where('user_id_fk', $userId)
+                    ->delete();
         return redirect()->back();   
     }
 }

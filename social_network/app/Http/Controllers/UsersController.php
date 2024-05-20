@@ -7,13 +7,15 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Users;
+use App\Models\UserGroup;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use App\Models\Posts;
-
+use App\Models\Relationship;
+use Illuminate\Support\Facades\Session;
 
 class UsersController extends Controller
 {
@@ -120,6 +122,11 @@ class UsersController extends Controller
    
     public function showAbout($id)
     {
+        $url = Session::get('url');
+        if ($url && $id != Auth::user()->user_id) { 
+           Session::forget("url");
+           return redirect($url)->withErrors("You don't have permission"); 
+        }
         $user = User::findOrFail($id); 
         $isInFriendList = DB::select("SELECT * FROM relationships WHERE (sender = ? AND receiver = ?)
         OR (sender = ? AND receiver = ?)",[Auth::user()->user_id,$id,$id,Auth::user()->user_id]);
@@ -127,9 +134,22 @@ class UsersController extends Controller
     }
 
     public function showProfile($id){
-        $user = User::findOrFail($id);
-        $isInFriendList = DB::select("SELECT * FROM relationships WHERE (sender = ? AND receiver = ?)
-        OR (sender = ? AND receiver = ?)",[Auth::user()->user_id,$id,$id,Auth::user()->user_id]);
+        $url = Session::get('url');
+        if ($url && $id != Auth::user()->user_id) { 
+           Session::forget("url");
+           return redirect($url)->withErrors("You don't have permission"); 
+        }
+        
+        DB::enableQueryLog();
+        $user = User::where('user_id',$id)->firstOrFail();
+        $user_id = $user->user_id;
+        $isInFriendList = Relationship::where(function ($query) use ($user_id, $id) {
+            $query->where('sender', $user_id)->where('receiver', $id);
+        })->orWhere(function ($query) use ($user_id, $id) {
+            $query->where('sender', $id)->where('receiver', $user_id);
+        })->exists();
+        // ... (Câu truy vấn của bạn) ...
+        
         return view('edit-profile-basic',["id"=>$id,'user'=>$user,"friend"=>$isInFriendList]);
     }
     /**
@@ -186,7 +206,8 @@ class UsersController extends Controller
 
         Posts::where('user_id_fk', $userId)->delete();
         Comment::where('user_id_fk', $userId)->delete();
-    
+        UserGroup::where('user_id_fk', $userId)->delete();
+        
         $user->delete();
         return redirect()->back();
     }   

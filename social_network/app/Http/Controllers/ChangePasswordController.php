@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 class ChangePasswordController extends Controller
 {
     public function showChangePasswordForm()
     {
+        
         $user = Auth::user();
         return view('auth.edit-password', compact('user'));
     }

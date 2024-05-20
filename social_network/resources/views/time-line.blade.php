@@ -103,8 +103,9 @@
 							@if(auth()->check() && $user->user_id == auth()->user()->user_id)
 								<div class="central-meta item">
 									<div class="new-postbox">
-										<figure>
-											<img src="{{asset('storage/images/' . $user->avatar)}}" alt="">
+
+										<figure style="width:3rem;height:3rem">
+											<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="" style="height: auto;width:100%">
 										</figure>
 										<div class="newpst-input">
 										<form method="post" action="{{ url('post') }}"
@@ -143,6 +144,9 @@
 								</div><!-- add post new box -->
               					  <x-loadposts :posts=$posts :user=$user></x-loadposts>
 
+							{{-- @endif --}}
+                				{{-- <x-loadposts :posts=$posts></x-loadposts> --}}
+							
 							</div>
 						</div><!-- centerl meta -->
 						<div class="col-lg-3">

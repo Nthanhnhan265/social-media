@@ -144,7 +144,19 @@ class GroupController extends Controller
         $group->description = $request->input('description');  
         $group->status = $request->input('status');    
         $group->save();
-        return redirect()->back()->with('success', 'Group updated successfully.');   
+        return redirect()->back();   
+    }
+
+    public function joinGroup($group_id){
+        $userId = Auth::user()->user_id;
+
+        $usergroup = UserGroup::create([
+            'user_id_fk' => $userId,
+            'group_id_fk' => $group_id,
+            'role_id_fk' => 2,
+            'request' => 1, 
+        ]);
+        return redirect()->back(); 
     }
 
     //xoá group trong group-management

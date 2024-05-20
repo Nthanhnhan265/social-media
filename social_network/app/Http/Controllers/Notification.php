@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\LikePost;
 use App\Models\Notification as ModelsNotification;
 use App\Models\Posts;
 use App\Models\Relationship;
@@ -108,6 +110,32 @@ class Notification extends Controller
                     // return view('newsfeed', $associativeArray);
                     return redirect(url('newsfeed')); 
                 }
+
+                  //friend commented your post
+                else if ($request->type == "commentpost") {
+                    $post_id = Comment::where('comment_id',$request->type_id)->first(); 
+                    if ($post_id->post_id_fk) { 
+                        $post_id = $post_id->post_id_fk; 
+                        $postFound = Posts::where('id',$post_id )->first();
+                        Session::flash('postFound',$postFound);
+                        Session::flash('type',"commentpost");
+                        return redirect(url('newsfeed')); 
+                    }
+                }
+
+                //friend liked your post
+                else if ($request->type == "likepost") {
+                    $post_id = LikePost::where('likepost_id',$request->type_id)->first(); 
+                    if ($post_id->post_id_fk) { 
+                        $post_id = $post_id->post_id_fk; 
+                        $postFound = Posts::where('id',$post_id )->first();
+                        Session::flash('postFound',$postFound);
+                        Session::flash('type',"commentpost");
+                        return redirect(url('newsfeed')); 
+                    }
+                }
+
+
             } else {
                 dd('marked');
             }

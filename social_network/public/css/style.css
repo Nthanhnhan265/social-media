@@ -10602,3 +10602,9 @@ aside.sidebar.full-style {
     align-items: center; /* Center content vertically */
     justify-content: center; /* Center content horizontally */
 }
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+

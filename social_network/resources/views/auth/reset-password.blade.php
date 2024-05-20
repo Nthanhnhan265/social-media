@@ -5,6 +5,14 @@
         <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
+        @if(session('success'))
+            <div class="alert alert-success " >
+                {{ session('success') }}
+            </div>
+        @endif
+
+
+
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />

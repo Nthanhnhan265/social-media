@@ -57,7 +57,6 @@
                 <div class="form-group">
                     <input type="password" name="current_password" id="current_password" required="required" />
                     <label class="control-label" for="current_password">Current password</label>
-                    <div class="error-message" id="currentPasswordError"></div>
                 </div>
                 <a class="forgot-pwd underline" title="" href="#">Forgot Password?</a>
                 <div class="submit-btns">

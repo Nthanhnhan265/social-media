@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use App\Models\Posts;
-use App\Models\Relationship;
 use Illuminate\Support\Facades\Session;
 
 class UsersController extends Controller

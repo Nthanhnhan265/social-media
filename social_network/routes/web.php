@@ -18,8 +18,8 @@ use App\Http\Controllers\NewsController;
 // use App\Http\Controllers\UseGroupController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ChangePasswordController;
-
-
+use App\Http\Controllers\UseGroupController;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +43,7 @@ Route::put('/relationship/{id}/{redirect?}',[Relationship::class,'update'])->nam
 Route::delete('/relationship/{id}/{redirect?}',[Relationship::class,'destroy'])->name('relationships.destroy')->middleware(['auth','verified']);
 Route::get('/timeline-friends/{id}',function($id) { 
     $user = Auth::user(); 
+    
     if ($user->user_id == $id) { 
         return view('timeline-friends',
         [
@@ -53,7 +54,11 @@ Route::get('/timeline-friends/{id}',function($id) {
         ]
     );
     }else  {
-        return redirect()->back()->middleware(['auth','verified']); 
+        $url = Session::get('url');
+        if ($url) { 
+           Session::forget("url");
+           return redirect($url)->withErrors("You don't have permission"); 
+        }
     }
    
 })->middleware(['auth','verified']);  

@@ -6,6 +6,16 @@
 	 (note: don't SPACE after attributes, ex: :user = $friend (error))
 --}}
 <!-- top area -->
+@if ($errors->any())
+<div class="alert alert-danger position-fixed z-1 countdown">
+	<ul class="p-0 m-0">
+		@foreach ($errors->all() as $error)
+		<li style="list-style: none"><i class="fa-solid fa-circle-exclamation pe-2"></i> {{ $error }}</li>
+		@endforeach
+		
+	</ul>
+</div>
+@endif
 <x-personal_nav :user=$user :friend=$friend></x-personal_nav>
 
 <section>

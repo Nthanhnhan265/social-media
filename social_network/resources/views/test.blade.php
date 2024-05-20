@@ -1,7 +1,8 @@
 <?php
 
 use App\Models\UserGroup;
+use App\Models\Notification;
 
-   dd( UserGroup::checkUserInGroup(1,3));
+   dd( Notification::getContentByType('likepost',27));
 
 ?> 

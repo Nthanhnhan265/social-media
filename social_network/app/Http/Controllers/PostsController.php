@@ -74,8 +74,6 @@ class PostsController extends Controller
         $firstPost = false; 
 
 
-
-
         //if session exists (user clicked notification) => return post that is remained in notification box at the top
         if (Session::get("postFound") && Session::get("type")) {
             //set session to variable 

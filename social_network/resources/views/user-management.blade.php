@@ -32,7 +32,10 @@
                                     @foreach ($users as $user)
                                         <tr class="">
                                             <td width="80">
-                                                <img src="{{ asset('images/resources/' . $user->avatar) }}" alt="Avatar">
+                                                <div class="avatar-noti">
+                                                    <img src="{{ asset('storage/images/' . $user->avatar) }}" alt="Avatar" style="width:100%;height:auto">
+
+                                                </div>
                                             </td>
                                             <td>{{ $user->user_id }}</td>
                                             <td>{{ $user->first_name }}</td>

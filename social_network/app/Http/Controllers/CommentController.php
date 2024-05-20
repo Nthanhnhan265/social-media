@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use \App\Models\Posts;
 use \App\Models\Comment;
 use \App\Http\Controllers\PostController;
+use App\Models\Follow;
 use App\Models\Image;
+use App\Models\Notification;
 use App\Models\Video;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +44,8 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->post_id) {
+        $post = Posts::where('id',$request->post_id)->with('user')->first(); 
+        if ($post) {
             $newComment = [
                 "post_id_fk" => $request->post_id,
                 "content" => empty($request->content) ? "" : $request->content,
@@ -51,7 +54,6 @@ class CommentController extends Controller
             ];
 
             $cmt = Comment::create($newComment);
-
             //check and add images 
             if (!empty($request->file('imgFileSelected'))) {
                 $newImgs = [];
@@ -100,12 +102,23 @@ class CommentController extends Controller
                 //them vao db 
                 Video::insert([...$newVideos]);
             }
+            $user_id = Auth::user()->user_id; 
+            $friend_id = $post->user->user_id;
+            //list people that a friend followed 
+            $arrFollowers = Follow::getFollowersByUserId($friend_id);
+            
+            //check if friend is following us
+            if (in_array($user_id,$arrFollowers)) { 
+                
+               dd( Notification::newNotify($friend_id,$cmt->comment_id,"commentpost")); 
+            }
         }
+        
         return redirect()->back();
     }
-
     
-
+    
+    
     /**
      * Display the specified resource.
      *

@@ -42,11 +42,11 @@
 							</p>
 						<form method="post">
 							<div class="form-group">	
-							  <input type="text" id="input" required="required" name="email"/>
+							<input type="text" id="input" required="required" name="email"/>
 							  <label class="control-label" for="input">Email</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="password" required="required" name="password/>
+							<input type="password" required="required" name="password/>
 							  <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
 							</div>
 							<div class="checkbox">
@@ -68,11 +68,11 @@
 							</p>
 						<form method="post">
 							<div class="form-group">	
-							  <input type="text" required="required" name="first-name"/>
+							<input type="text" required="required" name="first-name"/>
 							  <label class="control-label" for="input">First Name </label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="text" required="required" name="last-name"/>
+							<input type="text" required="required" name="last-name"/>
 							  <label class="control-label" for="input"> Last Name</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
@@ -80,7 +80,7 @@
 							  <label class="control-label" for="input">Email</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="password" required="required" name="password"/>
+							<input type="password" required="required" name="password"/>
 							  <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-radio">

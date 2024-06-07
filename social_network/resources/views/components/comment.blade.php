@@ -8,7 +8,7 @@
 <li class={{$class}}>
     <div class="comet-avatar">
    <div class="comment-avatar" style="width: 45px; height: 45px; overflow: hidden; border-radius: 50%;">
-            <img src="{{ asset('storage/images/' . $commenter->user->avatar) }}" alt="" style="height: auto;width:100%">
+            <img src="{{ asset('storage/images/' . $commenter->user->avatar) }}" alt="" style="height: 100%;width:100%">
 </div>
 
     </div>

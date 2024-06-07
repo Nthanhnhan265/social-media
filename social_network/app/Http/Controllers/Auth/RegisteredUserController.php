@@ -49,8 +49,8 @@ class RegisteredUserController extends Controller
             'description' => $request->description ?? null,
             'avatar' => $request->avatar ?? "default.jpg",
             'background' => $request->background ?? null,
-            'role_id_fk' => $request->role_id_fk ?? random_int(1, 10),
-            'status' => 2,
+            'role_id_fk' => $request->role_id_fk ?? 2,
+            'status' => 1,
         ]);
 
         event(new Registered($user));

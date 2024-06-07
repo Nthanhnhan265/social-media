@@ -34,7 +34,7 @@
                     <input type="file" name="vdFileSelected[]" multiple>
                     <div id="comment-videos-{{$comment->id}}" class="mt-2">
                         @foreach ($comment->video as $vi)
-                            <video controls class="mb-2" style="width: 100%;">
+                            <video controls class="mb-2" style="width: 10rem; height:10rem ">
                                 <source src="{{asset('storage/videos/' . $vi->url)}}" type="video/mp4">
                             </video>
                         @endforeach

@@ -105,7 +105,7 @@
 									<div class="new-postbox">
 
 										<figure style="width:3rem;height:3rem">
-											<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="" style="height: auto;width:100%">
+											<img src="{{ asset('storage/images/' . $user->avatar) }}" alt="" style="height: 100%;width:100%">
 										</figure>
 										<div class="newpst-input">
 										<form method="post" action="{{ url('post') }}"

@@ -33,7 +33,7 @@
                                         <tr class="">
                                             <td width="80">
                                                 <div class="avatar-noti">
-                                                    <img src="{{ asset('storage/images/' . $user->avatar) }}" alt="Avatar" style="width:100%;height:auto">
+                                                    <img src="{{ asset('storage/images/' . $user->avatar) }}" alt="Avatar" style="width:100%;height:100%">
 
                                                 </div>
                                             </td>
@@ -45,11 +45,11 @@
                                             <td style="width: 100px">{{ $user->description }}</td>
                                             <td>{{ $user->status == 1 ? 'Active' : 'Deactive' }}</td>
                                             <td>                                          
-                                                <a href="{{ url('edit-user/' . $user->user_id) }}" class="btn btn-success btn-mini">Edit</a>
+                                                <a href="{{ url('edit-user/' . $user->user_id) }}" class="btn btn-outline-success-2">Edit</a>
                                                 <form action="{{ route('delete-user', $user->user_id) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-mini" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+                                                    <button type="submit" class="btn btn-outline-success-2" style="border:1px solid ; color: red" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

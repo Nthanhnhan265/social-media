@@ -163,7 +163,7 @@ $allUsers = User::get();
                 <div class="position-relative">
                     <form class="d-flex position-absolute" style="width:30vw; transform:translate(90%,30%)"
                         role="search" action="{{ route('posts.search') }}" method="GET">
-                        <input class="form-control me-2" type="search" name="search" placeholder="Search"
+                        <input class="form-control me-2" type="search" name="search" placeholder="Search" value="{{ request()->get('search') }}"
                             aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
@@ -403,7 +403,6 @@ $allUsers = User::get();
                 <a href="{{ url('time-line/user-profile/' . Auth::user()->user_id) }}" title=""><i
                         class="ti-user"></i> view profile</a>
                 <a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
-                <a href="#" title=""><i class="ti-target"></i>activity log</a>
                 <a href="#" title=""><i class="ti-settings"></i>account setting</a>
                 @if (auth()->check() && auth()->user()->role_id_fk == 1)
                     <a href="{{ url('/user-management') }}" title="Admin" data-ripple="">

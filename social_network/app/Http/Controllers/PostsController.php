@@ -68,7 +68,7 @@ class PostsController extends Controller
         $userId = Auth::user()->user_id;
         $friend_list = Relationship::getFriendListOfUser();
         $postActivityHistorys = DB::select('select * from posts where user_id_fk = ?', [$userId]);
-        $commentsActivityHistorys = Comment::where('user_id_fk',$userId)->get();
+        $commentsActivityHistorys = Comment::where('user_id_fk',$userId)->with('user')->get();
         $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]);
         $posts = $this->getNewfeed($userId); 
         $firstPost = false; 
@@ -177,7 +177,7 @@ class PostsController extends Controller
         else {
            
             //random any posts in DB 
-            $posts = Posts::inRandomOrder()->limit(10)
+            $posts = Posts::inRandomOrder()->limit(5)
             ->with([
                 'user',
                 'image',

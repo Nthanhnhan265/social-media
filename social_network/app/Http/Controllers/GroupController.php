@@ -59,9 +59,10 @@ class GroupController extends Controller
     public function getGroupByUserID()
     {
         $userId = Auth::user()->user_id;
+        $user = Auth::user(); 
         $groups = UserGroup::where('user_id_fk', $userId)
                 ->get();                
-        return view('groups')->with('groups', $groups);
+        return view('groups')->with('groups', $groups)->with('user',$user)->with('friend','');
     }
     /**
      * Show the form for creating a new resource.

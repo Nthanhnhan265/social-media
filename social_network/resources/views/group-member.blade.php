@@ -2,7 +2,7 @@
 @section('content')		
 	<section>
 		<div class="feature-photo">
-			<figure><img style="width: 100%" src="{{ asset('images/resources/timeline-4.jpg')}}" alt=""></figure>
+			<figure><img style="width: 100%" src="{{ asset('/images/resources/timeline-4.jpg')}}" alt=""></figure>
 			<div class="add-btn">
 				<button type="submit" title="" data-ripple="" class="delete-group" style="right: 180; background: #098DD1">Joined</button>
 				@if($userRole->role_id_fk == !0)
@@ -127,7 +127,7 @@
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="{{ url('time-line') }}" title=""><img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('images/resources/' . $member->user->avatar) }}" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('storage/images/' . $member->user->avatar) }}" alt=""></a>
 													</figure>
 													<div class="pepl-info">
 														<h4><a href="{{ url('time-line') }}" title="">{{$member->user->first_name.' '.$member->user->last_name }}</a></h4>
@@ -187,7 +187,7 @@
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="{{ url('time-line') }}" title=""><img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('images/resources/' . $request->user->avatar) }}" alt=""></a>
+														<a href="{{ url('time-line') }}" title=""><img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('storage/images/' . $request->user->avatar) }}" alt=""></a>
 													</figure>
 													<div class="pepl-info">
 														<h4><a href="{{ url('time-line') }}" title="">{{$request->user->first_name.' '.$request->user->last_name }}</a></h4>
@@ -195,7 +195,7 @@
 															@csrf
 															@method('DELETE')
 															<input type="text" name="user_id" value="{{ $request->user->user_id }}" style="display: none;"/>
-															<button type="submit" title="" data-ripple="" class="request-delete">Delete request</button>
+															<button type="submit" title="" data-ripple="" class="request-delete" style="width: 120px">Delete request</button>
 														</form>
 														<form action="{{ route('update', $group->group_id) }}" method="POST" style="display: inline;" onsubmit="">
 															@csrf
@@ -231,7 +231,7 @@
 											@foreach($members as $member)								
 											<li>
 												<figure>
-													<img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('images/resources/' . $member->user->avatar) }}" alt="">
+													<img style="width: 45px; height: 45px; overflow: hidden" src="{{ asset('storage/images/' . $member->user->avatar) }}" alt="">
 												</figure>
 												<div class="friend-meta">
 													<h4><a href="{{ url('group-members') }}" class="underline" title="">{{$member->user->first_name.' '.$member->user->last_name }}</a></h4>

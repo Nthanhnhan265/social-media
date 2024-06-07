@@ -108,7 +108,7 @@ class UsersController extends Controller
         $userId = Auth::user()->user_id;
         $friend_list = Relationship::getFriendListOfUser();
         $postActivityHistorys = DB::select('select * from posts where user_id_fk = ?', [$userId]);
-        $commentsActivityHistorys = Comment::where('user_id_fk',$userId)->get();
+        $commentsActivityHistorys = Comment::where('user_id_fk',$userId)->with('user')->get();
         $shareActivityHistorys = DB::select('select * from share where user_id_fk = ?', [$userId]); 
          $isInFriendList = DB::select("SELECT * FROM relationships WHERE (sender = ? AND receiver = ?)
         OR (sender = ? AND receiver = ?)",[Auth::user()->user_id,$id,$id,Auth::user()->user_id]);
@@ -226,7 +226,7 @@ class UsersController extends Controller
         if ($request->hasFile('fileUpload')) {
             $image = $request->file('fileUpload');
             $imageName = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images/resources'), $imageName);
+            $image->move(public_path('storage/images/'), $imageName);
             $user->avatar = $imageName;
         }
     

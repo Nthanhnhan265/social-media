@@ -28,42 +28,40 @@
 											<div class="friend-name">
 												<ins><a href="{{ url('time-line') }}" title="">{{$post->user->last_name." ".$post->user->first_name}}</a></ins>
 												<span>published: {{$post->created_at }}</span>
-                                                
 											</div>                                           
 											<div class="post-meta">
-												<img src="{{ asset('images/resources/user-post.jpg') }}"  alt="">
+												<div class="description">													
+													<p>
+														{{$post->content }}
+													</p>
+												</div>
 												<div class="we-video-info">
 													<ul>
 														<li>
 															<span class="views" data-toggle="tooltip" title="views">
 																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
+																<ins>1</ins>
 															</span>
 														</li>
 														<li>
 															<span class="comment" data-toggle="tooltip" title="Comments">
 																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
+																<ins>10</ins>
 															</span>
 														</li>
 														<li>
 															<span class="like" data-toggle="tooltip" title="like">
 																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
+																<ins>2</ins>
 															</span>
 														</li>
 														<li>
 															<span class="dislike" data-toggle="tooltip" title="dislike">
 																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
+																<ins>2</ins>
 															</span>
 														</li>														
 													</ul>
-												</div>
-												<div class="description">													
-													<p>
-														{{$post->content }}
-													</p>
 												</div>
 											</div>
 										</div>

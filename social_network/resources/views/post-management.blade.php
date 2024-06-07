@@ -38,12 +38,11 @@
                                             <td>{{ $post->created_at }}</td>  
                                             <td>{{ $post->updated_at }}</td>                                       
                                             <td>
-                                                <a href="{{ url('post-detail', $post->id) }}" class="btn
-                                                    btn-success btn-mini">Detail</a>                               
+                                                <a href="{{ url('post-detail', $post->id) }}" class="btn btn-outline-success-2">Detail</a>                               
                                                 <form action="{{ route('delete-post', $post->id) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-mini" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                                                    <button type="submit" class="btn btn-outline-success-2" style="border:1px solid ; color: red" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>   

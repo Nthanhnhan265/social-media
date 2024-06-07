@@ -11,8 +11,11 @@
             <li>
                 <div class="activity-meta">
                     <i>{{ $postActivityHistor->created_at }}</i>
+                    @php 
+                        $string = $postActivityHistor->content
+                    @endphp
                     <span><a href="#" title="">Posted your status.
-                            “{{ $postActivityHistor->content }}”</a></span>
+                            <x-format_string :content=$string/></a></span>
                 </div>
             </li>
             @endforeach
@@ -25,8 +28,9 @@
                     <span><a href="#" title="">Commented on Video posted
                         </a></span>
                     <h6>by <a href="{{ url('time-line') }}">
-                            {{ $commentsActivityHistory->user_first_name }}
-                            {{ $commentsActivityHistory->user_last_name }} </a></h6>
+                            {{ $commentsActivityHistory->user->first_name }}
+                            {{ $commentsActivityHistory->user->last_name }} </a>
+                        </h6>
                             <div class="dropdown" style="position: absolute; right: 5%;">
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton-{{$commentsActivityHistory->comment_id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;background:#f4f2f2;">
                                 <i class="fa-solid fa-ellipsis-vertical"></i>

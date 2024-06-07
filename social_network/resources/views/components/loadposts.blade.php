@@ -7,7 +7,7 @@
 							<div class="user-post">
 								<div class="friend-info">
 									<figure style="width:3rem;height:3rem" class="border-avt">
-										<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="" style="height: auto;width:100%">
+										<img src="{{ asset('storage/images/' . $post->user->avatar) }}" alt="" style="height: 100%;width:100%">
 									</figure>
 									<div class="friend-name">
 										<ins><a href="{{ url('time-line') . '/user-profile/' . $post->user->user_id }}" title="">
@@ -36,6 +36,11 @@
 																	</form>
 																</div>
 															</div>
+															@if (session('success'))
+													<div class="alert alert-success" id="successMessage">
+														{{ session('success') }}
+													</div>
+												@endif
 															@endif
 									</div>
 									<div class="post-meta">
@@ -253,20 +258,23 @@
 						$post = $post->post;
 						
 						@endphp
-						@if (Request::is('newsfeed') )
-							@if ($sharePost->status == 0)
-								@continue
-							@endif
-						@else 
-							@if (!Request::is('time-line/user-profile/' . Auth::user()->user_id) || $sharePost->status == 0)
-								@continue
-							@endif
-
+												
+						@if (Request::is('newsfeed'))
+						{{-- Chỉ hiển thị bài viết có trạng thái công khai (public) trên newsfeed --}}
+						@if ($sharePost->status == 0)
+							@continue
 						@endif
+						@else 
+						{{-- Nếu không phải newsfeed, kiểm tra xem có phải trang cá nhân của người dùng hiện tại không --}}
+						@if (!Request::is('time-line/user-profile/' . Auth::user()->user_id) && $sharePost->status == 0)
+							@continue
+						@endif
+						@endif
+
 						<div class="sharer newpost {{isset($firstPost) && $firstPost == true ? 'firstPost': ''}}">
 							<div class="user-shared" style="position: relative">
 								<figure style="width:3rem;height:3rem;border-radius:50%;overflow:hidden" class="border-avt">
-									<img src="{{ asset('storage/images/' . $sharer->avatar) }}" alt="" style="height: auto;width:100%">
+									<img src="{{ asset('storage/images/' . $sharer->avatar) }}" alt="" style="height: 100%;width:100%">
 								</figure>
 								<div class="content pl-3">
 									<div class="text">

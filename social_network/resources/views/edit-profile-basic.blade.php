@@ -15,18 +15,56 @@
 					<div class="row" id="page-contents">
 						<div class="col-lg-3">
 							<aside class="sidebar static">
-								<div class="widget" style ="height: 30%">
-									<h4 class="widget-title">Edit info</h4>
-									<ul class="naves">
-		
+								<div class="widget">
+									<h4 class="widget-title">Recent Activity</h4>
+									<ul class="activitiez">
 										<li>
-											<i class="ti-lock"></i>
-											<a title="" href="{{ route('password.change') }}">Change password</a>
+											<div class="activity-meta">
+												<i>10 hours Ago</i>
+												<span><a title="" href="#">Commented on Video posted </a></span>
+												<h6>by <a href="{{ url('time-line') }}">black demon.</a></h6>
+											</div>
 										</li>
-
+										<li>
+											<div class="activity-meta">
+												<i>30 Days Ago</i>
+												<span><a title="" href="#">Posted your status. “Hello guys, how are you?”</a></span>
+											</div>
+										</li>
+										<li>
+											<div class="activity-meta">
+												<i>2 Years Ago</i>
+												<span><a title="" href="#">Share a video on her timeline.</a></span>
+												<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
+											</div>
+										</li>
 									</ul>
 								</div>
-								 
+								<div class="widget stick-widget">
+									<h4 class="widget-title">Edit info</h4>
+									<ul class="naves">
+										<li>
+											<i class="ti-info-alt"></i>
+											<a href="edit-profile-basic" title="">Basic info</a>
+										</li>
+										<li>
+											<i class="ti-mouse-alt"></i>
+											<a href="edit-work-eductation" title="">Education & Work</a>
+										</li>
+										<li>
+											<i class="ti-heart"></i>
+											<a href="edit-interest" title="">My interests</a>
+										</li>
+										<li>
+											<i class="ti-settings"></i>
+											<a href="edit-account-setting" title="">account setting</a>
+										</li>
+										<li>
+											<i class="ti-lock"></i>
+											<a href="edit-password" title="">change password</a>
+										</li>
+									</ul>
+								</div><!-- settings widget -->
 							</aside>
 						</div><!-- sidebar -->
 						<div class="col-lg-6">

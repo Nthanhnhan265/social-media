@@ -190,8 +190,8 @@ class CommentController extends Controller
     
           
             if ($request->hasFile('vdFileSelected')) {
-            
-                foreach ($comment->videos as $video) {
+              
+                foreach ($comment->video as $video) {
                     Storage::delete('public/videos/' . $video->url);
                     $video->delete();
                 }

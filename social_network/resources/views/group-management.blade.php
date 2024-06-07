@@ -49,12 +49,11 @@
                                             </td>                                              
                                             <td>{{ $group->created_at }}</td>                                        
                                             <td>
-                                                <a href="{{ url('edit-group/' . $group->group_id) }}" class="btn
-                                                    btn-success btn-mini">Edit</a>                            
+                                                <a href="{{ url('edit-group/' . $group->group_id) }}" class="btn btn-outline-success-2">Edit</a>                            
                                                 <form action="{{ route('delete-group', $group->group_id) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-mini" onclick="return confirm('Are you sure you want to delete this group?')">Delete</button>
+                                                    <button type="submit" class="btn btn-outline-success-2" style="border:1px solid ; color: red" onclick="return confirm('Are you sure you want to delete this group?')">Delete</button>
                                                 </form>
                                         </td>
                                         </tr>

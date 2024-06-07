@@ -3,20 +3,26 @@ jQuery(document).ready(function($) {
 	"use strict";
 	
 //------- Notifications Dropdowns
-  $('.top-area > .setting-area > li').on("click",function(){
-	$(this).siblings().children('div').removeClass('active');
-	$(this).children('div').addClass('active');
+
+//   $('.top-area > .setting-area > li').on("click",function(){
+// 	$(this).siblings().children('div').removeClass('active');
+// 	$(this).children('div').addClass('active');
+//         return false; 
+    
+  $('.top-area > .setting-area > li > a' ).on("click",function(){
+	$('.top-area > .setting-area > li > a' ).toggleClass('active');
 	return false;
+
   });
 //------- remove class active on body
-  $("body *").not('.top-area > .setting-area > li').on("click", function() {
-	$(".top-area > .setting-area > li > div").removeClass('active');		
+  $("body *").not('.top-area > .setting-area > li > a').on("click", function() {
+	$(".top-area > .setting-area > li > a").removeClass('active');		
  });
 	
 
 //--- user setting dropdown on topbar	
 $('.user-img').on('click', function() {
-	$('.user-setting').toggleClass("active");
+	$('.user-img').toggleClass("active");
 	return false;
 });	
 	
@@ -123,6 +129,9 @@ $('.notification-box > ul li > i.del').on("click", function(){
 	$(".we-page-setting").on("click", function() {
 	    $(".wesetting-dropdown").toggleClass("active");
 	  });	
+	// $('.notification-e').on("click",function(){ 
+	// 	$(".notification-e").toggleClass("active");
+	// });
 	  
 /*--- topbar toogle setting dropdown ---*/	
 $('#nightmode').on('change', function() {
@@ -147,16 +156,7 @@ if ($.isFunction($.fn.userincr)) {
 	}).data({'min':0,'max':20,'step':1});
 }	
 	
-if ($.isFunction($.fn.loadMoreResults)) {	
-	$('.loadMore').loadMoreResults({
-		displayedItems: 3,
-		showItems: 1,
-		button: {
-		  'class': 'btn-load-more',
-		  'text': 'Load More'
-		}
-	});	
-}
+
 	//===== owl carousel  =====//
 	if ($.isFunction($.fn.owlCarousel)) {
 		$('.sponsor-logo').owlCarousel({
@@ -400,8 +400,112 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 
 
 });//document ready end
+// SIDEBAR TOGGLE - Management
 
+let sidebarOpen = false;
+const sidebar = document.getElementById('sidebar');
 
+function openSidebar() {
+  if (!sidebarOpen) {
+    sidebar.classList.add('sidebar-responsive');
+    sidebarOpen = true;
+  }
+}
 
+function closeSidebar() {
+  if (sidebarOpen) {
+    sidebar.classList.remove('sidebar-responsive');
+    sidebarOpen = false;
+  }
+}
+
+function previewImage(event) {
+	const input = event.target;
+	if (input.files && input.files[0]) {
+		const reader = new FileReader();
+		reader.onload = function (e) {
+			document.getElementById('avatarPreview').src = e.target.result;
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+//Xác nhận xóa người dùng
+function confirmDeleteUser(userId) {
+	if (confirm('Are you sure you want to delete this user?')) {
+		window.location.href = "{{ url('user-delete') }}/" + userId;
+	} else {
+		return false;
+	}
+}
+			
+//Scrip change password
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('changePasswordForm');
+    const newPassword = document.getElementById('new_password');
+    const confirmPassword = document.getElementById('new_password_confirmation');
+    const currentPassword = document.getElementById('current_password');
+
+    if (form) { 
+        form.addEventListener('submit', function(event) {
+            let isValid = true;
+
+            // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+            if (newPassword.value !== confirmPassword.value) {
+                isValid = false;
+            } else {
+                document.getElementById('newPasswordError').innerText = '';
+            }
+
+            // Kiểm tra độ dài mật khẩu mới
+            if (newPassword.value.length < 8) {
+                document.getElementById('newPasswordError').innerText = 'Mật khẩu mới phải có ít nhất 8 ký tự.';
+                isValid = false;
+            } else {
+                if (newPassword.value === confirmPassword.value) {
+                    document.getElementById('newPasswordError').innerText = '';
+                }
+            }
+
+            // Kiểm tra xem mật khẩu hiện tại đã được cung cấp hay không
+            if (currentPassword.value === '') {
+                document.getElementById('currentPasswordError').innerText = 'Vui lòng nhập mật khẩu hiện tại.';
+                isValid = false;
+            } else {
+                document.getElementById('currentPasswordError').innerText = '';
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    }
+});
+
+// //Load post
+// $(document).ready(function() {
+// 	const allPosts = $('.newpost')
+// 	let indexPosts = 0; 
+// 	const MAX_POST = 5; 
+// 	$(window).scroll(function() {
+// 		if (true) {
+// 			if ($('#loading-spinner').is(':hidden')) {
+// 				$('#loading-spinner').show();
+// 				const nextPosts = allPosts.slice(indexPosts, indexPosts + MAX_POST)
+// 				if (nextPosts && indexPosts < allPosts.length ) { 
+				
+// 					nextPosts.removeClass('d-none');
+					 
+// 				}
+// 				indexPosts += MAX_POST 
+// 				// loadMorePosts(nextPage);
+// 			}else  { 
+// 				$('#loading-spinner').hide();
+// 			}
+// 		}
+// 		console.log(`${indexPosts}: ${indexPosts +  MAX_POST} : ${$(window).scrollTop() + 900} : ${$(window).height()}`); 
+// 	});
+// }
+// )
 
 

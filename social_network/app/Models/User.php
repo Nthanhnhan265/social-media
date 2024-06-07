@@ -7,10 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Auth\Passwords\CanResetPassword;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, CanResetPassword;
+
+    protected $table ="users";
+    protected $primaryKey = "user_id";
+    public $timestamps = true;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +23,18 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'user_id',
+        'first_name', 
+        'last_name', 
+        'email', 
+        'DOB', 
+        'gender', 
+        'password', 
+        'description', 
+        'avatar', 
+        'background', 
+        'role_id_fk',
+        'status'
     ];
 
     /**
@@ -30,6 +44,8 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
         'remember_token',
     ];
 
@@ -40,5 +56,36 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'two_factor_confirmed_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Posts::class, "user_id_fk");
+    }
+    public function usergroups()
+    {
+        return $this->hasMany(Usergroup::class, 'user_id_fk');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, "user_id_fk");
+    }
+    public function follower() { 
+        return $this->hasMany(Follow::class,"user_id_fk");
+    }    
+
+    public function share() {
+        return $this->belongsToMany(Posts::class, 'share', 'user_id_fk','post_id_fk',)->withPivot('status');
+    }
+    public function images()
+    {
+        return $this->hasMany(Image::class,"ref_id_fk");
+    }
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
 }

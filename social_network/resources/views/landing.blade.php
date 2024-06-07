@@ -42,11 +42,11 @@
 							</p>
 						<form method="post">
 							<div class="form-group">	
-							  <input type="text" id="input" required="required"/>
-							  <label class="control-label" for="input">Username</label><i class="mtrl-select"></i>
+							<input type="text" id="input" required="required" name="email"/>
+							  <label class="control-label" for="input">Email</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="password" required="required"/>
+							<input type="password" required="required" name="password/>
 							  <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
 							</div>
 							<div class="checkbox">
@@ -68,15 +68,19 @@
 							</p>
 						<form method="post">
 							<div class="form-group">	
-							  <input type="text" required="required"/>
-							  <label class="control-label" for="input">First & Last Name</label><i class="mtrl-select"></i>
+							<input type="text" required="required" name="first-name"/>
+							  <label class="control-label" for="input">First Name </label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="text" required="required"/>
-							  <label class="control-label" for="input">User Name</label><i class="mtrl-select"></i>
+							<input type="text" required="required" name="last-name"/>
+							  <label class="control-label" for="input"> Last Name</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="password" required="required"/>
+							  <input type="text" required="required" name="email"/>
+							  <label class="control-label" for="input">Email</label><i class="mtrl-select"></i>
+							</div>
+							<div class="form-group">	
+							<input type="password" required="required" name="password"/>
 							  <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-radio">

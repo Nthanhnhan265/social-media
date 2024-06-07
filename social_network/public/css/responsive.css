@@ -76,7 +76,8 @@
         font-size: 14px;
     }
     .user-avatar {
-        width: 80.2%
+        width: 12.5rem;
+        height: 12.5rem;
     }
     .chat-box {
         right: 230px;
@@ -85,7 +86,7 @@
         width: 62%;
     }
     .pepl-info {
-        width: 87%;
+        max-width: 87%;
     }
     .liked-pages > li {
         min-width: 32.4%;
@@ -231,7 +232,7 @@
         margin-right: 10px;
     }
     .user-setting {
-        left: -50px;
+        right: 0px;
     }
     .post-meta .detail > span {
         font-size: 20px;
